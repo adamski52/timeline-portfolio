@@ -5,7 +5,6 @@ import {HttpModule} from '@angular/http';
 
 import {AppComponent} from './app.component';
 import {TimelineComponent} from './components/timeline/timeline.component';
-import {GithubHttpService} from "./services/github-http.service";
 import {GithubEventsService} from "./services/github-events.service";
 import {GithubReposService} from "./services/github-repos.service";
 import {GithubUserService} from "./services/github-user.service";
@@ -22,7 +21,6 @@ import {ErrorService} from "./services/error.service";
         HttpModule
     ],
     providers: [
-        GithubHttpService,
         GithubEventsService,
         GithubReposService,
         GithubUserService,

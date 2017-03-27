@@ -1,12 +1,11 @@
 import {Injectable} from '@angular/core';
-import {GithubHttpService} from './github-http.service';
 import {GithubGenericService} from "./github-generic.service";
-import {Response} from "@angular/http";
+import {Http, Response} from "@angular/http";
 import {ErrorService} from "./error.service";
 
 @Injectable()
 export class GithubUserService extends GithubGenericService {
-    constructor(private http: GithubHttpService, private errorService: ErrorService) {
+    constructor(private http: Http, private errorService: ErrorService) {
         super();
     }
 
