@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css?family=Bungee+Inline|Londrina+Shadow|Londrina+Solid|Luckiest+Guy|Margarine|Skranji|Slackey|Wellfleet');
+
+.accent-font-solid {
+  font-family: 'Londrina Solid', cursive;
+}
+
+.accent-font-outline {
+  font-family: 'Londrina Shadow', cursive;
+}
+
+.primary-font {
+  font-family: 'Wellfleet', cursive;
+}
+
+html,
+body,
+.fill {
+  height: 100%;
+}
+
+.line-wrapper {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  margin-left: -30px;
+  width: 60px;
+
+  .line {
+    width: 33.33333%;
+    float:left;
+  }
+}
+
+
+h1,
+h2 {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+h1 {
+  font-size: 3em;
+  @extend .accent-font-outline;
+}
+
+h2 {
+  font-size: 1.2em;
+  @extend .accent-font-solid;
+}

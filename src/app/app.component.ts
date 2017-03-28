@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'jna-app',
+  selector: 'body',
   templateUrl: './app.component.html',
   styleUrls: ['app.component.scss']
 })

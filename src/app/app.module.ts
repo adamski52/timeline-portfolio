@@ -9,11 +9,17 @@ import {GithubEventsService} from "./services/github-events.service";
 import {GithubReposService} from "./services/github-repos.service";
 import {GithubUserService} from "./services/github-user.service";
 import {ErrorService} from "./services/error.service";
+import { AboutComponent } from './components/about/about.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { IntroComponent } from './components/intro/intro.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        TimelineComponent
+        TimelineComponent,
+        AboutComponent,
+        ContactComponent,
+        IntroComponent
     ],
     imports: [
         BrowserModule,

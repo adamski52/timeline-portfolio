@@ -1,1 +1,36 @@
-/* You can add global styles to this file, and also import other style files */
+// Core variables and mixins
+@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/variables";
+@import "styles/variables";
+@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
+@import "styles/themes";
+
+// Reset and dependencies
+@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/normalize";
+@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/print";
+@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/glyphicons";
+
+// Core CSS
+@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/scaffolding";
+//@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/type";
+//@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/code";
+@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/grid";
+//@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/tables";
+@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/forms";
+@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/buttons";
+
+// Components
+//@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/dropdowns";
+//@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/button-groups";
+//@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/input-groups";
+//@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/labels";
+//@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/badges";
+//@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/alerts";
+//@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/progress-bars";
+//@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/list-group";
+//@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/responsive-embed";
+
+// Utility classes
+@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/utilities";
+@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/responsive-utilities";
+
+@import "styles/global";

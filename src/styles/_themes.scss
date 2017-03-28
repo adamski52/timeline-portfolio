@@ -1,0 +1,28 @@
+@function darker($color, $pct) {
+  @return mix(#000, $color, $pct);
+}
+
+@function lighter($color, $pct) {
+  @return mix(#fff, $color, $pct);
+}
+
+@mixin make-theme($primary, $secondary) {
+  background: $primary;
+  color: $secondary;
+}
+
+.theme-about {
+  @include make-theme(#88D1FF, #333);
+}
+
+.theme-timeline {
+  @include make-theme(#FFFE90, #333);
+}
+
+.theme-contact {
+  @include make-theme(#CC5F5F, #333);
+}
+
+.theme-intro {
+  @include make-theme(#fff, #666);
+}
