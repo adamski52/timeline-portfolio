@@ -22,7 +22,3 @@
 .theme-contact {
   @include make-theme(#CC5F5F, #333);
 }
-
-.theme-intro {
-  @include make-theme(#fff, #666);
-}

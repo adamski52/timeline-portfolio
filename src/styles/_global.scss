@@ -1,15 +1,11 @@
-@import url('https://fonts.googleapis.com/css?family=Bungee+Inline|Londrina+Shadow|Londrina+Solid|Luckiest+Guy|Margarine|Skranji|Slackey|Wellfleet');
+@import url('https://fonts.googleapis.com/css?family=Wellfleet|Slackey');
 
-.accent-font-solid {
-  font-family: 'Londrina Solid', cursive;
-}
-
-.accent-font-outline {
-  font-family: 'Londrina Shadow', cursive;
+.accent-font {
+  font-family: Wellfleet;
 }
 
 .primary-font {
-  font-family: 'Wellfleet', cursive;
+  font-family: Wellfleet;
 }
 
 html,
@@ -32,19 +28,43 @@ body,
 }
 
 
-h1,
-h2 {
+h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding: 0;
-  font-weight: normal;
+  line-height: 1.2em;
+  display: inline-block;
 }
 
 h1 {
-  font-size: 3em;
-  @extend .accent-font-outline;
+  font-size: 2.2em;
+  background: #000;
+  color: #fff;
+  padding: 5px 10px;
+  @extend .accent-font;
 }
 
-h2 {
-  font-size: 1.2em;
-  @extend .accent-font-solid;
+h2, h3, h4, h5, h6 {
+  font-size: 1.37em;
+  padding: 3px 4px 1px 4px;
+  background: #fbfbfb;
+  border: 1px solid #f0f0f0;
+  @extend .accent-font;
+}
+
+.intro {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 10%;
+  left: 0;
+}
+
+@media (min-width: $screen-sm-min) {
+  h1 {
+    font-size: 4em;
+  }
+
+  h2, h3, h4, h5, h6 {
+    font-size: 2em;
+  }
 }
