@@ -6,19 +6,28 @@
   @return mix(#fff, $color, $pct);
 }
 
+@mixin gradient($start, $end, $startPct: 0%, $endPct: 100%) {
+  background: $start;
+  background: -moz-linear-gradient(top, $start $startPct, $end $endPct);
+  background: -webkit-linear-gradient(top, $start $startPct, $end $endPct);
+  background: linear-gradient(to bottom, $start $startPct, $end $endPct);
+}
+
 @mixin make-theme($primary, $secondary) {
-  background: $primary;
+  background: lighter($primary, 10%);
   color: $secondary;
 }
 
 .theme-about {
-  @include make-theme(#88D1FF, #333);
+  @include make-theme(#00c1ff, #333);
 }
 
 .theme-timeline {
-  @include make-theme(#FFFE90, #333);
+  position: relative;
+  z-index: 1;
+  @include make-theme(#ffab00, #333);
 }
 
 .theme-contact {
-  @include make-theme(#CC5F5F, #333);
+  @include make-theme(#cc005b, #333);
 }
