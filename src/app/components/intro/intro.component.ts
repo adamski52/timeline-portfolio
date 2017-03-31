@@ -7,14 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IntroComponent implements OnInit {
 
-  private _transitionMs:number = 200;
+  private _transitionMs:number = 10000;
   private _index:number = 0;
-  private _colors:string[] = ["#fc0", "#f0c", "#c0f", "#cc0", "#0fc", "#0cf"];
+  private _colors:string[] = ["#9f015e", "#7f019f", "#015a9f", "#008c7a", "#147c00", "#ac4900"];
 
   constructor() { }
 
   getStyle() {
     return {
+      "text-shadow": "2px 2px #000",
       "-webkit-transition": "all " + this._transitionMs/1000 + "s",
       "transition": "all " + this._transitionMs/1000 + "s",
       "background": this._colors[this._index]
@@ -22,12 +23,16 @@ export class IntroComponent implements OnInit {
   }
 
   private getIndex():number {
-    return Math.floor(Math.random() * this._colors.length);
+    let i:number = this._index;
+    while(i === this._index) {
+      i = Math.floor(Math.random() * this._colors.length);
+    }
+    return i;
   }
 
   ngOnInit() {
     this._index = this.getIndex();
-    let timer = setInterval(() => {
+    setInterval(() => {
       this._index = this.getIndex();
     }, this._transitionMs);
   }
