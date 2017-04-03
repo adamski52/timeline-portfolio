@@ -7,6 +7,8 @@ import {GithubEventsService} from "../../services/github-events.service";
 import {HttpModule, XHRBackend} from '@angular/http';
 import {ErrorService} from "../../services/error.service";
 import {MockBackend} from '@angular/http/testing';
+import {RepoLanguagesComponent} from "../repo-language/repo-languages.component";
+import {RepoThumbnailComponent} from "../repo-thumbnail/repo-thumbnail.component";
 
 describe('TimelineComponent', () => {
     let component: TimelineComponent;
@@ -14,21 +16,25 @@ describe('TimelineComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [TimelineComponent],
+            declarations: [
+                TimelineComponent,
+                RepoLanguagesComponent,
+                RepoThumbnailComponent
+            ],
             providers: [
                 GithubUserService,
                 GithubReposService,
                 GithubEventsService,
                 ErrorService,
                 {
-                    provide: XHRBackend, useClass: MockBackend
+                    provide: XHRBackend,
+                    useClass: MockBackend
                 }
             ],
             imports: [
                 HttpModule
             ]
-        })
-            .compileComponents();
+        }).compileComponents();
     }));
 
     beforeEach(() => {

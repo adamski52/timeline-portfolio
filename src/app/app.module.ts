@@ -15,6 +15,7 @@ import { IntroComponent } from './components/intro/intro.component';
 import {GithubGenericService} from "./services/github-generic.service";
 import {RepoLanguagesComponent} from "./components/repo-language/repo-languages.component";
 import {GithubRepoLanguagesService} from "./services/github-repo-languages.service";
+import {RepoThumbnailComponent} from "./components/repo-thumbnail/repo-thumbnail.component";
 
 @NgModule({
     declarations: [
@@ -23,7 +24,8 @@ import {GithubRepoLanguagesService} from "./services/github-repo-languages.servi
         AboutComponent,
         ContactComponent,
         IntroComponent,
-        RepoLanguagesComponent
+        RepoLanguagesComponent,
+        RepoThumbnailComponent
     ],
     imports: [
         BrowserModule,

@@ -56,7 +56,13 @@ export class GithubRepoLanguagesService {
             });
         }
 
-        console.log(languageList);
+        if(languageList.length <= 0) {
+            languageList.push({
+                name: "Other",
+                iconClass: "icon-jna-file-alt"
+            });
+        }
+
         return languageList;
     }
 
