@@ -1,15 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'jna-about',
-  templateUrl: './about.component.html',
-  styleUrls: ['./about.component.scss']
+  templateUrl: './about.component.html'
 })
-export class AboutComponent implements OnInit {
-
+export class AboutComponent {
   constructor() { }
-
-  ngOnInit() {
-  }
-
 }

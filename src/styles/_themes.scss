@@ -18,16 +18,14 @@
   color: $secondary;
 }
 
-.theme-about {
-  @include make-theme(#00c1ff, #333);
+.theme-intro {
+  @include make-theme(#00c1ff, #333)
 }
 
 .theme-timeline {
-  position: relative;
-  z-index: 1;
-  @include make-theme(#ffab00, #333);
+  @include make-theme(#fff, #333);
 }
 
 .theme-contact {
-  @include make-theme(#cc005b, #333);
+  @include make-theme(#5fbd34, #333);
 }

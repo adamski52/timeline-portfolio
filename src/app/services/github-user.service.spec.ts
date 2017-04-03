@@ -21,20 +21,6 @@ describe('GithubUserService', () => {
     });
   });
 
-  xit('should send token with requests', inject([GithubUserService, XHRBackend], (service: GithubUserService, mockBackend: MockBackend) => {
-    let auth: string = "";
-
-    mockBackend.connections.subscribe((connection) => {
-      connection.mockRespond(new Response(new ResponseOptions({
-        body: "fake"
-      })));
-      auth = connection.request.headers.get('Authorization');
-    });
-
-    service.fetch();
-    expect(auth.indexOf("token")).toBe(0);
-  }));
-
   it('should notify subscribers with response', inject([GithubUserService, XHRBackend], (service: GithubUserService, mockBackend: MockBackend) => {
     let response,
         data = {

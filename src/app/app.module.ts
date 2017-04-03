@@ -12,6 +12,9 @@ import {ErrorService} from "./services/error.service";
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { IntroComponent } from './components/intro/intro.component';
+import {GithubGenericService} from "./services/github-generic.service";
+import {RepoLanguagesComponent} from "./components/repo-language/repo-languages.component";
+import {GithubRepoLanguagesService} from "./services/github-repo-languages.service";
 
 @NgModule({
     declarations: [
@@ -19,7 +22,8 @@ import { IntroComponent } from './components/intro/intro.component';
         TimelineComponent,
         AboutComponent,
         ContactComponent,
-        IntroComponent
+        IntroComponent,
+        RepoLanguagesComponent
     ],
     imports: [
         BrowserModule,
@@ -30,6 +34,7 @@ import { IntroComponent } from './components/intro/intro.component';
         GithubEventsService,
         GithubReposService,
         GithubUserService,
+        GithubRepoLanguagesService,
         ErrorService
     ],
     bootstrap: [AppComponent]

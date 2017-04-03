@@ -2,17 +2,17 @@ import {Component} from '@angular/core';
 import {GithubUserService} from "../../services/github-user.service";
 import {GithubReposService} from "../../services/github-repos.service";
 import {GithubEventsService} from "../../services/github-events.service";
+import {IObject} from "../../interfaces/object";
 
 @Component({
     selector: 'jna-timeline',
-    templateUrl: './timeline.component.html',
-    styleUrls: ['./timeline.component.scss']
+    templateUrl: './timeline.component.html'
 })
 export class TimelineComponent {
 
-    public user: any;
-    public repos: any;
-    public events: any;
+    private user:IObject;
+    public repos:IObject[];
+    public events:IObject[];
 
     constructor(private userService: GithubUserService,
                 private reposService: GithubReposService,

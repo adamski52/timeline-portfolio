@@ -12,7 +12,8 @@ describe('GithubEventsService', () => {
                 ErrorService,
                 GithubEventsService,
                 {
-                    provide: XHRBackend, useClass: MockBackend
+                    provide: XHRBackend,
+                    useClass: MockBackend
                 }
             ],
             imports: [
@@ -20,20 +21,6 @@ describe('GithubEventsService', () => {
             ]
         });
     });
-
-    xit('should send token with requests', inject([GithubEventsService, XHRBackend], (service: GithubEventsService, mockBackend: MockBackend) => {
-        let auth: string = "";
-
-        mockBackend.connections.subscribe((connection) => {
-            connection.mockRespond(new Response(new ResponseOptions({
-                body: "fake"
-            })));
-            auth = connection.request.headers.get('Authorization');
-        });
-
-        service.fetch();
-        expect(auth.indexOf("token")).toBe(0);
-    }));
 
     it('should notify subscribers with response', inject([GithubEventsService, XHRBackend], (service: GithubEventsService, mockBackend: MockBackend) => {
         let response,

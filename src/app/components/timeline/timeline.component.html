@@ -1,1 +1,3 @@
-<div class="item" *ngFor="let repo of repos"></div>
+<div class="timeline-item" *ngFor="let repo of repos">
+    <jna-repo-languages [repo]="repo.name"></jna-repo-languages>
+</div>

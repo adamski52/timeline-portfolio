@@ -1,17 +1,31 @@
 import {Injectable} from '@angular/core';
-import {Response} from '@angular/http';
+import {Http, Response} from '@angular/http';
 import {Observable, Observer} from 'rxjs';
+import {ErrorService} from "./error.service";
+import {IObject} from "../interfaces/object";
 
 @Injectable()
 export class GithubGenericService {
     protected _observer: Observer<any>;
-    public data$: Observable<Response> = new Observable((observer) => {
+
+    constructor(protected http: Http, protected errorService: ErrorService) {}
+
+    public data$: Observable<any> = new Observable((observer) => {
         this._observer = observer
     }).share();
 
-    protected broadcast(response:Response) {
+    protected broadcast(response:any) {
         if(this._observer) {
-            this._observer.next(response.json());
+            this._observer.next(response);
         }
+    }
+
+    public fetch(url): void {
+        this.http.get(url).subscribe((response:Response) => {
+            this.broadcast(response.json());
+        },
+        (error: Response) => {
+            this.errorService.add("Failed to load language.", error.status);
+        });
     }
 }

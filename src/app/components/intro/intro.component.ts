@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'jna-intro',
-  templateUrl: './intro.component.html',
-  styleUrls: ['./intro.component.scss']
+  templateUrl: './intro.component.html'
 })
 export class IntroComponent implements OnInit {
 
@@ -15,7 +14,6 @@ export class IntroComponent implements OnInit {
 
   getStyle() {
     return {
-      "text-shadow": "2px 2px #000",
       "-webkit-transition": "all " + this._transitionMs/1000 + "s",
       "transition": "all " + this._transitionMs/1000 + "s",
       "background": this._colors[this._index]
