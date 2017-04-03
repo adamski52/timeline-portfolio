@@ -1,3 +1,6 @@
 <div class="timeline-item" *ngFor="let repo of repos">
-    <jna-repo-languages [repo]="repo.name"></jna-repo-languages>
+    <div class="timeline-item-content">
+        <h4 class="timeline-title">{{repo.name}}</h4>
+        <jna-repo-languages [repo]="repo.name" class="timeline-languages"></jna-repo-languages>
+    </div>
 </div>
