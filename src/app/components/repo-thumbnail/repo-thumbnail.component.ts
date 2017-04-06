@@ -11,7 +11,7 @@ import {GithubGenericService} from '../../services/github-generic.service';
 export class RepoThumbnailComponent {
     @Input("repo") repo:string;
 
-    private thumbnail:string;
+    public thumbnail:string;
 
     constructor(private service: GithubGenericService) {
         this.service.data$.subscribe((response) => {

@@ -13,7 +13,7 @@ import {GithubRepoLanguagesService} from "../../services/github-repo-languages.s
 export class RepoLanguagesComponent {
     @Input("repo") repo:string;
 
-    private languages:IObject[];
+    public languages:IObject[];
 
     constructor(private service: GithubGenericService, private languageService: GithubRepoLanguagesService) {
         this.service.data$.subscribe((response) => {

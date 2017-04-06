@@ -10,7 +10,7 @@ import {IObject} from "../../interfaces/object";
 })
 export class TimelineComponent {
 
-    private user:IObject;
+    public user:IObject;
     public repos:IObject[];
     public events:IObject[];
 

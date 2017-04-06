@@ -6,6 +6,11 @@ import {GithubReposService} from './github-repos.service';
 import {ErrorService} from "./error.service";
 
 describe('GithubReposService', () => {
+  let response,
+      data = {
+        data: "hello"
+      };
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
@@ -22,11 +27,6 @@ describe('GithubReposService', () => {
   });
 
   it('should notify subscribers with response', inject([GithubReposService, XHRBackend], (service: GithubReposService, mockBackend: MockBackend) => {
-    let response,
-        data = {
-          data: "hello"
-        };
-
     mockBackend.connections.subscribe((connection) => {
       connection.mockRespond(new Response(new ResponseOptions({
         body: data
@@ -43,8 +43,6 @@ describe('GithubReposService', () => {
   }));
 
   it('should log an error if the end point fails', inject([GithubReposService, XHRBackend, ErrorService], (service: GithubReposService, mockBackend: MockBackend, errorService:ErrorService) => {
-    let response;
-
     mockBackend.connections.subscribe((connection) => {
       connection.mockError(new Response(new ResponseOptions({
         status: 400

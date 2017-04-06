@@ -65,5 +65,4 @@ export class GithubRepoLanguagesService {
 
         return languageList;
     }
-
 }

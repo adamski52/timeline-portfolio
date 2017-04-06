@@ -5,6 +5,11 @@ import {XHRBackend, HttpModule, Response, ResponseOptions} from "@angular/http";
 import {ErrorService} from "./error.service";
 
 describe('GithubGenericService', () => {
+    let response,
+        data = {
+            data: "hello"
+        };
+
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
@@ -26,11 +31,6 @@ describe('GithubGenericService', () => {
     }));
 
     it('should provide a public fetch method', inject([GithubGenericService, XHRBackend, ErrorService], (service: GithubGenericService, mockBackend: MockBackend, errorService:ErrorService) => {
-        let response,
-            data = {
-                data: "hello"
-            };
-
         mockBackend.connections.subscribe((connection) => {
             connection.mockRespond(new Response(new ResponseOptions({
                 body: data
@@ -44,5 +44,23 @@ describe('GithubGenericService', () => {
         service.fetch("fake");
 
         expect(response).toBe(data);
+    }));
+
+    it('should log an error if the end point fails', inject([GithubGenericService, XHRBackend, ErrorService], (service: GithubGenericService, mockBackend: MockBackend, errorService:ErrorService) => {
+        mockBackend.connections.subscribe((connection) => {
+            connection.mockError(new Response(new ResponseOptions({
+                status: 400
+            })));
+        });
+
+        expect(errorService.getAll().length).toEqual(0);
+
+        service.data$.subscribe((r) => {
+            response = r;
+        });
+
+        service.fetch("fake");
+
+        expect(errorService.getAll().length).toEqual(1);
     }));
 });

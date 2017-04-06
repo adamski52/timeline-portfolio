@@ -15,9 +15,7 @@ export class GithubGenericService {
     }).share();
 
     protected broadcast(response:any) {
-        if(this._observer) {
-            this._observer.next(response);
-        }
+        this._observer.next(response);
     }
 
     public fetch(url): void {
