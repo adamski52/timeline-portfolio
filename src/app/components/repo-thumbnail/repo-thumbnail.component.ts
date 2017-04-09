@@ -14,7 +14,7 @@ export class RepoThumbnailComponent {
     public thumbnail:string;
 
     constructor(private service: GithubGenericService) {
-        this.service.data$.subscribe((response) => {
+        this.service.subscribe((response) => {
             this.thumbnail = response.download_url;
         });
     }

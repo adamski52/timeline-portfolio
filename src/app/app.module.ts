@@ -10,9 +10,8 @@ import {GithubReposService} from "./services/github-repos.service";
 import {GithubUserService} from "./services/github-user.service";
 import {ErrorService} from "./services/error.service";
 import {RepoLanguagesComponent} from "./components/repo-language/repo-languages.component";
-import {GithubRepoLanguagesService} from "./services/github-repo-languages.service";
 import {RepoThumbnailComponent} from "./components/repo-thumbnail/repo-thumbnail.component";
-import {TimelineService} from "./services/timeline.service";
+import {GithubGenericService} from "./services/github-generic.service";
 
 @NgModule({
     declarations: [
@@ -27,10 +26,10 @@ import {TimelineService} from "./services/timeline.service";
         HttpModule
     ],
     providers: [
-        TimelineService,
         GithubEventsService,
         GithubReposService,
         GithubUserService,
+        GithubGenericService,
         ErrorService
     ],
     bootstrap: [AppComponent]

@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 import {GithubRepoLanguagesService} from "../../services/github-repo-languages.service";
 import {ILanguage} from "../../interfaces/interfaces";
 
@@ -9,7 +9,7 @@ import {ILanguage} from "../../interfaces/interfaces";
         GithubRepoLanguagesService
     ]
 })
-export class RepoLanguagesComponent {
+export class RepoLanguagesComponent implements OnInit {
     @Input("repo") repo:string;
 
     @Output("onHover") onHover =  new EventEmitter<string>()
@@ -30,5 +30,11 @@ export class RepoLanguagesComponent {
 
     onOver(language:ILanguage) {
         this.onHover.emit(language.name);
+    }
+
+    ngOnInit() {
+        if(this.repo) {
+            this.languageService.fetch(this.repo);
+        }
     }
 }

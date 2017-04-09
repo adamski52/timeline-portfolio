@@ -8,9 +8,18 @@ export const ErrorTypes = {
     UNKNOWN: 0
 };
 
+export interface IThumbnail {
+
+};
+
 export interface ILanguage {
     name: string;
     iconClass: string;
+    size?: number;
+};
+
+export interface ILanguageMeta {
+    [key: string]: number;
 };
 
 export interface IActor {

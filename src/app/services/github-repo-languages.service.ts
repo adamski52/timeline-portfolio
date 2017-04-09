@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {ILanguage, IRepo} from "../interfaces/interfaces";
+import {ILanguage, ILanguageMeta} from "../interfaces/interfaces";
 import {GithubGenericService} from "./github-generic.service";
 import {Http, Response} from "@angular/http";
 import {ErrorService} from "./error.service";
 
 @Injectable()
-export class GithubRepoLanguagesService extends GithubGenericService{
+export class GithubRepoLanguagesService extends GithubGenericService {
     private languageMap:{[key: string]: string} = {
         "typescript": "angular",
         "sql": "mysql-alt",
@@ -51,13 +51,14 @@ export class GithubRepoLanguagesService extends GithubGenericService{
         return "icon-css";
     }
 
-    private makeArray(languages:any):ILanguage[] {
+    private makeArray(languages:ILanguageMeta):ILanguage[] {
         let languageList:ILanguage[] = [];
 
         for(let language in languages) {
             languageList.push({
                 name: language,
-                iconClass: this.getIconClass(language)
+                iconClass: this.getIconClass(language),
+                size: languages[language]
             });
         }
 
@@ -71,9 +72,10 @@ export class GithubRepoLanguagesService extends GithubGenericService{
         return languageList;
     }
 
-    public fetch(repo:IRepo):void {
-        this.http.get("/api/repos/adamski52/" + repo.name + "/languages").subscribe((response: Response) => {
-            this.data = response.json();
+    public fetch(repoName:string):void {
+        this.http.get("/api/repos/adamski52/" + repoName + "/languages").subscribe((response: Response) => {
+            this._data = this.makeArray(response.json());
+
             this.broadcast(this.data);
         },
         (error: Response) => {

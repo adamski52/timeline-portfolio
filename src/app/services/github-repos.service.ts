@@ -20,7 +20,7 @@ export class GithubReposService extends GithubGenericService {
             this.data = response.json();
 
             for(let repo of this.data) {
-                this.languageService.fetch(repo);
+                this.languageService.fetch(repo.name);
             }
 
             this.broadcast(this.data);
