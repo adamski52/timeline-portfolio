@@ -12,6 +12,7 @@ import {ErrorService} from "./services/error.service";
 import {RepoLanguagesComponent} from "./components/repo-language/repo-languages.component";
 import {GithubRepoLanguagesService} from "./services/github-repo-languages.service";
 import {RepoThumbnailComponent} from "./components/repo-thumbnail/repo-thumbnail.component";
+import {TimelineService} from "./services/timeline.service";
 
 @NgModule({
     declarations: [
@@ -26,13 +27,12 @@ import {RepoThumbnailComponent} from "./components/repo-thumbnail/repo-thumbnail
         HttpModule
     ],
     providers: [
+        TimelineService,
         GithubEventsService,
         GithubReposService,
         GithubUserService,
-        GithubRepoLanguagesService,
         ErrorService
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule {}

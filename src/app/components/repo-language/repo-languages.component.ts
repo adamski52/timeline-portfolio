@@ -1,29 +1,34 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {GithubGenericService} from '../../services/github-generic.service';
-import {IObject} from "../../interfaces/object";
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {GithubRepoLanguagesService} from "../../services/github-repo-languages.service";
+import {ILanguage} from "../../interfaces/interfaces";
 
 @Component({
     selector: 'jna-repo-languages',
     templateUrl: './repo-languages.component.html',
     providers: [
-        GithubGenericService
+        GithubRepoLanguagesService
     ]
 })
 export class RepoLanguagesComponent {
     @Input("repo") repo:string;
 
-    public languages:IObject[];
+    @Output("onHover") onHover =  new EventEmitter<string>()
 
-    constructor(private service: GithubGenericService, private languageService: GithubRepoLanguagesService) {
-        this.service.data$.subscribe((response) => {
-            this.languages = this.languageService.makeArray(response);
+    public isHover:boolean = true;
+    public languages:ILanguage[];
+
+    constructor(private languageService: GithubRepoLanguagesService) {
+        this.languageService.subscribe((languages:ILanguage[]) => {
+            this.languages = languages;
         });
     }
 
-    ngOnInit() {
-        if(this.repo) {
-            this.service.fetch("/api/repos/adamski52/" + this.repo + "/languages");
-        }
+    onOut() {
+        this.isHover = false;
+        this.onHover.emit("");
+    }
+
+    onOver(language:ILanguage) {
+        this.onHover.emit(language.name);
     }
 }

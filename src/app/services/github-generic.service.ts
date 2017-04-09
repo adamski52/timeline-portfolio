@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http, Response} from '@angular/http';
-import {Observable, Observer} from 'rxjs';
+import {Observable, Observer, Subscription} from 'rxjs';
 import {ErrorService} from "./error.service";
-import {IObject} from "../interfaces/object";
 
 @Injectable()
 export class GithubGenericService {
@@ -10,12 +9,16 @@ export class GithubGenericService {
 
     constructor(protected http: Http, protected errorService: ErrorService) {}
 
-    public data$: Observable<any> = new Observable((observer) => {
-        this._observer = observer
+    private data$: Observable<any> = new Observable((observer) => {
+        this._observer = observer;
     }).share();
 
     protected broadcast(response:any) {
         this._observer.next(response);
+    }
+
+    public subscribe(handler:(value: any) => void):Subscription {
+        return this.data$.subscribe(handler);
     }
 
     public fetch(url): void {

@@ -21,7 +21,7 @@ export class RepoThumbnailComponent {
 
     ngOnInit() {
         if(this.repo) {
-            this.service.fetch("/api/repos/adamski52/" + this.repo + "/contents/thumbnail.png");
+            //this.service.fetch("/api/repos/adamski52/" + this.repo + "/contents/thumbnail.png");
         }
     }
 }

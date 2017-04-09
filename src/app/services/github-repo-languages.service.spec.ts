@@ -2,10 +2,10 @@
 
 import {TestBed, inject} from '@angular/core/testing';
 import {GithubRepoLanguagesService} from "./github-repo-languages.service";
-import {IObject} from "../interfaces/object";
+import {ILanguage} from "../interfaces/interfaces";
 
 describe('RepoLanguagesService', () => {
-    let languageMap: IObject = {
+    let languageMap = {
         "typescript": "angular",
         "sql": "mysql-alt",
         "scss": "sass",
@@ -64,13 +64,13 @@ describe('RepoLanguagesService', () => {
     }
 
     it('should return an array of name/iconClass pairs', inject([GithubRepoLanguagesService], (repoLanguagesService: GithubRepoLanguagesService) => {
-        let languages:IObject = {
+        let languages = {
             "TypeScript": 123,
             "JavaScript": 456
         };
 
-        let result:IObject[] = repoLanguagesService.makeArray(languages);
-        
+        let result = repoLanguagesService.makeArray(languages);
+
         expect(result.length).toEqual(2);
         expect(result[0]["name"]).toEqual("TypeScript");
         expect(result[0]["iconClass"]).toEqual("icon-angular");
@@ -79,9 +79,9 @@ describe('RepoLanguagesService', () => {
     }));
 
     it('should return "other" if no languages are specified', inject([GithubRepoLanguagesService], (repoLanguagesService: GithubRepoLanguagesService) => {
-        let languages:IObject = {};
+        let languages = {};
 
-        let result:IObject[] = repoLanguagesService.makeArray(languages);
+        let result:ILanguage[] = repoLanguagesService.makeArray(languages);
 
         expect(result.length).toEqual(1);
         expect(result[0]["name"]).toEqual("Other");

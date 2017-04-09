@@ -1,43 +1,48 @@
 import {Injectable} from '@angular/core';
-import {IObject} from "../interfaces/object";
+import {ILanguage, IRepo} from "../interfaces/interfaces";
+import {GithubGenericService} from "./github-generic.service";
+import {Http, Response} from "@angular/http";
+import {ErrorService} from "./error.service";
 
 @Injectable()
-export class GithubRepoLanguagesService {
-    private languageMap:{[key: string]: string};
+export class GithubRepoLanguagesService extends GithubGenericService{
+    private languageMap:{[key: string]: string} = {
+        "typescript": "angular",
+        "sql": "mysql-alt",
+        "scss": "sass",
+        "sass": "sass",
+        "css": "css3-alt",
+        "jsx": "reactjs",
+        "html": "html5-alt",
+        "javascript": "javascript-alt",
+        "java": "java-bold",
+        "svg": "svg",
+        "python": "python",
+        "ruby": "ruby",
+        "shell": "script",
+        "powershell": "shell",
+        "batchfile": "shell",
+        "apacheconf": "apache",
+        "php": "php-alt",
+        "xml": "html",
+        "nginx": "nginx",
+        "maven pom": "java-bold",
+        "json": "javascript-alt",
+        "django": "python",
+        "gradle": "java-bold",
+        "go": "go",
+        "dockerfile": "docker",
+        "clojure": "clojure",
+        "c#": "csharp"
+    };
 
-    constructor() {
-        this.languageMap = {
-            "typescript": "angular",
-            "sql": "mysql-alt",
-            "scss": "sass",
-            "sass": "sass",
-            "css": "css3-alt",
-            "jsx": "reactjs",
-            "html": "html5-alt",
-            "javascript": "javascript-alt",
-            "java": "java-bold",
-            "svg": "svg",
-            "python": "python",
-            "ruby": "ruby",
-            "shell": "script",
-            "powershell": "shell",
-            "batchfile": "shell",
-            "apacheconf": "apache",
-            "php": "php-alt",
-            "xml": "html",
-            "nginx": "nginx",
-            "maven pom": "java-bold",
-            "json": "javascript-alt",
-            "django": "python",
-            "gradle": "java-bold",
-            "go": "go",
-            "dockerfile": "docker",
-            "clojure": "clojure",
-            "c#": "csharp"
-        };
+    private _data:ILanguage[];
+
+    constructor(protected http:Http, protected errorService:ErrorService) {
+        super(http, errorService);
     }
 
-    public getIconClass(language:string) {
+    private getIconClass(language:string):string {
         language = language.toLowerCase();
         if(this.languageMap[language]) {
             return "icon-" + this.languageMap[language];
@@ -46,8 +51,8 @@ export class GithubRepoLanguagesService {
         return "icon-css";
     }
 
-    public makeArray(languages:any):IObject[] {
-        let languageList:IObject[] = [];
+    private makeArray(languages:any):ILanguage[] {
+        let languageList:ILanguage[] = [];
 
         for(let language in languages) {
             languageList.push({
@@ -64,5 +69,23 @@ export class GithubRepoLanguagesService {
         }
 
         return languageList;
+    }
+
+    public fetch(repo:IRepo):void {
+        this.http.get("/api/repos/adamski52/" + repo.name + "/languages").subscribe((response: Response) => {
+            this.data = response.json();
+            this.broadcast(this.data);
+        },
+        (error: Response) => {
+            this.errorService.add("Failed to load events.", error.status);
+        });
+    }
+
+    public get data():ILanguage[] {
+        return this._data;
+    }
+
+    public set data(languages:ILanguage[]) {
+        this._data = languages;
     }
 }

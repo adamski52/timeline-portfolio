@@ -56,12 +56,6 @@ h1, h2, h3, h4, h5, h6 {
     right: auto;
     overflow: hidden;
 
-    * {
-      position: relative;
-      z-index: 1;
-    }
-
-
     .timeline-thumbnail {
       transition: all .7s;
       position: absolute;
@@ -93,6 +87,7 @@ h1, h2, h3, h4, h5, h6 {
     .timeline-item-content {
       width: 200%;
       color: #fff;
+      border-color: #000;
 
       .timeline-title,
       .timeline-languages {
@@ -112,8 +107,16 @@ h1, h2, h3, h4, h5, h6 {
       left: auto;
       right: 0;
     }
+
+    .timeline-languages,
+    .timeline-title {
+      float: right;
+    }
+
+
   }
 }
+
 
 .timeline-languages,
 .timeline-title {

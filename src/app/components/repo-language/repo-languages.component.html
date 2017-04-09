@@ -1,1 +1,1 @@
-<i [ngClass]="language.iconClass" title="{{language.name}}" *ngFor="let language of languages"></i>
+<i *ngFor="let language of languages" (mouseenter)="onOver(language)" (mouseleave)="onOut()" [ngClass]="language.iconClass"></i>

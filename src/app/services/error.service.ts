@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observer, Observable} from 'rxjs';
-import {IError} from "../interfaces/error";
+import {IError} from "../interfaces/interfaces";
 
 @Injectable()
 export class ErrorService {
