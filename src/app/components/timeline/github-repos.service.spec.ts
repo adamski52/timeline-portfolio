@@ -2,15 +2,20 @@ import {TestBed, inject} from '@angular/core/testing';
 import {MockBackend} from '@angular/http/testing';
 import {HttpModule, XHRBackend, Response, ResponseOptions} from '@angular/http';
 
-import {GithubUserService} from './github-user.service';
-import {ErrorService} from "./error.service";
+import {GithubReposService} from './github-repos.service';
+import {ErrorService} from "../../services/error.service";
 
-describe('GithubUserService', () => {
+describe('GithubReposService', () => {
+  let response,
+      data = {
+        data: "hello"
+      };
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         ErrorService,
-        GithubUserService,
+        GithubReposService,
         {
           provide: XHRBackend, useClass: MockBackend
         }
@@ -21,19 +26,14 @@ describe('GithubUserService', () => {
     });
   });
 
-  it('should notify subscribers with response', inject([GithubUserService, XHRBackend], (service: GithubUserService, mockBackend: MockBackend) => {
-    let response,
-        data = {
-          data: "hello"
-        };
-
+  it('should notify subscribers with response', inject([GithubReposService, XHRBackend], (service: GithubReposService, mockBackend: MockBackend) => {
     mockBackend.connections.subscribe((connection) => {
       connection.mockRespond(new Response(new ResponseOptions({
         body: data
       })));
     });
 
-    service.data$.subscribe((r:any) => {
+    service.subscribe((r:any) => {
       response = r
     });
 
@@ -42,9 +42,7 @@ describe('GithubUserService', () => {
     expect(response).toBe(data);
   }));
 
-  it('should log an error if the end point fails', inject([GithubUserService, XHRBackend, ErrorService], (service: GithubUserService, mockBackend: MockBackend, errorService:ErrorService) => {
-    let response;
-
+  it('should log an error if the end point fails', inject([GithubReposService, XHRBackend, ErrorService], (service: GithubReposService, mockBackend: MockBackend, errorService:ErrorService) => {
     mockBackend.connections.subscribe((connection) => {
       connection.mockError(new Response(new ResponseOptions({
         status: 400
@@ -53,7 +51,7 @@ describe('GithubUserService', () => {
 
     expect(errorService.getAll().length).toEqual(0);
 
-    service.data$.subscribe((r) => {
+    service.subscribe((r) => {
       response = r;
     });
 

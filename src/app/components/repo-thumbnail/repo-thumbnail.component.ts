@@ -1,11 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {GithubGenericService} from '../../services/github-generic.service';
+import {GithubRepoThumbnailService} from "./repo-thumbnail.service";
+import {IThumbnail} from "../../interfaces/thumbnail";
 
 @Component({
     selector: 'jna-repo-thumbnail',
     templateUrl: './repo-thumbnail.component.html',
     providers: [
-        GithubGenericService
+        GithubRepoThumbnailService
     ]
 })
 export class RepoThumbnailComponent {
@@ -13,15 +14,15 @@ export class RepoThumbnailComponent {
 
     public thumbnail:string;
 
-    constructor(private service: GithubGenericService) {
-        this.service.subscribe((response) => {
-            this.thumbnail = response.download_url;
+    constructor(private thumbnailService:GithubRepoThumbnailService) {
+        this.thumbnailService.subscribe((thumbnail:IThumbnail) => {
+            this.thumbnail = thumbnail.download_url;
         });
     }
 
     ngOnInit() {
         if(this.repo) {
-            //this.service.fetch("/api/repos/adamski52/" + this.repo + "/contents/thumbnail.png");
+            this.thumbnailService.fetch(this.repo);
         }
     }
 }

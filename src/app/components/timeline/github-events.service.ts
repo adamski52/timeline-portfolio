@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {GithubGenericService} from "./github-generic.service";
+import {GenericHttpService} from "../../services/generic-http.service";
 import {Http, Response} from "@angular/http";
-import {ErrorService} from "./error.service";
-import {IEvent} from "../interfaces/interfaces";
+import {ErrorService} from "../../services/error.service";
+import {IEvent} from "../../interfaces/event";
 
 @Injectable()
-export class GithubEventsService extends GithubGenericService {
+export class GithubEventsService extends GenericHttpService {
     private _data:IEvent[];
 
     constructor(protected http: Http, protected errorService: ErrorService) {

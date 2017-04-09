@@ -1,10 +1,10 @@
 import {TestBed, inject} from '@angular/core/testing';
 import {MockBackend} from '@angular/http/testing';
-import {GithubGenericService} from './github-generic.service';
+import {GenericHttpService} from './generic-http.service';
 import {XHRBackend, HttpModule, Response, ResponseOptions} from "@angular/http";
 import {ErrorService} from "./error.service";
 
-describe('GithubGenericService', () => {
+describe('GenericHttpService', () => {
     let response,
         data = {
             data: "hello"
@@ -14,7 +14,7 @@ describe('GithubGenericService', () => {
         TestBed.configureTestingModule({
             providers: [
                 ErrorService,
-                GithubGenericService,
+                GenericHttpService,
                 {
                     provide: XHRBackend,
                     useClass: MockBackend
@@ -26,11 +26,11 @@ describe('GithubGenericService', () => {
         });
     });
 
-    it('should provide a public subscribable', inject([GithubGenericService], (service: GithubGenericService) => {
+    it('should provide a public subscribable', inject([GenericHttpService], (service: GenericHttpService) => {
         expect(service.data$).toBeTruthy();
     }));
 
-    it('should provide a public fetch method', inject([GithubGenericService, XHRBackend, ErrorService], (service: GithubGenericService, mockBackend: MockBackend, errorService:ErrorService) => {
+    it('should provide a public fetch method', inject([GenericHttpService, XHRBackend, ErrorService], (service: GenericHttpService, mockBackend: MockBackend, errorService:ErrorService) => {
         mockBackend.connections.subscribe((connection) => {
             connection.mockRespond(new Response(new ResponseOptions({
                 body: data
@@ -46,7 +46,7 @@ describe('GithubGenericService', () => {
         expect(response).toBe(data);
     }));
 
-    it('should log an error if the end point fails', inject([GithubGenericService, XHRBackend, ErrorService], (service: GithubGenericService, mockBackend: MockBackend, errorService:ErrorService) => {
+    it('should log an error if the end point fails', inject([GenericHttpService, XHRBackend, ErrorService], (service: GenericHttpService, mockBackend: MockBackend, errorService:ErrorService) => {
         mockBackend.connections.subscribe((connection) => {
             connection.mockError(new Response(new ResponseOptions({
                 status: 400

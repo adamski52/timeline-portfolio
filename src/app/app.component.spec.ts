@@ -2,9 +2,9 @@ import {TestBed, async} from '@angular/core/testing';
 
 import {AppComponent} from './app.component';
 import {TimelineComponent} from "./components/timeline/timeline.component";
-import {GithubUserService} from "./services/github-user.service";
-import {GithubReposService} from "./services/github-repos.service";
-import {GithubEventsService} from "./services/github-events.service";
+import {GithubUserService} from "./components/timeline/github-user.service";
+import {GithubReposService} from "./components/timeline/github-repos.service";
+import {GithubEventsService} from "./components/timeline/github-events.service";
 import {ErrorService} from "./services/error.service";
 import {HttpModule, XHRBackend} from '@angular/http';
 import {MockBackend} from '@angular/http/testing';

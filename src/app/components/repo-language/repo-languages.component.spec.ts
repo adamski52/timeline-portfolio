@@ -2,11 +2,11 @@ import {async, ComponentFixture, TestBed, inject} from '@angular/core/testing';
 
 import {Component} from '@angular/core';
 import {RepoLanguagesComponent} from './repo-languages.component';
-import {GithubGenericService} from "../../services/github-generic.service";
+import {GenericHttpService} from "../../services/generic-http.service";
 import {ErrorService} from "../../services/error.service";
 import {HttpModule, RequestMethod, XHRBackend, Response, ResponseOptions} from '@angular/http';
 import {MockBackend} from '@angular/http/testing';
-import {GithubRepoLanguagesService} from "../../services/github-repo-languages.service";
+import {GithubRepoLanguagesService} from "./repo-languages.service";
 
 @Component({
     selector: 'jna-test-component',
@@ -37,7 +37,7 @@ describe('RepoLanguagesComponent', () => {
                 RepoLanguagesComponent
             ],
             providers: [
-                GithubGenericService,
+                GenericHttpService,
                 GithubRepoLanguagesService,
                 ErrorService,
                 {
@@ -66,14 +66,14 @@ describe('RepoLanguagesComponent', () => {
         fixture.detectChanges();
     }));
 
-    it('should not call the languages service if there is no @input', inject([GithubGenericService, XHRBackend], (service:GithubGenericService, mockBackend: MockBackend) => {
+    it('should not call the languages service if there is no @input', inject([GenericHttpService, XHRBackend], (service:GenericHttpService, mockBackend: MockBackend) => {
         mockBackend.connections.subscribe((connection) => {
             connection.mockRespond(new Response(new ResponseOptions({
                 body: mockData
             })));
         });
 
-        service.data$.subscribe((r:any) => {
+        service.subscribe((r:any) => {
             response = r;
         });
 
@@ -85,14 +85,14 @@ describe('RepoLanguagesComponent', () => {
     }));
 
 
-    it('should respond to the languages service', inject([GithubGenericService, XHRBackend], (service: GithubGenericService, mockBackend: MockBackend) => {
+    it('should respond to the languages service', inject([GenericHttpService, XHRBackend], (service: GenericHttpService, mockBackend: MockBackend) => {
         mockBackend.connections.subscribe((connection) => {
             connection.mockRespond(new Response(new ResponseOptions({
                 body: mockData
             })));
         });
 
-        service.data$.subscribe((r:any) => {
+        service.subscribe((r:any) => {
             response = r;
         });
 

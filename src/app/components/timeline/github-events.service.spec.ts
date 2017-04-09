@@ -3,7 +3,7 @@ import {MockBackend} from '@angular/http/testing';
 import {HttpModule, XHRBackend, Response, ResponseOptions} from '@angular/http';
 
 import {GithubEventsService} from './github-events.service';
-import {ErrorService} from "./error.service";
+import {ErrorService} from "../../services/error.service";
 
 describe('GithubEventsService', () => {
     beforeEach(() => {
@@ -34,7 +34,7 @@ describe('GithubEventsService', () => {
             })));
         });
 
-        service.data$.subscribe((r:any) => {
+        service.subscribe((r:any) => {
             response = r
         });
 
@@ -54,7 +54,7 @@ describe('GithubEventsService', () => {
 
         expect(errorService.getAll().length).toEqual(0);
 
-        service.data$.subscribe((r) => {
+        service.subscribe((r) => {
             response = r;
         });
 

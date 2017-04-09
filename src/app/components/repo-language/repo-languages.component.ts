@@ -1,10 +1,9 @@
 import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
-import {GithubRepoLanguagesService} from "../../services/github-repo-languages.service";
-import {ILanguage} from "../../interfaces/interfaces";
+import {GithubRepoLanguagesService, ILanguage} from "./repo-languages.service";
 
 @Component({
     selector: 'jna-repo-languages',
-    templateUrl: './repo-languages.component.html',
+    templateUrl: 'repo-languages.component.html',
     providers: [
         GithubRepoLanguagesService
     ]
@@ -12,7 +11,7 @@ import {ILanguage} from "../../interfaces/interfaces";
 export class RepoLanguagesComponent implements OnInit {
     @Input("repo") repo:string;
 
-    @Output("onHover") onHover =  new EventEmitter<string>()
+    @Output("onHover") onHover =  new EventEmitter<string>();
 
     public isHover:boolean = true;
     public languages:ILanguage[];

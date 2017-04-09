@@ -4,7 +4,7 @@ import {Observable, Observer, Subscription} from 'rxjs';
 import {ErrorService} from "./error.service";
 
 @Injectable()
-export class GithubGenericService {
+export class GenericHttpService {
     protected _observer: Observer<any>;
 
     constructor(protected http: Http, protected errorService: ErrorService) {}

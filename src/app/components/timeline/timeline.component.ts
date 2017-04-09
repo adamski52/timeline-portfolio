@@ -1,12 +1,19 @@
 import {Component} from '@angular/core';
-import {IUser, IRepo, IEvent} from "../../interfaces/interfaces";
-import {GithubUserService} from "../../services/github-user.service";
-import {GithubReposService} from "../../services/github-repos.service";
-import {GithubEventsService} from "../../services/github-events.service";
+import {GithubUserService} from "./github-user.service";
+import {GithubReposService} from "./github-repos.service";
+import {GithubEventsService} from "./github-events.service";
+import {IUser} from "../../interfaces/user";
+import {IRepo} from "../../interfaces/repo";
+import {IEvent} from "../../interfaces/event";
 
 @Component({
     selector: 'jna-timeline',
     templateUrl: './timeline.component.html',
+    providers: [
+        GithubEventsService,
+        GithubReposService,
+        GithubUserService
+    ]
 })
 export class TimelineComponent {
 
