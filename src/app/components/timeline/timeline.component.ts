@@ -8,12 +8,7 @@ import {IEvent} from "../../interfaces/event";
 
 @Component({
     selector: 'jna-timeline',
-    templateUrl: './timeline.component.html',
-    providers: [
-        GithubEventsService,
-        GithubReposService,
-        GithubUserService
-    ]
+    templateUrl: './timeline.component.html'
 })
 export class TimelineComponent {
 

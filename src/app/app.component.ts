@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {GithubRepoLanguagesService} from "./components/repo-thumbnail/repo-thumbnail.service";
 
 @Component({
   selector: 'body',

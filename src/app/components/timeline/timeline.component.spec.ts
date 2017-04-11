@@ -50,35 +50,42 @@ describe('TimelineComponent', () => {
         expect(userService.fetch).toHaveBeenCalled();
     }));
 
-    // it('should respond to the user service', inject([GithubUserService, GithubEventsService, GithubReposService, XHRBackend], (userService: GithubUserService, eventsService:GithubEventsService, reposService:GithubReposService, mockBackend: MockBackend) => {
-    //     spyOn(eventsService, "fetch");
-    //     spyOn(reposService, "fetch");
-    //
-    //     mockBackend.connections.subscribe((connection) => {
-    //         connection.mockRespond(new Response(new ResponseOptions({
-    //             body: JSON.stringify(mockObj)
-    //         })));
-    //     });
-    //
-    //     userService.subscribe((r:any) => {
-    //         console.log("test got", r);
-    //         response = r;
-    //     });
-    //
-    //     fixture = TestBed.createComponent(TimelineComponent);
-    //     component = fixture.componentInstance;
-    //     fixture.detectChanges();
-    //     expect(component.user).toBe(mockObj);
-    // }));
-    //
-    // it('should invoke the repos service', inject([GithubReposService], (reposService: GithubReposService) => {
-    //     spyOn(reposService, "fetch");
-    //     fixture = TestBed.createComponent(TimelineComponent);
-    //     fixture.detectChanges();
-    //     expect(reposService.fetch).toHaveBeenCalled();
-    // }));
+    it('should invoke the repos service', inject([GithubReposService], (reposService: GithubReposService) => {
+        spyOn(reposService, "fetch");
+        fixture = TestBed.createComponent(TimelineComponent);
+        fixture.detectChanges();
+        expect(reposService.fetch).toHaveBeenCalled();
+    }));
 
-    it('should respond to the repos service', inject([GithubUserService, GithubEventsService, GithubReposService, XHRBackend], (userService: GithubUserService, eventsService:GithubEventsService, reposService:GithubReposService, mockBackend: MockBackend) => {
+    it('should invoke the events service', inject([GithubEventsService], (eventsService: GithubEventsService) => {
+        spyOn(eventsService, "fetch");
+        fixture = TestBed.createComponent(TimelineComponent);
+        fixture.detectChanges();
+        expect(eventsService.fetch).toHaveBeenCalled();
+    }));
+
+    it('should respond to the user service', inject([GithubUserService, GithubEventsService, GithubReposService, XHRBackend], (userService: GithubUserService, eventsService: GithubEventsService, reposService: GithubReposService, mockBackend: MockBackend) => {
+        spyOn(eventsService, "fetch");
+        spyOn(reposService, "fetch");
+
+        mockBackend.connections.subscribe((connection) => {
+            connection.mockRespond(new Response(new ResponseOptions({
+                body: mockObj
+            })));
+        });
+
+        userService.subscribe((r: any) => {
+            response = r;
+        });
+
+        fixture = TestBed.createComponent(TimelineComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+        expect(component.user).toBe(mockObj);
+    }));
+
+
+    it('should respond to the repos service', inject([GithubUserService, GithubEventsService, GithubReposService, XHRBackend], (userService: GithubUserService, eventsService: GithubEventsService, reposService: GithubReposService, mockBackend: MockBackend) => {
         spyOn(eventsService, "fetch");
         spyOn(userService, "fetch");
 
@@ -88,7 +95,7 @@ describe('TimelineComponent', () => {
             })));
         });
 
-        reposService.subscribe((r:any) => {
+        reposService.subscribe((r: any) => {
             response = r;
         });
 
@@ -98,14 +105,8 @@ describe('TimelineComponent', () => {
         expect(component.repos).toBe(mockArray);
     }));
 
-    // it('should invoke the events service', inject([GithubEventsService], (eventsService: GithubEventsService) => {
-    //     spyOn(eventsService, "fetch");
-    //     fixture = TestBed.createComponent(TimelineComponent);
-    //     fixture.detectChanges();
-    //     expect(eventsService.fetch).toHaveBeenCalled();
-    // }));
 
-    it('should respond to the events service', inject([GithubUserService, GithubEventsService, GithubReposService, XHRBackend], (userService: GithubUserService, eventsService:GithubEventsService, reposService:GithubReposService, mockBackend: MockBackend) => {
+    it('should respond to the events service', inject([GithubUserService, GithubEventsService, GithubReposService, XHRBackend], (userService: GithubUserService, eventsService: GithubEventsService, reposService: GithubReposService, mockBackend: MockBackend) => {
         spyOn(userService, "fetch");
         spyOn(reposService, "fetch");
 
@@ -115,7 +116,7 @@ describe('TimelineComponent', () => {
             })));
         });
 
-        eventsService.subscribe((r:any) => {
+        eventsService.subscribe((r: any) => {
             response = r;
         });
 

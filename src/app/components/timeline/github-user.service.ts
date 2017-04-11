@@ -13,10 +13,8 @@ export class GithubUserService extends GenericHttpService {
     }
 
     public fetch(): void {
-        console.log("fetch user");
         this.http.get("/api/users/adamski52").subscribe((response: Response) => {
             this.data = response.json();
-            console.log("broadcast", this.data);
             this.broadcast(this.data);
         },
         (error: Response) => {
