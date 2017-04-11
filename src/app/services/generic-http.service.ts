@@ -14,7 +14,9 @@ export class GenericHttpService {
     }).share();
 
     protected broadcast(response:any) {
-        this._observer.next(response);
+        if(this._observer) {
+            this._observer.next(response);
+        }
     }
 
     public subscribe(handler:(value: any) => void):Subscription {
