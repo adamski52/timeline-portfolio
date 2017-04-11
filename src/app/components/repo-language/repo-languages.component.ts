@@ -1,5 +1,6 @@
 import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
-import {GithubRepoLanguagesService, ILanguage} from "./repo-languages.service";
+import {GithubRepoLanguagesService} from "./repo-languages.service";
+import {ILanguage} from "../../interfaces/language";
 
 @Component({
     selector: 'jna-repo-languages',
