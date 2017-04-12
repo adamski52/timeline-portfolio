@@ -4,7 +4,7 @@ import {Observable, Observer, Subscription} from 'rxjs';
 import {ErrorService} from "./error.service";
 
 @Injectable()
-export class GenericHttpService {
+export abstract class GenericHttpService {
     protected _observer: Observer<any>;
 
     constructor(protected http: Http, protected errorService: ErrorService) {}
@@ -19,16 +19,44 @@ export class GenericHttpService {
         }
     }
 
+    public fetch(url:string):void {
+        this.load(url);
+    }
+
+    protected load(url:string): Observable<Response> {
+        // TODO:  Just for dev purposes to avoid rate limiting myself
+        if(this.isMock()) {
+            let pieces:string[] = url.split("/");
+            switch(pieces[pieces.length-1]) {
+                case "adamski52":
+                    url = "/mocks/user.json";
+                    break;
+                case "repos":
+                    url = "/mocks/repos.json";
+                    break;
+                case "languages":
+                    url = "/mocks/languages.json";
+                    break;
+                case "thumbnail.png":
+                    url = "/mocks/img/thumbnail.png";
+                    break;
+                case "events":
+                    url = "/mocks/events.json";
+                    break;
+                default:
+                    url = "";
+                    break;
+            }
+        }
+
+        return this.http.get(url);
+    }
+
     public subscribe(handler:(value: any) => void):Subscription {
         return this.data$.subscribe(handler);
     }
 
-    public fetch(url): void {
-        this.http.get(url).subscribe((response:Response) => {
-            this.broadcast(response.json());
-        },
-        (error: Response) => {
-            this.errorService.add("Failed to load language.", error.status);
-        });
+    public isMock():boolean {
+        return true;
     }
 }

@@ -8,17 +8,16 @@ import {IUser} from "../../interfaces/user";
 export class GithubUserService extends GenericHttpService {
     private _data:IUser;
 
-    constructor(protected http: Http, protected errorService: ErrorService) {
+    constructor(protected http:Http, protected errorService:ErrorService) {
         super(http, errorService);
     }
 
-    public fetch(): void {
-        this.http.get("/api/users/adamski52").subscribe((response: Response) => {
+    public fetch():void {
+        this.load("/api/users/adamski52").subscribe((response:Response) => {
             this.data = response.json();
             this.broadcast(this.data);
-        },
-        (error: Response) => {
-            this.errorService.add("Failed to load profile.", error.status);
+        }, (error:Response) => {
+            this.errorService.add("Failed to load user.", error.status);
         });
     }
 

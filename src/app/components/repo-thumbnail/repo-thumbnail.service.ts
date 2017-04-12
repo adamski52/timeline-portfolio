@@ -14,10 +14,11 @@ export class GithubRepoThumbnailService extends GenericHttpService {
     }
 
     public fetch(repoName:string):void {
-        this.http.get("/api/repos/adamski52/" + repoName + "/contents/thumbnail.png").subscribe((response:Response) => {
+        this.load("/api/repos/adamski52/" + repoName + "/contents/thumbnail.png").subscribe((response:Response) => {
             this.data = response.json();
-
             this.broadcast(this.data);
+        }, (error:Response) => {
+            this.errorService.add("Failed to load thumbnail.", error.status);
         });
     }
 

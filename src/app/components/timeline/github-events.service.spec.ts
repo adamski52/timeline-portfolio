@@ -22,7 +22,7 @@ describe('GithubEventsService', () => {
         });
     });
 
-    it('should notify subscribers with response', inject([GithubEventsService, XHRBackend], (service: GithubEventsService, mockBackend: MockBackend) => {
+    it('should notify subscribers with response', inject([GithubEventsService, XHRBackend], (service:GithubEventsService, mockBackend:MockBackend) => {
         let response,
             data = {
                 data: "hello"
@@ -43,7 +43,7 @@ describe('GithubEventsService', () => {
         expect(response).toBe(data);
     }));
 
-    it('should log an error if the end point fails', inject([GithubEventsService, XHRBackend, ErrorService], (service: GithubEventsService, mockBackend: MockBackend, errorService:ErrorService) => {
+    it('should log an error if the end point fails', inject([GithubEventsService, XHRBackend, ErrorService], (service:GithubEventsService, mockBackend:MockBackend, errorService:ErrorService) => {
         let response;
 
         mockBackend.connections.subscribe((connection) => {

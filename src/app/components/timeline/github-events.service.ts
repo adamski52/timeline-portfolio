@@ -8,16 +8,15 @@ import {IEvent} from "../../interfaces/event";
 export class GithubEventsService extends GenericHttpService {
     private _data:IEvent[];
 
-    constructor(protected http: Http, protected errorService: ErrorService) {
+    constructor(protected http:Http, protected errorService:ErrorService) {
         super(http, errorService);
     }
 
-    public fetch(): void {
-        this.http.get("/api/users/adamski52/events").subscribe((response: Response) => {
+    public fetch():void {
+        this.load("/api/users/adamski52/events").subscribe((response:Response) => {
             this.data = response.json();
             this.broadcast(this.data);
-        },
-        (error: Response) => {
+        }, (error:Response) => {
             this.errorService.add("Failed to load events.", error.status);
         });
     }

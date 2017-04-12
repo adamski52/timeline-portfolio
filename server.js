@@ -1,5 +1,6 @@
 require('dotenv').config()
 var express = require('express');
+var path = require('path');
 var proxy = require('express-http-proxy');
 var app = express();
 
@@ -13,6 +14,6 @@ app.use('/api', proxy('api.github.com', {
     }
 }));
 
-
+app.use(express.static(path.join(__dirname, 'mocks')));
 
 console.log("Express started at :3000 / " + process.env.API_KEY);

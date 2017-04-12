@@ -7,11 +7,11 @@ export class ErrorService {
     private _id:number = new Date().getTime();
     private _errors:IError[] = [];
 
-    private _observer: Observer<IError[]>;
+    private _observer:Observer<IError[]>;
     public data$:Observable<IError[]> = new Observable(observer => this._observer = observer).share();
 
     private broadcast():void {
-        if(this._observer) {
+        if (this._observer) {
             this._observer.next(this._errors);
         }
     }
@@ -44,9 +44,9 @@ export class ErrorService {
         return error;
     }
 
-    public remove(error: IError):void {
+    public remove(error:IError):void {
         let index:number = this._errors.indexOf(error);
-        if(index <= -1) {
+        if (index <= -1) {
             return;
         }
 
@@ -55,7 +55,7 @@ export class ErrorService {
     }
 
     public removeAll():void {
-        if(this._errors.length <= 0) {
+        if (this._errors.length <= 0) {
             return;
         }
 
@@ -68,7 +68,8 @@ export interface IError {
     description: string;
     type: number;
     id?: number;
-};
+}
+;
 
 export const ErrorTypes = {
     UNKNOWN: 0

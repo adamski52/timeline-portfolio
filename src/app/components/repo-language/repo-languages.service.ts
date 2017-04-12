@@ -44,7 +44,7 @@ export class GithubRepoLanguagesService extends GenericHttpService {
 
     private getIconClass(language:string):string {
         language = language.toLowerCase();
-        if(this.languageMap[language]) {
+        if (this.languageMap[language]) {
             return "icon-" + this.languageMap[language];
         }
 
@@ -54,7 +54,7 @@ export class GithubRepoLanguagesService extends GenericHttpService {
     private makeArray(languages:ILanguageMeta):ILanguage[] {
         let languageList:ILanguage[] = [];
 
-        for(let language in languages) {
+        for (let language in languages) {
             languageList.push({
                 name: language,
                 iconClass: this.getIconClass(language),
@@ -62,7 +62,7 @@ export class GithubRepoLanguagesService extends GenericHttpService {
             });
         }
 
-        if(languageList.length <= 0) {
+        if (languageList.length <= 0) {
             languageList.push({
                 name: "Other",
                 iconClass: "icon-jna-file-alt"
@@ -73,13 +73,11 @@ export class GithubRepoLanguagesService extends GenericHttpService {
     }
 
     public fetch(repoName:string):void {
-        this.http.get("/api/repos/adamski52/" + repoName + "/languages").subscribe((response: Response) => {
-            this._data = this.makeArray(response.json());
-
+        this.load("/api/repos/adamski52/" + repoName + "/languages").subscribe((response:Response) => {
+            this.data = this.makeArray(response.json());
             this.broadcast(this.data);
-        },
-        (error: Response) => {
-            this.errorService.add("Failed to load events.", error.status);
+        }, (error:Response) => {
+            this.errorService.add("Failed to load languages.", error.status);
         });
     }
 

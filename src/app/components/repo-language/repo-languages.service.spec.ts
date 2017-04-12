@@ -79,20 +79,22 @@ describe('RepoLanguagesService', () => {
                 }
             ],
             imports: [
-               HttpModule
+                HttpModule
             ]
         });
     });
 
 
-    function testMatch(language: string) {
+    function testMatch(language:string) {
         let lowercaseLanguage = language.toLowerCase(),
             iconClass:string = "icon-" + languageMap[lowercaseLanguage],
             bodyObj = {};
 
         bodyObj[language] = mockData[language];
 
-        it('should return "' + iconClass + "' for " + language, inject([XHRBackend, GithubRepoLanguagesService], (mockBackend: MockBackend, repoLanguagesService: GithubRepoLanguagesService) => {
+        it('should return "' + iconClass + "' for " + language, inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:GithubRepoLanguagesService) => {
+            spyOn(repoLanguagesService, "isMock").and.returnValue(false);
+
             mockBackend.connections.subscribe((connection) => {
                 connection.mockRespond(new Response(new ResponseOptions({
                     body: bodyObj
@@ -108,7 +110,9 @@ describe('RepoLanguagesService', () => {
     }
 
 
-    it('should return an icon class, prefixed with "icon-"', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend: MockBackend, repoLanguagesService: GithubRepoLanguagesService) => {
+    it('should return an icon class, prefixed with "icon-"', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:GithubRepoLanguagesService) => {
+        spyOn(repoLanguagesService, "isMock").and.returnValue(false);
+
         mockBackend.connections.subscribe((connection) => {
             connection.mockRespond(new Response(new ResponseOptions({
                 body: {
@@ -124,7 +128,9 @@ describe('RepoLanguagesService', () => {
         expect(repoLanguagesService.data[0].size).toEqual(1234);
     }));
 
-    it('should return icon-css (because it looks most like a generic script icon) when a language is unknown', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend: MockBackend, repoLanguagesService: GithubRepoLanguagesService) => {
+    it('should return icon-css (because it looks most like a generic script icon) when a language is unknown', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:GithubRepoLanguagesService) => {
+        spyOn(repoLanguagesService, "isMock").and.returnValue(false);
+
         mockBackend.connections.subscribe((connection) => {
             connection.mockRespond(new Response(new ResponseOptions({
                 body: {
@@ -144,7 +150,7 @@ describe('RepoLanguagesService', () => {
         testMatch(language);
     }
 
-    it('should convert the github object to an array of name/iconClass/size', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend: MockBackend, repoLanguagesService: GithubRepoLanguagesService) => {
+    it('should convert the github object to an array of name/iconClass/size', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:GithubRepoLanguagesService) => {
         mockBackend.connections.subscribe((connection) => {
             connection.mockRespond(new Response(new ResponseOptions({
                 body: {
@@ -160,7 +166,7 @@ describe('RepoLanguagesService', () => {
         expect(repoLanguagesService.data[0].size).toEqual(1234);
     }));
 
-    it('should return "other" if no languages are specified', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend: MockBackend, repoLanguagesService: GithubRepoLanguagesService) => {
+    it('should return "other" if no languages are specified', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:GithubRepoLanguagesService) => {
         mockBackend.connections.subscribe((connection) => {
             connection.mockRespond(new Response(new ResponseOptions({
                 body: {}

@@ -14,11 +14,10 @@ export class GithubReposService extends GenericHttpService {
     }
 
     public fetch(): void {
-        this.http.get("/api/users/adamski52/repos").subscribe((response: Response) => {
+        this.load("/api/users/adamski52/repos").subscribe((response: Response) => {
             this.data = response.json();
             this.broadcast(this.data);
-        },
-        (error: Response) => {
+        }, (error:Response) => {
             this.errorService.add("Failed to load repos.", error.status);
         });
     }

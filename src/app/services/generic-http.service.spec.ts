@@ -26,41 +26,7 @@ describe('GenericHttpService', () => {
         });
     });
 
-    it('should provide a public subscribable', inject([GenericHttpService], (service: GenericHttpService) => {
-        expect(service.data$).toBeTruthy();
-    }));
-
-    it('should provide a public fetch method', inject([GenericHttpService, XHRBackend, ErrorService], (service: GenericHttpService, mockBackend: MockBackend, errorService:ErrorService) => {
-        mockBackend.connections.subscribe((connection) => {
-            connection.mockRespond(new Response(new ResponseOptions({
-                body: data
-            })));
-        });
-
-        service.data$.subscribe((r:any) => {
-            response = r
-        });
-
-        service.fetch("fake");
-
-        expect(response).toBe(data);
-    }));
-
-    it('should log an error if the end point fails', inject([GenericHttpService, XHRBackend, ErrorService], (service: GenericHttpService, mockBackend: MockBackend, errorService:ErrorService) => {
-        mockBackend.connections.subscribe((connection) => {
-            connection.mockError(new Response(new ResponseOptions({
-                status: 400
-            })));
-        });
-
-        expect(errorService.getAll().length).toEqual(0);
-
-        service.data$.subscribe((r) => {
-            response = r;
-        });
-
-        service.fetch("fake");
-
-        expect(errorService.getAll().length).toEqual(1);
+    it('should provide a public subscribable', inject([GenericHttpService], (service:GenericHttpService) => {
+        expect(service.subscribe).toBeTruthy();
     }));
 });

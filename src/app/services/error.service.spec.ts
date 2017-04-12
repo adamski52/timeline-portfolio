@@ -14,7 +14,7 @@ describe('ErrorService', () => {
         });
     });
 
-    it('should expose a subscribable source', inject([ErrorService], (errorService: ErrorService) => {
+    it('should expose a subscribable source', inject([ErrorService], (errorService:ErrorService) => {
         expect(errorService.data$).toBeDefined();
     }));
 
