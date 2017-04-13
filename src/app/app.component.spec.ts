@@ -10,6 +10,7 @@ import {HttpModule, XHRBackend} from '@angular/http';
 import {MockBackend} from '@angular/http/testing';
 import {RepoLanguagesComponent} from "./components/repo-language/repo-languages.component";
 import {RepoThumbnailComponent} from "./components/repo-thumbnail/repo-thumbnail.component";
+import {TimelineItemComponent} from "./components/timeline/timeline-item.component";
 
 describe('AppComponent', () => {
     beforeEach(async(() => {
@@ -17,6 +18,7 @@ describe('AppComponent', () => {
             declarations: [
                 AppComponent,
                 TimelineComponent,
+                TimelineItemComponent,
                 RepoLanguagesComponent,
                 RepoThumbnailComponent
             ],

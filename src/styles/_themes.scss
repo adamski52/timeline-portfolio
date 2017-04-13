@@ -6,6 +6,14 @@
   @return mix(#fff, $color, $pct);
 }
 
+@mixin make-icon($color, $pct: 50%) {
+    color: $color;
+
+    &:hover {
+        color: lighter($color, $pct);
+    }
+}
+
 @mixin gradient($start, $end, $startPct: 0%, $endPct: 100%) {
   background: $start;
   background: -moz-linear-gradient(top, $start $startPct, $end $endPct);

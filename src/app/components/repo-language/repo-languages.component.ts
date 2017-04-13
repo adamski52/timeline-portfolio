@@ -1,6 +1,7 @@
 import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 import {GithubRepoLanguagesService} from "./repo-languages.service";
 import {ILanguage} from "../../interfaces/language";
+import {TimelineItemService} from "../timeline/timeline-item.service";
 
 @Component({
     selector: 'jna-repo-languages',
@@ -12,28 +13,20 @@ import {ILanguage} from "../../interfaces/language";
 export class RepoLanguagesComponent implements OnInit {
     @Input("repo") repo:string;
 
-    @Output("hover") hover = new EventEmitter<ILanguage>();
-
     public languages:ILanguage[];
 
-    constructor(private languageService:GithubRepoLanguagesService) {
+    constructor(private itemService:TimelineItemService, private languageService:GithubRepoLanguagesService) {
         this.languageService.subscribe((languages:ILanguage[]) => {
             this.languages = languages;
         });
     }
 
-    onHover() {
-        console.log("all wrong");
-    }
-
     onOut() {
-        console.log("out");
-        this.hover.emit();
+        this.itemService.title = "";
     }
 
     onOver(language:ILanguage) {
-        console.log("over", language);
-        this.hover.emit(language);
+        this.itemService.title = language.name;
     }
 
     ngOnInit() {

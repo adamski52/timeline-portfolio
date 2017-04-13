@@ -7,6 +7,7 @@ import {ErrorService} from "../../services/error.service";
 import {HttpModule, RequestMethod, XHRBackend, Response, ResponseOptions} from '@angular/http';
 import {MockBackend} from '@angular/http/testing';
 import {GithubRepoLanguagesService} from "./repo-languages.service";
+import {TimelineItemService} from "../timeline/timeline-item.service";
 
 @Component({
     selector: 'jna-test-component',
@@ -41,6 +42,7 @@ describe('RepoLanguagesComponent', () => {
             providers: [
                 GenericHttpService,
                 GithubRepoLanguagesService,
+                TimelineItemService,
                 ErrorService,
                 {
                     provide: XHRBackend,
