@@ -6,59 +6,59 @@ import {GithubUserService} from './github-user.service';
 import {ErrorService} from "../../services/error.service";
 
 describe('GithubUserService', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [
-        ErrorService,
-        GithubUserService,
-        {
-          provide: XHRBackend, useClass: MockBackend
-        }
-      ],
-      imports: [
-        HttpModule
-      ]
-    });
-  });
-
-  it('should notify subscribers with response', inject([GithubUserService, XHRBackend], (service: GithubUserService, mockBackend: MockBackend) => {
-    let response,
-        data = {
-          data: "hello"
-        };
-
-    mockBackend.connections.subscribe((connection) => {
-      connection.mockRespond(new Response(new ResponseOptions({
-        body: data
-      })));
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            providers: [
+                ErrorService,
+                GithubUserService,
+                {
+                    provide: XHRBackend, useClass: MockBackend
+                }
+            ],
+            imports: [
+                HttpModule
+            ]
+        });
     });
 
-    service.subscribe((r:any) => {
-      response = r
-    });
+    it('should notify subscribers with response', inject([GithubUserService, XHRBackend], (service:GithubUserService, mockBackend:MockBackend) => {
+        let response,
+            data = {
+                data: "hello"
+            };
 
-    service.fetch();
+        mockBackend.connections.subscribe((connection) => {
+            connection.mockRespond(new Response(new ResponseOptions({
+                body: data
+            })));
+        });
 
-    expect(response).toBe(data);
-  }));
+        service.subscribe((r:any) => {
+            response = r
+        });
 
-  it('should log an error if the end point fails', inject([GithubUserService, XHRBackend, ErrorService], (service: GithubUserService, mockBackend: MockBackend, errorService:ErrorService) => {
-    let response;
+        service.fetch();
 
-    mockBackend.connections.subscribe((connection) => {
-      connection.mockError(new Response(new ResponseOptions({
-        status: 400
-      })));
-    });
+        expect(response).toBe(data);
+    }));
 
-    expect(errorService.getAll().length).toEqual(0);
+    it('should log an error if the end point fails', inject([GithubUserService, XHRBackend, ErrorService], (service:GithubUserService, mockBackend:MockBackend, errorService:ErrorService) => {
+        let response;
 
-    service.subscribe((r) => {
-      response = r;
-    });
+        mockBackend.connections.subscribe((connection) => {
+            connection.mockError(new Response(new ResponseOptions({
+                status: 400
+            })));
+        });
 
-    service.fetch();
+        expect(errorService.getAll().length).toEqual(0);
 
-    expect(errorService.getAll().length).toEqual(1);
-  }));
+        service.subscribe((r) => {
+            response = r;
+        });
+
+        service.fetch();
+
+        expect(errorService.getAll().length).toEqual(1);
+    }));
 });

@@ -11,8 +11,8 @@ import {RepoLanguagesComponent} from "../repo-language/repo-languages.component"
 import {RepoThumbnailComponent} from "../repo-thumbnail/repo-thumbnail.component";
 
 describe('TimelineComponent', () => {
-    let fixture: ComponentFixture<TimelineComponent>,
-        component: TimelineComponent,
+    let fixture:ComponentFixture<TimelineComponent>,
+        component:TimelineComponent,
         response,
         mockObj = {
             "lol": "wat"
@@ -43,28 +43,28 @@ describe('TimelineComponent', () => {
         }).compileComponents();
     }));
 
-    it('should invoke the user service', inject([GithubUserService], (userService: GithubUserService) => {
+    it('should invoke the user service', inject([GithubUserService], (userService:GithubUserService) => {
         spyOn(userService, "fetch");
         fixture = TestBed.createComponent(TimelineComponent);
         fixture.detectChanges();
         expect(userService.fetch).toHaveBeenCalled();
     }));
 
-    it('should invoke the repos service', inject([GithubReposService], (reposService: GithubReposService) => {
+    it('should invoke the repos service', inject([GithubReposService], (reposService:GithubReposService) => {
         spyOn(reposService, "fetch");
         fixture = TestBed.createComponent(TimelineComponent);
         fixture.detectChanges();
         expect(reposService.fetch).toHaveBeenCalled();
     }));
 
-    it('should invoke the events service', inject([GithubEventsService], (eventsService: GithubEventsService) => {
+    it('should invoke the events service', inject([GithubEventsService], (eventsService:GithubEventsService) => {
         spyOn(eventsService, "fetch");
         fixture = TestBed.createComponent(TimelineComponent);
         fixture.detectChanges();
         expect(eventsService.fetch).toHaveBeenCalled();
     }));
 
-    it('should respond to the user service', inject([GithubUserService, GithubEventsService, GithubReposService, XHRBackend], (userService: GithubUserService, eventsService: GithubEventsService, reposService: GithubReposService, mockBackend: MockBackend) => {
+    it('should respond to the user service', inject([GithubUserService, GithubEventsService, GithubReposService, XHRBackend], (userService:GithubUserService, eventsService:GithubEventsService, reposService:GithubReposService, mockBackend:MockBackend) => {
         spyOn(eventsService, "fetch");
         spyOn(reposService, "fetch");
 
@@ -74,7 +74,7 @@ describe('TimelineComponent', () => {
             })));
         });
 
-        userService.subscribe((r: any) => {
+        userService.subscribe((r:any) => {
             response = r;
         });
 
@@ -85,7 +85,7 @@ describe('TimelineComponent', () => {
     }));
 
 
-    it('should respond to the repos service', inject([GithubUserService, GithubEventsService, GithubReposService, XHRBackend], (userService: GithubUserService, eventsService: GithubEventsService, reposService: GithubReposService, mockBackend: MockBackend) => {
+    it('should respond to the repos service', inject([GithubUserService, GithubEventsService, GithubReposService, XHRBackend], (userService:GithubUserService, eventsService:GithubEventsService, reposService:GithubReposService, mockBackend:MockBackend) => {
         spyOn(eventsService, "fetch");
         spyOn(userService, "fetch");
 
@@ -95,7 +95,7 @@ describe('TimelineComponent', () => {
             })));
         });
 
-        reposService.subscribe((r: any) => {
+        reposService.subscribe((r:any) => {
             response = r;
         });
 
@@ -106,7 +106,7 @@ describe('TimelineComponent', () => {
     }));
 
 
-    it('should respond to the events service', inject([GithubUserService, GithubEventsService, GithubReposService, XHRBackend], (userService: GithubUserService, eventsService: GithubEventsService, reposService: GithubReposService, mockBackend: MockBackend) => {
+    it('should respond to the events service', inject([GithubUserService, GithubEventsService, GithubReposService, XHRBackend], (userService:GithubUserService, eventsService:GithubEventsService, reposService:GithubReposService, mockBackend:MockBackend) => {
         spyOn(userService, "fetch");
         spyOn(reposService, "fetch");
 
@@ -116,7 +116,7 @@ describe('TimelineComponent', () => {
             })));
         });
 
-        eventsService.subscribe((r: any) => {
+        eventsService.subscribe((r:any) => {
             response = r;
         });
 

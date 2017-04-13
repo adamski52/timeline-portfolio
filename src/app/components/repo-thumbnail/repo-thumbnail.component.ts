@@ -21,7 +21,7 @@ export class RepoThumbnailComponent {
     }
 
     ngOnInit() {
-        if(this.repo) {
+        if (this.repo) {
             this.thumbnailService.fetch(this.repo);
         }
     }

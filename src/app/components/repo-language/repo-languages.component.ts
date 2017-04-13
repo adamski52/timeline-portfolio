@@ -16,7 +16,7 @@ export class RepoLanguagesComponent implements OnInit {
 
     public languages:ILanguage[];
 
-    constructor(private languageService: GithubRepoLanguagesService) {
+    constructor(private languageService:GithubRepoLanguagesService) {
         this.languageService.subscribe((languages:ILanguage[]) => {
             this.languages = languages;
         });
@@ -37,7 +37,7 @@ export class RepoLanguagesComponent implements OnInit {
     }
 
     ngOnInit() {
-        if(this.repo) {
+        if (this.repo) {
             this.languageService.fetch(this.repo);
         }
     }

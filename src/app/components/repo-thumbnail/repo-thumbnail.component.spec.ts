@@ -12,17 +12,19 @@ import {GithubRepoThumbnailService} from "./repo-thumbnail.service";
     selector: 'jna-test-component',
     template: `<jna-repo-thumbnail [repo]="'lol'"></jna-repo-thumbnail>`
 })
-class TestComponent {}
+class TestComponent {
+}
 
 @Component({
     selector: 'jna-test-component-blank',
     template: `<jna-repo-thumbnail></jna-repo-thumbnail>`
 })
-class TestComponentBlank {}
+class TestComponentBlank {
+}
 
 describe('RepoLanguagesComponent', () => {
-    let component: RepoThumbnailComponent,
-        fixture: ComponentFixture<TestComponent | TestComponentBlank>,
+    let component:RepoThumbnailComponent,
+        fixture:ComponentFixture<TestComponent | TestComponentBlank>,
         mockData = {
             download_url: "/api/repos/adamski52/lol/contents/thumbnail.png"
         },
@@ -51,7 +53,7 @@ describe('RepoLanguagesComponent', () => {
     }));
 
 
-    it('should call the thumbnail service based on @input', inject([XHRBackend], (mockBackend: MockBackend) => {
+    it('should call the thumbnail service based on @input', inject([XHRBackend], (mockBackend:MockBackend) => {
         mockBackend.connections.subscribe((connection) => {
             expect(connection.request.method).toBe(RequestMethod.Get);
             expect(connection.request.url).toBe("/api/repos/adamski52/lol/contents/thumbnail.png");
@@ -65,7 +67,7 @@ describe('RepoLanguagesComponent', () => {
         fixture.detectChanges();
     }));
 
-    it('should not call the thumbnail service if there is no @input', inject([GenericHttpService, XHRBackend], (service:GenericHttpService, mockBackend: MockBackend) => {
+    it('should not call the thumbnail service if there is no @input', inject([GenericHttpService, XHRBackend], (service:GenericHttpService, mockBackend:MockBackend) => {
         mockBackend.connections.subscribe((connection) => {
             connection.mockRespond(new Response(new ResponseOptions({
                 body: mockData
@@ -84,7 +86,7 @@ describe('RepoLanguagesComponent', () => {
     }));
 
 
-    it('should respond to the thumbnail service', inject([GenericHttpService, XHRBackend], (service: GenericHttpService, mockBackend: MockBackend) => {
+    it('should respond to the thumbnail service', inject([GenericHttpService, XHRBackend], (service:GenericHttpService, mockBackend:MockBackend) => {
         mockBackend.connections.subscribe((connection) => {
             connection.mockRespond(new Response(new ResponseOptions({
                 body: mockData
