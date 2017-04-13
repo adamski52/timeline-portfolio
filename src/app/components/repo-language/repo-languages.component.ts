@@ -12,9 +12,8 @@ import {ILanguage} from "../../interfaces/language";
 export class RepoLanguagesComponent implements OnInit {
     @Input("repo") repo:string;
 
-    @Output("onHover") onHover =  new EventEmitter<string>();
+    @Output("hover") hover = new EventEmitter<ILanguage>();
 
-    public isHover:boolean = true;
     public languages:ILanguage[];
 
     constructor(private languageService: GithubRepoLanguagesService) {
@@ -23,13 +22,18 @@ export class RepoLanguagesComponent implements OnInit {
         });
     }
 
+    onHover() {
+        console.log("all wrong");
+    }
+
     onOut() {
-        this.isHover = false;
-        this.onHover.emit("");
+        console.log("out");
+        this.hover.emit();
     }
 
     onOver(language:ILanguage) {
-        this.onHover.emit(language.name);
+        console.log("over", language);
+        this.hover.emit(language);
     }
 
     ngOnInit() {

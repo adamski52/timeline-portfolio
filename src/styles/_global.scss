@@ -112,8 +112,6 @@ h1, h2, h3, h4, h5, h6 {
     .timeline-title {
       float: right;
     }
-
-
   }
 }
 
@@ -125,6 +123,8 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
   float: left;
   clear: both;
+  position: relative;
+  z-index: 1;
 }
 
 .timeline-languages {

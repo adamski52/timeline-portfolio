@@ -172,4 +172,24 @@ describe('RepoLanguagesService', () => {
         expect(repoLanguagesService.data[0].name).toEqual("Other");
         expect(repoLanguagesService.data[0].size).toEqual(undefined);
     }));
+
+    it('should log an error if the end point fails', inject([XHRBackend, GithubRepoLanguagesService, ErrorService], (mockBackend: MockBackend, repoLanguagesService: GithubRepoLanguagesService, errorService:ErrorService) => {
+        let response;
+
+        mockBackend.connections.subscribe((connection) => {
+            connection.mockError(new Response(new ResponseOptions({
+                status: 400
+            })));
+        });
+
+        expect(errorService.getAll().length).toEqual(0);
+
+        repoLanguagesService.subscribe((r) => {
+            response = r;
+        });
+
+        repoLanguagesService.fetch("fake");
+
+        expect(errorService.getAll().length).toEqual(1);
+    }));
 });

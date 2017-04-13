@@ -11,11 +11,13 @@ import {RepoThumbnailComponent} from "./components/repo-thumbnail/repo-thumbnail
 import {GithubUserService} from "./components/timeline/github-user.service";
 import {GithubReposService} from "./components/timeline/github-repos.service";
 import {GithubEventsService} from "./components/timeline/github-events.service";
+import {TimelineItemComponent} from "./components/timeline/timeline-item.component";
 
 @NgModule({
     declarations: [
         AppComponent,
         TimelineComponent,
+        TimelineItemComponent,
         RepoLanguagesComponent,
         RepoThumbnailComponent
     ],
