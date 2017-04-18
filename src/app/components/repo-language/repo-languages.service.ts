@@ -81,7 +81,6 @@ export class GithubRepoLanguagesService extends GenericHttpService {
         });
     }
 
-
     public get data():ILanguage[] {
         return this._data;
     }

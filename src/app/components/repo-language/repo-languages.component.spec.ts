@@ -1,6 +1,6 @@
 import {async, ComponentFixture, TestBed, inject} from '@angular/core/testing';
 
-import {Component} from '@angular/core';
+import {Component, Injectable} from '@angular/core';
 import {RepoLanguagesComponent} from './repo-languages.component';
 import {GenericHttpService} from "../../services/generic-http.service";
 import {ErrorService} from "../../services/error.service";
@@ -8,6 +8,8 @@ import {HttpModule, RequestMethod, XHRBackend, Response, ResponseOptions} from '
 import {MockBackend} from '@angular/http/testing';
 import {GithubRepoLanguagesService} from "./repo-languages.service";
 import {TimelineItemService} from "../timeline/timeline-item.service";
+import {ILanguage} from "../../interfaces/language";
+import {TickerService} from "../../services/ticker.service";
 
 @Component({
     selector: 'jna-test-component',
@@ -43,6 +45,7 @@ describe('RepoLanguagesComponent', () => {
                 GenericHttpService,
                 GithubRepoLanguagesService,
                 TimelineItemService,
+                TickerService,
                 ErrorService,
                 {
                     provide: XHRBackend,
@@ -106,4 +109,34 @@ describe('RepoLanguagesComponent', () => {
 
         expect(component.languages.length).toBe(2);
     }));
+
+    it('should set the services title to the language on mouseenter', () => {
+        let language:ILanguage = {
+            name: "lolcode",
+            iconClass: "icon-lolcode",
+            size: 1234
+        };
+
+        fixture = TestBed.createComponent(TestComponent);
+        component = fixture.debugElement.children[0].componentInstance;
+        fixture.detectChanges();
+
+        let service:TimelineItemService = fixture.debugElement.children[0].injector.get(TimelineItemService);
+        spyOn(service, "setTitle");
+
+        component.onOver(language);
+        expect(service.setTitle).toHaveBeenCalledWith(language.name);
+    });
+
+    it('should reset the services title on mouseleave', () => {
+        fixture = TestBed.createComponent(TestComponent);
+        component = fixture.debugElement.children[0].componentInstance;
+        fixture.detectChanges();
+
+        let service:TimelineItemService = fixture.debugElement.children[0].injector.get(TimelineItemService);
+        spyOn(service, "reset");
+
+        component.onOut();
+        expect(service.reset).toHaveBeenCalled();
+    });
 });

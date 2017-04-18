@@ -12,6 +12,7 @@ import {GithubUserService} from "./components/timeline/github-user.service";
 import {GithubReposService} from "./components/timeline/github-repos.service";
 import {GithubEventsService} from "./components/timeline/github-events.service";
 import {TimelineItemComponent} from "./components/timeline/timeline-item.component";
+import {TickerService} from "./services/ticker.service";
 
 @NgModule({
     declarations: [
@@ -30,7 +31,8 @@ import {TimelineItemComponent} from "./components/timeline/timeline-item.compone
         ErrorService,
         GithubUserService,
         GithubReposService,
-        GithubEventsService
+        GithubEventsService,
+        TickerService
     ],
     bootstrap: [AppComponent]
 })

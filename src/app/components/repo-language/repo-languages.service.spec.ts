@@ -179,6 +179,29 @@ describe('RepoLanguagesService', () => {
         expect(repoLanguagesService.data[0].size).toEqual(undefined);
     }));
 
+    it('should notify subscribers with response', inject([GithubRepoLanguagesService, XHRBackend], (service:GithubRepoLanguagesService, mockBackend:MockBackend) => {
+        let response,
+            data = {
+                "TypeScript": 1234
+            };
+
+        mockBackend.connections.subscribe((connection) => {
+            connection.mockRespond(new Response(new ResponseOptions({
+                body: data
+            })));
+        });
+
+        service.subscribe((r:any) => {
+            response = r;
+        });
+
+        service.fetch("fake");
+
+        expect(response[0].name).toEqual("TypeScript");
+        expect(response[0].iconClass).toEqual("icon-angular");
+        expect(response[0].size).toEqual(1234);
+    }));
+
     it('should log an error if the end point fails', inject([XHRBackend, GithubRepoLanguagesService, ErrorService], (mockBackend: MockBackend, repoLanguagesService: GithubRepoLanguagesService, errorService:ErrorService) => {
         let response;
 

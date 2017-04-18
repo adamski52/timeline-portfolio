@@ -20,7 +20,9 @@ export abstract class GenericHttpService {
     }
 
     public fetch(url:string):void {
-        this.load(url);
+        this.load(url).subscribe((response:any) => {
+           this.broadcast(response.json());
+        });
     }
 
     protected load(url:string): Observable<Response> {

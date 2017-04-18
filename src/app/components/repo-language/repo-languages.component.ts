@@ -22,11 +22,11 @@ export class RepoLanguagesComponent implements OnInit {
     }
 
     onOut() {
-        this.itemService.title = "";
+        this.itemService.reset();
     }
 
     onOver(language:ILanguage) {
-        this.itemService.title = language.name;
+        this.itemService.setTitle(language.name);
     }
 
     ngOnInit() {

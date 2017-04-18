@@ -10,6 +10,7 @@ import {MockBackend} from '@angular/http/testing';
 import {RepoLanguagesComponent} from "../repo-language/repo-languages.component";
 import {RepoThumbnailComponent} from "../repo-thumbnail/repo-thumbnail.component";
 import {TimelineItemComponent} from "./timeline-item.component";
+import {TickerService} from "../../services/ticker.service";
 
 describe('TimelineComponent', () => {
     let fixture:ComponentFixture<TimelineComponent>,
@@ -33,6 +34,7 @@ describe('TimelineComponent', () => {
                 GithubUserService,
                 GithubReposService,
                 GithubEventsService,
+                TickerService,
                 ErrorService,
                 {
                     provide: XHRBackend,

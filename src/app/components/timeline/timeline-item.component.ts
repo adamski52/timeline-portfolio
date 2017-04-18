@@ -11,23 +11,16 @@ import {TimelineItemService} from "./timeline-item.service";
 })
 export class TimelineItemComponent implements OnInit {
     @Input("repo") repo:IRepo;
+    @Input("isEven") isEven:boolean;
 
-    private title:string;
-    private originalTitle:string;
+    public title:string;
 
-    constructor(private itemService:TimelineItemService) {
-        this.itemService.subscribe((t:string) => {
-            if(t === "") {
-                this.title = this.originalTitle;
-            }
-            else {
-                this.title = t;
-            }
-        });
-    }
+    constructor(private itemService:TimelineItemService) {}
 
     ngOnInit() {
-        this.originalTitle = this.repo.name;
-        this.title = this.originalTitle;
+        this.itemService.subscribe(this.repo.name, this.isEven, (t:string) => {
+            this.title = t;
+        });
+        this.title = this.repo.name;
     }
 }

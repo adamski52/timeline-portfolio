@@ -5,11 +5,6 @@ import {XHRBackend, HttpModule, Response, ResponseOptions} from "@angular/http";
 import {ErrorService} from "./error.service";
 
 describe('GenericHttpService', () => {
-    let response,
-        data = {
-            data: "hello"
-        };
-
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
@@ -28,5 +23,23 @@ describe('GenericHttpService', () => {
 
     it('should provide a public subscribable', inject([GenericHttpService], (service:GenericHttpService) => {
         expect(service.subscribe).toBeTruthy();
+    }));
+
+    it('should fetch a given URL', inject([GenericHttpService, XHRBackend], (service:GenericHttpService, mockBackend:MockBackend) => {
+        let response;
+
+        mockBackend.connections.subscribe((connection) => {
+            connection.mockRespond(new Response(new ResponseOptions({
+                body: {message: "great success"}
+            })));
+        });
+
+        service.subscribe((r:any) => {
+            response = r;
+        });
+
+        service.fetch("http://www.example.com/");
+
+        expect(response.message).toEqual("great success");
     }));
 });
