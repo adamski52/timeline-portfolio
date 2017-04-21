@@ -17,6 +17,13 @@ export class TimelineItemComponent implements OnInit {
 
     constructor(private itemService:TimelineItemService) {}
 
+    getIconClass() {
+        return {
+            "icon-jna-github": !this.isEven,
+            "icon-jna-reverse-github": this.isEven
+        };
+    }
+
     ngOnInit() {
         this.itemService.subscribe(this.repo.name, this.isEven, (t:string) => {
             this.title = t;

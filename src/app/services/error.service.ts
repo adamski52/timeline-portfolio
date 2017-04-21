@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observer, Observable} from 'rxjs';
+import {IError} from "../interfaces/error";
 
 @Injectable()
 export class ErrorService {
@@ -63,14 +64,3 @@ export class ErrorService {
         this.broadcast();
     }
 }
-
-export interface IError {
-    description: string;
-    type: number;
-    id?: number;
-}
-;
-
-export const ErrorTypes = {
-    UNKNOWN: 0
-};

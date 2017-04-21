@@ -13,6 +13,8 @@ import {GithubReposService} from "./components/timeline/github-repos.service";
 import {GithubEventsService} from "./components/timeline/github-events.service";
 import {TimelineItemComponent} from "./components/timeline/timeline-item.component";
 import {TickerService} from "./services/ticker.service";
+import {TimelineSettingsService} from "./components/timeline/timeline-settings.service";
+import {TimelineSettingsComponent} from "./components/timeline/timeline-settings.component";
 
 @NgModule({
     declarations: [
@@ -20,7 +22,8 @@ import {TickerService} from "./services/ticker.service";
         TimelineComponent,
         TimelineItemComponent,
         RepoLanguagesComponent,
-        RepoThumbnailComponent
+        RepoThumbnailComponent,
+        TimelineSettingsComponent
     ],
     imports: [
         BrowserModule,
@@ -32,7 +35,8 @@ import {TickerService} from "./services/ticker.service";
         GithubUserService,
         GithubReposService,
         GithubEventsService,
-        TickerService
+        TickerService,
+        TimelineSettingsService
     ],
     bootstrap: [AppComponent]
 })

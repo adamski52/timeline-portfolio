@@ -211,7 +211,7 @@ describe('TimelineItemService', () => {
         });
 
         service.setTitle(numbers);
-
+21
         for(let i = 0; i < numbers.length; i++) {
             mockTicker.tick();
         }

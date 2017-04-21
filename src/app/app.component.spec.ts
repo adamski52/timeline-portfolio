@@ -11,6 +11,8 @@ import {MockBackend} from '@angular/http/testing';
 import {RepoLanguagesComponent} from "./components/repo-language/repo-languages.component";
 import {RepoThumbnailComponent} from "./components/repo-thumbnail/repo-thumbnail.component";
 import {TimelineItemComponent} from "./components/timeline/timeline-item.component";
+import {TimelineSettingsComponent} from "./components/timeline/timeline-settings.component";
+import {TimelineSettingsService} from "./components/timeline/timeline-settings.service";
 
 describe('AppComponent', () => {
     beforeEach(async(() => {
@@ -19,6 +21,7 @@ describe('AppComponent', () => {
                 AppComponent,
                 TimelineComponent,
                 TimelineItemComponent,
+                TimelineSettingsComponent,
                 RepoLanguagesComponent,
                 RepoThumbnailComponent
             ],
@@ -26,6 +29,7 @@ describe('AppComponent', () => {
                 GithubUserService,
                 GithubReposService,
                 GithubEventsService,
+                TimelineSettingsService,
                 ErrorService,
                 {
                     provide: XHRBackend, useClass: MockBackend

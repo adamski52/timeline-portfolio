@@ -130,10 +130,32 @@ h1, h2, h3, h4, h5, h6 {
 .timeline-title {
     padding: 5px 10px;
     text-transform: lowercase;
+
+    &:before {
+        vertical-align: text-bottom;
+        margin-right: 5px;
+    }
+
+    &:after {
+        vertical-align: text-bottom;
+        margin-left: 5px;
+    }
 }
 
 .timeline-languages {
     padding: 0 10px;
+}
+
+.timeline-settings-item {
+    text-align: right;
+    span {
+        display: inline-block;
+
+        &:before {
+            font-size: 1.35em;
+            vertical-align: top;
+        }
+    }
 }
 
 @media (min-width: $screen-sm-min) {
