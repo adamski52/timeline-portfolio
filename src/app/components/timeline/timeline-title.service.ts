@@ -3,7 +3,7 @@ import {Observable, Observer, Subscription} from "rxjs";
 import {TickerService} from "../../services/ticker.service";
 
 @Injectable()
-export class TimelineItemService {
+export class TimelineTitleService {
     private _observer: Observer<string>;
     private originalValue:string;
     private interval:number;

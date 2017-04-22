@@ -1,19 +1,47 @@
 import {Component, OnInit} from '@angular/core';
 import {TimelineSettingsService} from "./timeline-settings.service";
+import {TimelineTitleService} from "./timeline-title.service";
 
 @Component({
     selector: 'jna-timeline-settings',
-    templateUrl: './timeline-settings.component.html'
+    templateUrl: './timeline-settings.component.html',
+    providers: [
+        TimelineTitleService
+    ]
 })
 export class TimelineSettingsComponent implements OnInit {
-    public settings:any = {};
+    private titleMap = {
+        githubEvents: "Github Events",
+        githubRepos: "Github Repos",
+        experiments: "Experiments",
+        tweets: "Tweets",
+        blogs: "Blogs"
+    };
 
-    constructor(private settingsService:TimelineSettingsService) {}
+    public settings:any = {};
+    public title:string = "";
+
+    constructor(private settingsService:TimelineSettingsService, private titleService:TimelineTitleService) {}
 
     ngOnInit() {
         this.settingsService.subscribe((settings: any) => {
             this.settings = settings;
         });
+
+        this.titleService.subscribe("", false, (t:string) => {
+            this.title = t;
+        });
+    }
+
+    onHover(key:string):void {
+        let prefix:string = this.settings[key] ? "Hide" : "Show",
+            title = this.titleMap[key];
+
+        this.titleService.setTitle(prefix + " " + title);
+    }
+
+    onOut():void {
+        this.titleService.reset();
     }
 
     toggleSetting(key:string):void {
@@ -22,7 +50,7 @@ export class TimelineSettingsComponent implements OnInit {
 
     getIconClass(key:string) {
         return {
-            "icon-disabled": !this.settings[key]
+            "jna-icon-disabled": !this.settings[key]
         };
     }
 }

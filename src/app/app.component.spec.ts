@@ -10,9 +10,10 @@ import {HttpModule, XHRBackend} from '@angular/http';
 import {MockBackend} from '@angular/http/testing';
 import {RepoLanguagesComponent} from "./components/repo-language/repo-languages.component";
 import {RepoThumbnailComponent} from "./components/repo-thumbnail/repo-thumbnail.component";
-import {TimelineItemComponent} from "./components/timeline/timeline-item.component";
+import {TimelineRepoComponent} from "./components/timeline/timeline-repo.component";
 import {TimelineSettingsComponent} from "./components/timeline/timeline-settings.component";
 import {TimelineSettingsService} from "./components/timeline/timeline-settings.service";
+import {TickerService} from "./services/ticker.service";
 
 describe('AppComponent', () => {
     beforeEach(async(() => {
@@ -20,7 +21,7 @@ describe('AppComponent', () => {
             declarations: [
                 AppComponent,
                 TimelineComponent,
-                TimelineItemComponent,
+                TimelineRepoComponent,
                 TimelineSettingsComponent,
                 RepoLanguagesComponent,
                 RepoThumbnailComponent
@@ -30,6 +31,7 @@ describe('AppComponent', () => {
                 GithubReposService,
                 GithubEventsService,
                 TimelineSettingsService,
+                TickerService,
                 ErrorService,
                 {
                     provide: XHRBackend, useClass: MockBackend

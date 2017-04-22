@@ -1,7 +1,24 @@
 @charset "UTF-8";
 
+[class^="icon-"],
+[class*=" icon-"] {
+    display: inline-block;
+    font-size: 17px;
+    padding: 0 4px;
+
+    &:last-child {
+        padding-right: 0;
+    }
+
+    &:first-child {
+        padding-left: 0;
+    }
+}
+
 .icon-angular {
     @include make-icon($angular-color);
+    position: relative;
+    top: -1px;
 }
 
 .icon-sql {
@@ -22,10 +39,16 @@
 
 .icon-html5-alt {
     @include make-icon($html-color);
+    margin-right: -2px;
 }
 
 .icon-javascript-alt {
     @include make-icon($js-color);
+    font-size: 23px;
+    position: relative;
+    top: 2px;
+    margin: 0 -5px 0 -3px;
+    line-height: 1;
 }
 
 .icon-java-bold {
@@ -76,7 +99,7 @@
     @include make-icon($csharp-color);
 }
 
-.icon-jna-file {
+.jna-icon-file {
     @include make-icon($unknown-color);
 }
 
@@ -105,10 +128,10 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-[class^="icon-jna-"]:before,
-[class*=" icon-jna-"]:before,
-[class^="icon-jna-reverse-"]:after,
-[class*=" icon-jna-reverse-"]:after {
+[class^="jna-icon-"]:before,
+[class*=" jna-icon-"]:before,
+[class^="jna-icon-reverse-"]:after,
+[class*=" jna-icon-reverse-"]:after {
     font-family: "jna-icons" !important;
     font-style: normal !important;
     font-weight: normal !important;
@@ -120,102 +143,102 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-jna-twitter:before,
-.icon-jna-reverse-twitter:after {
+.jna-icon-twitter:before,
+.jna-icon-reverse-twitter:after {
     content: "\61";
 }
-.icon-jna-twitter-al:before,
-.icon-jna-reverse-twitter-al:after {
+.jna-icon-twitter-al:before,
+.jna-icon-reverse-twitter-al:after {
     content: "\62";
 }
-.icon-jna-unlock:before,
-.icon-jna-reverse-unlock:after {
+.jna-icon-unlock:before,
+.jna-icon-reverse-unlock:after {
     content: "\63";
 }
-.icon-jna-heart-alt:before,
-.icon-jna-reverse-heart-alt:after {
+.jna-icon-heart-alt:before,
+.jna-icon-reverse-heart-alt:after {
     content: "\64";
 }
-.icon-jna-heart:before,
-.icon-jna-reverse-heart:after {
+.jna-icon-heart:before,
+.jna-icon-reverse-heart:after {
     content: "\65";
 }
-.icon-jna-github:before,
-.icon-jna-reverse-github:after {
+.jna-icon-github:before,
+.jna-icon-reverse-github:after {
     content: "\66";
 }
-.icon-jna-github-alt:before,
-.icon-jna-reverse-github-alt:after {
+.jna-icon-github-alt:before,
+.jna-icon-reverse-github-alt:after {
     content: "\67";
 }
-.icon-jna-git-al:before,
-.icon-jna-reverse-git-al:after {
+.jna-icon-git-al:before,
+.jna-icon-reverse-git-al:after {
     content: "\68";
 }
-.icon-jna-git:before,
-.icon-jna-reverse-git:after {
+.jna-icon-git:before,
+.jna-icon-reverse-git:after {
     content: "\69";
 }
-.icon-jna-heartbeat:before,
-.icon-jna-reverse-heartbeat:after {
+.jna-icon-heartbeat:before,
+.jna-icon-reverse-heartbeat:after {
     content: "\6a";
 }
-.icon-jna-file:before,
-.icon-jna-reverse-file:after {
+.jna-icon-file:before,
+.jna-icon-reverse-file:after {
     content: "\6b";
 }
-.icon-jna-file-alt:before,
-.icon-jna-reverse-file-alt:after {
+.jna-icon-file-alt:before,
+.jna-icon-reverse-file-alt:after {
     content: "\6c";
 }
-.icon-jna-lock:before,
-.icon-jna-reverse-lock:after {
+.jna-icon-lock:before,
+.jna-icon-reverse-lock:after {
     content: "\6d";
 }
-.icon-jna-tags:before,
-.icon-jna-reverse-tags:after {
+.jna-icon-tags:before,
+.jna-icon-reverse-tags:after {
     content: "\6e";
 }
-.icon-jna-tag:before,
-.icon-jna-reverse-tag:after {
+.jna-icon-tag:before,
+.jna-icon-reverse-tag:after {
     content: "\6f";
 }
-.icon-jna-flask:before,
-.icon-jna-reverse-flask:after {
+.jna-icon-flask:before,
+.jna-icon-reverse-flask:after {
     content: "\70";
 }
-.icon-jna-code-fork:before,
-.icon-jna-reverse-code-fork:after {
+.jna-icon-code-fork:before,
+.jna-icon-reverse-code-fork:after {
     content: "\71";
 }
-.icon-jna-github-square:before,
-.icon-jna-reverse-github-square:after {
+.jna-icon-github-square:before,
+.jna-icon-reverse-github-square:after {
     content: "\72";
 }
-.icon-jna-font:before,
-.icon-jna-reverse-font:after {
+.jna-icon-font:before,
+.jna-icon-reverse-font:after {
     content: "\73";
 }
-.icon-jna-rss:before,
-.icon-jna-reverse-rss:after {
+.jna-icon-rss:before,
+.jna-icon-reverse-rss:after {
     content: "\74";
 }
-.icon-jna-rss-square:before,
-.icon-jna-reverse-rss-square:after {
+.jna-icon-rss-square:before,
+.jna-icon-reverse-rss-square:after {
     content: "\75";
 }
-.icon-jna-stack-overflow:before,
-.icon-jna-reverse-stack-overflow:after {
+.jna-icon-stack-overflow:before,
+.jna-icon-reverse-stack-overflow:after {
     content: "\76";
 }
-.icon-jna-share-alt:before,
-.icon-jna-reverse-share-alt:after {
+.jna-icon-share-alt:before,
+.jna-icon-reverse-share-alt:after {
     content: "\77";
 }
-.icon-jna-share-alt-square:before,
-.icon-jna-reverse-share-alt-square:after {
+.jna-icon-share-alt-square:before,
+.jna-icon-reverse-share-alt-square:after {
     content: "\78";
 }
-.icon-disabled {
+.jna-icon-disabled {
     color: #bbb;
 }

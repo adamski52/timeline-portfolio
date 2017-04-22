@@ -68,23 +68,6 @@ h1, h2, h3, h4, h5, h6 {
         }
     }
 
-    i {
-        margin-right: 5px;
-        font-size: 16px;
-        display: inline-block;
-        vertical-align: middle;
-
-        &:last-child {
-            margin-right: 0;
-        }
-
-        &.icon-javascript-alt {
-            font-size: 22px;
-            position: relative;
-            top: 1px;
-        }
-    }
-
     &:hover {
         .timeline-item-content {
             width: 200%;
@@ -132,22 +115,29 @@ h1, h2, h3, h4, h5, h6 {
     text-transform: lowercase;
 
     &:before {
-        vertical-align: text-bottom;
+        vertical-align: text-top;
         margin-right: 5px;
+        font-size: 1.2em;
     }
 
     &:after {
-        vertical-align: text-bottom;
+        vertical-align: text-top;
         margin-left: 5px;
+        font-size: 1.2em;
     }
 }
 
 .timeline-languages {
-    padding: 0 10px;
+    padding: 4px 10px 1px 10px;
 }
 
-.timeline-settings-item {
-    text-align: right;
+.timeline-settings {
+    float: right;
+    text-align: center;
+    width: 135px;
+}
+
+.timeline-settings-icons {
     span {
         display: inline-block;
 

@@ -1,21 +1,20 @@
 import {async, ComponentFixture, TestBed, inject} from '@angular/core/testing';
 
-import {TimelineItemComponent} from './timeline-item.component';
-import {TimelineItemService} from "./timeline-item.service";
-import {Component, Injectable} from "@angular/core";
+import {TimelineRepoComponent} from './timeline-repo.component';
+import {TimelineTitleService} from "./timeline-title.service";
+import {Component} from "@angular/core";
 import {RepoLanguagesComponent} from "../repo-language/repo-languages.component";
 import {RepoThumbnailComponent} from "../repo-thumbnail/repo-thumbnail.component";
 import {HttpModule, XHRBackend} from '@angular/http';
 import {MockBackend} from '@angular/http/testing';
 import {ErrorService} from "../../services/error.service";
-import {IRepo} from "../../interfaces/repo";
 import {TickerService} from "../../services/ticker.service";
 
 @Component({
     selector: 'jna-test-component',
-    template: `<jna-timeline-item [repo]="repo"></jna-timeline-item>`,
+    template: `<jna-timeline-repo [repo]="repo"></jna-timeline-repo>`,
     providers: [
-        TimelineItemService
+        TimelineTitleService
     ]
 })
 class TestComponent {
@@ -24,8 +23,8 @@ class TestComponent {
     };
 }
 
-describe('TimelineItemComponent', () => {
-    let component:TimelineItemComponent,
+describe('TimelineRepoComponent', () => {
+    let component:TimelineRepoComponent,
         fixture:ComponentFixture<TestComponent>;
 
     beforeEach(async(() => {
@@ -34,10 +33,10 @@ describe('TimelineItemComponent', () => {
                 TestComponent,
                 RepoLanguagesComponent,
                 RepoThumbnailComponent,
-                TimelineItemComponent
+                TimelineRepoComponent
             ],
             providers: [
-                TimelineItemService,
+                TimelineTitleService,
                 ErrorService,
                 TickerService,
                 {
@@ -57,7 +56,7 @@ describe('TimelineItemComponent', () => {
         fixture.detectChanges();
     }));
 
-    it('should set its title based on the provided @input repo', inject([TimelineItemService], (service:TimelineItemService) => {
+    it('should set its title based on the provided @input repo', inject([TimelineTitleService], (service:TimelineTitleService) => {
         expect(component.title).toEqual("lol");
     }));
 

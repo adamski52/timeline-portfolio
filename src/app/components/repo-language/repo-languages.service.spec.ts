@@ -174,7 +174,7 @@ describe('RepoLanguagesService', () => {
         });
 
         repoLanguagesService.fetch("lol");
-        expect(repoLanguagesService.data[0].iconClass).toEqual("icon-jna-file-alt");
+        expect(repoLanguagesService.data[0].iconClass).toEqual("jna-icon-file-alt");
         expect(repoLanguagesService.data[0].name).toEqual("Other");
         expect(repoLanguagesService.data[0].size).toEqual(undefined);
     }));

@@ -65,7 +65,7 @@ export class GithubRepoLanguagesService extends GenericHttpService {
         if (languageList.length <= 0) {
             languageList.push({
                 name: "Other",
-                iconClass: "icon-jna-file-alt"
+                iconClass: "jna-icon-file-alt"
             });
         }
 

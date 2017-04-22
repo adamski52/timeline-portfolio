@@ -11,7 +11,7 @@ import {RepoThumbnailComponent} from "./components/repo-thumbnail/repo-thumbnail
 import {GithubUserService} from "./components/timeline/github-user.service";
 import {GithubReposService} from "./components/timeline/github-repos.service";
 import {GithubEventsService} from "./components/timeline/github-events.service";
-import {TimelineItemComponent} from "./components/timeline/timeline-item.component";
+import {TimelineRepoComponent} from "./components/timeline/timeline-repo.component";
 import {TickerService} from "./services/ticker.service";
 import {TimelineSettingsService} from "./components/timeline/timeline-settings.service";
 import {TimelineSettingsComponent} from "./components/timeline/timeline-settings.component";
@@ -20,7 +20,7 @@ import {TimelineSettingsComponent} from "./components/timeline/timeline-settings
     declarations: [
         AppComponent,
         TimelineComponent,
-        TimelineItemComponent,
+        TimelineRepoComponent,
         RepoLanguagesComponent,
         RepoThumbnailComponent,
         TimelineSettingsComponent

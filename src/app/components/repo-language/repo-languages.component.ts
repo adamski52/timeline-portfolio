@@ -1,7 +1,7 @@
-import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {GithubRepoLanguagesService} from "./repo-languages.service";
 import {ILanguage} from "../../interfaces/language";
-import {TimelineItemService} from "../timeline/timeline-item.service";
+import {TimelineTitleService} from "../timeline/timeline-title.service";
 
 @Component({
     selector: 'jna-repo-languages',
@@ -15,18 +15,18 @@ export class RepoLanguagesComponent implements OnInit {
 
     public languages:ILanguage[];
 
-    constructor(private itemService:TimelineItemService, private languageService:GithubRepoLanguagesService) {
+    constructor(private titleService:TimelineTitleService, private languageService:GithubRepoLanguagesService) {
         this.languageService.subscribe((languages:ILanguage[]) => {
             this.languages = languages;
         });
     }
 
     onOut() {
-        this.itemService.reset();
+        this.titleService.reset();
     }
 
     onOver(language:ILanguage) {
-        this.itemService.setTitle(language.name);
+        this.titleService.setTitle(language.name);
     }
 
     ngOnInit() {

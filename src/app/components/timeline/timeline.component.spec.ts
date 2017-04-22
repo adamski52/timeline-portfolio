@@ -9,7 +9,7 @@ import {ErrorService} from "../../services/error.service";
 import {MockBackend} from '@angular/http/testing';
 import {RepoLanguagesComponent} from "../repo-language/repo-languages.component";
 import {RepoThumbnailComponent} from "../repo-thumbnail/repo-thumbnail.component";
-import {TimelineItemComponent} from "./timeline-item.component";
+import {TimelineRepoComponent} from "./timeline-repo.component";
 import {TickerService} from "../../services/ticker.service";
 
 describe('TimelineComponent', () => {
@@ -26,7 +26,7 @@ describe('TimelineComponent', () => {
         TestBed.configureTestingModule({
             declarations: [
                 TimelineComponent,
-                TimelineItemComponent,
+                TimelineRepoComponent,
                 RepoLanguagesComponent,
                 RepoThumbnailComponent
             ],

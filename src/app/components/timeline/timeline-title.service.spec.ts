@@ -1,5 +1,5 @@
 import {TestBed, inject} from '@angular/core/testing';
-import {TimelineItemService} from "./timeline-item.service";
+import {TimelineTitleService} from "./timeline-title.service";
 import {TickerService} from "../../services/ticker.service";
 import {Injectable} from "@angular/core";
 
@@ -17,16 +17,16 @@ class MockTickerService {
     public stop(interval:number) {}
 }
 
-describe('TimelineItemService', () => {
+describe('TimelineTitleService', () => {
 
     let title:string,
-        service:TimelineItemService,
+        service:TimelineTitleService,
         letters:string[];
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
-                TimelineItemService,
+                TimelineTitleService,
                 {
                     provide: TickerService,
                     useClass: MockTickerService
@@ -36,7 +36,7 @@ describe('TimelineItemService', () => {
     });
 
     it('should have a public setter which broadcasts to subscribers', inject([TickerService], (mockTicker:MockTickerService) => {
-        service = TestBed.get(TimelineItemService);
+        service = TestBed.get(TimelineTitleService);
 
         service.subscribe("wat", true, (t:string) => {
             title = t;
@@ -52,7 +52,7 @@ describe('TimelineItemService', () => {
     }));
 
     it('should have a reset which broadcasts the original title', inject([TickerService], (mockTicker:MockTickerService) => {
-        service = TestBed.get(TimelineItemService);
+        service = TestBed.get(TimelineTitleService);
 
         service.subscribe("wat", true, (t:string) => {
             title = t;
@@ -73,7 +73,7 @@ describe('TimelineItemService', () => {
     }));
 
     it("should scramble the entire word", inject([TickerService], (mockTicker:MockTickerService) => {
-        service = TestBed.get(TimelineItemService);
+        service = TestBed.get(TimelineTitleService);
 
         service.subscribe("wat", true, (t:string) => {
             title = t;
@@ -91,7 +91,7 @@ describe('TimelineItemService', () => {
     }));
 
     it("should unscramble letter by letter word, left to right if even", inject([TickerService], (mockTicker:MockTickerService) => {
-        service = TestBed.get(TimelineItemService);
+        service = TestBed.get(TimelineTitleService);
 
         service.subscribe("lol", false, (t:string) => {
             title = t;
@@ -125,7 +125,7 @@ describe('TimelineItemService', () => {
     }));
 
     it("should unscramble letter by letter, right to left if not even", inject([TickerService], (mockTicker:MockTickerService) => {
-        service = TestBed.get(TimelineItemService);
+        service = TestBed.get(TimelineTitleService);
 
         service.subscribe("lol", true, (t:string) => {
             title = t;
@@ -161,7 +161,7 @@ describe('TimelineItemService', () => {
     it("should scramble letters for letters only", inject([TickerService], (mockTicker:MockTickerService) => {
         let alphabet:string = "abcdefghijklmnopqtstuvwxyz";
 
-        service = TestBed.get(TimelineItemService);
+        service = TestBed.get(TimelineTitleService);
 
         service.subscribe("lol", true, (t:string) => {
             title = t;
@@ -183,7 +183,7 @@ describe('TimelineItemService', () => {
     it("should scramble numbers for numbers only", inject([TickerService], (mockTicker:MockTickerService) => {
         let numbers:string = "1234567890";
 
-        service = TestBed.get(TimelineItemService);
+        service = TestBed.get(TimelineTitleService);
 
         service.subscribe("lol", true, (t:string) => {
             title = t;
@@ -204,14 +204,14 @@ describe('TimelineItemService', () => {
     it("should not scramble anything else", inject([TickerService], (mockTicker:MockTickerService) => {
         let numbers:string = "~`!@#$%^&*()_-+={[}]|\\:;\"'<,>.?/';";
 
-        service = TestBed.get(TimelineItemService);
+        service = TestBed.get(TimelineTitleService);
 
         service.subscribe("lol", true, (t:string) => {
             title = t;
         });
 
         service.setTitle(numbers);
-21
+
         for(let i = 0; i < numbers.length; i++) {
             mockTicker.tick();
         }

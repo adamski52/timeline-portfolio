@@ -1,13 +1,13 @@
 import {async, ComponentFixture, TestBed, inject} from '@angular/core/testing';
 
-import {Component, Injectable} from '@angular/core';
+import {Component} from '@angular/core';
 import {RepoLanguagesComponent} from './repo-languages.component';
 import {GenericHttpService} from "../../services/generic-http.service";
 import {ErrorService} from "../../services/error.service";
 import {HttpModule, RequestMethod, XHRBackend, Response, ResponseOptions} from '@angular/http';
 import {MockBackend} from '@angular/http/testing';
 import {GithubRepoLanguagesService} from "./repo-languages.service";
-import {TimelineItemService} from "../timeline/timeline-item.service";
+import {TimelineTitleService} from "../timeline/timeline-title.service";
 import {ILanguage} from "../../interfaces/language";
 import {TickerService} from "../../services/ticker.service";
 
@@ -44,7 +44,7 @@ describe('RepoLanguagesComponent', () => {
             providers: [
                 GenericHttpService,
                 GithubRepoLanguagesService,
-                TimelineItemService,
+                TimelineTitleService,
                 TickerService,
                 ErrorService,
                 {
@@ -59,7 +59,7 @@ describe('RepoLanguagesComponent', () => {
     }));
 
 
-    it('should call the languages service based on @input', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend, service:GithubRepoLanguagesService) => {
+    it('should call the languages service based on @input', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend) => {
         mockBackend.connections.subscribe((connection) => {
             expect(connection.request.method).toBe(RequestMethod.Get);
             expect(connection.request.url).toBe("/api/repos/adamski52/lol/languages");
@@ -121,7 +121,7 @@ describe('RepoLanguagesComponent', () => {
         component = fixture.debugElement.children[0].componentInstance;
         fixture.detectChanges();
 
-        let service:TimelineItemService = fixture.debugElement.children[0].injector.get(TimelineItemService);
+        let service:TimelineTitleService = fixture.debugElement.children[0].injector.get(TimelineTitleService);
         spyOn(service, "setTitle");
 
         component.onOver(language);
@@ -133,7 +133,7 @@ describe('RepoLanguagesComponent', () => {
         component = fixture.debugElement.children[0].componentInstance;
         fixture.detectChanges();
 
-        let service:TimelineItemService = fixture.debugElement.children[0].injector.get(TimelineItemService);
+        let service:TimelineTitleService = fixture.debugElement.children[0].injector.get(TimelineTitleService);
         spyOn(service, "reset");
 
         component.onOut();
