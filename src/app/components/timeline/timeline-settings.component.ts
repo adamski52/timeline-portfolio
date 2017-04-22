@@ -15,4 +15,14 @@ export class TimelineSettingsComponent implements OnInit {
             this.settings = settings;
         });
     }
+
+    toggleSetting(key:string):void {
+        this.settingsService.toggleSetting(key);
+    }
+
+    getIconClass(key:string) {
+        return {
+            "icon-disabled": !this.settings[key]
+        };
+    }
 }

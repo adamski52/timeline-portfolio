@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-
 .icon-angular {
     @include make-icon($angular-color);
 }
@@ -216,4 +215,7 @@
 .icon-jna-share-alt-square:before,
 .icon-jna-reverse-share-alt-square:after {
     content: "\78";
+}
+.icon-disabled {
+    color: #bbb;
 }
