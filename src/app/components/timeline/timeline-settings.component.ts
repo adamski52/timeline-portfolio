@@ -28,7 +28,7 @@ export class TimelineSettingsComponent implements OnInit {
             this.settings = settings;
         });
 
-        this.titleService.subscribe("", false, (t:string) => {
+        this.titleService.subscribe("", true, (t:string) => {
             this.title = t;
         });
     }
@@ -42,6 +42,11 @@ export class TimelineSettingsComponent implements OnInit {
 
     onOut():void {
         this.titleService.reset();
+    }
+
+    onClick(e:Event, key:string):void {
+        e.preventDefault();
+        this.toggleSetting(key);
     }
 
     toggleSetting(key:string):void {

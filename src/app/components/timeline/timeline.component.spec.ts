@@ -11,6 +11,7 @@ import {RepoLanguagesComponent} from "../repo-language/repo-languages.component"
 import {RepoThumbnailComponent} from "../repo-thumbnail/repo-thumbnail.component";
 import {TimelineRepoComponent} from "./timeline-repo.component";
 import {TickerService} from "../../services/ticker.service";
+import {TimelineDateComponent} from "./timeline-date.component";
 
 describe('TimelineComponent', () => {
     let fixture:ComponentFixture<TimelineComponent>,
@@ -28,7 +29,8 @@ describe('TimelineComponent', () => {
                 TimelineComponent,
                 TimelineRepoComponent,
                 RepoLanguagesComponent,
-                RepoThumbnailComponent
+                RepoThumbnailComponent,
+                TimelineDateComponent
             ],
             providers: [
                 GithubUserService,

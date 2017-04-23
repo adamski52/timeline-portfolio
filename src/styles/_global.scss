@@ -1,26 +1,25 @@
-@import url('https://fonts.googleapis.com/css?family=Gruppo|Press+Start+2P');
+@font-face {
+    font-family: "BigPixel";
+    src:url("assets/fonts/BigPixel.otf");
+    font-weight: normal;
+    font-style: normal;
+}
+
 
 html,
 body {
     height: 100%;
+    background: #fbfbfb;
 }
 
 body {
-    @extend .primary-font;
+    font-family: BigPixel;
     font-size: 12px;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: normal;
     margin: 0;
-}
-
-.accent-font {
-    font-family: "Press Start 2P";
-}
-
-.primary-font {
-    font-family: Gruppo;
 }
 
 .fill {
@@ -32,6 +31,7 @@ h1, h2, h3, h4, h5, h6 {
     height: 100%;
     display: block;
     margin: 0 auto;
+    padding-top: 30px;
 }
 
 .timeline-item {
@@ -41,6 +41,28 @@ h1, h2, h3, h4, h5, h6 {
     height: 175px;
     position: relative;
     float: left;
+
+    .timeline-date {
+        position: absolute;
+        color: #ddd;
+        bottom: 0;
+        left: 0;
+        margin: 0;
+        padding: 3px;
+
+        .timeline-date-month {
+            display: block;
+            font-size: 13px;
+            line-height: 13px;
+            text-transform: uppercase;
+        }
+
+        .timeline-date-date {
+            display: block;
+            font-size: 20px;
+            line-height: 16px;
+        }
+    }
 
     .timeline-item-content {
         transition: all .7s;
@@ -97,6 +119,12 @@ h1, h2, h3, h4, h5, h6 {
         .timeline-title {
             float: right;
         }
+
+        .timeline-date {
+            left: auto;
+            right: 0;
+            text-align: right;
+        }
     }
 }
 
@@ -113,17 +141,17 @@ h1, h2, h3, h4, h5, h6 {
 .timeline-title {
     padding: 5px 10px;
     text-transform: lowercase;
+    font-size: .8em;
 
-    &:before {
-        vertical-align: text-top;
-        margin-right: 5px;
-        font-size: 1.2em;
+    span,
+    &:before,
+    &:after {
+        vertical-align: middle;
     }
 
+    &:before,
     &:after {
-        vertical-align: text-top;
-        margin-left: 5px;
-        font-size: 1.2em;
+        font-size: 1.6em;
     }
 }
 
@@ -132,18 +160,33 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .timeline-settings {
-    float: right;
-    text-align: center;
-    width: 135px;
-}
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+    background: #000;
+    text-align: right;
+    color: #ddd;
+    padding: 3px;
+    font-size: .8em;
 
-.timeline-settings-icons {
-    span {
+    a {
+        color: inherit;
+        vertical-align: middle;
         display: inline-block;
+        text-decoration: none;
+        font-size: 1.2em;
+
+        &.jna-icon-disabled {
+            color: #666;
+        }
 
         &:before {
             font-size: 1.35em;
             vertical-align: top;
+        }
+
+        &:hover {
+            color: inherit;
         }
     }
 }

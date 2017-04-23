@@ -1,10 +1,8 @@
 <div class="timeline-settings">
-    <div class="timeline-settings-icons">
-        <span [ngClass]="getIconClass('githubEvents')" (mouseenter)="onHover('githubEvents')" (mouseleave)="onOut()" (click)="toggleSetting('githubEvents')" class="jna-icon-code-fork"></span>
-        <span [ngClass]="getIconClass('githubRepos')" (mouseenter)="onHover('githubRepos')" (mouseleave)="onOut()" (click)="toggleSetting('githubRepos')" class="jna-icon-github"></span>
-        <span [ngClass]="getIconClass('experiments')" (mouseenter)="onHover('experiments')" (mouseleave)="onOut()" (click)="toggleSetting('experiments')" class="jna-icon-flask"></span>
-        <span [ngClass]="getIconClass('tweets')" (mouseenter)="onHover('tweets')" (mouseleave)="onOut()" (click)="toggleSetting('tweets')" class="jna-icon-twitter"></span>
-        <span [ngClass]="getIconClass('blogs')" (mouseenter)="onHover('blogs')" (mouseleave)="onOut()" (click)="toggleSetting('blogs')" class="jna-icon-rss"></span>
-    </div>
-    <div class="timeline-settings-title">{{title}}</div>
+    <span>{{title}}</span>
+    <a [ngClass]="getIconClass('githubEvents')" (mouseenter)="onHover('githubEvents')" (mouseleave)="onOut()" (click)="onClick($event, 'githubEvents')" class="jna-icon-code-fork" href=""></a>
+    <a [ngClass]="getIconClass('githubRepos')" (mouseenter)="onHover('githubRepos')" (mouseleave)="onOut()" (click)="onClick($event, 'githubRepos')" class="jna-icon-github" href=""></a>
+    <a [ngClass]="getIconClass('experiments')" (mouseenter)="onHover('experiments')" (mouseleave)="onOut()" (click)="onClick($event, 'experiments')" class="jna-icon-flask" href=""></a>
+    <a [ngClass]="getIconClass('tweets')" (mouseenter)="onHover('tweets')" (mouseleave)="onOut()" (click)="onClick($event, 'tweets')" class="jna-icon-twitter" href=""></a>
+    <a [ngClass]="getIconClass('blogs')" (mouseenter)="onHover('blogs')" (mouseleave)="onOut()" (click)="onClick($event, 'blogs')" class="jna-icon-rss" href=""></a>
 </div>

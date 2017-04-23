@@ -14,6 +14,7 @@ import {TimelineRepoComponent} from "./components/timeline/timeline-repo.compone
 import {TimelineSettingsComponent} from "./components/timeline/timeline-settings.component";
 import {TimelineSettingsService} from "./components/timeline/timeline-settings.service";
 import {TickerService} from "./services/ticker.service";
+import {TimelineDateComponent} from "./components/timeline/timeline-date.component";
 
 describe('AppComponent', () => {
     beforeEach(async(() => {
@@ -24,7 +25,8 @@ describe('AppComponent', () => {
                 TimelineRepoComponent,
                 TimelineSettingsComponent,
                 RepoLanguagesComponent,
-                RepoThumbnailComponent
+                RepoThumbnailComponent,
+                TimelineDateComponent
             ],
             providers: [
                 GithubUserService,

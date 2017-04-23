@@ -9,6 +9,7 @@ import {HttpModule, XHRBackend} from '@angular/http';
 import {MockBackend} from '@angular/http/testing';
 import {ErrorService} from "../../services/error.service";
 import {TickerService} from "../../services/ticker.service";
+import {TimelineDateComponent} from "./timeline-date.component";
 
 @Component({
     selector: 'jna-test-component',
@@ -33,7 +34,8 @@ describe('TimelineRepoComponent', () => {
                 TestComponent,
                 RepoLanguagesComponent,
                 RepoThumbnailComponent,
-                TimelineRepoComponent
+                TimelineRepoComponent,
+                TimelineDateComponent
             ],
             providers: [
                 TimelineTitleService,
@@ -56,8 +58,8 @@ describe('TimelineRepoComponent', () => {
         fixture.detectChanges();
     }));
 
-    it('should set its title based on the provided @input repo', inject([TimelineTitleService], (service:TimelineTitleService) => {
+    it('should set its title based on the provided @input repo', () => {
         expect(component.title).toEqual("lol");
-    }));
+    });
 
 });

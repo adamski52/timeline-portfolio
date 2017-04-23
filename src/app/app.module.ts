@@ -15,6 +15,7 @@ import {TimelineRepoComponent} from "./components/timeline/timeline-repo.compone
 import {TickerService} from "./services/ticker.service";
 import {TimelineSettingsService} from "./components/timeline/timeline-settings.service";
 import {TimelineSettingsComponent} from "./components/timeline/timeline-settings.component";
+import {TimelineDateComponent} from "./components/timeline/timeline-date.component";
 
 @NgModule({
     declarations: [
@@ -23,7 +24,8 @@ import {TimelineSettingsComponent} from "./components/timeline/timeline-settings
         TimelineRepoComponent,
         RepoLanguagesComponent,
         RepoThumbnailComponent,
-        TimelineSettingsComponent
+        TimelineSettingsComponent,
+        TimelineDateComponent
     ],
     imports: [
         BrowserModule,
