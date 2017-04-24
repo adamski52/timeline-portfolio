@@ -29,6 +29,7 @@ export class TimelineComponent {
         });
 
         this.eventsService.subscribe((events:IEvent[]) => {
+            console.log(events);
             this.events = events;
         });
 

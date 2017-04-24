@@ -5,3 +5,11 @@
     [isEven]="isEven"
     (hover)="onHover($event)">
 </jna-timeline-repo>
+
+<jna-timeline-event
+    class="timeline-item"
+    *ngFor="let event of events; let isEven = even;"
+    [event]="event"
+    [isEven]="isEven"
+    (hover)="onHover($event)">
+</jna-timeline-event>
