@@ -6,10 +6,6 @@ var express = require('express'),
     app = express(),
     fs = require('fs');
 
-function handleMock(res, req) {
-
-}
-
 app.listen(3000);
 
 if(process.env.API_USE_MOCK) {
