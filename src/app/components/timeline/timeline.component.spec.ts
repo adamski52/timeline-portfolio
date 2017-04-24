@@ -12,6 +12,7 @@ import {RepoThumbnailComponent} from "../repo-thumbnail/repo-thumbnail.component
 import {TimelineRepoComponent} from "./timeline-repo.component";
 import {TickerService} from "../../services/ticker.service";
 import {TimelineDateComponent} from "./timeline-date.component";
+import {TimelineSettingsService} from "./timeline-settings.service";
 
 describe('TimelineComponent', () => {
     let fixture:ComponentFixture<TimelineComponent>,
@@ -36,6 +37,7 @@ describe('TimelineComponent', () => {
                 GithubUserService,
                 GithubReposService,
                 GithubEventsService,
+                TimelineSettingsService,
                 TickerService,
                 ErrorService,
                 {

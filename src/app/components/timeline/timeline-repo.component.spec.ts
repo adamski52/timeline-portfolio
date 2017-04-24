@@ -10,6 +10,7 @@ import {MockBackend} from '@angular/http/testing';
 import {ErrorService} from "../../services/error.service";
 import {TickerService} from "../../services/ticker.service";
 import {TimelineDateComponent} from "./timeline-date.component";
+import {TimelineSettingsService} from "./timeline-settings.service";
 
 @Component({
     selector: 'jna-test-component',
@@ -39,6 +40,7 @@ describe('TimelineRepoComponent', () => {
             ],
             providers: [
                 TimelineTitleService,
+                TimelineSettingsService,
                 ErrorService,
                 TickerService,
                 {

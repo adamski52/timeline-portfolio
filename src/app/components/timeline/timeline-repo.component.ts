@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, HostBinding} from '@angular/core';
 import {IRepo} from "../../interfaces/repo";
 import {TimelineTitleService} from "./timeline-title.service";
+import {TimelineSettingsService} from "./timeline-settings.service";
 
 @Component({
     selector: 'jna-timeline-repo',
@@ -10,12 +11,18 @@ import {TimelineTitleService} from "./timeline-title.service";
     ]
 })
 export class TimelineRepoComponent implements OnInit {
+    @HostBinding("class.is-hidden") isHidden:boolean = false;
+
     @Input("repo") repo:IRepo;
     @Input("isEven") isEven:boolean;
 
     public title:string;
 
-    constructor(private titleService:TimelineTitleService) {}
+    constructor(private titleService:TimelineTitleService, private settingsService:TimelineSettingsService) {
+        this.settingsService.subscribe((settings:any) => {
+            this.isHidden = !settings.githubRepos;
+        });
+    }
 
     getIconClass() {
         return {

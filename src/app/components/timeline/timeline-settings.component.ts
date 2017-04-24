@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {TimelineSettingsService} from "./timeline-settings.service";
 import {TimelineTitleService} from "./timeline-title.service";
 
@@ -9,7 +9,7 @@ import {TimelineTitleService} from "./timeline-title.service";
         TimelineTitleService
     ]
 })
-export class TimelineSettingsComponent implements OnInit {
+export class TimelineSettingsComponent {
     private titleMap = {
         githubEvents: "Github Events",
         githubRepos: "Github Repos",
@@ -21,14 +21,12 @@ export class TimelineSettingsComponent implements OnInit {
     public settings:any = {};
     public title:string = "";
 
-    constructor(private settingsService:TimelineSettingsService, private titleService:TimelineTitleService) {}
-
-    ngOnInit() {
+    constructor(private settingsService:TimelineSettingsService, private titleService:TimelineTitleService) {
         this.settingsService.subscribe((settings: any) => {
             this.settings = settings;
         });
 
-        this.titleService.subscribe("", true, (t:string) => {
+        this.titleService.subscribe("", true, (t: string) => {
             this.title = t;
         });
     }
