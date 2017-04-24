@@ -26,31 +26,6 @@ export abstract class GenericHttpService {
     }
 
     protected load(url:string): Observable<Response> {
-        // TODO:  Just for dev purposes to avoid rate limiting myself
-        if(this.isMock()) {
-            let pieces:string[] = url.split("/");
-            switch(pieces[pieces.length-1]) {
-                case "adamski52":
-                    url = "/mocks/user.json";
-                    break;
-                case "repos":
-                    url = "/mocks/repos.json";
-                    break;
-                case "languages":
-                    url = "/mocks/languages.json";
-                    break;
-                case "thumbnail.png":
-                    url = "/mocks/img/thumbnail.png";
-                    break;
-                case "events":
-                    url = "/mocks/events.json";
-                    break;
-                default:
-                    url = "";
-                    break;
-            }
-        }
-
         return this.http.get(url);
     }
 
@@ -59,6 +34,6 @@ export abstract class GenericHttpService {
     }
 
     public isMock():boolean {
-        return false;
+        return true;
     }
 }
