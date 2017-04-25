@@ -7,7 +7,7 @@ import {GithubReposService} from "./github-repos.service";
 
 @Component({
     selector: 'jna-timeline-event',
-    templateUrl: './timeline-repo.component.html',
+    templateUrl: './timeline-event.component.html',
     providers: [
         TimelineTitleService
     ]
@@ -18,22 +18,36 @@ export class TimelineEventComponent implements OnInit {
     @Input("event") event:IEvent;
     @Input("isEven") isEven:boolean;
 
-    public title:string;
-    private repo:IRepo;
+    public repoName:string;
+    public eventMessage:string;
+    public commitMessage:string;
 
-    constructor(private titleService:TimelineTitleService,
-                private settingsService:TimelineSettingsService,
+    constructor(private settingsService:TimelineSettingsService,
                 private reposService:GithubReposService) {
 
         this.settingsService.subscribe((settings:any) => {
-            this.isHidden = !settings.githubRepos;
+            this.isHidden = !settings.githubEvents;
         });
+    }
 
-        this.reposService.subscribe((repos:IRepo[]) => {
-            this.repo = repos.find((r:IRepo) => {
-                return r.id === this.event.repo.id;
-            });
-        });
+    private getEventMessage():string {
+        if(this.event.type === "PushEvent") {
+            return "pushed to " + this.event.payload.ref;
+        }
+
+        if(this.event.type === "CreateEvent") {
+            return "created " + this.event.payload.ref;
+        }
+
+        return "???";
+    }
+
+    private getCommitMessage():string {
+        if(this.event.type === "PushEvent") {
+            return this.event.payload.commits[0].message
+        }
+
+        return "";
     }
 
     getIconClass() {
@@ -44,12 +58,20 @@ export class TimelineEventComponent implements OnInit {
     }
 
     ngOnInit() {
-        let title:string = this.repo.name + " / " + this.event.payload.commits[0].message;
+        this.reposService.subscribe((repos: IRepo[]) => {
+            if(repos.length <= 0) {
+                return;
+            }
 
-        this.titleService.subscribe(title, this.isEven, (t:string) => {
-            this.title = t;
+            let repo:IRepo = repos.find((repo: IRepo) => {
+                return repo.id === this.event.repo.id;
+            });
+
+            this.repoName = repo.name;
         });
 
-        this.title = title;
+
+        this.eventMessage = this.getEventMessage();
+        this.commitMessage = this.getCommitMessage();
     }
 }

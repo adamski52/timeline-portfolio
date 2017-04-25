@@ -12,29 +12,45 @@ import {IEvent} from "../../interfaces/event";
 })
 export class TimelineComponent {
 
-    public user:IUser;
-    public repos:IRepo[];
-    public events:IEvent[];
+    public repos:IRepo[] = [];
+    public events:IEvent[] = [];
+    public items:(IRepo|IEvent)[] = [];
 
-    constructor(private userService:GithubUserService,
-                private reposService:GithubReposService,
+    constructor(private reposService:GithubReposService,
                 private eventsService:GithubEventsService) {
-
-        this.userService.subscribe((user:IUser) => {
-            this.user = user;
-        });
 
         this.reposService.subscribe((repos:IRepo[]) => {
             this.repos = repos;
+            this.createItems();
         });
 
         this.eventsService.subscribe((events:IEvent[]) => {
-            console.log(events);
             this.events = events;
+            this.createItems();
         });
 
-        this.userService.fetch();
         this.reposService.fetch();
         this.eventsService.fetch();
+    }
+
+    private createItems():void {
+        this.items = this.repos;
+        console.log(this.items);
+    }
+
+    public isItemRepo(item:IRepo|IEvent):boolean {
+        let match:IRepo = this.repos.find((repo:IRepo) => {
+            return repo.id === item.id;
+        });
+
+        return match === undefined;
+    }
+
+    public isItemEvent(item:IRepo|IEvent):boolean {
+        let match:IEvent = this.events.find((event:IEvent) => {
+            return event.id === item.id;
+        });
+
+        return match === undefined;
     }
 }

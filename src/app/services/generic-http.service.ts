@@ -1,27 +1,19 @@
 import {Injectable} from '@angular/core';
 import {Http, Response} from '@angular/http';
-import {Observable, Observer, Subscription} from 'rxjs';
 import {ErrorService} from "./error.service";
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {Observable} from "rxjs/Observable";
+import {Subscription} from "rxjs/Subscription";
 
 @Injectable()
 export abstract class GenericHttpService {
-    protected _observer: Observer<any>;
+    protected subject:BehaviorSubject<any> = new BehaviorSubject([]);
 
     constructor(protected http: Http, protected errorService: ErrorService) {}
 
-    private data$: Observable<any> = new Observable((observer) => {
-        this._observer = observer;
-    }).share();
-
-    protected broadcast(response:any) {
-        if(this._observer) {
-            this._observer.next(response);
-        }
-    }
-
     public fetch(url:string):void {
         this.load(url).subscribe((response:any) => {
-           this.broadcast(response.json());
+           this.subject.next(response.json());
         });
     }
 
@@ -30,10 +22,6 @@ export abstract class GenericHttpService {
     }
 
     public subscribe(handler:(value: any) => void):Subscription {
-        return this.data$.subscribe(handler);
-    }
-
-    public isMock():boolean {
-        return true;
+        return this.subject.subscribe(handler);
     }
 }

@@ -1,0 +1,8 @@
+<div class="timeline-item-content">
+    <h4 class="timeline-title" [ngClass]="getIconClass()">
+        <span>{{eventMessage}}</span>
+    </h4>
+    <h5 class="timeline-subtitle">{{repoName}}</h5>
+    <h5 class="timeline-commit-message">{{commitMessage}}</h5>
+</div>
+<jna-timeline-date class="timeline-date" [date]="event.created_at"></jna-timeline-date>

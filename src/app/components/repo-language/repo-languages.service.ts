@@ -75,7 +75,7 @@ export class GithubRepoLanguagesService extends GenericHttpService {
     public fetch(repoName:string):void {
         this.load("/api/repos/adamski52/" + repoName + "/languages").subscribe((response:Response) => {
             this._data = this.makeArray(response.json());
-            this.broadcast(this._data);
+            this.subject.next(this._data);
         }, (error:Response) => {
             this.errorService.add("Failed to load languages.", error.status);
         });

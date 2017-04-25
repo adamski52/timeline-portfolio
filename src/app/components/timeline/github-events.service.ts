@@ -15,7 +15,7 @@ export class GithubEventsService extends GenericHttpService {
     public fetch():void {
         this.load("/api/users/adamski52/events").subscribe((response:Response) => {
             this.data = response.json();
-            this.broadcast(this.data);
+            this.subject.next(this.data);
         }, (error:Response) => {
             this.errorService.add("Failed to load events.", error.status);
         });

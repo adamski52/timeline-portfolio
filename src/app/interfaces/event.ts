@@ -1,6 +1,5 @@
 import {IActor} from "./actor";
 import {IPayload} from "./payload";
-import {IRepo} from "./repo";
 
 export interface IEvent {
     actor: IActor;
@@ -8,6 +7,10 @@ export interface IEvent {
     id: string;
     payload: IPayload;
     public: true;
-    repo: IRepo;
+    repo: {
+        id: number;
+        name: string;
+        url: string;
+    };
     type: string;
 };
