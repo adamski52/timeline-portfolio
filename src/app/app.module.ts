@@ -17,6 +17,8 @@ import {TimelineSettingsService} from "./components/timeline/timeline-settings.s
 import {TimelineSettingsComponent} from "./components/timeline/timeline-settings.component";
 import {TimelineDateComponent} from "./components/timeline/timeline-date.component";
 import {TimelineEventComponent} from "./components/timeline/timeline-event.component";
+import {TimelineBlogService} from "./components/timeline/timeline-blog.service";
+import {TimelineBlogComponent} from "./components/timeline/timeline-blog.component";
 
 @NgModule({
     declarations: [
@@ -24,6 +26,7 @@ import {TimelineEventComponent} from "./components/timeline/timeline-event.compo
         TimelineComponent,
         TimelineRepoComponent,
         TimelineEventComponent,
+        TimelineBlogComponent,
         RepoLanguagesComponent,
         RepoThumbnailComponent,
         TimelineSettingsComponent,
@@ -39,6 +42,7 @@ import {TimelineEventComponent} from "./components/timeline/timeline-event.compo
         GithubUserService,
         GithubReposService,
         GithubEventsService,
+        TimelineBlogService,
         TickerService,
         TimelineSettingsService
     ],
