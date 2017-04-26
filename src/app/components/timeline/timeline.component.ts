@@ -7,6 +7,7 @@ import {IRepo} from "../../interfaces/repo";
 import {IEvent} from "../../interfaces/event";
 import {IBlog} from "../../interfaces/blog";
 import {TimelineBlogService} from "./timeline-blog.service";
+import {TimelineSettingsService} from "./timeline-settings.service";
 
 @Component({
     selector: 'jna-timeline',
@@ -22,7 +23,8 @@ export class TimelineComponent {
 
     constructor(private reposService:GithubReposService,
                 private eventsService:GithubEventsService,
-                private blogsService:TimelineBlogService) {
+                private blogsService:TimelineBlogService,
+                private settingsService:TimelineSettingsService) {
 
         this.reposService.subscribe((repos:IRepo[]) => {
             this.repos = repos;
@@ -39,6 +41,28 @@ export class TimelineComponent {
             this.createItems();
         });
 
+        this.settingsService.subscribe((settings:any) => {
+           setTimeout(() => {
+               let items = [];
+
+               console.log("SETTINGS", settings);
+
+               if(settings.githubRepos) {
+                   items.concat(this.repos);
+               }
+
+               if(settings.githubEvents) {
+                   items.concat(this.events);
+               }
+
+               if(settings.blogs) {
+                   items.concat(this.blogs);
+               }
+
+               this.items = items;
+           }, 801)
+        });
+
         this.reposService.fetch();
         this.eventsService.fetch();
         this.blogsService.fetch();
@@ -53,7 +77,7 @@ export class TimelineComponent {
             return repo.id === item.id;
         });
 
-        return match === undefined;
+        return match !== undefined;
     }
 
     public isItemEvent(item:IRepo|IEvent|IBlog):boolean {
@@ -61,7 +85,7 @@ export class TimelineComponent {
             return event.id === item.id;
         });
 
-        return match === undefined;
+        return match !== undefined;
     }
 
     public isItemBlog(item:IRepo|IEvent|IBlog):boolean {
@@ -69,6 +93,6 @@ export class TimelineComponent {
             return blog.id === item.id;
         });
 
-        return match === undefined;
+        return match !== undefined;
     }
 }

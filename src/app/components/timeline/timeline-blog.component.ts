@@ -13,7 +13,7 @@ export class TimelineBlogComponent implements OnInit {
     @Input("isEven") isEven:boolean;
 
     public title:string;
-    public content:string;
+    public summary:string;
 
     constructor(private settingsService:TimelineSettingsService) {
         this.settingsService.subscribe((settings:any) => {
@@ -30,6 +30,6 @@ export class TimelineBlogComponent implements OnInit {
 
     ngOnInit() {
         this.title = this.blog.title;
-        this.content = this.blog.content;
+        this.summary = this.blog.content;
     }
 }
