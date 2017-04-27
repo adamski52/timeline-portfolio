@@ -5,10 +5,13 @@ import {HttpModule, XHRBackend, Response, ResponseOptions} from '@angular/http';
 import {ErrorService} from "../../services/error.service";
 import {TimelineBlogService} from "./timeline-blog.service";
 
-fdescribe('TimelineBlogService', () => {
+describe('TimelineBlogService', () => {
     let response,
         data = {
-            data: "hello"
+            items: [{
+                "lol": "wat",
+                "hoo": "dat"
+            }]
         };
 
     beforeEach(() => {
@@ -39,7 +42,7 @@ fdescribe('TimelineBlogService', () => {
 
         service.fetch();
 
-        expect(response).toBe(data);
+        expect(response.length).toBe(1);
     }));
 
     it('should log an error if the end point fails', inject([TimelineBlogService, XHRBackend, ErrorService], (service:TimelineBlogService, mockBackend:MockBackend, errorService:ErrorService) => {

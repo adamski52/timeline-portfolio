@@ -16,10 +16,15 @@ import {TimelineBlogComponent} from "./timeline-blog.component";
 import {TimelineBlogService} from "./timeline-blog.service";
 import {TimelineEventComponent} from "./timeline-event.component";
 
-fdescribe('TimelineComponent', () => {
+describe('TimelineComponent', () => {
     let fixture:ComponentFixture<TimelineComponent>,
         component:TimelineComponent,
         response,
+        blogMock:any = {
+            items: [{
+                "lol": "wat"
+            }]
+        },
         mockArray:any[] = [{
             "lol": "wat"
         }];
@@ -118,7 +123,7 @@ fdescribe('TimelineComponent', () => {
         spyOn(reposService, "fetch");
         mockBackend.connections.subscribe((connection) => {
             connection.mockRespond(new Response(new ResponseOptions({
-                body: mockArray
+                body: blogMock
             })));
         });
 
@@ -129,6 +134,6 @@ fdescribe('TimelineComponent', () => {
         fixture = TestBed.createComponent(TimelineComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
-        expect(component.blogs).toBe(mockArray);
+        expect(component.blogs).toBe(blogMock.items);
     }));
 });

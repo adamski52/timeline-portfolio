@@ -29,7 +29,6 @@ export class TimelineBlogComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log("BLOG", this.blog);
         this.title = this.blog.title;
         this.summary = this.blog.content;
     }

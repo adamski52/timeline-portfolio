@@ -9,8 +9,7 @@ module.exports = function (config) {
             require('karma-jasmine'),
             require('karma-spec-reporter'),
             require('karma-phantomjs-launcher'),
-            require('karma-jasmine-html-reporter'),
-            require('karma-coverage-istanbul-reporter'),
+            require('karma-remap-istanbul'),
             require('@angular/cli/plugins/karma')
         ],
         proxies: {
@@ -29,16 +28,17 @@ module.exports = function (config) {
         mime: {
             'text/x-typescript': ['ts', 'tsx']
         },
-        coverageIstanbulReporter: {
-            reports: ['html', 'lcovonly'],
-            fixWebpackSourcePaths: true
+        remapIstanbulReporter: {
+            reports: {
+                html: 'coverage',
+                lcovonly: './coverage/coverage.json'
+            }
         },
         angularCli: {
-            environment: 'dev'
+            environment: 'dev',
+            config: './angular-cli.json'
         },
-        reporters: config.angularCli && config.angularCli.codeCoverage
-            ? ['spec', 'coverage-istanbul']
-            : ['spec', 'kjhtml'],
+        reporters: ['spec', 'karma-remap-istanbul'],
         port: 9876,
         colors: true,
         logLevel: config.LOG_INFO,
