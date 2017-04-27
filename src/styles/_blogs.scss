@@ -1,0 +1,25 @@
+.timeline-item:hover .timeline-item-content {
+    .timeline-blog-summary {
+        opacity: 1;
+    }
+}
+
+.timeline-blog-summary {
+    opacity: 0;
+    margin: 0;
+    width: 100%;
+    height: $timeline-item-content-height;
+    overflow: hidden;
+    padding: $global-spacing-medium;
+    clear: both;
+    text-overflow: ellipsis;
+
+    &>* {
+        display: none;
+        margin: 0;
+    }
+
+    &>*:first-child {
+        display: block;
+    }
+}

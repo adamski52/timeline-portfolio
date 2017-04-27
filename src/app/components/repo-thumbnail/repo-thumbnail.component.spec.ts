@@ -82,7 +82,7 @@ describe('RepoLanguagesComponent', () => {
         component = fixture.debugElement.children[0].componentInstance;
         fixture.detectChanges();
 
-        expect(response).toBeFalsy();
+        expect(response.length).toEqual(0);
     }));
 
 

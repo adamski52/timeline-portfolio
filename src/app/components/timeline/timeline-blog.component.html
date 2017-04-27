@@ -2,6 +2,6 @@
     <h4 class="timeline-title" [ngClass]="getIconClass()">
         <span>{{title}}</span>
     </h4>
-    <div class="timeline-blog-summary">{{summary}}</div>
+    <div class="timeline-blog-summary" [innerHTML]="summary"></div>
 </div>
 <jna-timeline-date class="timeline-date" [date]="blog.published"></jna-timeline-date>

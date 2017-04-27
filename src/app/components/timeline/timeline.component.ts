@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {GithubUserService} from "./github-user.service";
 import {GithubReposService} from "./github-repos.service";
 import {GithubEventsService} from "./github-events.service";
 import {IUser} from "../../interfaces/user";
@@ -45,18 +44,16 @@ export class TimelineComponent {
            setTimeout(() => {
                let items = [];
 
-               console.log("SETTINGS", settings);
-
                if(settings.githubRepos) {
-                   items.concat(this.repos);
+                   items = items.concat(this.repos);
                }
 
                if(settings.githubEvents) {
-                   items.concat(this.events);
+                   items = items.concat(this.events);
                }
 
                if(settings.blogs) {
-                   items.concat(this.blogs);
+                   items = items.concat(this.blogs);
                }
 
                this.items = items;
