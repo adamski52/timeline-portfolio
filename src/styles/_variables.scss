@@ -33,7 +33,7 @@ $global-light-color: #ccc;
 $global-lighter-color: #fbfbfb;
 $global-lightest-color: #fff;
 
-$global-base-font-size: 12px;
+$global-base-font-size: 14px;
 
 $global-font-size-smallest: .7em;
 $global-font-size-smaller: .8em;
@@ -42,17 +42,17 @@ $global-font-size-large: 1.2em;
 $global-font-size-larger: 1.3em;
 $global-font-size-largest: 1.6em;
 
-
 $global-content-width: 150px;
 $global-content-height: 100%;
 
-$timeline-item-height: 175px;
+$timeline-item-height: 150px;
 $timeline-item-content-height: 95px;
 $timeline-item-width: 50%;
 $timeline-item-content-width: 100%;
 $timeline-item-width-open: 200%;
 $timeline-item-width-open-lg: 400%;
 
+$global-spacing-largest: 40px;
 $global-spacing-larger: 30px;
 $global-spacing-large: 20px;
 $global-spacing-medium: 10px;
@@ -60,3 +60,6 @@ $global-spacing-small: 5px;
 $global-spacing-smaller: 3px;
 $global-spacing-smallest: 1px;
 
+$global-transition: .3s;
+$global-transition-long: .5s;
+$global-transition-very-long: .8s;

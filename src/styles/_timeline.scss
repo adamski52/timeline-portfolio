@@ -3,7 +3,7 @@
     height: $global-content-height;
     display: block;
     margin: 0 auto;
-    padding-top: $global-spacing-large;
+    padding-top: $global-spacing-largest;
 }
 
 .timeline-item-wrapper {
@@ -17,6 +17,7 @@
     height: $timeline-item-height;
     position: relative;
     float: left;
+    transition: $global-transition;
 
     &.is-hidden {
         width: 0;
@@ -27,6 +28,7 @@
         .timeline-item-content {
             width: $timeline-item-width-open;
             border-color: $global-darkest-color;
+            transition-delay: unset;
         }
 
         .timeline-title {
@@ -54,9 +56,8 @@
         }
 
         .timeline-date {
-            left: auto;
-            right: 0;
-            text-align: right;
+            left: 0;
+            right: auto;
         }
     }
 }
@@ -73,6 +74,8 @@
     left: 0;
     right: auto;
     overflow: hidden;
+    transition: $global-transition;
+    transition-delay: $global-transition;
 }
 
 .timeline-title,
@@ -109,22 +112,22 @@
     position: absolute;
     color: $global-light-color;
     bottom: 0;
-    left: 0;
+    right: 0;
     margin: 0;
     padding: $global-spacing-smaller $global-spacing-medium $global-spacing-smallest $global-spacing-medium;
 }
 
 .timeline-date-month {
     display: block;
-    font-size: $global-font-size-small;
+    font-size: $global-font-size-smaller;
     line-height: $global-font-size-smaller;
     text-transform: uppercase;
 }
 
 .timeline-date-date {
     display: block;
-    font-size: $global-font-size-largest;
-    line-height: $global-font-size-largest;
+    font-size: $global-font-size-large;
+    line-height: $global-font-size-large;
 }
 
 

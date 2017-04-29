@@ -12,15 +12,24 @@
     }
 }
 
+.timeline-item:hover {
+    .timeline-item-content {
+        .timeline-commit-message {
+            transition-delay: $global-transition;
+        }
+    }
+}
+
 .timeline-commit-message {
     font-size: $global-font-size-larger;
     position: relative;
     float: left;
-    margin-top: $global-spacing-large;
     color: $global-darkest-color;
     text-align: center;
     width: $timeline-item-content-width;
     opacity: 0;
     padding: $global-spacing-medium;
     height: $timeline-item-content-height;
+    transition: $global-transition;
+    transition-delay: unset;
 }

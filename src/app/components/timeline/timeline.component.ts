@@ -7,6 +7,7 @@ import {IEvent} from "../../interfaces/event";
 import {IBlog} from "../../interfaces/blog";
 import {TimelineBlogService} from "./timeline-blog.service";
 import {TimelineSettingsService} from "./timeline-settings.service";
+import {ISettings} from "../../interfaces/settings";
 
 @Component({
     selector: 'jna-timeline',
@@ -17,7 +18,7 @@ export class TimelineComponent {
     private _repos:IRepo[] = [];
     private _events:IEvent[] = [];
     private _blogs:IBlog[] = [];
-    private _settings = {};
+    private _settings:ISettings;
 
     public items:(IRepo|IEvent|IBlog)[] = [];
 
@@ -42,7 +43,7 @@ export class TimelineComponent {
             this._settings = settings;
             setTimeout(() => {
                 this.items = this.createItems();
-           }, 801)
+            }, 301);
         });
 
         this.reposService.fetch();
@@ -52,6 +53,9 @@ export class TimelineComponent {
 
     private createItems():(IBlog|IEvent|IRepo)[] {
         let items = [];
+        if(!this._settings) {
+            return items;
+        }
 
         if(this._settings.githubRepos) {
             items = items.concat(this.repos);
@@ -65,7 +69,30 @@ export class TimelineComponent {
             items = items.concat(this.blogs);
         }
 
+        items = items.sort((lhs:IBlog|IEvent|IRepo, rhs:IBlog|IEvent|IRepo) => {
+            let lhsValue:number = this.getItemTime(lhs),
+                rhsValue:number = this.getItemTime(rhs);
+
+            return rhsValue - lhsValue;
+        });
+
         return items;
+    }
+
+    private getItemTime(item:IBlog|IEvent|IRepo):number {
+        if(this.isItemRepo(item)) {
+            return new Date((<IRepo>item).updated_at.toString()).getTime();
+        }
+
+        if(this.isItemBlog(item)) {
+            return new Date((<IBlog>item).published).getTime();
+        }
+
+        if(this.isItemEvent(item)) {
+            return new Date((<IEvent>item).created_at.toString()).getTime();
+        }
+
+        return 0;
     }
 
     public isItemRepo(item:IRepo|IEvent|IBlog):boolean {

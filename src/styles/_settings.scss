@@ -16,11 +16,11 @@
         font-size: $global-font-size-large;
 
         &.jna-icon-disabled {
-            color: $global-darker-color;
+            color: $global-dark-color;
         }
 
         &:before {
-            font-size: $global-font-size-largest;
+            font-size: $global-font-size-larger;
             vertical-align: top;
         }
 

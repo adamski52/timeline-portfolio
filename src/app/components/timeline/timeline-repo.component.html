@@ -2,7 +2,8 @@
     <h4 class="timeline-title" [ngClass]="getIconClass()">
         <span>{{title}}</span>
     </h4>
+    
     <jna-repo-languages class="timeline-languages" [repo]="repo.name"></jna-repo-languages>
-    <jna-repo-thumbnail class="timeline-thumbnail" [repo]="repo.name"></jna-repo-thumbnail>
+    <!--<jna-repo-thumbnail class="timeline-thumbnail" [repo]="repo.name"></jna-repo-thumbnail>-->
+    <jna-timeline-date class="timeline-date" [date]="repo.updated_at"></jna-timeline-date>
 </div>
-<jna-timeline-date class="timeline-date" [date]="repo.updated_at"></jna-timeline-date>

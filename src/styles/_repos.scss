@@ -7,6 +7,13 @@
     .timeline-thumbnail {
         opacity: 1;
     }
+
+    .timeline-languages {
+        opacity: 1;
+        height: auto;
+        transition-delay: $global-transition;
+        transition: opacity height $global-transition;
+    }
 }
 
 .timeline-item.even {
@@ -23,6 +30,10 @@
     clear: both;
     position: relative;
     z-index: 1;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: opacity $global-transition-very-long;
 }
 
 .timeline-thumbnail {

@@ -52,11 +52,19 @@ export class GithubRepoLanguagesService extends GenericHttpService {
     }
 
     private makeArray(languages:ILanguageMeta):ILanguage[] {
-        let languageList:ILanguage[] = [];
+        let languageList:ILanguage[] = [],
+            totalSize:number = 0,
+            pct:number;
+
+        for(let language in languages) {
+            totalSize += languages[language]
+        }
 
         for (let language in languages) {
+            pct = Math.round((languages[language]/totalSize) * 100);
+
             languageList.push({
-                name: language,
+                name: language + " (" + (pct > 0 ? pct : "< 1") + "%)",
                 iconClass: this.getIconClass(language),
                 size: languages[language]
             });
@@ -68,6 +76,10 @@ export class GithubRepoLanguagesService extends GenericHttpService {
                 iconClass: "jna-icon-file-alt"
             });
         }
+
+        languageList.sort((lhs:ILanguage, rhs:ILanguage) => {
+           return rhs.size - lhs.size;
+        });
 
         return languageList;
     }

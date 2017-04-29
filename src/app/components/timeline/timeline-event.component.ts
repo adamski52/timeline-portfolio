@@ -47,13 +47,17 @@ export class TimelineEventComponent implements OnInit {
             return this.event.payload.commits[0].message
         }
 
+        if(this.event.type === "CreateEvent") {
+            return "created branch";
+        }
+
         return "";
     }
 
     getIconClass() {
         return {
-            "jna-icon-github": !this.isEven,
-            "jna-icon-reverse-github": this.isEven
+            "jna-icon-code-fork": !this.isEven,
+            "jna-icon-reverse-code-fork": this.isEven
         };
     }
 
