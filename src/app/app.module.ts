@@ -8,7 +8,6 @@ import {TimelineComponent} from './components/timeline/timeline.component';
 import {ErrorService} from "./services/error.service";
 import {RepoLanguagesComponent} from "./components/repo-language/repo-languages.component";
 import {RepoThumbnailComponent} from "./components/repo-thumbnail/repo-thumbnail.component";
-import {GithubUserService} from "./components/timeline/github-user.service";
 import {GithubReposService} from "./components/timeline/github-repos.service";
 import {GithubEventsService} from "./components/timeline/github-events.service";
 import {TimelineRepoComponent} from "./components/timeline/timeline-repo.component";
@@ -17,6 +16,8 @@ import {TimelineSettingsService} from "./components/timeline/timeline-settings.s
 import {TimelineSettingsComponent} from "./components/timeline/timeline-settings.component";
 import {TimelineDateComponent} from "./components/timeline/timeline-date.component";
 import {TimelineEventComponent} from "./components/timeline/timeline-event.component";
+import {TimelineBlogService} from "./components/timeline/timeline-blog.service";
+import {TimelineBlogComponent} from "./components/timeline/timeline-blog.component";
 
 @NgModule({
     declarations: [
@@ -24,6 +25,7 @@ import {TimelineEventComponent} from "./components/timeline/timeline-event.compo
         TimelineComponent,
         TimelineRepoComponent,
         TimelineEventComponent,
+        TimelineBlogComponent,
         RepoLanguagesComponent,
         RepoThumbnailComponent,
         TimelineSettingsComponent,
@@ -36,9 +38,9 @@ import {TimelineEventComponent} from "./components/timeline/timeline-event.compo
     ],
     providers: [
         ErrorService,
-        GithubUserService,
         GithubReposService,
         GithubEventsService,
+        TimelineBlogService,
         TickerService,
         TimelineSettingsService
     ],

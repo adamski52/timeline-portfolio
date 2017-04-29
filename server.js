@@ -43,6 +43,33 @@ if(process.env.API_USE_MOCK) {
             res.send(data);
         });
     });
+
+
+    app.use('/blog', function(req, res) {
+        var url = req.originalUrl,
+            pieces = url.split("/"),
+            ending = pieces[pieces.length-1].split("?")[0];
+
+        switch(ending) {
+            case "posts":
+                url = "mocks/posts.json";
+                break;
+            default:
+                url = "";
+                break;
+        }
+
+        fs.readFile(url, 'utf8', function(err, data) {
+            if (err) {
+                res.status(500).send("Error with " + url);
+                return;
+            }
+
+            res.send(data);
+        });
+    });
+
+
     console.log("Express started at :3000 / using mock");
 }
 else {
@@ -53,8 +80,17 @@ else {
             return proxyReq;
         }
     }));
+
+    app.use('/blog', proxy('googleapis.com', {
+        https: true,
+        decorateRequest: function (proxyReq, originalReq) {
+            return proxyReq;
+        }
+    }));
+
     console.log("Express started at :3000 / " + process.env.API_KEY);
 }
+
 
 app.use(express.static(path.join(__dirname, 'mocks')));
 

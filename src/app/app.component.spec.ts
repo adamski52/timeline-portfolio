@@ -2,7 +2,6 @@ import {TestBed, async} from '@angular/core/testing';
 
 import {AppComponent} from './app.component';
 import {TimelineComponent} from "./components/timeline/timeline.component";
-import {GithubUserService} from "./components/timeline/github-user.service";
 import {GithubReposService} from "./components/timeline/github-repos.service";
 import {GithubEventsService} from "./components/timeline/github-events.service";
 import {ErrorService} from "./services/error.service";
@@ -15,6 +14,9 @@ import {TimelineSettingsComponent} from "./components/timeline/timeline-settings
 import {TimelineSettingsService} from "./components/timeline/timeline-settings.service";
 import {TickerService} from "./services/ticker.service";
 import {TimelineDateComponent} from "./components/timeline/timeline-date.component";
+import {TimelineEventComponent} from "./components/timeline/timeline-event.component";
+import {TimelineBlogComponent} from "./components/timeline/timeline-blog.component";
+import {TimelineBlogService} from "./components/timeline/timeline-blog.service";
 
 describe('AppComponent', () => {
     beforeEach(async(() => {
@@ -23,16 +25,18 @@ describe('AppComponent', () => {
                 AppComponent,
                 TimelineComponent,
                 TimelineRepoComponent,
+                TimelineEventComponent,
+                TimelineBlogComponent,
                 TimelineSettingsComponent,
                 RepoLanguagesComponent,
                 RepoThumbnailComponent,
                 TimelineDateComponent
             ],
             providers: [
-                GithubUserService,
                 GithubReposService,
                 GithubEventsService,
                 TimelineSettingsService,
+                TimelineBlogService,
                 TickerService,
                 ErrorService,
                 {

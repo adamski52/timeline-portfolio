@@ -1,6 +1,6 @@
 $screen-xs-min: 320px;
 $screen-sm-min: 475px;
-$screem-lg-min: 1000px;
+$screen-lg-min: 1000px;
 
 $angular-color: #e7333e;
 $sql-color: #005b86;
@@ -24,3 +24,39 @@ $clojure-color: #63b132;
 $csharp-color: #4da3de;
 $unknown-color: #40de93;
 $icon-hover-color: #fff;
+
+$global-darkest-color: #000;
+$global-darker-color: #222;
+$global-dark-color: #666;
+$global-medium-color: #bbb;
+$global-light-color: #ccc;
+$global-lighter-color: #fbfbfb;
+$global-lightest-color: #fff;
+
+$global-base-font-size: 12px;
+
+$global-font-size-smallest: .7em;
+$global-font-size-smaller: .8em;
+$global-font-size-small: 1.1em;
+$global-font-size-large: 1.2em;
+$global-font-size-larger: 1.3em;
+$global-font-size-largest: 1.6em;
+
+
+$global-content-width: 150px;
+$global-content-height: 100%;
+
+$timeline-item-height: 175px;
+$timeline-item-content-height: 95px;
+$timeline-item-width: 50%;
+$timeline-item-content-width: 100%;
+$timeline-item-width-open: 200%;
+$timeline-item-width-open-lg: 400%;
+
+$global-spacing-larger: 30px;
+$global-spacing-large: 20px;
+$global-spacing-medium: 10px;
+$global-spacing-small: 5px;
+$global-spacing-smaller: 3px;
+$global-spacing-smallest: 1px;
+

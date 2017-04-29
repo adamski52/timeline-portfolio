@@ -46,7 +46,7 @@ export class TimelineEventComponent implements OnInit {
 
     private getCommitMessage():string {
         if(this.event.type === "PushEvent") {
-            return this.event.payload.commits[0].message
+            return this.event.payload.commits[0].message;
         }
 
         return "";

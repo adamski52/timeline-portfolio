@@ -1,0 +1,31 @@
+.timeline-settings {
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+    background: $global-darkest-color;
+    text-align: right;
+    color: $global-light-color;
+    padding: $global-spacing-smaller;
+    font-size: $global-font-size-smaller;
+
+    a {
+        color: inherit;
+        vertical-align: middle;
+        display: inline-block;
+        text-decoration: none;
+        font-size: $global-font-size-large;
+
+        &.jna-icon-disabled {
+            color: $global-darker-color;
+        }
+
+        &:before {
+            font-size: $global-font-size-largest;
+            vertical-align: top;
+        }
+
+        &:hover {
+            color: inherit;
+        }
+    }
+}

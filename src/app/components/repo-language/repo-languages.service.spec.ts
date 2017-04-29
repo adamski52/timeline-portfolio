@@ -93,8 +93,6 @@ describe('RepoLanguagesService', () => {
         bodyObj[language] = mockData[language];
 
         it('should return "' + iconClass + "' for " + language, inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:GithubRepoLanguagesService) => {
-            spyOn(repoLanguagesService, "isMock").and.returnValue(false);
-
             mockBackend.connections.subscribe((connection) => {
                 connection.mockRespond(new Response(new ResponseOptions({
                     body: bodyObj
@@ -111,8 +109,6 @@ describe('RepoLanguagesService', () => {
 
 
     it('should return an icon class, prefixed with "icon-"', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:GithubRepoLanguagesService) => {
-        spyOn(repoLanguagesService, "isMock").and.returnValue(false);
-
         mockBackend.connections.subscribe((connection) => {
             connection.mockRespond(new Response(new ResponseOptions({
                 body: {
@@ -129,8 +125,6 @@ describe('RepoLanguagesService', () => {
     }));
 
     it('should return icon-css (because it looks most like a generic script icon) when a language is unknown', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:GithubRepoLanguagesService) => {
-        spyOn(repoLanguagesService, "isMock").and.returnValue(false);
-
         mockBackend.connections.subscribe((connection) => {
             connection.mockRespond(new Response(new ResponseOptions({
                 body: {

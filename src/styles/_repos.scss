@@ -1,0 +1,36 @@
+.timeline-item:hover {
+    .timeline-languages {
+        color: $global-lightest-color;
+        background: $global-darkest-color;
+    }
+
+    .timeline-thumbnail {
+        opacity: 1;
+    }
+}
+
+.timeline-item.even {
+    .timeline-languages {
+        float: right;
+    }
+}
+
+.timeline-languages {
+    padding: $global-spacing-smaller $global-spacing-medium $global-spacing-smallest $global-spacing-medium;
+    white-space: nowrap;
+    margin: 0;
+    float: left;
+    clear: both;
+    position: relative;
+    z-index: 1;
+}
+
+.timeline-thumbnail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0;
+}
