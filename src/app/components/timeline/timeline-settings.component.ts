@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {TimelineSettingsService} from "./timeline-settings.service";
 import {TimelineTitleService} from "./timeline-title.service";
+import {ISettings} from "../../interfaces/settings";
 
 @Component({
     selector: 'jna-timeline-settings',
@@ -18,11 +19,11 @@ export class TimelineSettingsComponent {
         blogs: "Blogs"
     };
 
-    public settings:any = {};
+    public settings:ISettings;
     public title:string = "";
 
     constructor(private settingsService:TimelineSettingsService, private titleService:TimelineTitleService) {
-        this.settingsService.subscribe((settings: any) => {
+        this.settingsService.subscribe((settings: ISettings) => {
             this.settings = settings;
         });
 

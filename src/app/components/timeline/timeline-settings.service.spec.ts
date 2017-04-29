@@ -1,10 +1,11 @@
 import {TestBed} from '@angular/core/testing';
 import {TimelineSettingsService} from "./timeline-settings.service";
+import {ISettings} from "../../interfaces/settings";
 
 describe('TimelineSettingsService', () => {
 
     let service:TimelineSettingsService,
-        settings;
+        settings:ISettings;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -15,7 +16,7 @@ describe('TimelineSettingsService', () => {
 
         service = TestBed.get(TimelineSettingsService);
 
-        service.subscribe((s:any) => {
+        service.subscribe((s:ISettings) => {
             settings = s;
         });
     });

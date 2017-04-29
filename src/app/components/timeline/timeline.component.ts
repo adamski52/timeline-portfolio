@@ -14,9 +14,10 @@ import {TimelineSettingsService} from "./timeline-settings.service";
 })
 export class TimelineComponent {
 
-    public repos:IRepo[] = [];
-    public events:IEvent[] = [];
-    public blogs:IBlog[] = [];
+    private _repos:IRepo[] = [];
+    private _events:IEvent[] = [];
+    private _blogs:IBlog[] = [];
+    private _settings = {};
 
     public items:(IRepo|IEvent|IBlog)[] = [];
 
@@ -27,36 +28,20 @@ export class TimelineComponent {
 
         this.reposService.subscribe((repos:IRepo[]) => {
             this.repos = repos;
-            this.createItems();
         });
 
         this.eventsService.subscribe((events:IEvent[]) => {
             this.events = events;
-            this.createItems();
         });
 
         this.blogsService.subscribe((blogs:IBlog[]) => {
             this.blogs = blogs;
-            this.createItems();
         });
 
         this.settingsService.subscribe((settings:any) => {
-           setTimeout(() => {
-               let items = [];
-
-               if(settings.githubRepos) {
-                   items = items.concat(this.repos);
-               }
-
-               if(settings.githubEvents) {
-                   items = items.concat(this.events);
-               }
-
-               if(settings.blogs) {
-                   items = items.concat(this.blogs);
-               }
-
-               this.items = items;
+            this._settings = settings;
+            setTimeout(() => {
+                this.items = this.createItems();
            }, 801)
         });
 
@@ -65,8 +50,22 @@ export class TimelineComponent {
         this.blogsService.fetch();
     }
 
-    private createItems():void {
-        this.items = [].concat(this.repos, this.events, this.blogs);
+    private createItems():(IBlog|IEvent|IRepo)[] {
+        let items = [];
+
+        if(this._settings.githubRepos) {
+            items = items.concat(this.repos);
+        }
+
+        if(this._settings.githubEvents) {
+            items = items.concat(this.events);
+        }
+
+        if(this._settings.blogs) {
+            items = items.concat(this.blogs);
+        }
+
+        return items;
     }
 
     public isItemRepo(item:IRepo|IEvent|IBlog):boolean {
@@ -91,5 +90,32 @@ export class TimelineComponent {
         });
 
         return match !== undefined;
+    }
+
+    public set repos(repos:IRepo[]) {
+        this._repos = repos;
+        this.items = this.createItems();
+    }
+
+    public get repos():IRepo[] {
+        return this._repos;
+    }
+
+    public set events(events:IEvent[]) {
+        this._events = events;
+        this.items = this.createItems();
+    }
+
+    public get events():IEvent[] {
+        return this._events;
+    }
+
+    public set blogs(blogs:IBlog[]) {
+        this._blogs= blogs;
+        this.items = this.createItems();
+    }
+
+    public get blogs():IBlog[] {
+        return this._blogs;
     }
 }
