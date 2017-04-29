@@ -31,6 +31,7 @@ export class TimelineEventComponent implements OnInit {
     }
 
     private getEventMessage():string {
+        console.log("after", this.event);
         if(this.event.type === "PushEvent") {
             return "pushed to " + this.event.payload.ref;
         }
@@ -39,6 +40,7 @@ export class TimelineEventComponent implements OnInit {
             return "created " + this.event.payload.ref;
         }
 
+        // TODO
         return "???";
     }
 
@@ -52,8 +54,8 @@ export class TimelineEventComponent implements OnInit {
 
     getIconClass() {
         return {
-            "jna-icon-github": !this.isEven,
-            "jna-icon-reverse-github": this.isEven
+            "jna-icon-heart": !this.isEven,
+            "jna-icon-reverse-heart": this.isEven
         };
     }
 
@@ -70,7 +72,7 @@ export class TimelineEventComponent implements OnInit {
             this.repoName = repo.name;
         });
 
-
+        console.log("before", this.event);
         this.eventMessage = this.getEventMessage();
         this.commitMessage = this.getCommitMessage();
     }

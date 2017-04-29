@@ -34,8 +34,10 @@ export class TimelineComponent {
     }
 
     private createItems():void {
-        this.items = this.repos;
-        console.log(this.items);
+        this.items = [].concat(this.repos, this.events);
+        console.log("repos", this.repos);
+        console.log("events", this.events);
+        console.log("items", this.items);
     }
 
     public isItemRepo(item:IRepo|IEvent):boolean {
@@ -43,7 +45,7 @@ export class TimelineComponent {
             return repo.id === item.id;
         });
 
-        return match === undefined;
+        return match !== undefined;
     }
 
     public isItemEvent(item:IRepo|IEvent):boolean {
@@ -51,6 +53,6 @@ export class TimelineComponent {
             return event.id === item.id;
         });
 
-        return match === undefined;
+        return match !== undefined;
     }
 }
