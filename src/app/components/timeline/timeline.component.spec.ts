@@ -20,11 +20,12 @@ import {IBlog} from "../../interfaces/blog";
 import {IRepo} from "../../interfaces/repo";
 import {IEvent} from "../../interfaces/event";
 
-fdescribe('TimelineComponent', () => {
+describe('TimelineComponent', () => {
     let fixture:ComponentFixture<TimelineComponent>,
         component:TimelineComponent,
         response,
-        blogMock:IBlog[] = require("../../../../mocks/posts.json"),
+        blogResponse = require("../../../../mocks/posts.json"),
+        blogMock:IBlog[] = blogResponse.items,
         repoMock:IRepo[] = require("../../../../mocks/repos.json"),
         eventMock:IEvent[] = require("../../../../mocks/events.json");
 
@@ -122,7 +123,7 @@ fdescribe('TimelineComponent', () => {
         spyOn(reposService, "fetch");
         mockBackend.connections.subscribe((connection) => {
             connection.mockRespond(new Response(new ResponseOptions({
-                body: blogMock
+                body: blogResponse
             })));
         });
 
@@ -133,7 +134,7 @@ fdescribe('TimelineComponent', () => {
         fixture = TestBed.createComponent(TimelineComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
-        expect(component.blogs).toBe(blogMock.items);
+        expect(component.blogs).toBe(blogMock);
     }));
 
     it('should add repos to items based on settings', inject([GithubEventsService, GithubReposService, TimelineBlogService, TimelineSettingsService], (eventsService:GithubEventsService, reposService:GithubReposService, blogService:TimelineBlogService, settingsService:TimelineSettingsService) => {
@@ -145,7 +146,7 @@ fdescribe('TimelineComponent', () => {
         settingsService.toggleSetting("githubEvents");
         settingsService.toggleSetting("blogs");
 
-        component.blogs = blogMock.items;
+        component.blogs = blogMock;
         component.repos = repoMock;
         component.events = eventMock;
 
@@ -163,7 +164,7 @@ fdescribe('TimelineComponent', () => {
         settingsService.toggleSetting("githubRepos");
         settingsService.toggleSetting("blogs");
 
-        component.blogs = blogMock.items;
+        component.blogs = blogMock;
         component.repos = repoMock;
         component.events = eventMock;
 
@@ -181,7 +182,7 @@ fdescribe('TimelineComponent', () => {
         settingsService.toggleSetting("githubRepos");
         settingsService.toggleSetting("githubEvents");
 
-        component.blogs = blogMock.items;
+        component.blogs = blogMock;
         component.repos = repoMock;
         component.events = eventMock;
 

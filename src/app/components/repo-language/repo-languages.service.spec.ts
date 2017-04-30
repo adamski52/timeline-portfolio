@@ -5,6 +5,7 @@ import {GithubRepoLanguagesService} from "./repo-languages.service";
 import {MockBackend} from '@angular/http/testing';
 import {XHRBackend, Response, ResponseOptions, HttpModule} from '@angular/http';
 import {ErrorService} from "../../services/error.service";
+import {ILanguage} from "../../interfaces/language";
 
 describe('RepoLanguagesService', () => {
     let languageMap = {
@@ -67,6 +68,8 @@ describe('RepoLanguagesService', () => {
         "C#": 1234
     };
 
+    let languages:ILanguage[];
+
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -84,7 +87,6 @@ describe('RepoLanguagesService', () => {
         });
     });
 
-
     function testMatch(language:string) {
         let lowercaseLanguage = language.toLowerCase(),
             iconClass:string = "icon-" + languageMap[lowercaseLanguage],
@@ -100,13 +102,131 @@ describe('RepoLanguagesService', () => {
             });
 
             repoLanguagesService.fetch("lol");
-            expect(repoLanguagesService.data.length).toEqual(1);
-            expect(repoLanguagesService.data[0].iconClass).toEqual(iconClass);
-            expect(repoLanguagesService.data[0].name).toEqual(language);
-            expect(repoLanguagesService.data[0].size).toEqual(mockData[language]);
+            repoLanguagesService.subscribe((langs:ILanguage[]) => {
+                languages = langs;
+            });
+            expect(languages[0].iconClass).toEqual(iconClass);
         }));
     }
 
+    it('should append the percentage for each language in the set', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:GithubRepoLanguagesService) => {
+        mockBackend.connections.subscribe((connection) => {
+            connection.mockRespond(new Response(new ResponseOptions({
+                body: {
+                    "Nginx": 50,
+                    "Go": 49,
+                    "XML": 1
+                }
+            })));
+        });
+
+        repoLanguagesService.subscribe((langs:ILanguage[]) => {
+            languages = langs;
+        });
+
+        repoLanguagesService.fetch("lol");
+
+        expect(languages[0].name).toEqual("Nginx");
+        expect(languages[1].name).toEqual("Go");
+        expect(languages[2].name).toEqual("XML");
+    }));
+
+    it('should sort languages by size in descending order', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:GithubRepoLanguagesService) => {
+        mockBackend.connections.subscribe((connection) => {
+            connection.mockRespond(new Response(new ResponseOptions({
+                body: {
+                    "Nginx": 30,
+                    "Go": 60,
+                    "XML": 10
+                }
+            })));
+        });
+
+        repoLanguagesService.subscribe((langs:ILanguage[]) => {
+            languages = langs;
+        });
+
+        repoLanguagesService.fetch("lol");
+        expect(languages[0].name).toEqual("Go");
+        expect(languages[1].name).toEqual("Nginx");
+        expect(languages[2].name).toEqual("XML");
+    }));
+
+    it('should return display name as < 1% instead of 0%', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:GithubRepoLanguagesService) => {
+        mockBackend.connections.subscribe((connection) => {
+            connection.mockRespond(new Response(new ResponseOptions({
+                body: {
+                    "Nginx": 99,
+                    "XML": .8,
+                    "Go": .2
+                }
+            })));
+        });
+
+        repoLanguagesService.subscribe((langs:ILanguage[]) => {
+            languages = langs;
+        });
+
+        repoLanguagesService.fetch("lol");
+        expect(repoLanguagesService.getDisplayName(languages[2])).toEqual("Go (< 1%)");
+    }));
+
+    it('should say > 99% instead of 100%, when there is more than 1 language', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:GithubRepoLanguagesService) => {
+        mockBackend.connections.subscribe((connection) => {
+            connection.mockRespond(new Response(new ResponseOptions({
+                body: {
+                    "Nginx": 99.8,
+                    "Go": .2
+                }
+            })));
+        });
+
+        repoLanguagesService.subscribe((langs:ILanguage[]) => {
+            languages = langs;
+        });
+
+        repoLanguagesService.fetch("lol");
+
+        expect(repoLanguagesService.getDisplayName(languages[0])).toEqual("Nginx (> 99%)");
+    }));
+
+    it('should say 100%, when there is only 1 language', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:GithubRepoLanguagesService) => {
+        mockBackend.connections.subscribe((connection) => {
+            connection.mockRespond(new Response(new ResponseOptions({
+                body: {
+                    "Nginx": 100
+                }
+            })));
+        });
+
+        repoLanguagesService.subscribe((langs:ILanguage[]) => {
+            languages = langs;
+        });
+
+        repoLanguagesService.fetch("lol");
+
+        expect(repoLanguagesService.getDisplayName(languages[0])).toEqual("Nginx (100%)");
+    }));
+
+    it('should round to nearest percentage', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:GithubRepoLanguagesService) => {
+        mockBackend.connections.subscribe((connection) => {
+            connection.mockRespond(new Response(new ResponseOptions({
+                body: {
+                    "Nginx": 49.6,
+                    "XML": 50.4
+                }
+            })));
+        });
+
+        repoLanguagesService.subscribe((langs:ILanguage[]) => {
+            languages = langs;
+        });
+
+        repoLanguagesService.fetch("lol");
+
+        expect(repoLanguagesService.getDisplayName(languages[0])).toEqual("Nginx (50%)");
+        expect(repoLanguagesService.getDisplayName(languages[1])).toEqual("XML (50%)");
+    }));
 
     it('should return an icon class, prefixed with "icon-"', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:GithubRepoLanguagesService) => {
         mockBackend.connections.subscribe((connection) => {
@@ -117,11 +237,12 @@ describe('RepoLanguagesService', () => {
             })));
         });
 
+        repoLanguagesService.subscribe((langs:ILanguage[]) => {
+            languages = langs;
+        });
+
         repoLanguagesService.fetch("lol");
-        expect(repoLanguagesService.data.length).toEqual(1);
-        expect(repoLanguagesService.data[0].iconClass).toEqual("icon-nginx");
-        expect(repoLanguagesService.data[0].name).toEqual("Nginx");
-        expect(repoLanguagesService.data[0].size).toEqual(1234);
+        expect(languages[0].iconClass).toEqual("icon-nginx");
     }));
 
     it('should return icon-css (because it looks most like a generic script icon) when a language is unknown', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:GithubRepoLanguagesService) => {
@@ -133,18 +254,23 @@ describe('RepoLanguagesService', () => {
             })));
         });
 
+        repoLanguagesService.subscribe((langs:ILanguage[]) => {
+            languages = langs;
+        });
+
         repoLanguagesService.fetch("lol");
-        expect(repoLanguagesService.data.length).toEqual(1);
-        expect(repoLanguagesService.data[0].iconClass).toEqual("icon-css");
-        expect(repoLanguagesService.data[0].name).toEqual("Don Johnsonscript");
-        expect(repoLanguagesService.data[0].size).toEqual(9999999999);
+
+        expect(languages.length).toEqual(1);
+        expect(languages[0].iconClass).toEqual("icon-css");
+        expect(languages[0].name).toEqual("Don Johnsonscript");
+        expect(languages[0].percentage).toEqual(100);
     }));
 
     for (let language in mockData) {
         testMatch(language);
     }
 
-    it('should convert the github object to an array of name/iconClass/size', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:GithubRepoLanguagesService) => {
+    it('should convert the github object to an array of name/iconClass/percentage', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:GithubRepoLanguagesService) => {
         mockBackend.connections.subscribe((connection) => {
             connection.mockRespond(new Response(new ResponseOptions({
                 body: {
@@ -153,11 +279,16 @@ describe('RepoLanguagesService', () => {
             })));
         });
 
+        repoLanguagesService.subscribe((langs:ILanguage[]) => {
+            languages = langs;
+        });
+
         repoLanguagesService.fetch("lol");
-        expect(repoLanguagesService.data.length).toEqual(1);
-        expect(repoLanguagesService.data[0].iconClass).toEqual("icon-angular");
-        expect(repoLanguagesService.data[0].name).toEqual("TypeScript");
-        expect(repoLanguagesService.data[0].size).toEqual(1234);
+
+        expect(languages.length).toEqual(1);
+        expect(languages[0].iconClass).toEqual("icon-angular");
+        expect(languages[0].name).toEqual("TypeScript");
+        expect(languages[0].percentage).toEqual(100);
     }));
 
     it('should return "other" if no languages are specified', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:GithubRepoLanguagesService) => {
@@ -167,10 +298,14 @@ describe('RepoLanguagesService', () => {
             })));
         });
 
+        repoLanguagesService.subscribe((langs:ILanguage[]) => {
+            languages = langs;
+        });
+
         repoLanguagesService.fetch("lol");
-        expect(repoLanguagesService.data[0].iconClass).toEqual("jna-icon-file-alt");
-        expect(repoLanguagesService.data[0].name).toEqual("Other");
-        expect(repoLanguagesService.data[0].size).toEqual(undefined);
+        expect(languages[0].iconClass).toEqual("jna-icon-file-alt");
+        expect(languages[0].name).toEqual("Other");
+        expect(languages[0].percentage).toEqual(100);
     }));
 
     it('should notify subscribers with response', inject([GithubRepoLanguagesService, XHRBackend], (service:GithubRepoLanguagesService, mockBackend:MockBackend) => {
@@ -193,7 +328,7 @@ describe('RepoLanguagesService', () => {
 
         expect(response[0].name).toEqual("TypeScript");
         expect(response[0].iconClass).toEqual("icon-angular");
-        expect(response[0].size).toEqual(1234);
+        expect(response[0].percentage).toEqual(100);
     }));
 
     it('should log an error if the end point fails', inject([XHRBackend, GithubRepoLanguagesService, ErrorService], (mockBackend: MockBackend, repoLanguagesService: GithubRepoLanguagesService, errorService:ErrorService) => {

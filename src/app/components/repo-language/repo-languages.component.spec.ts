@@ -114,7 +114,7 @@ describe('RepoLanguagesComponent', () => {
         let language:ILanguage = {
             name: "lolcode",
             iconClass: "icon-lolcode",
-            size: 1234
+            percentage: 1234
         };
 
         fixture = TestBed.createComponent(TestComponent);

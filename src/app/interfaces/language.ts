@@ -1,7 +1,7 @@
 export interface ILanguage {
     name: string;
     iconClass: string;
-    size?: number;
+    percentage: number;
 };
 
 export interface ILanguageMeta {

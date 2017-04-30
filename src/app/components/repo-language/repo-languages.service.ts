@@ -51,6 +51,22 @@ export class GithubRepoLanguagesService extends GenericHttpService {
         return "icon-css";
     }
 
+    public getDisplayName(language:ILanguage) {
+        if(this._data.length <= 1) {
+            return language.name + " (100%)";
+        }
+
+        if(language.percentage === 100) {
+            return language.name + " (> 99%)";
+        }
+
+        if(language.percentage === 0) {
+            return language.name + " (< 1%)";
+        }
+
+        return language.name + " (" + language.percentage + "%)";
+    }
+
     private makeArray(languages:ILanguageMeta):ILanguage[] {
         let languageList:ILanguage[] = [],
             totalSize:number = 0,
@@ -64,21 +80,22 @@ export class GithubRepoLanguagesService extends GenericHttpService {
             pct = Math.round((languages[language]/totalSize) * 100);
 
             languageList.push({
-                name: language + " (" + (pct > 0 ? pct : "< 1") + "%)",
+                name: language,
                 iconClass: this.getIconClass(language),
-                size: languages[language]
+                percentage: pct
             });
         }
 
         if (languageList.length <= 0) {
             languageList.push({
                 name: "Other",
-                iconClass: "jna-icon-file-alt"
+                iconClass: "jna-icon-file-alt",
+                percentage: 100
             });
         }
 
         languageList.sort((lhs:ILanguage, rhs:ILanguage) => {
-           return rhs.size - lhs.size;
+           return rhs.percentage - lhs.percentage;
         });
 
         return languageList;
@@ -91,9 +108,5 @@ export class GithubRepoLanguagesService extends GenericHttpService {
         }, (error:Response) => {
             this.errorService.add("Failed to load languages.", error.status);
         });
-    }
-
-    public get data():ILanguage[] {
-        return this._data;
     }
 }

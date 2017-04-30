@@ -14,29 +14,45 @@ export class GithubEventsService extends GenericHttpService {
 
     private sanitizeEventMessages(data:IEvent[]):IEvent[] {
         for(let d in data) {
-            data[d].payload.ref = data[d].payload.ref.replace("refs/heads/", "");
+            if(data[d].payload && data[d].payload.ref) {
+                data[d].payload.ref = data[d].payload.ref.replace("refs/heads/", "");
+            }
         }
 
         return data;
     }
 
+    public getEventMessage(event:IEvent):string {
+        if(event.type === "PushEvent") {
+            return "pushed to " + event.payload.ref;
+        }
+
+        if(event.type === "CreateEvent") {
+            return "created " + event.payload.ref;
+        }
+
+        return "???";
+    }
+
+    public getCommitMessage(event:IEvent):string {
+        if(event.type === "PushEvent") {
+            return event.payload.commits[0].message
+        }
+
+        if(event.type === "CreateEvent") {
+            return "created branch";
+        }
+
+        return "";
+    }
+
     public fetch():void {
         this.load("/api/users/adamski52/events").subscribe((response:Response) => {
-            this.data = response.json();
+            this._data = this.sanitizeEventMessages(response.json());
 
-            this.data = this.sanitizeEventMessages(this.data);
-
-            this.subject.next(this.data);
+            this.subject.next(this._data);
         }, (error:Response) => {
             this.errorService.add("Failed to load events.", error.status);
         });
-    }
-
-    public get data():IEvent[] {
-        return this._data;
-    }
-
-    public set data(events:IEvent[]) {
-        this._data = events;
     }
 }

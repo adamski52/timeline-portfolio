@@ -4,6 +4,7 @@ import {TimelineSettingsService} from "./timeline-settings.service";
 import {IEvent} from "../../interfaces/event";
 import {IRepo} from "../../interfaces/repo";
 import {GithubReposService} from "./github-repos.service";
+import {GithubEventsService} from "./github-events.service";
 
 @Component({
     selector: 'jna-timeline-event',
@@ -23,35 +24,12 @@ export class TimelineEventComponent implements OnInit {
     public commitMessage:string;
 
     constructor(private settingsService:TimelineSettingsService,
-                private reposService:GithubReposService) {
+                private reposService:GithubReposService,
+                private eventsService:GithubEventsService) {
 
         this.settingsService.subscribe((settings:any) => {
             this.isHidden = !settings.githubEvents;
         });
-    }
-
-    private getEventMessage():string {
-        if(this.event.type === "PushEvent") {
-            return "pushed to " + this.event.payload.ref;
-        }
-
-        if(this.event.type === "CreateEvent") {
-            return "created " + this.event.payload.ref;
-        }
-
-        return "???";
-    }
-
-    private getCommitMessage():string {
-        if(this.event.type === "PushEvent") {
-            return this.event.payload.commits[0].message
-        }
-
-        if(this.event.type === "CreateEvent") {
-            return "created branch";
-        }
-
-        return "";
     }
 
     getIconClass() {
@@ -75,7 +53,7 @@ export class TimelineEventComponent implements OnInit {
         });
 
 
-        this.eventMessage = this.getEventMessage();
-        this.commitMessage = this.getCommitMessage();
+        this.eventMessage = this.eventsService.getEventMessage(this.event);
+        this.commitMessage = this.eventsService.getCommitMessage(this.event);
     }
 }

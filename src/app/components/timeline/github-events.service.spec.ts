@@ -4,8 +4,12 @@ import {HttpModule, XHRBackend, Response, ResponseOptions} from '@angular/http';
 
 import {GithubEventsService} from './github-events.service';
 import {ErrorService} from "../../services/error.service";
+import {IEvent} from "../../interfaces/event";
 
 describe('GithubEventsService', () => {
+    let mockData:IEvent[] = require("../../../../mocks/events.json"),
+        response:IEvent[];
+
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
@@ -22,25 +26,68 @@ describe('GithubEventsService', () => {
         });
     });
 
-    it('should notify subscribers with response', inject([GithubEventsService, XHRBackend], (service:GithubEventsService, mockBackend:MockBackend) => {
-        let response,
-            data = {
-                data: "hello"
-            };
-
+    it('should remove refs/heads/ from event message', inject([GithubEventsService, XHRBackend], (service:GithubEventsService, mockBackend:MockBackend) => {
         mockBackend.connections.subscribe((connection) => {
             connection.mockRespond(new Response(new ResponseOptions({
-                body: data
+                body: mockData
             })));
         });
 
-        service.subscribe((r:any) => {
-            response = r
+        service.subscribe((r:IEvent[]) => {
+            response = r;
         });
 
         service.fetch();
 
-        expect(response).toBe(data);
+        expect(service.getEventMessage(response[2])).toBe("pushed to master");
+    }));
+
+    it('should remove refs/heads/ from commit message', inject([GithubEventsService, XHRBackend], (service:GithubEventsService, mockBackend:MockBackend) => {
+        mockBackend.connections.subscribe((connection) => {
+            connection.mockRespond(new Response(new ResponseOptions({
+                body: mockData
+            })));
+        });
+
+        service.subscribe((r:IEvent[]) => {
+            response = r;
+        });
+
+        service.fetch();
+
+        expect(service.getEventMessage(response[2])).toBe("pushed to master");
+    }));
+
+    it('should use ref name for create events', inject([GithubEventsService, XHRBackend], (service:GithubEventsService, mockBackend:MockBackend) => {
+        mockBackend.connections.subscribe((connection) => {
+            connection.mockRespond(new Response(new ResponseOptions({
+                body: mockData
+            })));
+        });
+
+        service.subscribe((r:IEvent[]) => {
+            response = r;
+        });
+
+        service.fetch();
+
+        expect(service.getEventMessage(response[4])).toBe("created refactor/service-streamlining");
+    }));
+
+    it('should notify subscribers with response', inject([GithubEventsService, XHRBackend], (service:GithubEventsService, mockBackend:MockBackend) => {
+        mockBackend.connections.subscribe((connection) => {
+            connection.mockRespond(new Response(new ResponseOptions({
+                body: mockData
+            })));
+        });
+
+        service.subscribe((r:IEvent[]) => {
+            response = r;
+        });
+
+        service.fetch();
+
+        expect(response).toBe(mockData);
     }));
 
     it('should log an error if the end point fails', inject([GithubEventsService, XHRBackend, ErrorService], (service:GithubEventsService, mockBackend:MockBackend, errorService:ErrorService) => {
@@ -54,7 +101,7 @@ describe('GithubEventsService', () => {
 
         expect(errorService.getAll().length).toEqual(0);
 
-        service.subscribe((r) => {
+        service.subscribe((r:IEvent[]) => {
             response = r;
         });
 
