@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {GenericHttpService} from "../../services/generic-http.service";
+import {GenericHttpService} from "../../../services/generic-http.service";
 import {Http, Response} from "@angular/http";
-import {ErrorService} from "../../services/error.service";
-import {IBlog} from "../../interfaces/blog";
+import {ErrorService} from "../../../services/error.service";
+import {IBlog} from "../../../interfaces/blog";
 
 @Injectable()
 export class TimelineBlogService extends GenericHttpService {

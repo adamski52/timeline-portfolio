@@ -1,16 +1,15 @@
 import {async, ComponentFixture, TestBed, inject} from '@angular/core/testing';
 
-import {TimelineRepoComponent} from './timeline-repo.component';
-import {TimelineTitleService} from "./timeline-title.service";
+import {TimelineRepoComponent} from './timeline-repo-item.component';
+import {TimelineTitleService} from "../timeline-item-title/timeline-item-title.service";
 import {Component} from "@angular/core";
-import {RepoLanguagesComponent} from "../repo-language/repo-languages.component";
-import {RepoThumbnailComponent} from "../repo-thumbnail/repo-thumbnail.component";
+import {TimelineRepoLanguagesComponent} from "../timeline-repo-languages/timeline-repo-languages.component";
 import {HttpModule, XHRBackend} from '@angular/http';
 import {MockBackend} from '@angular/http/testing';
-import {ErrorService} from "../../services/error.service";
-import {TickerService} from "../../services/ticker.service";
-import {TimelineDateComponent} from "./timeline-date.component";
-import {TimelineSettingsService} from "./timeline-settings.service";
+import {ErrorService} from "../../../services/error.service";
+import {TickerService} from "../../../services/ticker.service";
+import {TimelineDateComponent} from "../timeline-date/timeline-date.component";
+import {TimelineSettingsService} from "../timeline-settings/timeline-settings.service";
 
 @Component({
     selector: 'jna-test-component',
@@ -33,8 +32,7 @@ describe('TimelineRepoComponent', () => {
         TestBed.configureTestingModule({
             declarations: [
                 TestComponent,
-                RepoLanguagesComponent,
-                RepoThumbnailComponent,
+                TimelineRepoLanguagesComponent,
                 TimelineRepoComponent,
                 TimelineDateComponent
             ],

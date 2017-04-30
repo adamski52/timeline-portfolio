@@ -2,8 +2,8 @@ import {TestBed, inject} from '@angular/core/testing';
 import {MockBackend} from '@angular/http/testing';
 import {HttpModule, XHRBackend, Response, ResponseOptions} from '@angular/http';
 
-import {ErrorService} from "../../services/error.service";
-import {TimelineBlogService} from "./timeline-blog.service";
+import {ErrorService} from "../../../services/error.service";
+import {TimelineBlogService} from "./timeline-blog-item.service";
 
 describe('TimelineBlogService', () => {
     let response,

@@ -1,21 +1,21 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {GithubRepoLanguagesService} from "./repo-languages.service";
-import {ILanguage} from "../../interfaces/language";
-import {TimelineTitleService} from "../timeline/timeline-title.service";
+import {TimelineRepoLanguagesService} from "./timeline-repo-languages.service";
+import {ILanguage} from "../../../interfaces/language";
+import {TimelineTitleService} from "../timeline-item-title/timeline-item-title.service";
 
 @Component({
     selector: 'jna-repo-languages',
-    templateUrl: 'repo-languages.component.html',
+    templateUrl: './timeline-repo-languages.component.html',
     providers: [
-        GithubRepoLanguagesService
+        TimelineRepoLanguagesService
     ]
 })
-export class RepoLanguagesComponent implements OnInit {
+export class TimelineRepoLanguagesComponent implements OnInit {
     @Input("repo") repo:string;
 
     public languages:ILanguage[];
 
-    constructor(private titleService:TimelineTitleService, private languageService:GithubRepoLanguagesService) {
+    constructor(private titleService:TimelineTitleService, private languageService:TimelineRepoLanguagesService) {
         this.languageService.subscribe((languages:ILanguage[]) => {
             this.languages = languages;
         });

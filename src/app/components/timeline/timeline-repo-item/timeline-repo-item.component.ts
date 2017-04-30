@@ -1,11 +1,11 @@
 import {Component, Input, OnInit, HostBinding} from '@angular/core';
-import {IRepo} from "../../interfaces/repo";
-import {TimelineTitleService} from "./timeline-title.service";
-import {TimelineSettingsService} from "./timeline-settings.service";
+import {IRepo} from "../../../interfaces/repo";
+import {TimelineTitleService} from "../timeline-item-title/timeline-item-title.service";
+import {TimelineSettingsService} from "../timeline-settings/timeline-settings.service";
 
 @Component({
     selector: 'jna-timeline-repo',
-    templateUrl: './timeline-repo.component.html',
+    templateUrl: './timeline-repo-item.component.html',
     providers: [
         TimelineTitleService
     ]

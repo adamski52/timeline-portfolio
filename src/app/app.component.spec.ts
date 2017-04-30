@@ -2,21 +2,20 @@ import {TestBed, async} from '@angular/core/testing';
 
 import {AppComponent} from './app.component';
 import {TimelineComponent} from "./components/timeline/timeline.component";
-import {GithubReposService} from "./components/timeline/github-repos.service";
-import {GithubEventsService} from "./components/timeline/github-events.service";
+import {TimelineRepoService} from "./components/timeline/timeline-repo-item/timeline-repo-item.service";
+import {TimelineEventService} from "./components/timeline/timeline-event-item/timeline-event-item.service";
 import {ErrorService} from "./services/error.service";
 import {HttpModule, XHRBackend} from '@angular/http';
 import {MockBackend} from '@angular/http/testing';
-import {RepoLanguagesComponent} from "./components/repo-language/repo-languages.component";
-import {RepoThumbnailComponent} from "./components/repo-thumbnail/repo-thumbnail.component";
-import {TimelineRepoComponent} from "./components/timeline/timeline-repo.component";
-import {TimelineSettingsComponent} from "./components/timeline/timeline-settings.component";
-import {TimelineSettingsService} from "./components/timeline/timeline-settings.service";
+import {TimelineRepoLanguagesComponent} from "./components/timeline/timeline-repo-languages/timeline-repo-languages.component";
+import {TimelineRepoComponent} from "./components/timeline/timeline-repo-item/timeline-repo-item.component";
+import {TimelineSettingsComponent} from "./components/timeline/timeline-settings/timeline-settings.component";
+import {TimelineSettingsService} from "./components/timeline/timeline-settings/timeline-settings.service";
 import {TickerService} from "./services/ticker.service";
-import {TimelineDateComponent} from "./components/timeline/timeline-date.component";
-import {TimelineEventComponent} from "./components/timeline/timeline-event.component";
-import {TimelineBlogComponent} from "./components/timeline/timeline-blog.component";
-import {TimelineBlogService} from "./components/timeline/timeline-blog.service";
+import {TimelineDateComponent} from "./components/timeline/timeline-date/timeline-date.component";
+import {TimelineEventComponent} from "./components/timeline/timeline-event-item/timeline-event-item.component";
+import {TimelineBlogComponent} from "./components/timeline/timeline-blog-item/timeline-blog-item.component";
+import {TimelineBlogService} from "./components/timeline/timeline-blog-item/timeline-blog-item.service";
 
 describe('AppComponent', () => {
     beforeEach(async(() => {
@@ -28,19 +27,19 @@ describe('AppComponent', () => {
                 TimelineEventComponent,
                 TimelineBlogComponent,
                 TimelineSettingsComponent,
-                RepoLanguagesComponent,
-                RepoThumbnailComponent,
+                TimelineRepoLanguagesComponent,
                 TimelineDateComponent
             ],
             providers: [
-                GithubReposService,
-                GithubEventsService,
+                TimelineRepoService,
+                TimelineEventService,
                 TimelineSettingsService,
                 TimelineBlogService,
                 TickerService,
                 ErrorService,
                 {
-                    provide: XHRBackend, useClass: MockBackend
+                    provide: XHRBackend,
+                    useClass: MockBackend
                 }
             ],
             imports: [

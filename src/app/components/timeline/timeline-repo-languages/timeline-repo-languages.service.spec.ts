@@ -1,11 +1,11 @@
 /* tslint:disable:no-unused-variable */
 
 import {TestBed, inject} from '@angular/core/testing';
-import {GithubRepoLanguagesService} from "./repo-languages.service";
+import {TimelineRepoLanguagesService} from "./timeline-repo-languages.service";
 import {MockBackend} from '@angular/http/testing';
 import {XHRBackend, Response, ResponseOptions, HttpModule} from '@angular/http';
-import {ErrorService} from "../../services/error.service";
-import {ILanguage} from "../../interfaces/language";
+import {ErrorService} from "../../../services/error.service";
+import {ILanguage} from "../../../interfaces/language";
 
 describe('RepoLanguagesService', () => {
     let languageMap = {
@@ -74,7 +74,7 @@ describe('RepoLanguagesService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
-                GithubRepoLanguagesService,
+                TimelineRepoLanguagesService,
                 ErrorService,
                 {
                     provide: XHRBackend,
@@ -94,7 +94,7 @@ describe('RepoLanguagesService', () => {
 
         bodyObj[language] = mockData[language];
 
-        it('should return "' + iconClass + "' for " + language, inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:GithubRepoLanguagesService) => {
+        it('should return "' + iconClass + "' for " + language, inject([XHRBackend, TimelineRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:TimelineRepoLanguagesService) => {
             mockBackend.connections.subscribe((connection) => {
                 connection.mockRespond(new Response(new ResponseOptions({
                     body: bodyObj
@@ -109,7 +109,7 @@ describe('RepoLanguagesService', () => {
         }));
     }
 
-    it('should append the percentage for each language in the set', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:GithubRepoLanguagesService) => {
+    it('should append the percentage for each language in the set', inject([XHRBackend, TimelineRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:TimelineRepoLanguagesService) => {
         mockBackend.connections.subscribe((connection) => {
             connection.mockRespond(new Response(new ResponseOptions({
                 body: {
@@ -131,7 +131,7 @@ describe('RepoLanguagesService', () => {
         expect(languages[2].name).toEqual("XML");
     }));
 
-    it('should sort languages by size in descending order', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:GithubRepoLanguagesService) => {
+    it('should sort languages by size in descending order', inject([XHRBackend, TimelineRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:TimelineRepoLanguagesService) => {
         mockBackend.connections.subscribe((connection) => {
             connection.mockRespond(new Response(new ResponseOptions({
                 body: {
@@ -152,7 +152,7 @@ describe('RepoLanguagesService', () => {
         expect(languages[2].name).toEqual("XML");
     }));
 
-    it('should return display name as < 1% instead of 0%', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:GithubRepoLanguagesService) => {
+    it('should return display name as < 1% instead of 0%', inject([XHRBackend, TimelineRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:TimelineRepoLanguagesService) => {
         mockBackend.connections.subscribe((connection) => {
             connection.mockRespond(new Response(new ResponseOptions({
                 body: {
@@ -171,7 +171,7 @@ describe('RepoLanguagesService', () => {
         expect(repoLanguagesService.getDisplayName(languages[2])).toEqual("Go (< 1%)");
     }));
 
-    it('should say > 99% instead of 100%, when there is more than 1 language', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:GithubRepoLanguagesService) => {
+    it('should say > 99% instead of 100%, when there is more than 1 language', inject([XHRBackend, TimelineRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:TimelineRepoLanguagesService) => {
         mockBackend.connections.subscribe((connection) => {
             connection.mockRespond(new Response(new ResponseOptions({
                 body: {
@@ -190,7 +190,7 @@ describe('RepoLanguagesService', () => {
         expect(repoLanguagesService.getDisplayName(languages[0])).toEqual("Nginx (> 99%)");
     }));
 
-    it('should say 100%, when there is only 1 language', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:GithubRepoLanguagesService) => {
+    it('should say 100%, when there is only 1 language', inject([XHRBackend, TimelineRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:TimelineRepoLanguagesService) => {
         mockBackend.connections.subscribe((connection) => {
             connection.mockRespond(new Response(new ResponseOptions({
                 body: {
@@ -208,7 +208,7 @@ describe('RepoLanguagesService', () => {
         expect(repoLanguagesService.getDisplayName(languages[0])).toEqual("Nginx (100%)");
     }));
 
-    it('should round to nearest percentage', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:GithubRepoLanguagesService) => {
+    it('should round to nearest percentage', inject([XHRBackend, TimelineRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:TimelineRepoLanguagesService) => {
         mockBackend.connections.subscribe((connection) => {
             connection.mockRespond(new Response(new ResponseOptions({
                 body: {
@@ -228,7 +228,7 @@ describe('RepoLanguagesService', () => {
         expect(repoLanguagesService.getDisplayName(languages[1])).toEqual("XML (50%)");
     }));
 
-    it('should return an icon class, prefixed with "icon-"', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:GithubRepoLanguagesService) => {
+    it('should return an icon class, prefixed with "icon-"', inject([XHRBackend, TimelineRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:TimelineRepoLanguagesService) => {
         mockBackend.connections.subscribe((connection) => {
             connection.mockRespond(new Response(new ResponseOptions({
                 body: {
@@ -245,7 +245,7 @@ describe('RepoLanguagesService', () => {
         expect(languages[0].iconClass).toEqual("icon-nginx");
     }));
 
-    it('should return icon-css (because it looks most like a generic script icon) when a language is unknown', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:GithubRepoLanguagesService) => {
+    it('should return icon-css (because it looks most like a generic script icon) when a language is unknown', inject([XHRBackend, TimelineRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:TimelineRepoLanguagesService) => {
         mockBackend.connections.subscribe((connection) => {
             connection.mockRespond(new Response(new ResponseOptions({
                 body: {
@@ -270,7 +270,7 @@ describe('RepoLanguagesService', () => {
         testMatch(language);
     }
 
-    it('should convert the github object to an array of name/iconClass/percentage', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:GithubRepoLanguagesService) => {
+    it('should convert the github object to an array of name/iconClass/percentage', inject([XHRBackend, TimelineRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:TimelineRepoLanguagesService) => {
         mockBackend.connections.subscribe((connection) => {
             connection.mockRespond(new Response(new ResponseOptions({
                 body: {
@@ -291,7 +291,7 @@ describe('RepoLanguagesService', () => {
         expect(languages[0].percentage).toEqual(100);
     }));
 
-    it('should return "other" if no languages are specified', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:GithubRepoLanguagesService) => {
+    it('should return "other" if no languages are specified', inject([XHRBackend, TimelineRepoLanguagesService], (mockBackend:MockBackend, repoLanguagesService:TimelineRepoLanguagesService) => {
         mockBackend.connections.subscribe((connection) => {
             connection.mockRespond(new Response(new ResponseOptions({
                 body: {}
@@ -308,7 +308,7 @@ describe('RepoLanguagesService', () => {
         expect(languages[0].percentage).toEqual(100);
     }));
 
-    it('should notify subscribers with response', inject([GithubRepoLanguagesService, XHRBackend], (service:GithubRepoLanguagesService, mockBackend:MockBackend) => {
+    it('should notify subscribers with response', inject([TimelineRepoLanguagesService, XHRBackend], (service:TimelineRepoLanguagesService, mockBackend:MockBackend) => {
         let response,
             data = {
                 "TypeScript": 1234
@@ -331,7 +331,7 @@ describe('RepoLanguagesService', () => {
         expect(response[0].percentage).toEqual(100);
     }));
 
-    it('should log an error if the end point fails', inject([XHRBackend, GithubRepoLanguagesService, ErrorService], (mockBackend: MockBackend, repoLanguagesService: GithubRepoLanguagesService, errorService:ErrorService) => {
+    it('should log an error if the end point fails', inject([XHRBackend, TimelineRepoLanguagesService, ErrorService], (mockBackend: MockBackend, repoLanguagesService: TimelineRepoLanguagesService, errorService:ErrorService) => {
         let response;
 
         mockBackend.connections.subscribe((connection) => {

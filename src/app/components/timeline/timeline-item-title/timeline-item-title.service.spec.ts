@@ -1,7 +1,7 @@
 import {TestBed, inject} from '@angular/core/testing';
-import {TimelineTitleService} from "./timeline-title.service";
-import {TickerService} from "../../services/ticker.service";
+import {TimelineTitleService} from "./timeline-item-title.service";
 import {Injectable} from "@angular/core";
+import {TickerService} from "../../../services/ticker.service";
 
 @Injectable()
 class MockTickerService {

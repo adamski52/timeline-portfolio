@@ -1,10 +1,10 @@
 import {Component, Input, OnInit, HostBinding} from '@angular/core';
-import {IBlog} from "../../interfaces/blog";
-import {TimelineSettingsService} from "./timeline-settings.service";
+import {IBlog} from "../../../interfaces/blog";
+import {TimelineSettingsService} from "../timeline-settings/timeline-settings.service";
 
 @Component({
     selector: 'jna-timeline-blog',
-    templateUrl: './timeline-blog.component.html'
+    templateUrl: './timeline-blog-item.component.html'
 })
 export class TimelineBlogComponent implements OnInit {
     @HostBinding("class.is-hidden") isHidden:boolean = false;

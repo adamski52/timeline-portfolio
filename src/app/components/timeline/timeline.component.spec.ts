@@ -1,21 +1,19 @@
 import {async, ComponentFixture, TestBed, inject} from '@angular/core/testing';
 
 import {TimelineComponent} from './timeline.component';
-import {GithubReposService} from "./github-repos.service";
-import {GithubEventsService} from "./github-events.service";
+import {TimelineRepoService} from "./timeline-repo-item/timeline-repo-item.service";
+import {TimelineEventService} from "./timeline-event-item/timeline-event-item.service";
 import {HttpModule, XHRBackend, Response, ResponseOptions} from '@angular/http';
 import {ErrorService} from "../../services/error.service";
 import {MockBackend} from '@angular/http/testing';
-import {RepoLanguagesComponent} from "../repo-language/repo-languages.component";
-import {RepoThumbnailComponent} from "../repo-thumbnail/repo-thumbnail.component";
-import {TimelineRepoComponent} from "./timeline-repo.component";
+import {TimelineRepoLanguagesComponent} from "./timeline-repo-languages/timeline-repo-languages.component";
+import {TimelineRepoComponent} from "./timeline-repo-item/timeline-repo-item.component";
 import {TickerService} from "../../services/ticker.service";
-import {TimelineDateComponent} from "./timeline-date.component";
-import {TimelineSettingsService} from "./timeline-settings.service";
-import {TimelineBlogComponent} from "./timeline-blog.component";
-import {TimelineBlogService} from "./timeline-blog.service";
-import {TimelineEventComponent} from "./timeline-event.component";
-import {ISettings} from "../../interfaces/settings";
+import {TimelineDateComponent} from "./timeline-date/timeline-date.component";
+import {TimelineSettingsService} from "./timeline-settings/timeline-settings.service";
+import {TimelineBlogComponent} from "./timeline-blog-item/timeline-blog-item.component";
+import {TimelineBlogService} from "./timeline-blog-item/timeline-blog-item.service";
+import {TimelineEventComponent} from "./timeline-event-item/timeline-event-item.component";
 import {IBlog} from "../../interfaces/blog";
 import {IRepo} from "../../interfaces/repo";
 import {IEvent} from "../../interfaces/event";
@@ -34,15 +32,14 @@ describe('TimelineComponent', () => {
             declarations: [
                 TimelineComponent,
                 TimelineRepoComponent,
-                RepoLanguagesComponent,
-                RepoThumbnailComponent,
+                TimelineRepoLanguagesComponent,
                 TimelineDateComponent,
                 TimelineBlogComponent,
                 TimelineEventComponent
             ],
             providers: [
-                GithubReposService,
-                GithubEventsService,
+                TimelineRepoService,
+                TimelineEventService,
                 TimelineSettingsService,
                 TimelineBlogService,
                 TickerService,
@@ -58,14 +55,14 @@ describe('TimelineComponent', () => {
         }).compileComponents();
     }));
 
-    it('should invoke the repos service', inject([GithubReposService], (reposService:GithubReposService) => {
+    it('should invoke the repos service', inject([TimelineRepoService], (reposService:TimelineRepoService) => {
         spyOn(reposService, "fetch");
         fixture = TestBed.createComponent(TimelineComponent);
         fixture.detectChanges();
         expect(reposService.fetch).toHaveBeenCalled();
     }));
 
-    it('should invoke the events service', inject([GithubEventsService], (eventsService:GithubEventsService) => {
+    it('should invoke the events service', inject([TimelineEventService], (eventsService:TimelineEventService) => {
         spyOn(eventsService, "fetch");
         fixture = TestBed.createComponent(TimelineComponent);
         fixture.detectChanges();
@@ -79,7 +76,7 @@ describe('TimelineComponent', () => {
         expect(blogService.fetch).toHaveBeenCalled();
     }));
 
-    it('should respond to the repos service', inject([GithubEventsService, GithubReposService, TimelineBlogService, XHRBackend], (eventsService:GithubEventsService, reposService:GithubReposService, blogService:TimelineBlogService, mockBackend:MockBackend) => {
+    it('should respond to the repos service', inject([TimelineEventService, TimelineRepoService, TimelineBlogService, XHRBackend], (eventsService:TimelineEventService, reposService:TimelineRepoService, blogService:TimelineBlogService, mockBackend:MockBackend) => {
         spyOn(eventsService, "fetch");
         spyOn(blogService, "fetch");
         mockBackend.connections.subscribe((connection) => {
@@ -99,7 +96,7 @@ describe('TimelineComponent', () => {
     }));
 
 
-    it('should respond to the events service', inject([GithubEventsService, GithubReposService, TimelineBlogService, XHRBackend], (eventsService:GithubEventsService, reposService:GithubReposService, blogService:TimelineBlogService, mockBackend:MockBackend) => {
+    it('should respond to the events service', inject([TimelineEventService, TimelineRepoService, TimelineBlogService, XHRBackend], (eventsService:TimelineEventService, reposService:TimelineRepoService, blogService:TimelineBlogService, mockBackend:MockBackend) => {
         spyOn(reposService, "fetch");
         spyOn(blogService, "fetch");
         mockBackend.connections.subscribe((connection) => {
@@ -118,7 +115,7 @@ describe('TimelineComponent', () => {
         expect(component.events).toBe(eventMock);
     }));
 
-    it('should respond to the blogs service', inject([GithubEventsService, GithubReposService, TimelineBlogService, XHRBackend], (eventsService:GithubEventsService, reposService:GithubReposService, blogService:TimelineBlogService, mockBackend:MockBackend) => {
+    it('should respond to the blogs service', inject([TimelineEventService, TimelineRepoService, TimelineBlogService, XHRBackend], (eventsService:TimelineEventService, reposService:TimelineRepoService, blogService:TimelineBlogService, mockBackend:MockBackend) => {
         spyOn(eventsService, "fetch");
         spyOn(reposService, "fetch");
         mockBackend.connections.subscribe((connection) => {
@@ -137,7 +134,7 @@ describe('TimelineComponent', () => {
         expect(component.blogs).toBe(blogMock);
     }));
 
-    it('should add repos to items based on settings', inject([GithubEventsService, GithubReposService, TimelineBlogService, TimelineSettingsService], (eventsService:GithubEventsService, reposService:GithubReposService, blogService:TimelineBlogService, settingsService:TimelineSettingsService) => {
+    it('should add repos to items based on timeline-settings', inject([TimelineEventService, TimelineRepoService, TimelineBlogService, TimelineSettingsService], (eventsService:TimelineEventService, reposService:TimelineRepoService, blogService:TimelineBlogService, settingsService:TimelineSettingsService) => {
         fixture = TestBed.createComponent(TimelineComponent);
         component = fixture.componentInstance;
 
@@ -155,7 +152,7 @@ describe('TimelineComponent', () => {
         expect(component.items.length).toBe(component.repos.length);
     }));
 
-    it('should add events to items based on settings', inject([GithubEventsService, GithubReposService, TimelineBlogService, TimelineSettingsService], (eventsService:GithubEventsService, reposService:GithubReposService, blogService:TimelineBlogService, settingsService:TimelineSettingsService) => {
+    it('should add events to items based on timeline-settings', inject([TimelineEventService, TimelineRepoService, TimelineBlogService, TimelineSettingsService], (eventsService:TimelineEventService, reposService:TimelineRepoService, blogService:TimelineBlogService, settingsService:TimelineSettingsService) => {
         fixture = TestBed.createComponent(TimelineComponent);
         component = fixture.componentInstance;
 
@@ -173,7 +170,7 @@ describe('TimelineComponent', () => {
         expect(component.items.length).toBe(component.events.length);
     }));
 
-    it('should add blogs to items based on settings', inject([GithubEventsService, GithubReposService, TimelineBlogService, TimelineSettingsService], (eventsService:GithubEventsService, reposService:GithubReposService, blogService:TimelineBlogService, settingsService:TimelineSettingsService) => {
+    it('should add blogs to items based on timeline-settings', inject([TimelineEventService, TimelineRepoService, TimelineBlogService, TimelineSettingsService], (eventsService:TimelineEventService, reposService:TimelineRepoService, blogService:TimelineBlogService, settingsService:TimelineSettingsService) => {
         fixture = TestBed.createComponent(TimelineComponent);
         component = fixture.componentInstance;
 

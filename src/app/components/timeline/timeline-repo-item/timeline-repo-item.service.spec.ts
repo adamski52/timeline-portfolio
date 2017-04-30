@@ -1,20 +1,23 @@
-/* tslint:disable:no-unused-variable */
-
 import {TestBed, inject} from '@angular/core/testing';
-import {GithubRepoThumbnailService} from "./repo-thumbnail.service";
 import {MockBackend} from '@angular/http/testing';
-import {XHRBackend, Response, ResponseOptions, HttpModule} from '@angular/http';
-import {ErrorService} from "../../services/error.service";
+import {HttpModule, XHRBackend, Response, ResponseOptions} from '@angular/http';
 
-describe('RepoLanguagesService', () => {
+import {TimelineRepoService} from './timeline-repo-item.service';
+import {ErrorService} from "../../../services/error.service";
+
+describe('TimelineRepoService', () => {
+    let response,
+        data = {
+            data: "hello"
+        };
+
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
-                GithubRepoThumbnailService,
                 ErrorService,
+                TimelineRepoService,
                 {
-                    provide: XHRBackend,
-                    useClass: MockBackend
+                    provide: XHRBackend, useClass: MockBackend
                 }
             ],
             imports: [
@@ -23,12 +26,7 @@ describe('RepoLanguagesService', () => {
         });
     });
 
-    it('should notify subscribers with response', inject([GithubRepoThumbnailService, XHRBackend], (service:GithubRepoThumbnailService, mockBackend:MockBackend) => {
-        let response,
-            data = {
-                data: "hello"
-            };
-
+    it('should notify subscribers with response', inject([TimelineRepoService, XHRBackend], (service:TimelineRepoService, mockBackend:MockBackend) => {
         mockBackend.connections.subscribe((connection) => {
             connection.mockRespond(new Response(new ResponseOptions({
                 body: data
@@ -39,14 +37,12 @@ describe('RepoLanguagesService', () => {
             response = r
         });
 
-        service.fetch("fake");
+        service.fetch();
 
         expect(response).toBe(data);
     }));
 
-    it('should log an error if the end point fails', inject([XHRBackend, GithubRepoThumbnailService, ErrorService], (mockBackend: MockBackend, service: GithubRepoThumbnailService, errorService:ErrorService) => {
-        let response;
-
+    it('should log an error if the end point fails', inject([TimelineRepoService, XHRBackend, ErrorService], (service:TimelineRepoService, mockBackend:MockBackend, errorService:ErrorService) => {
         mockBackend.connections.subscribe((connection) => {
             connection.mockError(new Response(new ResponseOptions({
                 status: 400
@@ -59,7 +55,7 @@ describe('RepoLanguagesService', () => {
             response = r;
         });
 
-        service.fetch("fake");
+        service.fetch();
 
         expect(errorService.getAll().length).toEqual(1);
     }));

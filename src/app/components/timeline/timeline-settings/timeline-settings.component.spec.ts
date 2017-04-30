@@ -2,7 +2,7 @@ import {async, ComponentFixture, inject, TestBed} from '@angular/core/testing';
 
 import {TimelineSettingsService} from "./timeline-settings.service";
 import {TimelineSettingsComponent} from "./timeline-settings.component";
-import {TickerService} from "../../services/ticker.service";
+import {TickerService} from "../../../services/ticker.service";
 import {Injectable} from "@angular/core";
 
 @Injectable()
@@ -45,7 +45,7 @@ describe('TimelineSettingsComponent', () => {
         fixture.detectChanges();
     }));
 
-    it('should subscribe and react to the settings service', inject([TimelineSettingsService], (settingsService:TimelineSettingsService) => {
+    it('should subscribe and react to the timeline-settings service', inject([TimelineSettingsService], (settingsService:TimelineSettingsService) => {
         expect(component.settings.githubEvents).toEqual(true);
 
         settingsService.toggleSetting("githubEvents");

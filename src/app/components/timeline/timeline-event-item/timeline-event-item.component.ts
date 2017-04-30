@@ -1,14 +1,14 @@
 import {Component, Input, OnInit, HostBinding} from '@angular/core';
-import {TimelineTitleService} from "./timeline-title.service";
-import {TimelineSettingsService} from "./timeline-settings.service";
-import {IEvent} from "../../interfaces/event";
-import {IRepo} from "../../interfaces/repo";
-import {GithubReposService} from "./github-repos.service";
-import {GithubEventsService} from "./github-events.service";
+import {TimelineTitleService} from "../timeline-item-title/timeline-item-title.service";
+import {TimelineSettingsService} from "../timeline-settings/timeline-settings.service";
+import {IEvent} from "../../../interfaces/event";
+import {IRepo} from "../../../interfaces/repo";
+import {TimelineRepoService} from "../timeline-repo-item/timeline-repo-item.service";
+import {TimelineEventService} from "./timeline-event-item.service";
 
 @Component({
     selector: 'jna-timeline-event',
-    templateUrl: './timeline-event.component.html',
+    templateUrl: './timeline-event-item.component.html',
     providers: [
         TimelineTitleService
     ]
@@ -24,8 +24,8 @@ export class TimelineEventComponent implements OnInit {
     public commitMessage:string;
 
     constructor(private settingsService:TimelineSettingsService,
-                private reposService:GithubReposService,
-                private eventsService:GithubEventsService) {
+                private reposService:TimelineRepoService,
+                private eventsService:TimelineEventService) {
 
         this.settingsService.subscribe((settings:any) => {
             this.isHidden = !settings.githubEvents;

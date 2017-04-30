@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable, Observer, Subscription} from "rxjs";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
-import {ISettings} from "../../interfaces/settings";
+import {ISettings} from "../../../interfaces/settings";
 
 @Injectable()
 export class TimelineSettingsService {

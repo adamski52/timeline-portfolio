@@ -4,32 +4,32 @@ import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 
 import {AppComponent} from './app.component';
-import {TimelineComponent} from './components/timeline/timeline.component';
+import {TimelineComponent} from "./components/timeline/timeline.component";
+import {TimelineBlogComponent} from "./components/timeline/timeline-blog-item/timeline-blog-item.component";
+import {TimelineBlogService} from "./components/timeline/timeline-blog-item/timeline-blog-item.service";
+import {TimelineDateComponent} from "./components/timeline/timeline-date/timeline-date.component";
+import {TimelineEventComponent} from "./components/timeline/timeline-event-item/timeline-event-item.component";
+import {TimelineEventService} from "./components/timeline/timeline-event-item/timeline-event-item.service";
+import {TimelineTitleService} from "./components/timeline/timeline-item-title/timeline-item-title.service";
+import {TimelineRepoComponent} from "./components/timeline/timeline-repo-item/timeline-repo-item.component";
+import {TimelineRepoService} from "./components/timeline/timeline-repo-item/timeline-repo-item.service";
+import {TimelineRepoLanguagesComponent} from "./components/timeline/timeline-repo-languages/timeline-repo-languages.component";
+import {TimelineRepoLanguagesService} from "./components/timeline/timeline-repo-languages/timeline-repo-languages.service";
+import {TimelineSettingsComponent} from "./components/timeline/timeline-settings/timeline-settings.component";
+import {TimelineSettingsService} from "./components/timeline/timeline-settings/timeline-settings.service";
 import {ErrorService} from "./services/error.service";
-import {RepoLanguagesComponent} from "./components/repo-language/repo-languages.component";
-import {RepoThumbnailComponent} from "./components/repo-thumbnail/repo-thumbnail.component";
-import {GithubReposService} from "./components/timeline/github-repos.service";
-import {GithubEventsService} from "./components/timeline/github-events.service";
-import {TimelineRepoComponent} from "./components/timeline/timeline-repo.component";
 import {TickerService} from "./services/ticker.service";
-import {TimelineSettingsService} from "./components/timeline/timeline-settings.service";
-import {TimelineSettingsComponent} from "./components/timeline/timeline-settings.component";
-import {TimelineDateComponent} from "./components/timeline/timeline-date.component";
-import {TimelineEventComponent} from "./components/timeline/timeline-event.component";
-import {TimelineBlogService} from "./components/timeline/timeline-blog.service";
-import {TimelineBlogComponent} from "./components/timeline/timeline-blog.component";
 
 @NgModule({
     declarations: [
         AppComponent,
         TimelineComponent,
-        TimelineRepoComponent,
-        TimelineEventComponent,
         TimelineBlogComponent,
-        RepoLanguagesComponent,
-        RepoThumbnailComponent,
-        TimelineSettingsComponent,
-        TimelineDateComponent
+        TimelineDateComponent,
+        TimelineEventComponent,
+        TimelineRepoComponent,
+        TimelineRepoLanguagesComponent,
+        TimelineSettingsComponent
     ],
     imports: [
         BrowserModule,
@@ -37,12 +37,14 @@ import {TimelineBlogComponent} from "./components/timeline/timeline-blog.compone
         HttpModule
     ],
     providers: [
-        ErrorService,
-        GithubReposService,
-        GithubEventsService,
         TimelineBlogService,
-        TickerService,
-        TimelineSettingsService
+        TimelineEventService,
+        TimelineTitleService,
+        TimelineRepoService,
+        TimelineRepoLanguagesService,
+        TimelineSettingsService,
+        ErrorService,
+        TickerService
     ],
     bootstrap: [AppComponent]
 })

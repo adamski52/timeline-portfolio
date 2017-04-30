@@ -1,6 +1,6 @@
 import {TestBed} from '@angular/core/testing';
 import {TimelineSettingsService} from "./timeline-settings.service";
-import {ISettings} from "../../interfaces/settings";
+import {ISettings} from "../../../interfaces/settings";
 
 describe('TimelineSettingsService', () => {
 

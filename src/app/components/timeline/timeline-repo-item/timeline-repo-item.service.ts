@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {GenericHttpService} from "../../services/generic-http.service";
+import {GenericHttpService} from "../../../services/generic-http.service";
 import {Http, Response} from "@angular/http";
-import {ErrorService} from "../../services/error.service";
-import {IRepo} from "../../interfaces/repo";
+import {ErrorService} from "../../../services/error.service";
+import {IRepo} from "../../../interfaces/repo";
 
 @Injectable()
-export class GithubReposService extends GenericHttpService {
+export class TimelineRepoService extends GenericHttpService {
     private _data:IRepo[];
 
     constructor(protected http: Http,

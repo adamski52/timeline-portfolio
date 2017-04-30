@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable, Observer, Subscription} from "rxjs";
-import {TickerService} from "../../services/ticker.service";
+import {TickerService} from "../../../services/ticker.service";
 
 @Injectable()
 export class TimelineTitleService {

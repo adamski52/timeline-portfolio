@@ -1,15 +1,15 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {TimelineEventComponent} from './timeline-event.component';
+import {TimelineEventComponent} from './timeline-event-item.component';
 import {Component} from "@angular/core";
-import {TimelineTitleService} from "./timeline-title.service";
-import {TimelineDateComponent} from "./timeline-date.component";
-import {TimelineSettingsService} from "./timeline-settings.service";
-import {GithubReposService} from "./github-repos.service";
+import {TimelineTitleService} from "../timeline-item-title/timeline-item-title.service";
+import {TimelineDateComponent} from "../timeline-date/timeline-date.component";
+import {TimelineSettingsService} from "../timeline-settings/timeline-settings.service";
+import {TimelineRepoService} from "../timeline-repo-item/timeline-repo-item.service";
 import {HttpModule} from "@angular/http";
-import {ErrorService} from "../../services/error.service";
-import {GithubEventsService} from "./github-events.service";
-import {IEvent} from "../../interfaces/event";
+import {ErrorService} from "../../../services/error.service";
+import {TimelineEventService} from "./timeline-event-item.service";
+import {IEvent} from "../../../interfaces/event";
 
 @Component({
     selector: 'jna-test-component',
@@ -19,7 +19,7 @@ import {IEvent} from "../../interfaces/event";
     ]
 })
 class TestComponent {
-    public event:IEvent = require("../../../../mocks/events.json")[4];
+    public event:IEvent = require("../../../../../mocks/events.json")[4];
 }
 
 
@@ -37,9 +37,9 @@ describe('TimlineEventComponent', () => {
             providers: [
                 TimelineTitleService,
                 TimelineSettingsService,
-                GithubReposService,
+                TimelineRepoService,
                 ErrorService,
-                GithubEventsService
+                TimelineEventService
             ],
             imports: [
                 HttpModule

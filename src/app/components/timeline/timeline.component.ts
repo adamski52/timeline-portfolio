@@ -1,12 +1,11 @@
 import {Component} from '@angular/core';
-import {GithubReposService} from "./github-repos.service";
-import {GithubEventsService} from "./github-events.service";
-import {IUser} from "../../interfaces/user";
+import {TimelineRepoService} from "./timeline-repo-item/timeline-repo-item.service";
+import {TimelineEventService} from "./timeline-event-item/timeline-event-item.service";
 import {IRepo} from "../../interfaces/repo";
 import {IEvent} from "../../interfaces/event";
 import {IBlog} from "../../interfaces/blog";
-import {TimelineBlogService} from "./timeline-blog.service";
-import {TimelineSettingsService} from "./timeline-settings.service";
+import {TimelineBlogService} from "./timeline-blog-item/timeline-blog-item.service";
+import {TimelineSettingsService} from "./timeline-settings/timeline-settings.service";
 import {ISettings} from "../../interfaces/settings";
 
 @Component({
@@ -22,8 +21,8 @@ export class TimelineComponent {
 
     public items:(IRepo|IEvent|IBlog)[] = [];
 
-    constructor(private reposService:GithubReposService,
-                private eventsService:GithubEventsService,
+    constructor(private reposService:TimelineRepoService,
+                private eventsService:TimelineEventService,
                 private blogsService:TimelineBlogService,
                 private settingsService:TimelineSettingsService) {
 

@@ -1,15 +1,15 @@
 import {async, ComponentFixture, TestBed, inject} from '@angular/core/testing';
 
 import {Component} from '@angular/core';
-import {RepoLanguagesComponent} from './repo-languages.component';
-import {GenericHttpService} from "../../services/generic-http.service";
-import {ErrorService} from "../../services/error.service";
+import {TimelineRepoLanguagesComponent} from './timeline-repo-languages.component';
+import {GenericHttpService} from "../../../services/generic-http.service";
+import {ErrorService} from "../../../services/error.service";
 import {HttpModule, RequestMethod, XHRBackend, Response, ResponseOptions} from '@angular/http';
 import {MockBackend} from '@angular/http/testing';
-import {GithubRepoLanguagesService} from "./repo-languages.service";
-import {TimelineTitleService} from "../timeline/timeline-title.service";
-import {ILanguage} from "../../interfaces/language";
-import {TickerService} from "../../services/ticker.service";
+import {TimelineRepoLanguagesService} from "./timeline-repo-languages.service";
+import {TimelineTitleService} from "../timeline-item-title/timeline-item-title.service";
+import {ILanguage} from "../../../interfaces/language";
+import {TickerService} from "../../../services/ticker.service";
 
 @Component({
     selector: 'jna-test-component',
@@ -25,8 +25,8 @@ class TestComponent {
 class TestComponentBlank {
 }
 
-describe('RepoLanguagesComponent', () => {
-    let component:RepoLanguagesComponent,
+describe('TimelineRepoLanguagesComponent', () => {
+    let component:TimelineRepoLanguagesComponent,
         fixture:ComponentFixture<TestComponent | TestComponentBlank>,
         mockData = {
             "lol": "wat",
@@ -39,11 +39,11 @@ describe('RepoLanguagesComponent', () => {
             declarations: [
                 TestComponent,
                 TestComponentBlank,
-                RepoLanguagesComponent
+                TimelineRepoLanguagesComponent
             ],
             providers: [
                 GenericHttpService,
-                GithubRepoLanguagesService,
+                TimelineRepoLanguagesService,
                 TimelineTitleService,
                 TickerService,
                 ErrorService,
@@ -59,7 +59,7 @@ describe('RepoLanguagesComponent', () => {
     }));
 
 
-    it('should call the languages service based on @input', inject([XHRBackend, GithubRepoLanguagesService], (mockBackend:MockBackend) => {
+    it('should call the languages service based on @input', inject([XHRBackend, TimelineRepoLanguagesService], (mockBackend:MockBackend) => {
         mockBackend.connections.subscribe((connection) => {
             expect(connection.request.method).toBe(RequestMethod.Get);
             expect(connection.request.url).toBe("/api/repos/adamski52/lol/languages");

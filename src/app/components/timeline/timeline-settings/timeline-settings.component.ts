@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {TimelineSettingsService} from "./timeline-settings.service";
-import {TimelineTitleService} from "./timeline-title.service";
-import {ISettings} from "../../interfaces/settings";
+import {TimelineTitleService} from "../timeline-item-title/timeline-item-title.service";
+import {ISettings} from "../../../interfaces/settings";
 
 @Component({
     selector: 'jna-timeline-settings',

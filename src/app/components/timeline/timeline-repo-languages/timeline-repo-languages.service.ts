@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {GenericHttpService} from "../../services/generic-http.service";
+import {GenericHttpService} from "../../../services/generic-http.service";
 import {Http, Response} from "@angular/http";
-import {ErrorService} from "../../services/error.service";
-import {ILanguage, ILanguageMeta} from "../../interfaces/language";
+import {ErrorService} from "../../../services/error.service";
+import {ILanguage, ILanguageMeta} from "../../../interfaces/language";
 
 @Injectable()
-export class GithubRepoLanguagesService extends GenericHttpService {
+export class TimelineRepoLanguagesService extends GenericHttpService {
     private languageMap:{[key: string]: string} = {
         "typescript": "angular",
         "sql": "mysql-alt",
