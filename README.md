@@ -1,10 +1,12 @@
-# Jna2017
+# Portfolio 2017 (currently in development)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-rc.2.
 
-## Development server
+## Running the project
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `npm install` if this is your first time running the project.  After installation is complete, run `npm start`.  The front end will be available at `http://localhost:4200/`. The (mock) backend will be available at `http://localhost:3000/`.  Coverage can be viewed at `http://localhost:4200/coverage` after running `npm test`.
+
+The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
@@ -16,12 +18,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+Run `npm test` to execute the unit tests via [Karma](https://karma-runner.github.io).  This will also generate code coverage which can be viewed at `http://localhost:4200/coverage` (note: the server must be running in order to host these files.  use `npm start` to run it.)
 
 ## Further help
 
