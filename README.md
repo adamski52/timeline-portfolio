@@ -35,7 +35,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 # Hey, why'd did you...
 ### ...not barrel your styles?  Angular has this cool virtuzliation and it....
-I know.  It's pretty great.  However, I wanted to use system-wide variables and barreling + SCSS variables are incompatible (presently).  I'm building a single application more than I am building individiaul self containd widgets, so it's more beneficial to have global style variables than to have self containd entities.  Plus, this way I can control what portions of bootstrap I want to load (which isn't much).
+I know.  It's pretty great.  However, I wanted to use system-wide variables and barreling + SCSS variables are incompatible (presently).  I'm building a single application more than I am building individual, self-contained widgets, so it's more beneficial to have global style variables than to have self-contained entities.  Plus, this way I can control what portions of bootstrap I want to load (which isn't much).
 
 ### ...not bundle the noisey repo + event + language calls in to one call in the backend?  It'd save a lot of service calls.
 I thought about it.  I decided against it because I don't plan to have any backend supporting this project, except for hosting the auth token.  The auth token will be added to requests through an apache header.  This won't show up here for security reasons.  Maybe I'll add a dummy one at some point.  Regardless, the NodeJS backend is strictly for development purposes.  Even if it was going to production, I don't want to bog asynchronous calls down with each other.  It's OK to have a bunch run at once - better that than having the slowest call hold everything up.
