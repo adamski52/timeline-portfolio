@@ -11,6 +11,12 @@ The app will automatically reload if you change any of the source files.
 ## Permissions/tokens
 You will not be able to obtain real data without my auth token (which I'm not giving out of course).  To view data, set an environment variable named `API_USE_MOCK` and re-run the project.  The data loaded will be served from the `/mocks` folder.  It is real data - it's just not live data.
 
+### Windows
+`set API_USE_MOCK=1`
+
+### Linux/Mac
+`export API_USE_MOCK=1`
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
