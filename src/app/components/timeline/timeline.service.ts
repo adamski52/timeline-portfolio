@@ -40,9 +40,9 @@ export class TimelineService {
 
         this.settingsService.subscribe((settings: any) => {
             this.settings = settings;
-            setTimeout(() => {
-                this.updateItems();
-            }, 301);
+            //setTimeout(() => {
+            //    this.updateItems();
+            //}, 301);
         });
     }
 

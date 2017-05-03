@@ -1,4 +1,4 @@
-import {Component, Input, HostBinding} from '@angular/core';
+import {Component, Input, HostBinding, OnInit} from '@angular/core';
 import {TimelineSettingsService} from "../timeline-settings/timeline-settings.service";
 import {ISettings} from "../../../interfaces/settings";
 
@@ -6,7 +6,7 @@ import {ISettings} from "../../../interfaces/settings";
     selector: 'jna-timeline-item',
     template: `<ng-content></ng-content>`
 })
-export class TimelineBaseItemComponent {
+export class TimelineBaseItemComponent implements OnInit {
     protected settingsKey:string = "";
     protected classSuffix:string = "";
 
@@ -14,7 +14,9 @@ export class TimelineBaseItemComponent {
 
     @Input("isEven") isEven:boolean;
 
-    constructor(private settingsService:TimelineSettingsService) {
+    constructor(private settingsService:TimelineSettingsService) {}
+
+    protected watchForSettings():void {
         this.settingsService.subscribe((settings:ISettings) => {
             this.isHidden = !settings[this.settingsKey];
         });
@@ -25,5 +27,9 @@ export class TimelineBaseItemComponent {
         classObj["jna-icon-" + this.classSuffix] = !this.isEven;
         classObj["jna-icon-reverse-" + this.classSuffix] = this.isEven;
         return classObj;
+    }
+
+    public ngOnInit() {
+        this.watchForSettings();
     }
 }

@@ -17,9 +17,6 @@ import {TimelineBaseItemComponent} from "../timeline-base-item/timeline-base-ite
 export class TimelineEventComponent extends TimelineBaseItemComponent implements OnInit {
     @Input("event") event:IEvent;
 
-    protected settingsKey:string = "githubEvents";
-    protected classSuffix:string = "code-fork";
-
     public repoName:string;
     public eventMessage:string;
     public commitMessage:string;
@@ -34,6 +31,8 @@ export class TimelineEventComponent extends TimelineBaseItemComponent implements
     }
 
     ngOnInit() {
+        this.watchForSettings();
+
         this.reposService.subscribe((repos: IRepo[]) => {
             let repo:IRepo = repos.find((r:IRepo) => {
                 return r.id === this.event.repo.id;

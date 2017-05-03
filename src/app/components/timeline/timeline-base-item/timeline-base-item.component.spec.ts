@@ -56,15 +56,18 @@ describe('TimelineBaseItemComponent', () => {
         expect(fixture.componentInstance.getIconClass()["jna-icon-font"]).toEqual(true);
     });
 
+    it('should remove the "is-hidden" class based on settings key', () => {
+        TestBed.compileComponents();
 
-    // it('should remove "is-hidden" class based on settings key', () => {
-    //     fixture = TestBed.createComponent(TestComponent);
-    //     component = fixture.debugElement.children[0].componentInstance;
-    //     fixture.detectChanges();
-    //
-    //     expect(fixture.componentInstance.isHidden).toEqual(false);
-    //     expect(fixture.nativeElement.classList.contains("is-hidden")).toEqual(false);
-    // });
+        fixture = TestBed.createComponent(TestComponent);
+        component = fixture.debugElement.children[0].componentInstance;
+        fixture.detectChanges();
+
+        settingsService = fixture.debugElement.children[0].injector.get(TimelineSettingsService);
+
+        expect(fixture.componentInstance.isHidden).toEqual(false);
+        expect(fixture.nativeElement.classList.contains("is-hidden")).toEqual(false);
+    });
 
     it('should add the "is-hidden" class based on settings key', () => {
         TestBed.compileComponents();
