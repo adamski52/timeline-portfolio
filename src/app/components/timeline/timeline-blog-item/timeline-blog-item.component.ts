@@ -1,31 +1,22 @@
-import {Component, Input, OnInit, HostBinding} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {IBlog} from "../../../interfaces/blog";
 import {TimelineSettingsService} from "../timeline-settings/timeline-settings.service";
+import {TimelineBaseItemComponent} from "../timeline-base-item/timeline-base-item.component";
 
 @Component({
     selector: 'jna-timeline-blog',
     templateUrl: './timeline-blog-item.component.html'
 })
-export class TimelineBlogComponent implements OnInit {
-    @HostBinding("class.is-hidden") isHidden:boolean = false;
-
+export class TimelineBlogComponent extends TimelineBaseItemComponent implements OnInit {
     @Input("blog") blog:IBlog;
-    @Input("isEven") isEven:boolean;
 
     public title:string;
     public summary:string;
 
-    constructor(private settingsService:TimelineSettingsService) {
-        this.settingsService.subscribe((settings:any) => {
-            this.isHidden = !settings.blogs;
-        });
-    }
-
-    getIconClass() {
-        return {
-            "jna-icon-font": !this.isEven,
-            "jna-icon-reverse-font": this.isEven
-        };
+    constructor(settingsService:TimelineSettingsService) {
+        super(settingsService);
+        this.settingsKey = "blogs";
+        this.classSuffix = "font";
     }
 
     ngOnInit() {

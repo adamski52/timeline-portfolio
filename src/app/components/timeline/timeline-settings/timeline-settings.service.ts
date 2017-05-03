@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable, Observer, Subscription} from "rxjs";
+import {Subscription} from "rxjs";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {ISettings} from "../../../interfaces/settings";
 
@@ -14,6 +14,10 @@ export class TimelineSettingsService {
     };
 
     protected subject:BehaviorSubject<ISettings> = new BehaviorSubject(this._settings);
+
+    constructor() {
+        this.subject.next(this._settings);
+    }
 
     public subscribe(handler:(value: ISettings) => void):Subscription {
         return this.subject.subscribe(handler);

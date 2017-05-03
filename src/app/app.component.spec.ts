@@ -16,6 +16,7 @@ import {TimelineDateComponent} from "./components/timeline/timeline-date/timelin
 import {TimelineEventComponent} from "./components/timeline/timeline-event-item/timeline-event-item.component";
 import {TimelineBlogComponent} from "./components/timeline/timeline-blog-item/timeline-blog-item.component";
 import {TimelineBlogService} from "./components/timeline/timeline-blog-item/timeline-blog-item.service";
+import {TimelineService} from "./components/timeline/timeline.service";
 
 describe('AppComponent', () => {
     beforeEach(async(() => {
@@ -31,10 +32,11 @@ describe('AppComponent', () => {
                 TimelineDateComponent
             ],
             providers: [
+                TimelineService,
                 TimelineRepoService,
                 TimelineEventService,
-                TimelineSettingsService,
                 TimelineBlogService,
+                TimelineSettingsService,
                 TickerService,
                 ErrorService,
                 {

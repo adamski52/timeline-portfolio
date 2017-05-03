@@ -19,6 +19,7 @@ import {TimelineSettingsComponent} from "./components/timeline/timeline-settings
 import {TimelineSettingsService} from "./components/timeline/timeline-settings/timeline-settings.service";
 import {ErrorService} from "./services/error.service";
 import {TickerService} from "./services/ticker.service";
+import {TimelineService} from "./components/timeline/timeline.service";
 
 @NgModule({
     declarations: [
@@ -37,6 +38,7 @@ import {TickerService} from "./services/ticker.service";
         HttpModule
     ],
     providers: [
+        TimelineService,
         TimelineBlogService,
         TimelineEventService,
         TimelineTitleService,

@@ -6,7 +6,7 @@ import {IRepo} from "../../../interfaces/repo";
 
 @Injectable()
 export class TimelineRepoService extends GenericHttpService {
-    private _data:IRepo[];
+    private _data:IRepo[] = [];
 
     constructor(protected http: Http,
                 protected errorService: ErrorService) {

@@ -1,7 +1,8 @@
-import {Component, Input, OnInit, HostBinding} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {IRepo} from "../../../interfaces/repo";
 import {TimelineTitleService} from "../timeline-item-title/timeline-item-title.service";
 import {TimelineSettingsService} from "../timeline-settings/timeline-settings.service";
+import {TimelineBaseItemComponent} from "../timeline-base-item/timeline-base-item.component";
 
 @Component({
     selector: 'jna-timeline-repo',
@@ -10,25 +11,15 @@ import {TimelineSettingsService} from "../timeline-settings/timeline-settings.se
         TimelineTitleService
     ]
 })
-export class TimelineRepoComponent implements OnInit {
-    @HostBinding("class.is-hidden") isHidden:boolean = false;
-
+export class TimelineRepoComponent extends TimelineBaseItemComponent implements OnInit {
     @Input("repo") repo:IRepo;
-    @Input("isEven") isEven:boolean;
 
     public title:string;
 
-    constructor(private titleService:TimelineTitleService, private settingsService:TimelineSettingsService) {
-        this.settingsService.subscribe((settings:any) => {
-            this.isHidden = !settings.githubRepos;
-        });
-    }
-
-    getIconClass() {
-        return {
-            "jna-icon-github": !this.isEven,
-            "jna-icon-reverse-github": this.isEven
-        };
+    constructor(private titleService:TimelineTitleService, settingsService:TimelineSettingsService) {
+        super(settingsService);
+        this.settingsKey = "githubRepos";
+        this.classSuffix = "github";
     }
 
     ngOnInit() {

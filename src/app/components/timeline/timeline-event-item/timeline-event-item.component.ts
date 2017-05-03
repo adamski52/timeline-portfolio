@@ -1,10 +1,11 @@
-import {Component, Input, OnInit, HostBinding} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {TimelineTitleService} from "../timeline-item-title/timeline-item-title.service";
 import {TimelineSettingsService} from "../timeline-settings/timeline-settings.service";
 import {IEvent} from "../../../interfaces/event";
 import {IRepo} from "../../../interfaces/repo";
 import {TimelineRepoService} from "../timeline-repo-item/timeline-repo-item.service";
 import {TimelineEventService} from "./timeline-event-item.service";
+import {TimelineBaseItemComponent} from "../timeline-base-item/timeline-base-item.component";
 
 @Component({
     selector: 'jna-timeline-event',
@@ -13,45 +14,35 @@ import {TimelineEventService} from "./timeline-event-item.service";
         TimelineTitleService
     ]
 })
-export class TimelineEventComponent implements OnInit {
-    @HostBinding("class.is-hidden") isHidden:boolean = false;
-
+export class TimelineEventComponent extends TimelineBaseItemComponent implements OnInit {
     @Input("event") event:IEvent;
-    @Input("isEven") isEven:boolean;
+
+    protected settingsKey:string = "githubEvents";
+    protected classSuffix:string = "code-fork";
 
     public repoName:string;
     public eventMessage:string;
     public commitMessage:string;
 
-    constructor(private settingsService:TimelineSettingsService,
+    constructor(settingsService:TimelineSettingsService,
                 private reposService:TimelineRepoService,
                 private eventsService:TimelineEventService) {
 
-        this.settingsService.subscribe((settings:any) => {
-            this.isHidden = !settings.githubEvents;
-        });
-    }
-
-    getIconClass() {
-        return {
-            "jna-icon-code-fork": !this.isEven,
-            "jna-icon-reverse-code-fork": this.isEven
-        };
+        super(settingsService);
+        this.settingsKey = "githubEvents";
+        this.classSuffix = "code-fork";
     }
 
     ngOnInit() {
         this.reposService.subscribe((repos: IRepo[]) => {
-            if(repos.length <= 0) {
-                return;
-            }
-
-            let repo:IRepo = repos.find((repo: IRepo) => {
-                return repo.id === this.event.repo.id;
+            let repo:IRepo = repos.find((r:IRepo) => {
+                return r.id === this.event.repo.id;
             });
 
-            this.repoName = repo.name;
+            if(repo) {
+                this.repoName = repo.name;
+            }
         });
-
 
         this.eventMessage = this.eventsService.getEventMessage(this.event);
         this.commitMessage = this.eventsService.getCommitMessage(this.event);
