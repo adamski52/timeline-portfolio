@@ -1,5 +1,12 @@
-<div class="timeline-title" [ngClass]="getIconClass()">
-    <span>{{eventMessage}}</span>
+<div class="timeline-item-flipper">
+    <div class="timeline-item-front">
+        <div class="timeline-title" [ngClass]="getIconClass()">
+            <span>{{eventMessage}}</span>
+        </div>
+        <div class="timeline-subtitle">{{repoName}}</div>
+        <jna-timeline-date class="timeline-date" [date]="event.created_at"></jna-timeline-date>
+    </div>
+    <div class="timeline-item-back">
+        im the back.
+    </div>
 </div>
-<div class="timeline-subtitle">{{repoName}}</div>
-<jna-timeline-date class="timeline-date" [date]="event.created_at"></jna-timeline-date>

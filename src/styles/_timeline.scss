@@ -14,15 +14,44 @@
 
 .timeline-item {
     display: block;
-    color: $global-dark-color;
-    background: $global-lightest-color;
-    border: 1px dotted $global-light-color;
-    transition: all 1s;
-    overflow: hidden;
     margin: $global-spacing-medium;
-    position: relative;
     min-height: 42px;
-    padding: $global-spacing-small 41px + $global-spacing-small $global-spacing-small $global-spacing-small;
+
+    transform-origin: 0 0;
+    perspective: 320px;
+
+    .timeline-item-flipper {
+        transition: all 1s;
+        transform-style: preserve-3d;
+        position: relative;
+    }
+
+    .timeline-item-front,
+    .timeline-item-back {
+        display: block;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        color: $global-dark-color;
+        background: $global-lightest-color;
+        border: 1px dotted $global-light-color;
+        padding: $global-spacing-small 41px + $global-spacing-small $global-spacing-small $global-spacing-small;
+    }
+
+    .timeline-item-front {
+        z-index: 1;
+    }
+
+    .timeline-item-back {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: rotateY(180deg);
+    }
+
+    &.is-hidden .timeline-item-flipper {
+        transform: rotateY(180deg);
+    }
 }
 
 .timeline-item-content {
