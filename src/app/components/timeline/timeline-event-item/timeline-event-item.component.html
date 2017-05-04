@@ -1,11 +1,5 @@
-<div class="timeline-item-side timeline-item-front">
-    <h4 class="timeline-title" [ngClass]="getIconClass()">
-        <span>{{eventMessage}}</span>
-    </h4>
-    <h5 class="timeline-subtitle">{{repoName}}</h5>
-    <h5 class="timeline-commit-message">{{commitMessage}}</h5>
-    <jna-timeline-date class="timeline-date" [date]="event.created_at"></jna-timeline-date>
+<div class="timeline-title" [ngClass]="getIconClass()">
+    <span>{{eventMessage}}</span>
 </div>
-<div class="timeline-item-side timeline-item-back">
-        im the back
-</div>
+<div class="timeline-subtitle">{{repoName}}</div>
+<jna-timeline-date class="timeline-date" [date]="event.created_at"></jna-timeline-date>

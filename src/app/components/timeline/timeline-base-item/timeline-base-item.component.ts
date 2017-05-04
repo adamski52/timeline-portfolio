@@ -12,8 +12,6 @@ export class TimelineBaseItemComponent implements OnInit {
 
     @HostBinding("class.is-hidden") isHidden:boolean = false;
 
-    @Input("isEven") isEven:boolean;
-
     constructor(private settingsService:TimelineSettingsService) {}
 
     protected watchForSettings():void {
@@ -24,8 +22,7 @@ export class TimelineBaseItemComponent implements OnInit {
 
     public getIconClass() {
         let classObj = {};
-        classObj["jna-icon-" + this.classSuffix] = !this.isEven;
-        classObj["jna-icon-reverse-" + this.classSuffix] = this.isEven;
+        classObj["jna-icon-" + this.classSuffix] = true;
         return classObj;
     }
 

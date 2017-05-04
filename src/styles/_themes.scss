@@ -7,10 +7,9 @@
 }
 
 @mixin make-icon($color, $pct: 50%) {
-    color: $color;
-
+    transition: all $global-transition;
     &:hover {
-        color: lighter($color, $pct);
+        color: $color;
     }
 }
 
