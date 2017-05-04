@@ -15,8 +15,7 @@ export class TimelineBlogComponent extends TimelineBaseItemComponent implements 
 
     constructor(settingsService:TimelineSettingsService) {
         super(settingsService);
-        this.settingsKey = "blogs";
-        this.classSuffix = "font";
+        this.watchForSettings("blogs", "font");
     }
 
     ngOnInit() {

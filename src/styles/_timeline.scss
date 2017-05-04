@@ -16,14 +16,15 @@
     display: block;
     margin: $global-spacing-medium;
     min-height: 42px;
-
-    transform-origin: 0 0;
-    perspective: 320px;
+    perspective: 1000px;
 
     .timeline-item-flipper {
-        transition: all 1s;
         transform-style: preserve-3d;
+        transition: all .5s, transform .5s ease .5s;
         position: relative;
+        transform-origin: 0 0;
+        width: 100%;
+        height: 100%;
     }
 
     .timeline-item-front,
@@ -31,15 +32,17 @@
         display: block;
         width: 100%;
         height: 100%;
+        overflow: hidden;
         backface-visibility: hidden;
         color: $global-dark-color;
         background: $global-lightest-color;
         border: 1px dotted $global-light-color;
-        padding: $global-spacing-small 41px + $global-spacing-small $global-spacing-small $global-spacing-small;
+        padding: $global-spacing-small;
     }
 
     .timeline-item-front {
         z-index: 1;
+        padding-right: 41px + $global-spacing-small;
     }
 
     .timeline-item-back {
@@ -49,8 +52,13 @@
         transform: rotateY(180deg);
     }
 
-    &.is-hidden .timeline-item-flipper {
-        transform: rotateY(180deg);
+    &.is-hidden {
+        .timeline-item-flipper {
+            height: 42px;
+            transition: all .5s ease .5s, transform .5s;
+            transform: rotateY(180deg);
+            width: 50%;
+        }
     }
 }
 

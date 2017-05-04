@@ -26,13 +26,10 @@ export class TimelineEventComponent extends TimelineBaseItemComponent implements
                 private eventsService:TimelineEventService) {
 
         super(settingsService);
-        this.settingsKey = "githubEvents";
-        this.classSuffix = "code-fork";
+        this.watchForSettings("githubEvents", "code-fork");
     }
 
     ngOnInit() {
-        this.watchForSettings();
-
         this.reposService.subscribe((repos: IRepo[]) => {
             let repo:IRepo = repos.find((r:IRepo) => {
                 return r.id === this.event.repo.id;
