@@ -3,7 +3,7 @@
 [class^="icon-"],
 [class*=" icon-"] {
     display: inline-block;
-    font-size: 17px;
+    font-size: 1em;
     padding: 0 4px;
 
     &:last-child {
@@ -44,9 +44,9 @@
 
 .icon-javascript-alt {
     @include make-icon($js-color);
-    font-size: 23px;
+    font-size: 1.25em;
     position: relative;
-    top: 2px;
+    top: 1px;
     margin: 0 -5px 0 -3px;
     line-height: 1;
 }
