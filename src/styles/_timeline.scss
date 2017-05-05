@@ -6,21 +6,19 @@
     padding-top: $global-spacing-largest;
 }
 
-.timeline-item-wrapper {
-    margin: 0;
-    padding: 0;
-    width: 33.333%;
-}
-
 .timeline-item {
     display: block;
     margin: $global-spacing-medium;
     min-height: 42px;
     perspective: 1000px;
+    width: 50%;
+    position: relative;
+    left: 50%;
+    transition: all .5s;
 
     .timeline-item-flipper {
         transform-style: preserve-3d;
-        transition: all .5s, transform .5s ease .5s;
+        transition: transform .5s .5s;
         position: relative;
         transform-origin: 0 0;
         width: 100%;
@@ -29,6 +27,7 @@
 
     .timeline-item-front,
     .timeline-item-back {
+        transition: all .5s;
         display: block;
         width: 100%;
         height: 100%;
@@ -53,11 +52,20 @@
     }
 
     &.is-hidden {
+        height: 42px;
+        width: 20%;
+        transition: all .5s .5s;
+
+        .timeline-item-front,
+        .timeline-item-back {
+            color: $global-light-color;
+            background: $global-even-lighter-color;
+            transition: all .5s .5s;
+        }
+
         .timeline-item-flipper {
-            height: 42px;
-            transition: all .5s ease .5s, transform .5s;
+            transition: transform .5s;
             transform: rotateY(180deg);
-            width: 50%;
         }
     }
 }
@@ -69,6 +77,7 @@
 .timeline-title,
 .timeline-subtitle {
     text-transform: lowercase;
+    white-space: nowrap;
     font-size: $global-font-size-smaller;
 
     span {
@@ -89,6 +98,10 @@
     &:after {
         font-size: $global-font-size-largest;
     }
+}
+
+.timeline-disabled-icon {
+    font-size: 2em;
 }
 
 .timeline-subtitle {
