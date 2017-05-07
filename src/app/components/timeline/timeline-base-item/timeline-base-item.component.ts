@@ -11,7 +11,7 @@ export class TimelineBaseItemComponent implements OnInit {
     protected classSuffix:string = "";
 
     @HostBinding("class.is-hidden") isHidden:boolean = false;
-
+    @HostBinding("class.even")
     @Input("isEven") isEven:boolean;
 
     constructor(private settingsService:TimelineSettingsService) {}
@@ -24,8 +24,20 @@ export class TimelineBaseItemComponent implements OnInit {
 
     public getIconClass() {
         let classObj = {};
-        classObj["jna-icon-" + this.classSuffix] = !this.isEven;
-        classObj["jna-icon-reverse-" + this.classSuffix] = this.isEven;
+        classObj["jna-icon-" + this.classSuffix] = true;
+        return classObj;
+    }
+
+    public getConnectorClasses() {
+        let classObj = {};
+        if(this.isEven) {
+            classObj["top-right"] = true;
+            classObj["bottom-left"] = true;
+        }
+        else {
+            classObj["top-left"] = true;
+            classObj["bottom-right"] = true;
+        }
         return classObj;
     }
 

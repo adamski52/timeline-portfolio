@@ -11,6 +11,7 @@ export class TimelineDateComponent implements OnInit {
 
     public month:string;
     public date:string;
+    public year:string;
 
     ngOnInit() {
         this.fullDate = new Date(this.fullDate);
@@ -20,5 +21,7 @@ export class TimelineDateComponent implements OnInit {
         if(this.date.length < 2) {
             this.date = "0" + this.date;
         }
+
+        this.year = this.fullDate.getFullYear() + "";
     }
 }
