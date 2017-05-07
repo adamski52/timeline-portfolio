@@ -15,6 +15,24 @@
 }
 
 
+@mixin make-theme($primary) {
+    $secondary: darker($primary, 70%);
+    
+    .timeline-item-icon {
+        i {
+            &:before {
+                background: $primary;
+                color: $secondary;
+            }
+        }
+    }
+
+    .timeline-date {
+        background: $primary;
+        color: $secondary;
+    }
+}
+
 $screen-xs-min: 320px;
 $screen-sm-min: 475px;
 $screen-lg-min: 1000px;
@@ -42,14 +60,18 @@ $csharp-color: #4da3de;
 $unknown-color: #40de93;
 $icon-hover-color: #fff;
 
-$global-color-darkest: #000;
-$global-color-lightest: #fff;
+$theme-event-primary: #1FADBA;
+$theme-event-secondary: #F66800;
+$theme-repo-color: #F3572D;
+$theme-blog-color: #9ABE1F;
+$theme-history-color: #F68F03;
 
-$global-color-darker: lighter($global-color-darkest, 16.6%);
-$global-color-dark: lighter($global-color-darkest, 33.2%);
-$global-color-medium: lighter($global-color-darkest, 50%);
-$global-color-light: darker($global-color-lightest, 33.2%);
-$global-color-lighter: darker($global-color-lightest, 16.6%);
+$default-theme-secondary: #ddd;
+$default-theme-primary: #333;
+$global-color-darkest: #000;
+$global-color-medium: #333;
+$global-color-lightest: #fff;
+$global-color-background: #f3f3f3;
 
 $global-font-size-base: 14px;
 
@@ -76,4 +98,3 @@ $item-terminal-size: 8px;
 $item-date-size: 43px;
 $arc-size: 37px;
 $line-width: 2px;
-

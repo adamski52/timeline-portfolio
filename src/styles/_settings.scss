@@ -4,7 +4,7 @@
     width: 100%;
     background: $global-color-darkest;
     text-align: right;
-    color: $global-color-light;
+    color: $global-color-lightest;
     padding: $global-spacing-smaller;
     font-size: $global-font-size-smaller;
 
@@ -14,10 +14,6 @@
         display: inline-block;
         text-decoration: none;
         font-size: $global-font-size-large;
-
-        &.jna-icon-disabled {
-            color: $global-color-darker;
-        }
 
         &:before {
             font-size: $global-font-size-larger;

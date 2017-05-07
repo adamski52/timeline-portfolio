@@ -1,6 +1,6 @@
 <div class="timeline-item-wrapper" *ngFor="let item of items; let isEven = even;">
     <jna-timeline-repo
-        class="timeline-item"
+        class="timeline-item theme-repo"
         *ngIf="isItemRepo(item)"
         [repo]="item"
         [ngClass]="{'even': isEven}"
@@ -8,7 +8,7 @@
         (hover)="onHover($event)">
     </jna-timeline-repo>
     <jna-timeline-event
-        class="timeline-item"
+        class="timeline-item theme-event"
         *ngIf="isItemEvent(item)"
         [event]="item"
         [ngClass]="{'even': isEven}"
@@ -16,7 +16,7 @@
         (hover)="onHover($event)">
     </jna-timeline-event>
     <jna-timeline-blog
-        class="timeline-item"
+        class="timeline-item theme-blog"
         *ngIf="isItemBlog(item)"
         [blog]="item"
         [ngClass]="{'even': isEven}"
