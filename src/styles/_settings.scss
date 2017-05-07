@@ -2,9 +2,9 @@
     position: fixed;
     z-index: 100;
     width: 100%;
-    background: $global-darkest-color;
+    background: $global-color-darkest;
     text-align: right;
-    color: $global-light-color;
+    color: $global-color-light;
     padding: $global-spacing-smaller;
     font-size: $global-font-size-smaller;
 
@@ -16,7 +16,7 @@
         font-size: $global-font-size-large;
 
         &.jna-icon-disabled {
-            color: $global-dark-color;
+            color: $global-color-darker;
         }
 
         &:before {

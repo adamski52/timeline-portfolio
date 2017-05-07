@@ -1,14 +1,24 @@
 .timeline-wrapper {
     display: block;
     margin: 0 auto;
-    padding-top: $global-spacing-largest;
+    padding: $global-spacing-largest;
     white-space: nowrap;
+
 }
 
 .timeline-item-wrapper {
     display: inline-block;
     position: relative;
-    width: 335px;
+    width: $item-content-width;
+    vertical-align: top;
+
+    &:first-child {
+        .bottom-left {
+            &:before {
+                display: none;
+            }
+        }
+    }
 }
 
 .timeline-item {
@@ -19,8 +29,13 @@
         .timeline-item-content {
             top: 0;
             left: 0;
-            border-bottom: 2px solid #f00;
+            border-bottom: $line-width solid #f00;
             border-top: none;
+
+            &:after {
+                bottom: $arc-size - $item-terminal-size + $line-width;
+                top: auto;
+            }
         }
 
         .timeline-date {
@@ -28,53 +43,55 @@
             top: 0px;
         }
     }
+
 }
 
 .timeline-item-icon {
-    display: inline-block;
-    position: relative;
-    bottom: -42px;
-    right: -46px;
-    width: 75px;
-    height: 75px;
+    display: block;
+    position: absolute;
+    bottom: -$item-icon-size/2;
+    left: -$item-icon-size/2;
+    width: $item-icon-size;
+    height: $item-icon-size;
 
     i {
-        width: 71px;
-        height: 71px;
-        border-radius: 36px;
+        width: $item-icon-size - ($line-width * 2);
+        height: $item-icon-size - ($line-width * 2);
+        border-radius: $item-icon-size - ($line-width * 2);
         position: absolute;
-        background: $global-lighter-color;
-        top: 2px;
-        left: 2px;
+        background: $global-color-lighter;
+        top: $line-width;
+        left: $line-width;
         z-index: 1;
 
         &:before {
-            display: inline-block;
-            width: 50px;
-            height: 50px;
-            border-radius: 25px;
+            display: block;
+            width: $item-icon-content-size;
+            height: $item-icon-content-size;
+            border-radius: $item-icon-content-size;
             background: #f00;
-            font-size: 2.3em;
+            font-size: $global-font-size-largest;
             text-align: center;
-            line-height: 50px;
+            line-height: $item-icon-content-size;
             position: absolute;
-            left: 12px;
-            top: 10px;
+            left: 50%;
+            top: 50%;
+            margin: (-$item-icon-content-size/2) 0 0 (-$item-icon-content-size/2);
         }
     }
 
     &:before,
     &:after {
         content: "";
-        height: 38px;
-        width: 38px;
+        height: $arc-size;
+        width: $arc-size;
         background: #f00;
         position: absolute;
     }
 
     &.top-left {
         &:before {
-            border-radius: 50px 0 0 0;
+            border-radius: $item-icon-content-size 0 0 0;
             top: 0;
             left: 0;
         }
@@ -82,7 +99,7 @@
 
     &.top-right {
         &:after {
-            border-radius: 0 50px 0 0;
+            border-radius: 0 $item-icon-content-size 0 0;
             top: 0;
             right: 0;
         }
@@ -90,7 +107,7 @@
 
     &.bottom-left {
         &:before {
-            border-radius: 0 0 0 50px;
+            border-radius: 0 0 0 $item-icon-content-size;
             bottom: 0;
             left: 0;
         }
@@ -98,7 +115,7 @@
 
     &.bottom-right {
         &:after {
-            border-radius: 0 0 50px 0;
+            border-radius: 0 0 $item-icon-content-size 0;
             right: 0;
             bottom: 0;
         }
@@ -106,30 +123,43 @@
 }
 
 .timeline-item-content {
-    display: inline-block;
-    vertical-align: bottom;
+    display: block;
     position: relative;
-    top: 199px;
+    white-space: normal;
+    top: $item-content-height;
     left: -1px;
-    padding: 50px 15px 15px 15px;
-    width: 337px;
-    height: 200px;
-    border-left: 2px solid #f00;
-    border-top: 2px solid #f00;
+    padding: $item-icon-content-size $global-spacing-large $global-spacing-large $global-spacing-large;
+    width: $item-content-width;
+    height: $item-content-height;
+    border-left: $line-width solid #f00;
+    border-top: $line-width solid #f00;
+
+    &:after {
+        content: "";
+        width: $item-terminal-size;
+        height: $item-terminal-size;
+        border-radius: $item-terminal-size;
+        display: block;
+        position: absolute;
+        right: -$item-terminal-size/2;
+        top: $arc-size - $item-terminal-size + $line-width;
+        background: #00f;
+        z-index: 3;
+    }
 }
 
 .timeline-date {
-    width: 43px;
-    height: 43px;
-    border-radius: 22px;
+    width: $item-date-size;
+    height: $item-date-size;
+    border-radius: $item-date-size;
     background: #0f0;
-    font-size: .7em;
+    font-size: $global-font-size-smallest;
     display: block;
     text-align: center;
-    padding-top: 3px;
+    padding-top: $global-spacing-smaller;
     position: absolute;
     bottom: 0;
-    left: -22px;
+    left: -$item-date-size/2;
 }
 
 .timeline-date-date,
@@ -139,14 +169,11 @@
 }
 
 .timeline-date-date {
-    font-size: 1.5em;
+    font-size: $global-font-size-larger;
     line-height: 1em;
 }
 
-.timeline-date-month {
-    font-size: 1em;
-}
 
 .timeline-date-year {
-    font-size: .75em;
+    font-size: $global-font-size-smaller;
 }

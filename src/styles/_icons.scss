@@ -3,7 +3,7 @@
 [class^="icon-"],
 [class*=" icon-"] {
     display: inline-block;
-    font-size: 17px;
+    font-size: $global-font-size-base;
     padding: 0 4px;
 
     &:last-child {
@@ -240,5 +240,5 @@
     content: "\78";
 }
 .jna-icon-disabled {
-    color: #666;
+    color: $global-color-dark;
 }

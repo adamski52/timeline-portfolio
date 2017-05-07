@@ -8,12 +8,13 @@
 html,
 body {
     height: 100%;
-    background: $global-lighter-color;
+    background: $global-color-lighter;
 }
 
 body {
     font-family: VeraMono;
-    font-size: $global-base-font-size;
+    color: $global-color-darker;
+    font-size: $global-font-size-base;
 }
 
 h1, h2, h3, h4, h5, h6 {

@@ -2,7 +2,6 @@
 @import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/variables";
 @import "styles/variables";
 @import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
-@import "styles/themes";
 
 // Reset and dependencies
 @import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/normalize";
@@ -38,6 +37,3 @@
 @import "styles/global";
 @import "styles/settings";
 @import "styles/timeline";
-@import "styles/repos";
-@import "styles/events";
-@import "styles/blogs";
