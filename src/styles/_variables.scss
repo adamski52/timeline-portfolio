@@ -17,7 +17,7 @@
 
 @mixin make-theme($primary) {
     $secondary: darker($primary, 70%);
-    
+
     .timeline-item-icon {
         i {
             &:before {
@@ -66,8 +66,6 @@ $theme-repo-color: #F3572D;
 $theme-blog-color: #9ABE1F;
 $theme-history-color: #F68F03;
 
-$default-theme-secondary: #ddd;
-$default-theme-primary: #333;
 $global-color-darkest: #000;
 $global-color-medium: #333;
 $global-color-lightest: #fff;
@@ -78,23 +76,17 @@ $global-font-size-base: 14px;
 $global-font-size-smallest: .7em;
 $global-font-size-smaller: .75em;
 $global-font-size-small: 1.1em;
-$global-font-size-large: 1.2em;
+$global-font-size-large: 1.4em;
 $global-font-size-larger: 1.5em;
 $global-font-size-largest: 2.3em;
 
-$global-spacing-base: 10px;
-$global-spacing-small: $global-spacing-base / 2;
-$global-spacing-smaller: $global-spacing-base / 4;
-$global-spacing-smallest: 1px;
-$global-spacing-large: $global-spacing-base * 1.5;
-$global-spacing-larger: $global-spacing-base * 2;
-$global-spacing-largest: $global-spacing-base * 5;
+$global-transition-fast: .3s;
 
-$item-content-width: 265px;
-$item-content-height: 200px;
-$item-icon-size: 75px;
-$item-icon-content-size: 50px;
-$item-terminal-size: 8px;
-$item-date-size: 43px;
-$arc-size: 37px;
-$line-width: 2px;
+$global-spacing-larger: 30px;
+$global-spacing-large: 20px;
+$global-spacing-medium: 8px;
+
+$content-width: 600px;
+$timeline-width: 10px;
+$item-icon-size: 30px;
+$date-icon-size: 45px;
