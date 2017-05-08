@@ -11,7 +11,6 @@ export class TimelineBaseItemComponent implements OnInit {
     protected classSuffix:string = "";
 
     @HostBinding("class.is-hidden") isHidden:boolean = false;
-    @HostBinding("class.even")
     @Input("isEven") isEven:boolean;
 
     constructor(private settingsService:TimelineSettingsService) {}

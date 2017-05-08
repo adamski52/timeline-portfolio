@@ -3,7 +3,7 @@
         class="timeline-item theme-repo"
         *ngIf="isItemRepo(item)"
         [repo]="item"
-        [ngClass]="{'even': isEven}"
+        [ngClass]="{'even': isEven, 'odd': !isEven}"
         [isEven]="isEven"
         (hover)="onHover($event)">
     </jna-timeline-repo>
@@ -11,7 +11,7 @@
         class="timeline-item theme-event"
         *ngIf="isItemEvent(item)"
         [event]="item"
-        [ngClass]="{'even': isEven}"
+        [ngClass]="{'even': isEven, 'odd': !isEven}"
         [isEven]="isEven"
         (hover)="onHover($event)">
     </jna-timeline-event>
@@ -19,7 +19,7 @@
         class="timeline-item theme-blog"
         *ngIf="isItemBlog(item)"
         [blog]="item"
-        [ngClass]="{'even': isEven}"
+        [ngClass]="{'even': isEven, 'odd': !isEven}"
         [isEven]="isEven"
         (hover)="onHover($event)">
     </jna-timeline-blog>

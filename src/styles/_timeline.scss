@@ -26,13 +26,10 @@
     .timeline-item-inner {
         display: block;
         width: 0;
-        background: #00f;
         transition: all .5s;
         overflow: hidden;
-        margin: 0 295px 0 0;
-        float: right;
-        border-left: none;
-        border-right: 10px solid #f00;
+        position: relative;
+        clear: both;
 
         &:hover {
             width: 305px;
@@ -41,51 +38,105 @@
 
     .timeline-item-icon {
         position: absolute;
-        top: 50%;
+        top: 40px;
         left: 50%;
         height: 30px;
         width: 30px;
         border-radius: 30px;
-        margin: -15px 0 0 -15px;
+        margin-left: -15px;
+        margin-top: -15px;
         background: #ff0;
         text-align: center;
         line-height: 32px;
+        z-index: 1;
+    }
+
+    .timeline-date {
+        width: $item-date-size;
+        height: $item-date-size;
+        border-radius: $item-date-size;
+        font-size: $global-font-size-smallest;
+        display: block;
+        text-align: center;
+        padding-top: $global-spacing-smaller;
+        position: absolute;
+        top: 40px;
+        left: 50%;
+        line-height: 1em;
     }
 
     .timeline-item-content {
+        background: #00f;
         padding: 20px;
-        width: 299px;
+        width: 265px;
+        min-height: 75px;
         border: 1px dotted #ccc;
-        border-right: none;
+        position: relative;
     }
 
 
     &.is-hidden {}
 
     &.even {
+        .timeline-date {
+            margin: -$item-date-size/2 0 0 (-$item-date-size/2 - 35px);
+        }
+
         .timeline-item-inner {
             float: left;
-            clear: both;
             margin: 0 0 0 295px;
             border-right: none;
             border-left: 10px solid #f00;
         }
 
         .timeline-item-content {
-            border: 1px dotted #ccc;
+            float: right;
+
+            &::before {
+                content: "";
+                width: 0;
+                height: 0;
+                border-top: 10px solid transparent;
+                border-right: 20px solid #00f;
+                border-bottom: 10px solid transparent;
+                position: absolute;
+                top: 30px;
+                left: -20px;
+            }
+        }
+    }
+
+    &.odd {
+        .timeline-date {
+            margin: -$item-date-size/2 0 0 (-$item-date-size/2 + 35px);
+        }
+
+        .timeline-item-inner {
+            float: right;
+            margin: 0 295px 0 0;
             border-left: none;
+            border-right: 10px solid #f00;
+        }
+
+        .timeline-item-content {
+            float: left;
+
+            &::before {
+                content: "";
+                width: 0;
+                height: 0;
+                border-top: 10px solid transparent;
+                border-left: 20px solid #00f;
+                border-bottom: 10px solid transparent;
+                position: absolute;
+                top: 30px;
+                right: -20px;
+            }
         }
     }
 }
 
-.timeline-date {
-    width: $item-date-size;
-    height: $item-date-size;
-    font-size: $global-font-size-smallest;
-    display: block;
-    text-align: center;
-    padding-top: $global-spacing-smaller;
-}
+
 
 .timeline-date-date,
 .timeline-date-month,
@@ -93,10 +144,6 @@
     display: block;
 }
 
-.timeline-date-date {
-    font-size: $global-font-size-larger;
-    line-height: 1em;
-}
 
 
 .timeline-date-year {
