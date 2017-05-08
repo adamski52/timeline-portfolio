@@ -7,132 +7,123 @@
 
 .timeline-item-wrapper {
     display: block;
+    background: #f0f;
     width: 100%;
-    background: #0f0;
     float: left;
     clear: both;
 }
 
 .timeline-item {
     display: block;
-    width: 100%;
+    width: 305px;
+    clear: both;
     position: relative;
-    float: left;
 
-    p {
-        margin: 0;
+    &:hover {
+        .timeline-item-inner {
+            width: 300px;
+        }
     }
 
     .timeline-item-inner {
         display: block;
+        background: #0f0;
         width: 0;
-        transition: all .5s;
         overflow: hidden;
-        position: relative;
-        clear: both;
+        transition: all .5s;
 
-        &:hover {
-            width: 305px;
-        }
-    }
-
-    .timeline-item-icon {
-        position: absolute;
-        top: 40px;
-        left: 50%;
-        height: 30px;
-        width: 30px;
-        border-radius: 30px;
-        margin-left: -15px;
-        margin-top: -15px;
-        background: #ff0;
-        text-align: center;
-        line-height: 32px;
-        z-index: 1;
-    }
-
-    .timeline-date {
-        width: $item-date-size;
-        height: $item-date-size;
-        border-radius: $item-date-size;
-        font-size: $global-font-size-smallest;
-        display: block;
-        text-align: center;
-        padding-top: $global-spacing-smaller;
-        position: absolute;
-        top: 40px;
-        left: 50%;
-        line-height: 1em;
-    }
-
-    .timeline-item-content {
-        background: #00f;
-        padding: 20px;
-        width: 265px;
-        min-height: 75px;
-        border: 1px dotted #ccc;
-        position: relative;
-    }
-
-
-    &.is-hidden {}
-
-    &.even {
-        .timeline-date {
-            margin: -$item-date-size/2 0 0 (-$item-date-size/2 - 35px);
-        }
-
-        .timeline-item-inner {
-            float: left;
-            margin: 0 0 0 295px;
-            border-right: none;
-            border-left: 10px solid #f00;
+        &::before {
+            content: "";
+            display: block;
+            width: 10px;
+            height: 100%;
+            background: #000;
+            position: absolute;
         }
 
         .timeline-item-content {
-            float: right;
+            width: 300px;
+        }
+    }
+
+    &.even {
+        float: right;
+
+        .timeline-item-inner {
+            float: left;
+            margin-left: 5px;
 
             &::before {
-                content: "";
-                width: 0;
-                height: 0;
-                border-top: 10px solid transparent;
-                border-right: 20px solid #00f;
-                border-bottom: 10px solid transparent;
-                position: absolute;
-                top: 30px;
-                left: -20px;
+                left: 0;
             }
+        }
+
+        .timeline-item-icon {
+            left: -25px + 5px;
+        }
+
+        .timeline-date {
+            left: -80px;
+        }
+
+        .timeline-item-content {
+            padding-left: 40px;
         }
     }
 
     &.odd {
-        .timeline-date {
-            margin: -$item-date-size/2 0 0 (-$item-date-size/2 + 35px);
-        }
+        float: left;
 
         .timeline-item-inner {
             float: right;
-            margin: 0 295px 0 0;
-            border-left: none;
-            border-right: 10px solid #f00;
+            margin-right: 5px;
+
+            &::before {
+                right: 0;
+            }
+        }
+
+        .timeline-item-icon {
+            right: -25px + 5px;
+        }
+
+        .timeline-date {
+            right: -80px;
         }
 
         .timeline-item-content {
-            float: left;
-
-            &::before {
-                content: "";
-                width: 0;
-                height: 0;
-                border-top: 10px solid transparent;
-                border-left: 20px solid #00f;
-                border-bottom: 10px solid transparent;
-                position: absolute;
-                top: 30px;
-                right: -20px;
-            }
+            padding-right: 40px;
+            text-align: right;
         }
+    }
+
+
+    .timeline-item-icon {
+        display: block;
+        background: #0ff;
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        top: 25px;
+        z-index: 3;
+    }
+
+    .timeline-date {
+        background: #ff0;
+        width: 50px;
+        height: 50px;
+        display: block;
+        position: absolute;
+        top: 25px;
+    }
+
+    .timeline-item-content {
+        display: block;
+        background: #00f;
+        padding: 20px;
+    }
+
+    &.is-hidden {
     }
 }
 
