@@ -1,6 +1,8 @@
 <div class="timeline-item-icon" [ngClass]="getConnectorClasses()"><i [ngClass]="getIconClass()"></i></div>
-<div class="timeline-item-content">
-    <jna-timeline-date class="timeline-date" [date]="blog.published"></jna-timeline-date>
-    <h4 class="timeline-title">{{title}}</h4>
-    <div class="timeline-summary" [innerHTML]="summary"></div>
+<div class="timeline-item-inner">
+    <div class="timeline-item-content">
+        <jna-timeline-date class="timeline-date" [date]="blog.published"></jna-timeline-date>
+        <h4 class="timeline-title">{{title}}</h4>
+        <div class="timeline-summary" [innerHTML]="summary"></div>
+    </div>
 </div>

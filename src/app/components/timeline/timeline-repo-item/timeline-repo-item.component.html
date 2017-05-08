@@ -1,8 +1,10 @@
 <div class="timeline-item-icon" [ngClass]="getConnectorClasses()"><i [ngClass]="getIconClass()"></i></div>
-<div class="timeline-item-content">
-    <jna-timeline-date class="timeline-date" [date]="repo.updated_at"></jna-timeline-date>
-    <h4 class="timeline-title">{{title}}</h4>
-    <div class="timeline-summary">
-        <jna-repo-languages class="timeline-languages" [repo]="repo.name"></jna-repo-languages>
+<div class="timeline-item-inner">
+    <div class="timeline-item-content">
+        <jna-timeline-date class="timeline-date" [date]="repo.updated_at"></jna-timeline-date>
+        <h4 class="timeline-title">{{title}}</h4>
+        <div class="timeline-summary">
+            <jna-repo-languages class="timeline-languages" [repo]="repo.name"></jna-repo-languages>
+        </div>
     </div>
 </div>
