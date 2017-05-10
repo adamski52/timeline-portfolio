@@ -80,6 +80,10 @@ export class TimelineService {
         return match !== undefined;
     }
 
+    public isCreateEvent(item:IEvent):boolean {
+        return item.type === "CreateEvent";
+    }
+
     public getItemTime(item:IBlog|IEvent|IRepo):number {
         if(this.isItemRepo(item)) {
             return new Date((<IRepo>item).updated_at.toString()).getTime();

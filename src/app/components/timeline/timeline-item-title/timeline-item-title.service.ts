@@ -90,7 +90,7 @@ export class TimelineTitleService {
 
         let t = this.scramble(this.title);
 
-        if(!this.isEven) {
+        if(this.isEven) {
             t = this.descrambleFromLeft(t, this.numCharsToKeep);
         }
         else {

@@ -23,27 +23,19 @@ export class TimelineEventService extends GenericHttpService {
     }
 
     public getEventMessage(event:IEvent):string {
-        if(event.type === "PushEvent") {
-            return "pushed to " + event.payload.ref;
-        }
-
         if(event.type === "CreateEvent") {
             return "created " + event.payload.ref;
         }
 
-        return "???";
+        return "pushed to " + event.payload.ref;
     }
 
     public getCommitMessage(event:IEvent):string {
-        if(event.type === "PushEvent") {
-            return event.payload.commits[0].message
-        }
-
         if(event.type === "CreateEvent") {
             return "created branch";
         }
 
-        return "";
+        return event.payload.commits[0].message
     }
 
     public fetch():void {

@@ -8,10 +8,10 @@
         (hover)="onHover($event)">
     </jna-timeline-repo>
     <jna-timeline-event
-        class="timeline-item theme-event"
+        class="timeline-item"
         *ngIf="isItemEvent(item)"
         [event]="item"
-        [ngClass]="{'even': isEven, 'odd': !isEven}"
+        [ngClass]="{'even': isEven, 'odd': !isEven, 'theme-event': !isCreateEvent(item), 'theme-repo': isCreateEvent(item)}"
         [isEven]="isEven"
         (hover)="onHover($event)">
     </jna-timeline-event>

@@ -18,13 +18,13 @@ export class TimelineEventComponent extends TimelineBaseItemComponent implements
     @Input("event") event:IEvent;
 
     public repoName:string;
-    public eventMessage:string;
+    public title:string;
     public commitMessage:string;
 
     constructor(settingsService:TimelineSettingsService,
                 private reposService:TimelineRepoService,
-                private eventsService:TimelineEventService) {
-
+                private eventsService:TimelineEventService,
+                private titleService:TimelineTitleService) {
         super(settingsService);
         this.settingsKey = "githubEvents";
         this.classSuffix = "code-fork";
@@ -33,17 +33,20 @@ export class TimelineEventComponent extends TimelineBaseItemComponent implements
     ngOnInit() {
         this.watchForSettings();
 
+        this.title = this.eventsService.getEventMessage(this.event);
+        this.commitMessage = this.eventsService.getCommitMessage(this.event);
+
         this.reposService.subscribe((repos: IRepo[]) => {
-            let repo:IRepo = repos.find((r:IRepo) => {
+            let repo: IRepo = repos.find((r: IRepo) => {
                 return r.id === this.event.repo.id;
             });
 
-            if(repo) {
+            if (repo) {
                 this.repoName = repo.name;
+                this.titleService.subscribe(this.repoName, this.isEven, (t: string) => {
+                    this.repoName = t;
+                });
             }
         });
-
-        this.eventMessage = this.eventsService.getEventMessage(this.event);
-        this.commitMessage = this.eventsService.getCommitMessage(this.event);
     }
 }

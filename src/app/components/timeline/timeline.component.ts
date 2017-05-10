@@ -31,4 +31,8 @@ export class TimelineComponent {
     public isItemEvent(item:IRepo|IEvent|IBlog):boolean {
         return this.timelineService.isItemEvent(item);
     }
+
+    public isCreateEvent(item:IEvent):boolean {
+        return this.timelineService.isCreateEvent(item);
+    }
 }

@@ -22,10 +22,10 @@
         z-index: 999;
         .timeline-item-inner {
             width: $content-width/2;
+        }
 
-            &::before {
-                box-shadow: 0 0 $timeline-width #f00;
-            }
+        .timeline-item-icon {
+            transform: scale($timeline-hover-scale, $timeline-hover-scale);
         }
     }
 
@@ -42,7 +42,6 @@
             display: block;
             width: $timeline-width;
             height: 100%;
-            background: #000;
             position: absolute;
         }
 
@@ -53,8 +52,6 @@
 
     .timeline-item-icon {
         display: block;
-        border: 3px solid #f00;
-        background: #ccc;
         line-height: $item-icon-size + 2px;
         text-align: center;
         border-radius: $item-icon-size;
@@ -65,11 +62,11 @@
         margin-top: -$item-icon-size/2;
         font-size: $global-font-size-large;
         z-index: 3;
+        transition: $global-transition-fast;
     }
 
     .timeline-date {
         font-size: $global-font-size-smallest;
-        background: #ff0;
         width: $date-icon-size;
         height: $date-icon-size;
         border-radius: $date-icon-size;
@@ -83,9 +80,24 @@
 
     .timeline-item-content {
         display: block;
-        background: #fff;
+        background: $global-color-lightest;
         padding: $global-spacing-large;
-        border: 1px dotted #000;
+        border: 1px dotted $global-color-darkest;
+    }
+
+    .timeline-sub-item {
+        padding: $global-spacing-medium;
+        background: $global-color-lighter;
+        border: 1px solid $global-color-light;
+        position: relative;
+        overflow: hidden;
+
+        &::before {
+            font-size: 4em;
+            color: $global-color-light;
+            position: absolute;
+            bottom: -$global-spacing-medium;
+        }
     }
 
     &.is-hidden {
@@ -116,6 +128,12 @@
             float: left;
             border-left: none;
         }
+
+        .timeline-sub-item {
+            &::before {
+                right: -$global-spacing-medium;
+            }
+        }
     }
 
     &.odd {
@@ -144,9 +162,19 @@
             text-align: right;
             border-right: none;
         }
+
+        .timeline-sub-item {
+            &::before {
+                left: -$global-spacing-medium;
+            }
+        }
     }
 }
 
+
+.timeline-commit-message {
+    margin: $global-spacing-medium 0;
+}
 
 .timeline-date-date,
 .timeline-date-month,
@@ -163,3 +191,14 @@
     font-size: $global-font-size-smaller;
 }
 
+.theme-event {
+    @include make-theme($theme-event-color);
+}
+
+.theme-repo {
+    @include make-theme($theme-repo-color);
+}
+
+.theme-blog {
+    @include make-theme($theme-blog-color);
+}

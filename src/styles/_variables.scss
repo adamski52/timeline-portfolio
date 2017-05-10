@@ -16,20 +16,45 @@
 
 
 @mixin make-theme($primary) {
-    $secondary: darker($primary, 70%);
+    $secondary: darker($primary, $theme-secondary-scale);
 
-    .timeline-item-icon {
-        i {
-            &:before {
-                background: $primary;
-                color: $secondary;
+    &.timeline-item {
+        .timeline-item-inner {
+            &::before {
+                background: $secondary;
             }
         }
-    }
 
-    .timeline-date {
-        background: $primary;
-        color: $secondary;
+        .timeline-item-icon {
+            border: $global-spacing-smallest solid $secondary;
+            background: $primary;
+            color: $secondary;
+        }
+
+        .timeline-date {
+            background: $primary;
+            color: $secondary;
+        }
+
+        &:hover {
+            .timeline-item-inner {
+                &::before {
+                    box-shadow: 0 0 $timeline-width*$timeline-hover-scale $secondary;
+                    background: $primary;
+                }
+            }
+
+            .timeline-item-icon {
+                border-color: $primary;
+                background: $secondary;
+                color: $primary;
+            }
+
+            .timeline-date {
+                background: $secondary;
+                color: $primary;
+            }
+        }
     }
 }
 
@@ -60,14 +85,15 @@ $csharp-color: #4da3de;
 $unknown-color: #40de93;
 $icon-hover-color: #fff;
 
-$theme-event-primary: #1FADBA;
-$theme-event-secondary: #F66800;
+$theme-event-color: #1FADBA;
 $theme-repo-color: #F3572D;
 $theme-blog-color: #9ABE1F;
 $theme-history-color: #F68F03;
 
 $global-color-darkest: #000;
 $global-color-medium: #333;
+$global-color-light: #ddd;
+$global-color-lighter: #f0f0f0;
 $global-color-lightest: #fff;
 $global-color-background: #f3f3f3;
 
@@ -85,8 +111,11 @@ $global-transition-fast: .3s;
 $global-spacing-larger: 30px;
 $global-spacing-large: 20px;
 $global-spacing-medium: 8px;
+$global-spacing-smallest: 3px;
 
 $content-width: 600px;
 $timeline-width: 10px;
 $item-icon-size: 30px;
 $date-icon-size: 45px;
+$timeline-hover-scale: 1.5;
+$theme-secondary-scale: 60%;

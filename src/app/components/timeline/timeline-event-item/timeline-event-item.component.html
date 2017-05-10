@@ -2,10 +2,14 @@
 <jna-timeline-date class="timeline-date" [date]="event.created_at"></jna-timeline-date>
 <div class="timeline-item-inner">
     <div class="timeline-item-content">
-        <h4 class="timeline-title">{{eventMessage}}</h4>
+        <h4 class="timeline-title">{{title}}</h4>
         <div class="timeline-summary">
-            <h5 class="timeline-subtitle">{{repoName}}</h5>
             <h5 class="timeline-commit-message">{{commitMessage}}</h5>
+
+            <div class="timeline-sub-item jna-icon-github">
+                <h5 class="timeline-subtitle">{{repoName}}</h5>
+                <jna-repo-languages class="timeline-languages" *ngIf="repoName" [repo]="repoName"></jna-repo-languages>
+            </div>
         </div>
     </div>
 </div>
