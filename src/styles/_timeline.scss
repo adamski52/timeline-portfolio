@@ -217,3 +217,13 @@
 .theme-blog {
     @include make-theme($theme-blog-color);
 }
+
+@media (max-width: $screen-xs-min) {
+    .timeline-item {
+
+        &.even,
+        &.odd {
+            float: left;
+        }
+    }
+}
