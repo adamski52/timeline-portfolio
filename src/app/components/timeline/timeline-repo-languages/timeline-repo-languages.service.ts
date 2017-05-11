@@ -36,7 +36,7 @@ export class TimelineRepoLanguagesService extends GenericHttpService {
         "c#": "csharp"
     };
 
-    private _data:ILanguage[];
+    private _data:ILanguage[] = [];
 
     constructor(protected http:Http, protected errorService:ErrorService) {
         super(http, errorService);

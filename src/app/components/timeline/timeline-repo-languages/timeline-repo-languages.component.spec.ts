@@ -125,7 +125,7 @@ describe('TimelineRepoLanguagesComponent', () => {
         spyOn(service, "setTitle");
 
         component.onOver(language);
-        expect(service.setTitle).toHaveBeenCalledWith(language.name);
+        expect(service.setTitle).toHaveBeenCalledWith(language.name + " (100%)");
     });
 
     it('should reset the services title on mouseleave', () => {

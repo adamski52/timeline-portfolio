@@ -1,4 +1,4 @@
-<div class="timeline-item-wrapper" *ngFor="let item of items">
+<div class="timeline-item-wrapper" *ngFor="let item of items; let isEven = even;">
     <jna-timeline-repo
         class="timeline-item theme-repo"
         *ngIf="isItemRepo(item)"

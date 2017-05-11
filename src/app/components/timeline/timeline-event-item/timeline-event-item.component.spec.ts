@@ -2,7 +2,6 @@ import {async, ComponentFixture, TestBed, inject} from '@angular/core/testing';
 
 import {TimelineEventComponent} from './timeline-event-item.component';
 import {Component} from "@angular/core";
-import {IEvent} from "../../../interfaces/event";
 import {MockBackend} from '@angular/http/testing';
 import {HttpModule, XHRBackend, Response, ResponseOptions} from '@angular/http';
 import {TimelineTitleService} from "../timeline-item-title/timeline-item-title.service";
@@ -45,7 +44,10 @@ describe('TimlineEventComponent', () => {
                 TimelineRepoService,
                 ErrorService,
                 TimelineEventService,
-                TickerService
+                TickerService,
+                {
+                    provide: XHRBackend, useClass: MockBackend
+                }
             ],
             imports: [
                 HttpModule
@@ -61,7 +63,7 @@ describe('TimlineEventComponent', () => {
     });
 
     it('should set its event message based on the provided @input event', () => {
-        expect(component.eventMessage).toEqual("created refactor/service-streamlining");
+        expect(component.title).toEqual("created refactor/service-streamlining");
     });
 
     it('should set its repo name based on the provided @input event by mapping to the repos', inject([TimelineRepoService, XHRBackend], (service:TimelineRepoService, mockBackend:MockBackend) => {
