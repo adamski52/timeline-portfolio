@@ -1,0 +1,113 @@
+.timeline-item:hover {
+    .timeline-languages {
+        [class^="icon-"],
+        [class*=" icon-"],
+        .jna-icon-file,
+        .jna-icon-file-alt {
+            font-size: 1.3em;
+        }
+
+        .icon-angular {
+            @include make-icon($angular-color);
+        }
+
+        .icon-sql {
+            @include make-icon($sql-color);
+        }
+
+        .icon-sass {
+            @include make-icon($scss-color);
+        }
+
+        .icon-css3-alt {
+            @include make-icon($css-color);
+        }
+
+        .icon-reactjs {
+            @include make-icon($react-color);
+        }
+
+        .icon-html5-alt {
+            @include make-icon($html-color);
+        }
+
+        .icon-javascript-alt {
+            font-size: 1.6em;
+            @include make-icon($js-color);
+        }
+
+        .icon-java-bold {
+            @include make-icon($java-color);
+        }
+
+        .icon-svg {
+            @include make-icon($svg-color);
+        }
+
+        .icon-python {
+            @include make-icon($python-color);
+        }
+
+        .icon-ruby {
+            @include make-icon($ruby-color);
+        }
+
+        .icon-script {
+            @include make-icon($shell-color);
+        }
+
+        .icon-apache {
+            @include make-icon($apache-color);
+        }
+
+        .icon-php-alt {
+            @include make-icon($php-color);
+        }
+
+        .icon-nginx {
+            @include make-icon($nginx-color);
+        }
+
+        .icon-go {
+            @include make-icon($go-color);
+        }
+
+        .icon-docker {
+            @include make-icon($docker-color);
+        }
+
+        .icon-clojure {
+            @include make-icon($clojure-color);
+        }
+
+        .icon-csharp {
+            @include make-icon($csharp-color);
+        }
+
+        .jna-icon-file,
+        .jna-icon-file-alt {
+            @include make-icon($unknown-color);
+        }
+    }
+}
+
+.timeline-languages {
+    padding-left: 25px;
+    white-space: nowrap;
+    margin: 0;
+    display: block;
+
+    [class^="icon-"],
+    [class*=" icon-"],
+    .jna-icon-file,
+    .jna-icon-file-alt {
+        font-size: .8em;
+        transition: all $global-transition;
+        color: #ccc;
+    }
+
+    .icon-javascript-alt {
+        font-size: 1.1em;
+    }
+
+}

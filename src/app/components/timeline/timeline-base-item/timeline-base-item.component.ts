@@ -27,19 +27,6 @@ export class TimelineBaseItemComponent implements OnInit {
         return classObj;
     }
 
-    public getConnectorClasses() {
-        let classObj = {};
-        if(this.isEven) {
-            classObj["top-right"] = true;
-            classObj["bottom-left"] = true;
-        }
-        else {
-            classObj["top-left"] = true;
-            classObj["bottom-right"] = true;
-        }
-        return classObj;
-    }
-
     public ngOnInit() {
         this.watchForSettings();
     }

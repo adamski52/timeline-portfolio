@@ -6,14 +6,21 @@
 }
 
 .timeline-item-wrapper {
+<<<<<<< HEAD
     display: block;
     width: 100%;
     float: left;
     clear: both;
+=======
+    margin: 0;
+    padding: 0;
+    width: 33.333%;
+>>>>>>> master
 }
 
 .timeline-item {
     display: block;
+<<<<<<< HEAD
     width: $content-width/2 + $timeline-width/2;
     clear: both;
     position: relative;
@@ -148,8 +155,48 @@
                 right: -$global-spacing-medium;
             }
         }
+=======
+    margin: $global-spacing-medium;
+    min-height: 42px;
+
+    transform-origin: 0 0;
+    perspective: 320px;
+
+    .timeline-item-flipper {
+        transition: all 1s;
+        transform-style: preserve-3d;
+        position: relative;
     }
 
+    .timeline-item-front,
+    .timeline-item-back {
+        display: block;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        color: $global-dark-color;
+        background: $global-lightest-color;
+        border: 1px dotted $global-light-color;
+        padding: $global-spacing-small 41px + $global-spacing-small $global-spacing-small $global-spacing-small;
+    }
+
+    .timeline-item-front {
+        z-index: 1;
+    }
+
+    .timeline-item-back {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: rotateY(180deg);
+    }
+
+    &.is-hidden .timeline-item-flipper {
+        transform: rotateY(180deg);
+>>>>>>> master
+    }
+
+<<<<<<< HEAD
     &.odd {
         float: left;
 
@@ -161,6 +208,30 @@
                 right: 0;
             }
         }
+=======
+.timeline-item-content {
+    display: block;
+}
+
+.timeline-title,
+.timeline-subtitle {
+    text-transform: lowercase;
+    font-size: $global-font-size-smaller;
+
+    span {
+        white-space: nowrap;
+        width: 85%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: inline-block;
+    }
+
+    span,
+    &:before,
+    &:after {
+        vertical-align: middle;
+    }
+>>>>>>> master
 
         .timeline-item-icon {
             right: -$item-icon-size/2 + $timeline-width/2;
@@ -177,6 +248,7 @@
             border-right: none;
         }
 
+<<<<<<< HEAD
         .timeline-sub-item {
             &::before {
                 left: -$global-spacing-medium;
@@ -187,6 +259,24 @@
 
 .timeline-commit-message {
     margin: $global-spacing-medium 0;
+=======
+.timeline-subtitle {
+    font-size: $global-font-size-smallest;
+    text-transform: uppercase;
+    color: $global-medium-color;
+    padding-left: 25px;
+}
+
+.timeline-date {
+    position: absolute;
+    right: 0;
+    width: 41px;
+    height: 32px;
+    top: 50%;
+    color: $global-light-color;
+    margin: -16px 0 0 00;
+    padding: $global-spacing-smaller $global-spacing-medium $global-spacing-smallest $global-spacing-medium;
+>>>>>>> master
 }
 
 .timeline-date-date,
@@ -199,6 +289,7 @@
 .timeline-date-date {
     font-size: $global-font-size-large;
 }
+<<<<<<< HEAD
 
 .timeline-date-year {
     font-size: $global-font-size-smaller;
@@ -215,3 +306,5 @@
 .theme-blog {
     @include make-theme($theme-blog-color);
 }
+=======
+>>>>>>> master

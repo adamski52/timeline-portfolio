@@ -26,7 +26,7 @@ export class TimelineRepoLanguagesComponent implements OnInit {
     }
 
     onOver(language:ILanguage) {
-        this.titleService.setTitle(language.name);
+        this.titleService.setTitle(this.languageService.getDisplayName(language));
     }
 
     ngOnInit() {
