@@ -10,6 +10,9 @@ import {HttpModule} from "@angular/http";
 import {ErrorService} from "../../../services/error.service";
 import {TimelineEventService} from "./timeline-event-item.service";
 import {IEvent} from "../../../interfaces/event";
+import {TimelineRepoComponent} from "../timeline-repo-item/timeline-repo-item.component";
+import {TimelineRepoLanguagesComponent} from "../timeline-repo-languages/timeline-repo-languages.component";
+import {TickerService} from "../../../services/ticker.service";
 
 @Component({
     selector: 'jna-test-component',
@@ -32,14 +35,16 @@ describe('TimlineEventComponent', () => {
             declarations: [
                 TestComponent,
                 TimelineEventComponent,
-                TimelineDateComponent
+                TimelineDateComponent,
+                TimelineRepoLanguagesComponent
             ],
             providers: [
                 TimelineTitleService,
                 TimelineSettingsService,
                 TimelineRepoService,
                 ErrorService,
-                TimelineEventService
+                TimelineEventService,
+                TickerService
             ],
             imports: [
                 HttpModule

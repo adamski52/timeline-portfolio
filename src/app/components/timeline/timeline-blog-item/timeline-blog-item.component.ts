@@ -20,6 +20,7 @@ export class TimelineBlogComponent extends TimelineBaseItemComponent implements 
     }
 
     ngOnInit() {
+        this.watchForSettings();
         this.title = this.blog.title;
         this.summary = this.blog.content;
     }

@@ -36,23 +36,12 @@ describe('TimelineBaseItemComponent', () => {
         }).compileComponents();
     }));
 
-    it('should have the "reverse" class if the item is even', () => {
+    it('should have the proper icon class', () => {
         fixture = TestBed.createComponent(TestComponent);
         fixture.componentInstance.isEven = true;
         component = fixture.debugElement.children[0].componentInstance;
         fixture.detectChanges();
         expect(component.isEven).toEqual(true);
-        expect(fixture.componentInstance.getIconClass()["jna-icon-reverse-font"]).toEqual(true);
-        expect(fixture.componentInstance.getIconClass()["jna-icon-font"]).toEqual(false);
-    });
-
-    it('should not have the "reverse" class if the item is odd', () => {
-        fixture = TestBed.createComponent(TestComponent);
-        fixture.componentInstance.isEven = false;
-        component = fixture.debugElement.children[0].componentInstance;
-        fixture.detectChanges();
-        expect(component.isEven).toEqual(false);
-        expect(fixture.componentInstance.getIconClass()["jna-icon-reverse-font"]).toEqual(false);
         expect(fixture.componentInstance.getIconClass()["jna-icon-font"]).toEqual(true);
     });
 

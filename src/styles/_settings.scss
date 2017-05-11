@@ -1,12 +1,12 @@
 .timeline-settings {
     position: fixed;
-    z-index: 100;
     width: 100%;
     background: $global-color-darkest;
     text-align: right;
     color: $global-color-lightest;
     padding: 5px;
     font-size: $global-font-size-smaller;
+    z-index: 2;
 
     a {
         color: inherit;

@@ -23,7 +23,8 @@ export class TimelineRepoComponent extends TimelineBaseItemComponent implements 
     }
 
     ngOnInit() {
-        this.title = 'created repo ' + this.repo.name;
+        this.watchForSettings();
+        this.title = this.repo.name;
         this.titleService.subscribe(this.title, this.isEven, (t:string) => {
             this.title = t;
         });

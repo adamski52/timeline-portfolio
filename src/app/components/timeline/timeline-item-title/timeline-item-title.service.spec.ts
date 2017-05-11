@@ -93,7 +93,7 @@ describe('TimelineTitleService', () => {
     it("should unscramble letter by letter word, left to right if even", inject([TickerService], (mockTicker:MockTickerService) => {
         service = TestBed.get(TimelineTitleService);
 
-        service.subscribe("lol", false, (t:string) => {
+        service.subscribe("lol", true, (t:string) => {
             title = t;
         });
 
@@ -127,7 +127,7 @@ describe('TimelineTitleService', () => {
     it("should unscramble letter by letter, right to left if not even", inject([TickerService], (mockTicker:MockTickerService) => {
         service = TestBed.get(TimelineTitleService);
 
-        service.subscribe("lol", true, (t:string) => {
+        service.subscribe("lol", false, (t:string) => {
             title = t;
         });
 

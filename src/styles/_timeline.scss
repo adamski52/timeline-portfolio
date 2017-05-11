@@ -17,9 +17,10 @@
     width: $content-width/2 + $timeline-width/2;
     clear: both;
     position: relative;
+    transition: $global-transition-fast;
+    transition-delay: unset;
 
     &:hover {
-        z-index: 999;
         .timeline-item-inner {
             width: $content-width/2;
         }
@@ -61,8 +62,7 @@
         top: 50%;
         margin-top: -$item-icon-size/2;
         font-size: $global-font-size-large;
-        z-index: 3;
-        transition: $global-transition-fast;
+        z-index: 1;
     }
 
     .timeline-date {
@@ -101,6 +101,20 @@
     }
 
     &.is-hidden {
+        .timeline-item-icon {
+            opacity: 0;
+            transition-delay: unset;
+            transition: $global-transition-fast;
+        }
+
+        .timeline-date {
+            opacity: 0;
+            transition-delay: unset;
+            transition: $global-transition-fast;
+        }
+
+        transition: $global-transition-fast;
+        height: 0;
     }
 
     &.even {
@@ -170,7 +184,6 @@
         }
     }
 }
-
 
 .timeline-commit-message {
     margin: $global-spacing-medium 0;
