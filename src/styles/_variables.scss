@@ -15,8 +15,19 @@
 }
 
 
+@mixin make-button($primary, $secondary, $tertiary) {
+    background: $primary;
+    color: $global-color-lightest;
+
+    &:hover {
+        background: $secondary;
+        color: $tertiary;
+    }
+}
+
 @mixin make-theme($primary) {
     $secondary: darker($primary, $theme-secondary-scale);
+    $tertiary: lighter($primary, $theme-secondary-scale);
 
     &.timeline-item {
         .timeline-item-inner {
@@ -32,8 +43,9 @@
         }
 
         .timeline-date {
-            background: $primary;
+            background: $tertiary;
             color: $secondary;
+            border: 1px solid $primary;
         }
 
         &:hover {
@@ -52,9 +64,13 @@
 
             .timeline-date {
                 background: $secondary;
-                color: $primary;
+                color: $tertiary;
             }
         }
+    }
+
+    .btn {
+        @include make-button($primary, $secondary, $tertiary);
     }
 }
 
@@ -83,9 +99,10 @@ $csharp-color: #4da3de;
 $unknown-color: #40de93;
 $icon-hover-color: #fff;
 
-$theme-event-color: #1FADBA;
+$theme-commit-color: #1FADBA;
 $theme-repo-color: #F3572D;
-$theme-blog-color: #9ABE1F;
+$theme-branch-color: #9ABE1F;
+$theme-blog-color: #9640d2;
 $theme-history-color: #F68F03;
 
 $global-color-darkest: #000;
@@ -108,12 +125,13 @@ $global-transition-fast: .3s;
 
 $global-spacing-larger: 30px;
 $global-spacing-large: 20px;
-$global-spacing-medium: 8px;
-$global-spacing-smallest: 3px;
+$global-spacing-medium: 6px;
+$global-spacing-smaller: 3px;
+$global-spacing-smallest: 2px;
 
 $content-width: 600px;
 $timeline-width: 10px;
 $item-icon-size: 30px;
 $date-icon-size: 45px;
 $timeline-hover-scale: 1.5;
-$theme-secondary-scale: 60%;
+$theme-secondary-scale: 40%;

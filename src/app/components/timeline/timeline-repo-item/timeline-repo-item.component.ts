@@ -18,8 +18,8 @@ export class TimelineRepoComponent extends TimelineBaseItemComponent implements 
 
     constructor(private titleService:TimelineTitleService, settingsService:TimelineSettingsService) {
         super(settingsService);
-        this.settingsKey = "githubRepos";
-        this.classSuffix = "github";
+        this.settingsKey = "repos";
+        this.classSuffix = "birthday-cake";
     }
 
     ngOnInit() {

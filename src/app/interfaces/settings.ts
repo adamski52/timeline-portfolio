@@ -1,6 +1,7 @@
 export interface ISettings {
-    githubEvents: boolean;
-    githubRepos: boolean;
+    commits: boolean;
+    branches: boolean;
+    repos: boolean;
     tweets: boolean;
     blogs: boolean;
     experiments: boolean;

@@ -21,6 +21,7 @@
     transition-delay: unset;
 
     &:hover {
+        cursor: pointer;
         .timeline-item-inner {
             width: $content-width/2;
         }
@@ -53,7 +54,7 @@
 
     .timeline-item-icon {
         display: block;
-        line-height: $item-icon-size + 2px;
+        line-height: $item-icon-size - $global-spacing-smaller/2;
         text-align: center;
         border-radius: $item-icon-size;
         width: $item-icon-size;
@@ -187,6 +188,16 @@
     }
 }
 
+.timeline-languages {
+    display: block;
+}
+
+.btn {
+    padding: $global-spacing-smallest $global-spacing-medium;
+    font-size: $global-font-size-smaller;
+    color: $global-color-lightest;
+}
+
 .timeline-commit-message {
     margin: $global-spacing-medium 0;
 }
@@ -199,15 +210,19 @@
 }
 
 .timeline-date-date {
-    font-size: $global-font-size-large;
+    font-size: $global-font-size-largest;
 }
 
 .timeline-date-year {
     font-size: $global-font-size-smaller;
 }
 
-.theme-event {
-    @include make-theme($theme-event-color);
+.theme-commit {
+    @include make-theme($theme-commit-color);
+}
+
+.theme-branch {
+    @include make-theme($theme-branch-color);
 }
 
 .theme-repo {

@@ -9,11 +9,14 @@ import {TimelineEventService} from "./timeline-event-item/timeline-event-item.se
 import {TimelineBlogService} from "./timeline-blog-item/timeline-blog-item.service";
 import {Subscription} from "rxjs/Subscription";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {IEventCollection} from "../../interfaces/event-collection";
 
 @Injectable()
 export class TimelineService {
     private settings:ISettings;
     private repos:IRepo[] = [];
+    private branches:IEvent[] = [];
+    private commits:IEvent[] = [];
     private events:IEvent[] = [];
     private blogs:IBlog[] = [];
     private subject:BehaviorSubject<any> = new BehaviorSubject([]);
@@ -28,8 +31,13 @@ export class TimelineService {
             this.updateItems();
         });
 
-        this.eventsService.subscribe((events: IEvent[]) => {
-            this.events = events;
+        this.eventsService.subscribe((events: IEventCollection) => {
+            this.commits = events.commits;
+            this.branches = events.branches;
+
+            this.events = [].concat(this.commits, this.branches);
+            console.log("E", this.events);
+
             this.updateItems();
         });
 
@@ -80,10 +88,6 @@ export class TimelineService {
         return match !== undefined;
     }
 
-    public isCreateEvent(item:IEvent):boolean {
-        return item.type === "CreateEvent";
-    }
-
     public getItemTime(item:IBlog|IEvent|IRepo):number {
         if(this.isItemRepo(item)) {
             return new Date((<IRepo>item).updated_at.toString()).getTime();
@@ -107,12 +111,16 @@ export class TimelineService {
             return;
         }
 
-        if(this.settings.githubRepos) {
+        if(this.settings.repos) {
             items = items.concat(this.repos);
         }
 
-        if(this.settings.githubEvents) {
-            items = items.concat(this.events);
+        if(this.settings.commits) {
+            items = items.concat(this.commits);
+        }
+
+        if(this.settings.branches) {
+            items = items.concat(this.branches);
         }
 
         if(this.settings.blogs) {
@@ -126,6 +134,7 @@ export class TimelineService {
             return rhsValue - lhsValue;
         });
 
+        console.log("ITEMS", items);
         this.subject.next(items);
     }
 }

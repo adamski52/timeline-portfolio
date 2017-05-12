@@ -6,8 +6,9 @@ import {ISettings} from "../../../interfaces/settings";
 @Injectable()
 export class TimelineSettingsService {
     private _settings:ISettings = {
-        "githubEvents": true,
-        "githubRepos": true,
+        "commits": true,
+        "branches": true,
+        "repos": true,
         "tweets": true,
         "blogs": true,
         "experiments": true

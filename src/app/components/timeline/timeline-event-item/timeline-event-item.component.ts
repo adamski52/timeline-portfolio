@@ -26,11 +26,18 @@ export class TimelineEventComponent extends TimelineBaseItemComponent implements
                 private eventsService:TimelineEventService,
                 private titleService:TimelineTitleService) {
         super(settingsService);
-        this.settingsKey = "githubEvents";
-        this.classSuffix = "code-fork";
     }
 
     ngOnInit() {
+        if(this.eventsService.isCreateEvent(this.event)) {
+            this.settingsKey = "branches";
+            this.classSuffix = "github-square";
+        }
+        else {
+            this.settingsKey = "commits";
+            this.classSuffix = "code-fork";
+        }
+
         this.watchForSettings();
 
         this.title = this.eventsService.getEventMessage(this.event);

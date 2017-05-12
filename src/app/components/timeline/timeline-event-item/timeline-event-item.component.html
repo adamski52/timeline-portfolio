@@ -6,10 +6,13 @@
         <div class="timeline-summary">
             <h5 class="timeline-commit-message">{{commitMessage}}</h5>
 
-            <div class="timeline-sub-item jna-icon-github">
+            <div class="timeline-sub-item jna-icon-github theme-repo">
                 <h5 class="timeline-subtitle">{{repoName}}</h5>
                 <jna-repo-languages class="timeline-languages" *ngIf="repoName" [repo]="repoName"></jna-repo-languages>
+                <a href="" class="btn" (click)="onViewRepo()">View Repo</a>
             </div>
         </div>
+
+        <a href="" class="btn" (click)="onViewEvent()">View Event</a>
     </div>
 </div>

@@ -129,9 +129,7 @@
 }
 
 [class^="jna-icon-"]:before,
-[class*=" jna-icon-"]:before,
-[class^="jna-icon-reverse-"]:after,
-[class*=" jna-icon-reverse-"]:after {
+[class*=" jna-icon-"]:before {
     font-family: "jna-icons" !important;
     font-style: normal !important;
     font-weight: normal !important;
@@ -143,101 +141,32 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.jna-icon-twitter:before,
-.jna-icon-reverse-twitter:after {
+.jna-icon-twitter:before {
     content: "\61";
 }
-.jna-icon-twitter-al:before,
-.jna-icon-reverse-twitter-al:after {
-    content: "\62";
-}
-.jna-icon-unlock:before,
-.jna-icon-reverse-unlock:after {
-    content: "\63";
-}
-.jna-icon-heart-alt:before,
-.jna-icon-reverse-heart-alt:after {
-    content: "\64";
-}
-.jna-icon-heart:before,
-.jna-icon-reverse-heart:after {
-    content: "\65";
-}
-.jna-icon-github:before,
-.jna-icon-reverse-github:after {
+.jna-icon-github:before {
     content: "\66";
 }
-.jna-icon-github-alt:before,
-.jna-icon-reverse-github-alt:after {
-    content: "\67";
-}
-.jna-icon-git-al:before,
-.jna-icon-reverse-git-al:after {
-    content: "\68";
-}
-.jna-icon-git:before,
-.jna-icon-reverse-git:after {
-    content: "\69";
-}
-.jna-icon-heartbeat:before,
-.jna-icon-reverse-heartbeat:after {
-    content: "\6a";
-}
-.jna-icon-file:before,
-.jna-icon-reverse-file:after {
-    content: "\6b";
-}
-.jna-icon-file-alt:before,
-.jna-icon-reverse-file-alt:after {
+.jna-icon-file-alt:before {
     content: "\6c";
 }
-.jna-icon-lock:before,
-.jna-icon-reverse-lock:after {
-    content: "\6d";
-}
-.jna-icon-tags:before,
-.jna-icon-reverse-tags:after {
-    content: "\6e";
-}
-.jna-icon-tag:before,
-.jna-icon-reverse-tag:after {
-    content: "\6f";
-}
-.jna-icon-flask:before,
-.jna-icon-reverse-flask:after {
+.jna-icon-flask:before {
     content: "\70";
 }
-.jna-icon-code-fork:before,
-.jna-icon-reverse-code-fork:after {
+.jna-icon-code-fork:before {
     content: "\71";
 }
-.jna-icon-github-square:before,
-.jna-icon-reverse-github-square:after {
+.jna-icon-github-square:before {
     content: "\72";
 }
-.jna-icon-font:before,
-.jna-icon-reverse-font:after {
+.jna-icon-font:before {
     content: "\73";
 }
-.jna-icon-rss:before,
-.jna-icon-reverse-rss:after {
-    content: "\74";
-}
-.jna-icon-rss-square:before,
-.jna-icon-reverse-rss-square:after {
-    content: "\75";
-}
-.jna-icon-stack-overflow:before,
-.jna-icon-reverse-stack-overflow:after {
+.jna-icon-stack-overflow:before {
     content: "\76";
 }
-.jna-icon-share-alt:before,
-.jna-icon-reverse-share-alt:after {
-    content: "\77";
-}
-.jna-icon-share-alt-square:before,
-.jna-icon-reverse-share-alt-square:after {
-    content: "\78";
+.jna-icon-birthday-cake:before {
+    content: "\41";
 }
 .jna-icon-disabled {
     color: $global-color-medium;

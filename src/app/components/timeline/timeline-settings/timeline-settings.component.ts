@@ -12,8 +12,9 @@ import {ISettings} from "../../../interfaces/settings";
 })
 export class TimelineSettingsComponent {
     private titleMap = {
-        githubEvents: "Github Events",
-        githubRepos: "Github Repos",
+        commits: "Github Events",
+        branches: "Github Branches",
+        repos: "Github Repos",
         experiments: "Experiments",
         tweets: "Tweets",
         blogs: "Blogs"
