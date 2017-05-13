@@ -12,19 +12,15 @@ import {TimelineBaseItemComponent} from "../timeline-base-item/timeline-base-ite
     ]
 })
 export class TimelineRepoComponent extends TimelineBaseItemComponent implements OnInit {
-    @Input("repo") repo:IRepo;
-
     public title:string;
 
     constructor(private titleService:TimelineTitleService, settingsService:TimelineSettingsService) {
         super(settingsService);
-        this.settingsKey = "repos";
-        this.classSuffix = "birthday-cake";
     }
 
     ngOnInit() {
         this.watchForSettings();
-        this.title = this.repo.name;
+        this.title = (<IRepo>this.item).name;
         this.titleService.subscribe(this.title, this.isEven, (t:string) => {
             this.title = t;
         });

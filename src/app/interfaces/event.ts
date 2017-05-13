@@ -13,4 +13,6 @@ export interface IEvent {
         url: string;
     };
     type: string;
+    $$type: string;
+    $$theme: string;
 };

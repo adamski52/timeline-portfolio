@@ -23,4 +23,6 @@ export interface IBlog {
         totalItems: string;
         selfLink: string;
     };
+    $$type: string;
+    $$theme: string;
 };

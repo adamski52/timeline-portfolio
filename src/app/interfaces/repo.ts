@@ -72,4 +72,6 @@ export interface IRepo {
     url: string;
     watchers: number;
     watchers_count: number;
+    $$type: string;
+    $$theme: string;
 };

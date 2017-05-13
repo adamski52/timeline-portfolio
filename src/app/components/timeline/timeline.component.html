@@ -1,25 +1,33 @@
-<div class="timeline-item-wrapper" *ngFor="let item of items; let isEven = even;">
+<div class="timeline-item-wrapper" *ngFor="let item of items; let isEven = even;" [ngSwitch]="item.$$type">
     <jna-timeline-repo
-        class="timeline-item"
-        [ngClass]="getItemClass(item, isEven)"
-        *ngIf="isItemRepo(item)"
-        [repo]="item"
+        class="timeline-item theme-repo"
+        [ngClass]="{'even': isEven, 'odd': !isEven}"
+        *ngSwitchCase="'repos'"
+        [item]="item"
         [isEven]="isEven"
         (hover)="onHover($event)">
     </jna-timeline-repo>
-    <jna-timeline-event
-        class="timeline-item"
-        [ngClass]="getItemClass(item, isEven)"
-        *ngIf="isItemEvent(item)"
-        [event]="item"
+    <jna-timeline-commit
+        class="timeline-item theme-commit"
+        [ngClass]="{'even': isEven, 'odd': !isEven}"
+        *ngSwitchCase="'commits'"
+        [item]="item"
         [isEven]="isEven"
         (hover)="onHover($event)">
-    </jna-timeline-event>
+    </jna-timeline-commit>
+    <jna-timeline-branch
+        class="timeline-item theme-branch"
+        [ngClass]="{'even': isEven, 'odd': !isEven}"
+        *ngSwitchCase="'branches'"
+        [item]="item"
+        [isEven]="isEven"
+        (hover)="onHover($event)">
+    </jna-timeline-branch>
     <jna-timeline-blog
-        class="timeline-item"
-        [ngClass]="getItemClass(item, isEven)"
-        *ngIf="isItemBlog(item)"
-        [blog]="item"
+        class="timeline-item theme-blog"
+        [ngClass]="{'even': isEven, 'odd': !isEven}"
+        *ngSwitchCase="'blogs'"
+        [item]="item"
         [isEven]="isEven"
         (hover)="onHover($event)">
     </jna-timeline-blog>

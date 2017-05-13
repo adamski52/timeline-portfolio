@@ -1,5 +1,5 @@
-<div class="timeline-item-icon" [ngClass]="getIconClass()"></div>
-<jna-timeline-date class="timeline-date" [date]="event.created_at"></jna-timeline-date>
+<div class="timeline-item-icon jna-icon-github"></div>
+<jna-timeline-date class="timeline-date" [date]="item.created_at"></jna-timeline-date>
 <div class="timeline-item-inner">
     <div class="timeline-item-content">
         <h4 class="timeline-title">{{title}}</h4>
@@ -9,10 +9,13 @@
             <div class="timeline-sub-item jna-icon-github theme-repo">
                 <h5 class="timeline-subtitle">{{repoName}}</h5>
                 <jna-repo-languages class="timeline-languages" *ngIf="repoName" [repo]="repoName"></jna-repo-languages>
-                <a href="" class="btn" (click)="onViewRepo()">View Repo</a>
+                <div class="timeline-actions">
+                    <a href="" class="btn" (click)="onViewRepo()">View Repo</a>
+                </div>
             </div>
         </div>
-
-        <a href="" class="btn" (click)="onViewEvent()">View Event</a>
+        <div class="timeline-actions">
+            <a href="" class="btn" (click)="onViewEvent()">View Event</a>
+        </div>
     </div>
 </div>

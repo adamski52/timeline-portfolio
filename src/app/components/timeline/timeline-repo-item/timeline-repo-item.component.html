@@ -1,13 +1,15 @@
-<div class="timeline-item-icon" [ngClass]="getIconClass()"></div>
-<jna-timeline-date class="timeline-date" [date]="repo.updated_at"></jna-timeline-date>
+<div class="timeline-item-icon jna-icon-birthday-cake"></div>
+<jna-timeline-date class="timeline-date" [date]="item.updated_at"></jna-timeline-date>
 <div class="timeline-item-inner">
     <div class="timeline-item-content">
         <h3>A repo is born!</h3>
         <div class="timeline-sub-item jna-icon-github">
             <h4 class="timeline-title">{{title}}</h4>
             <div class="timeline-summary">
-                <jna-repo-languages class="timeline-languages" [repo]="repo.name"></jna-repo-languages>
-                <a href="" class="btn" (click)="onViewRepo()">View Repo</a>
+                <jna-repo-languages class="timeline-languages" [repo]="item.name"></jna-repo-languages>
+                <div class="timeline-actions">
+                    <a href="" class="btn" (click)="onViewRepo()">View Repo</a>
+                </div>
             </div>
         </div>
     </div>

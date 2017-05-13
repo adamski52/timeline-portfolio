@@ -16,6 +16,9 @@ export class TimelineBlogService extends GenericHttpService {
     public fetch(): void {
         this.load("/blog/blogger/v3/blogs/3369191738147730436/posts?key=AIzaSyD53h3c6rF1MQ1Bt9Nvdv0tDNbuB7aC1R4").subscribe((response: Response) => {
             this.data = response.json().items;
+            for(let d of this._data) {
+                d.$$type = "blogs";
+            }
             this.subject.next(this.data);
         }, (error:Response) => {
             this.errorService.add("Failed to load blogs.", error.status);

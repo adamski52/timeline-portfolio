@@ -9,14 +9,12 @@ import {TimelineBaseItemComponent} from "../timeline-base-item/timeline-base-ite
 
 @Component({
     selector: 'jna-timeline-event',
-    templateUrl: './timeline-event-item.component.html',
+    template: '<ng-content></ng-content>',
     providers: [
         TimelineTitleService
     ]
 })
 export class TimelineEventComponent extends TimelineBaseItemComponent implements OnInit {
-    @Input("event") event:IEvent;
-
     public repoName:string;
     public title:string;
     public commitMessage:string;
@@ -29,23 +27,15 @@ export class TimelineEventComponent extends TimelineBaseItemComponent implements
     }
 
     ngOnInit() {
-        if(this.eventsService.isCreateEvent(this.event)) {
-            this.settingsKey = "branches";
-            this.classSuffix = "github-square";
-        }
-        else {
-            this.settingsKey = "commits";
-            this.classSuffix = "code-fork";
-        }
-
+        console.log("ITEM", this.item);
         this.watchForSettings();
 
-        this.title = this.eventsService.getEventMessage(this.event);
-        this.commitMessage = this.eventsService.getCommitMessage(this.event);
+        this.title = this.eventsService.getEventMessage(<IEvent>this.item);
+        this.commitMessage = this.eventsService.getCommitMessage(<IEvent>this.item);
 
         this.reposService.subscribe((repos: IRepo[]) => {
             let repo: IRepo = repos.find((r: IRepo) => {
-                return r.id === this.event.repo.id;
+                return r.id === (<IEvent>this.item).repo.id;
             });
 
             if (repo) {
@@ -55,5 +45,37 @@ export class TimelineEventComponent extends TimelineBaseItemComponent implements
                 });
             }
         });
+    }
+}
+
+@Component({
+    selector: 'jna-timeline-commit',
+    templateUrl: './timeline-commit-item.component.html',
+    providers: [
+        TimelineTitleService
+    ]
+})
+export class TimelineCommitComponent extends TimelineEventComponent {
+    constructor(settingsService:TimelineSettingsService,
+                reposService:TimelineRepoService,
+                eventsService:TimelineEventService,
+                titleService:TimelineTitleService) {
+        super(settingsService, reposService, eventsService, titleService);
+    }
+}
+
+@Component({
+    selector: 'jna-timeline-branch',
+    templateUrl: './timeline-branch-item.component.html',
+    providers: [
+        TimelineTitleService
+    ]
+})
+export class TimelineBranchComponent extends TimelineEventComponent {
+    constructor(settingsService:TimelineSettingsService,
+                reposService:TimelineRepoService,
+                eventsService:TimelineEventService,
+                titleService:TimelineTitleService) {
+        super(settingsService, reposService, eventsService, titleService);
     }
 }

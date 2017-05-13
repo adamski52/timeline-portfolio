@@ -188,6 +188,12 @@
     }
 }
 
+.timeline-actions {
+    text-align: center;
+    display: block;
+    margin-top: $global-spacing-large;
+}
+
 .timeline-languages {
     display: block;
 }
@@ -235,7 +241,6 @@
 
 @media (max-width: $screen-xs-min) {
     .timeline-item {
-
         &.even,
         &.odd {
             float: left;

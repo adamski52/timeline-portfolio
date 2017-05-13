@@ -16,6 +16,9 @@ export class TimelineRepoService extends GenericHttpService {
     public fetch(): void {
         this.load("/api/users/adamski52/repos").subscribe((response: Response) => {
             this._data = response.json();
+            for(let d of this._data) {
+                d.$$type = "repos";
+            }
             this.subject.next(this._data);
         }, (error:Response) => {
             this.errorService.add("Failed to load repos.", error.status);

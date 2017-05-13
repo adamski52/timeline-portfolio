@@ -58,9 +58,11 @@ export class TimelineEventService extends GenericHttpService {
 
             for(let d of data) {
                 if(this.isCreateEvent(d)) {
+                    d.$$type = "branches";
                     this._branches.push(d);
                 }
                 else {
+                    d.$$type = "commits";
                     this._commits.push(d);
                 }
             }

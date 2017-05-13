@@ -65,27 +65,19 @@ export class TimelineService {
     }
 
     public isItemRepo(item:IRepo|IEvent|IBlog):boolean {
-        let match:IRepo = this.repos.find((repo:IRepo) => {
-            return repo.id === item.id;
-        });
-
-        return match !== undefined;
+        return item.$$type === "repos";
     }
 
-    public isItemEvent(item:IRepo|IEvent|IBlog):boolean {
-        let match:IEvent = this.events.find((event:IEvent) => {
-            return event.id === item.id;
-        });
+    public isItemCommit(item:IRepo|IEvent|IBlog):boolean {
+        return item.$$type === "commits";
+    }
 
-        return match !== undefined;
+    public isItemBranch(item:IRepo|IEvent|IBlog):boolean {
+        return item.$$type === "branches";
     }
 
     public isItemBlog(item:IRepo|IEvent|IBlog):boolean {
-        let match:IBlog = this.blogs.find((blog:IBlog) => {
-            return blog.id === item.id;
-        });
-
-        return match !== undefined;
+        return item.$$type === "blogs";
     }
 
     public getItemTime(item:IBlog|IEvent|IRepo):number {
@@ -97,7 +89,7 @@ export class TimelineService {
             return new Date((<IBlog>item).published).getTime();
         }
 
-        if(this.isItemEvent(item)) {
+        if(this.isItemCommit(item) || this.isItemBranch(item)) {
             return new Date((<IEvent>item).created_at.toString()).getTime();
         }
 
