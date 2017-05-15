@@ -27,7 +27,6 @@ export class TimelineEventComponent extends TimelineBaseItemComponent implements
     }
 
     ngOnInit() {
-        console.log("ITEM", this.item);
         this.watchForSettings();
 
         this.title = this.eventsService.getEventMessage(<IEvent>this.item);

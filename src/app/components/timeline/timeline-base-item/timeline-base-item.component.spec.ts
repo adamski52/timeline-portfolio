@@ -4,22 +4,24 @@ import {Component} from "@angular/core";
 import {TimelineBaseItemComponent} from "./timeline-base-item.component";
 import {TimelineSettingsService} from "../timeline-settings/timeline-settings.service";
 import {ISettings} from "../../../interfaces/settings";
+import {settings} from "cluster";
+import {IRepo} from "../../../interfaces/repo";
 
 @Component({
     selector: 'jna-timeline-test-item',
-    template: `<jna-timeline-item [isEven]="isEven"></jna-timeline-item>`
+    template: `<jna-timeline-item [isEven]="isEven" [item]="item"></jna-timeline-item>`
 })
-class TestComponent extends TimelineBaseItemComponent{
+class TestComponent extends TimelineBaseItemComponent {
     public isEven:boolean = true;
+
+    public item = require("../../../../../mocks/posts.json").items[0];
 
     constructor(settingsService:TimelineSettingsService) {
         super(settingsService);
-        this.settingsKey = "blogs";
-        this.classSuffix = "font";
     }
 }
 
-describe('TimelineBaseItemComponent', () => {
+fdescribe('TimelineBaseItemComponent', () => {
     let component:TimelineBaseItemComponent,
         fixture:ComponentFixture<TestComponent>,
         settingsService:TimelineSettingsService;
@@ -34,42 +36,44 @@ describe('TimelineBaseItemComponent', () => {
                 TimelineSettingsService
             ]
         }).compileComponents();
+
+        fixture = TestBed.createComponent(TestComponent);
+        component = fixture.debugElement.children[0].componentInstance;
+        settingsService = fixture.debugElement.children[0].injector.get(TimelineSettingsService);
     }));
 
-    it('should have the proper icon class', () => {
-        fixture = TestBed.createComponent(TestComponent);
-        fixture.componentInstance.isEven = true;
-        component = fixture.debugElement.children[0].componentInstance;
+    it('should subscribe to the settings service', () => {
+        spyOn(settingsService, "subscribe");
+
         fixture.detectChanges();
-        expect(component.isEven).toEqual(true);
-        expect(fixture.componentInstance.getIconClass()["jna-icon-font"]).toEqual(true);
+
+        expect(settingsService.subscribe).toHaveBeenCalled();
     });
 
-    it('should remove the "is-hidden" class based on settings key', () => {
-        TestBed.compileComponents();
-
-        fixture = TestBed.createComponent(TestComponent);
-        component = fixture.debugElement.children[0].componentInstance;
+    it('should be visible by default', () => {
         fixture.detectChanges();
 
-        settingsService = fixture.debugElement.children[0].injector.get(TimelineSettingsService);
-
-        expect(fixture.componentInstance.isHidden).toEqual(false);
+        expect(component.isHidden).toBe(false);
         expect(fixture.nativeElement.classList.contains("is-hidden")).toEqual(false);
     });
 
-    it('should add the "is-hidden" class based on settings key', () => {
-        TestBed.compileComponents();
-
-        fixture = TestBed.createComponent(TestComponent);
-        component = fixture.debugElement.children[0].componentInstance;
+    it('should hide based on settings key', () => {
         fixture.detectChanges();
-
-        settingsService = fixture.debugElement.children[0].injector.get(TimelineSettingsService);
         settingsService.toggleSetting("blogs");
         fixture.detectChanges();
 
-        expect(fixture.componentInstance.isHidden).toEqual(true);
+        expect(component.isHidden).toBe(true);
         expect(fixture.nativeElement.classList.contains("is-hidden")).toEqual(true);
+    });
+
+    it('should unhide based on settings key', () => {
+        fixture.detectChanges();
+        settingsService.toggleSetting("blogs");
+        fixture.detectChanges();
+        settingsService.toggleSetting("blogs");
+        fixture.detectChanges();
+
+        expect(component.isHidden).toBe(false);
+        expect(fixture.nativeElement.classList.contains("is-hidden")).toEqual(false);
     });
 });

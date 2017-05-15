@@ -14,5 +14,4 @@ export interface IEvent {
     };
     type: string;
     $$type: string;
-    $$theme: string;
 };

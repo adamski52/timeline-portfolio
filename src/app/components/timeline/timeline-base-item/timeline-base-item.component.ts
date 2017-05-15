@@ -23,7 +23,6 @@ export class TimelineBaseItemComponent implements OnInit {
 
     protected watchForSettings():void {
         this.settingsService.subscribe((settings:ISettings) => {
-            console.log(this.item);
             this.isHidden = !settings[this.item.$$type];
         });
     }

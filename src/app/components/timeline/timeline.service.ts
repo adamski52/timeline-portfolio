@@ -36,7 +36,6 @@ export class TimelineService {
             this.branches = events.branches;
 
             this.events = [].concat(this.commits, this.branches);
-            console.log("E", this.events);
 
             this.updateItems();
         });
@@ -126,7 +125,6 @@ export class TimelineService {
             return rhsValue - lhsValue;
         });
 
-        console.log("ITEMS", items);
         this.subject.next(items);
     }
 }

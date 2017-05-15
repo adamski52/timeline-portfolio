@@ -24,5 +24,4 @@ export interface IBlog {
         selfLink: string;
     };
     $$type: string;
-    $$theme: string;
 };
