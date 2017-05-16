@@ -25,8 +25,7 @@
             "replies": {
                 "totalItems": "0",
                 "selfLink": "https://www.googleapis.com/blogger/v3/blogs/3369191738147730436/posts/1272453214619971857/comments"
-            },
-            "$$type": "blogs"
+            }
         }
     ],
     "etag": "\"h3phi6z0oROkI1XWpXsALUFHLuA/MjAxNy0wNC0yN1QxMzo0MDoyMS44MTZa\""

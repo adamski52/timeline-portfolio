@@ -14,14 +14,14 @@ import {IRepo} from "../../../interfaces/repo";
 class TestComponent extends TimelineBaseItemComponent {
     public isEven:boolean = true;
 
-    public item = require("../../../../../mocks/posts.json").items[0];
+    public item = Object.assign({}, require("../../../../../mocks/posts.json").items[0], {$$type: "blogs"});
 
     constructor(settingsService:TimelineSettingsService) {
         super(settingsService);
     }
 }
 
-fdescribe('TimelineBaseItemComponent', () => {
+describe('TimelineBaseItemComponent', () => {
     let component:TimelineBaseItemComponent,
         fixture:ComponentFixture<TestComponent>,
         settingsService:TimelineSettingsService;

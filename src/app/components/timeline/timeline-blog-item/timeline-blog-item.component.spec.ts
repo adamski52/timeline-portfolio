@@ -8,14 +8,13 @@ import {TimelineSettingsService} from "../timeline-settings/timeline-settings.se
 
 @Component({
     selector: 'jna-test-component',
-    template: `<jna-timeline-blog [blog]="blog"></jna-timeline-blog>`
+    template: `<jna-timeline-blog [item]="blog"></jna-timeline-blog>`
 })
 class TestComponent {
-    public blog:IBlog = require("../../../../../mocks/posts.json").items[0];
+    public blog:IBlog = Object.assign({}, require("../../../../../mocks/posts.json").items[0], {$$type: "blogs"});
 }
 
-
-describe('TimlineBlogComponent', () => {
+describe('TimelineBlogComponent', () => {
     let component:TimelineBlogComponent,
         fixture:ComponentFixture<TestComponent>;
 

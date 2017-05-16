@@ -4,15 +4,11 @@ import {HttpModule, XHRBackend, Response, ResponseOptions} from '@angular/http';
 
 import {ErrorService} from "../../../services/error.service";
 import {TimelineBlogService} from "./timeline-blog-item.service";
+import {IBlog} from "../../../interfaces/blog";
 
 describe('TimelineBlogService', () => {
     let response,
-        data = {
-            items: [{
-                "lol": "wat",
-                "hoo": "dat"
-            }]
-        };
+        data = require("../../../../../mocks/posts.json");
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -29,6 +25,22 @@ describe('TimelineBlogService', () => {
         });
     });
 
+    it('should add $$type to all items', inject([TimelineBlogService, XHRBackend], (service:TimelineBlogService, mockBackend:MockBackend) => {
+        mockBackend.connections.subscribe((connection) => {
+            connection.mockRespond(new Response(new ResponseOptions({
+                body: data
+            })));
+        });
+
+        service.subscribe((blogs:IBlog[]) => {
+            response = blogs;
+        });
+
+        service.fetch();
+
+        expect(response[0].$$type).toEqual("blogs");
+    }));
+
     it('should notify subscribers with response', inject([TimelineBlogService, XHRBackend], (service:TimelineBlogService, mockBackend:MockBackend) => {
         mockBackend.connections.subscribe((connection) => {
             connection.mockRespond(new Response(new ResponseOptions({
@@ -36,13 +48,29 @@ describe('TimelineBlogService', () => {
             })));
         });
 
-        service.subscribe((r:any) => {
-            response = r
+        service.subscribe((blogs:IBlog[]) => {
+            response = blogs;
         });
 
         service.fetch();
 
         expect(response.length).toBe(1);
+    }));
+
+    it('should notify subscribers with just the items portion of the payload', inject([TimelineBlogService, XHRBackend], (service:TimelineBlogService, mockBackend:MockBackend) => {
+        mockBackend.connections.subscribe((connection) => {
+            connection.mockRespond(new Response(new ResponseOptions({
+                body: data
+            })));
+        });
+
+        service.subscribe((blogs:IBlog[]) => {
+            response = blogs;
+        });
+
+        service.fetch();
+
+        expect(response[0]).toBe(data.items[0]);
     }));
 
     it('should log an error if the end point fails', inject([TimelineBlogService, XHRBackend, ErrorService], (service:TimelineBlogService, mockBackend:MockBackend, errorService:ErrorService) => {
@@ -53,10 +81,6 @@ describe('TimelineBlogService', () => {
         });
 
         expect(errorService.getAll().length).toEqual(0);
-
-        service.subscribe((r) => {
-            response = r;
-        });
 
         service.fetch();
 
