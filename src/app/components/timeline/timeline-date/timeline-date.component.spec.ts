@@ -25,7 +25,7 @@ class TestComponent {
     public date:Date|string|number = new Date();
 }
 
-fdescribe('TimelineDateComponent', () => {
+describe('TimelineDateComponent', () => {
     let component:TimelineDateComponent,
         fixture:ComponentFixture<TestComponent>;
 
@@ -44,9 +44,18 @@ fdescribe('TimelineDateComponent', () => {
         }).compileComponents();
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.debugElement.children[0].componentInstance;
+        fixture.detectChanges();
     }));
 
     it('should set its month based on the input date', () => {
-        fixture.componentInstance.date =
+        expect(component.month).toEqual("JAN");
+    });
+
+    it('should set its date based on the input date', () => {
+        expect(component.date).toEqual("01");
+    });
+
+    it('should set its year based on the input date', () => {
+        expect(component.year).toEqual("1970");
     });
 });

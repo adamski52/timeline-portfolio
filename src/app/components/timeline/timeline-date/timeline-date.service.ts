@@ -5,19 +5,21 @@ import {IDate} from "../../../interfaces/date";
 export class TimelineDateService {
     private months:string[] = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
 
-    public getDate(fullDate:Date|string|number):IDate {
-        let date:Date = new Date(fullDate),
-            month:string = this.months[this.fullDate.getMonth()],
-            date:string = this.fullDate.getDate() + "",
-            year:string = date.getFullYear() + "";
+    public getDate(rawDate:Date|string|number):IDate {
+        let fullDate:any = rawDate,
+            date:Date = new Date(fullDate),
+            m:string = this.months[date.getMonth()],
+            d:string = date.getDate() + "",
+            y:string = date.getFullYear() + "";
 
-        if(date.length < 2) {
-            date = "0" + date;
+        if(d.length < 2) {
+            d = "0" + d;
         }
+
         return {
-            month: month,
-            date: date,
-            year: year
+            month: m,
+            date: d,
+            year: y
         };
     }
 }

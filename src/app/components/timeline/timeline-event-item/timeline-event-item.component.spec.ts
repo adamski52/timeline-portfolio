@@ -1,53 +1,60 @@
 import {async, ComponentFixture, TestBed, inject} from '@angular/core/testing';
 
-import {TimelineEventComponent} from './timeline-event-item.component';
-import {Component} from "@angular/core";
 import {MockBackend} from '@angular/http/testing';
-import {HttpModule, XHRBackend, Response, ResponseOptions} from '@angular/http';
-import {TimelineTitleService} from "../timeline-item-title/timeline-item-title.service";
-import {TimelineDateComponent} from "../timeline-date/timeline-date.component";
+import {Component, Injectable} from "@angular/core";
 import {TimelineSettingsService} from "../timeline-settings/timeline-settings.service";
-import {TimelineRepoService} from "../timeline-repo-item/timeline-repo-item.service";
-import {ErrorService} from "../../../services/error.service";
-import {TimelineEventService} from "./timeline-event-item.service";
 import {IEvent} from "../../../interfaces/event";
-import {TimelineRepoComponent} from "../timeline-repo-item/timeline-repo-item.component";
-import {TimelineRepoLanguagesComponent} from "../timeline-repo-languages/timeline-repo-languages.component";
+import {TimelineEventComponent} from "./timeline-event-item.component";
+import {TimelineEventService} from "./timeline-event-item.service";
 import {TickerService} from "../../../services/ticker.service";
+import {TimelineRepoService} from "../timeline-repo-item/timeline-repo-item.service";
+import {HttpModule, XHRBackend, Response, ResponseOptions} from '@angular/http';
+import {ErrorService} from "../../../services/error.service";
+import {IRepo} from "../../../interfaces/repo";
+
+@Injectable()
+class MockTimelineEventService {
+    public getEventMessage(event:IEvent):string {
+        return "hello!";
+    }
+
+    public getCommitMessage(event:IEvent):string {
+        return "goodbye!";
+    }
+}
 
 @Component({
     selector: 'jna-test-component',
-    template: `<jna-timeline-event [event]="event"></jna-timeline-event>`,
-    providers: [
-        TimelineTitleService
-    ]
+    template: `<jna-timeline-event [item]="event"></jna-timeline-event>`
 })
 class TestComponent {
-    public event:IEvent = require("../../../../../mocks/events.json")[4];
+    public event:IEvent[] = require("../../../../../mocks/events.json")[0];
 }
 
-
-describe('TimlineEventComponent', () => {
+fdescribe('TimelineEventComponent', () => {
     let component:TimelineEventComponent,
-        fixture:ComponentFixture<TestComponent>;
+        fixture:ComponentFixture<TestComponent>,
+        repoData:IRepo[] = require("../../../../../mocks/repos.json");
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
                 TestComponent,
-                TimelineEventComponent,
-                TimelineDateComponent,
-                TimelineRepoLanguagesComponent
+                TimelineEventComponent
             ],
             providers: [
-                TimelineSettingsService,
-                TimelineRepoService,
-                ErrorService,
-                TimelineEventService,
-                TickerService,
                 {
-                    provide: XHRBackend, useClass: MockBackend
-                }
+                    provide: TimelineEventService,
+                    useClass: MockTimelineEventService
+                },
+                {
+                    provide: XHRBackend,
+                    useClass: MockBackend
+                },
+                TimelineSettingsService,
+                TickerService,
+                TimelineRepoService,
+                ErrorService
             ],
             imports: [
                 HttpModule
@@ -55,26 +62,28 @@ describe('TimlineEventComponent', () => {
         }).compileComponents();
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.debugElement.children[0].componentInstance;
-        fixture.detectChanges();
     }));
 
-    it('should set its commit message based on the provided @input event', () => {
-        expect(component.commitMessage).toEqual("created branch");
+    it('should set its title message based on the provided @input event', () => {
+        fixture.detectChanges();
+        expect(component.title).toEqual("hello!");
     });
 
-    it('should set its event message based on the provided @input event', () => {
-        expect(component.title).toEqual("created refactor/service-streamlining");
+    it('should set its summary message based on the provided @input blog', () => {
+        fixture.detectChanges();
+
+        expect(component.commitMessage).toEqual("goodbye!");
     });
 
-    it('should set its repo name based on the provided @input event by mapping to the repos', inject([TimelineRepoService, XHRBackend], (service:TimelineRepoService, mockBackend:MockBackend) => {
+    it('should set its repo name based on the provided @input blog/repos', inject([TimelineEventService, XHRBackend], (service:TimelineEventService, mockBackend:MockBackend) => {
         mockBackend.connections.subscribe((connection) => {
             connection.mockRespond(new Response(new ResponseOptions({
-                body: require("../../../../../mocks/repos.json")
+                body: repoData
             })));
         });
 
-        service.fetch();
+        fixture.detectChanges();
 
-        expect(component.repoName).toEqual("timeline-portfolio");  // yo dogg
+        expect(component.repoName).toEqual("wat");
     }));
 });

@@ -1,27 +1,24 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {TimelineDateService} from "./timeline-date.service";
+import {IDate} from "../../../interfaces/date";
 
 @Component({
     selector: 'jna-timeline-date',
-    templateUrl: './timeline-date.component.html',
+    templateUrl: './timeline-date.component.html'
 })
 export class TimelineDateComponent implements OnInit {
-    @Input("date") fullDate:Date;
-
-    private months:string[] = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+    @Input("date") rawDate:Date;
 
     public month:string;
     public date:string;
     public year:string;
 
+    constructor(private dateService:TimelineDateService) {}
+
     ngOnInit() {
-        this.fullDate = new Date(this.fullDate);
-        this.month = this.months[this.fullDate.getMonth()];
-
-        this.date = this.fullDate.getDate() + "";
-        if(this.date.length < 2) {
-            this.date = "0" + this.date;
-        }
-
-        this.year = this.fullDate.getFullYear() + "";
+        let d:IDate = this.dateService.getDate(this.rawDate);
+        this.month = d.month;
+        this.date = d.date;
+        this.year = d.year;
     }
 }

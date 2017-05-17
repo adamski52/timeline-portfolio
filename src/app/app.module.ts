@@ -23,6 +23,7 @@ import {TimelineSettingsService} from "./components/timeline/timeline-settings/t
 import {ErrorService} from "./services/error.service";
 import {TickerService} from "./services/ticker.service";
 import {TimelineService} from "./components/timeline/timeline.service";
+import {TimelineDateService} from "./components/timeline/timeline-date/timeline-date.service";
 
 @NgModule({
     declarations: [
@@ -49,6 +50,7 @@ import {TimelineService} from "./components/timeline/timeline.service";
         TimelineRepoService,
         TimelineRepoLanguagesService,
         TimelineSettingsService,
+        TimelineDateService,
         ErrorService,
         TickerService
     ],

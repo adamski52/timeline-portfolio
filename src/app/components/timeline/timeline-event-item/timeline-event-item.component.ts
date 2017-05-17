@@ -33,6 +33,7 @@ export class TimelineEventComponent extends TimelineBaseItemComponent implements
         this.commitMessage = this.eventsService.getCommitMessage(<IEvent>this.item);
 
         this.reposService.subscribe((repos: IRepo[]) => {
+            console.log("subscribed repos", repos);
             let repo: IRepo = repos.find((r: IRepo) => {
                 return r.id === (<IEvent>this.item).repo.id;
             });
