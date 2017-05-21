@@ -6,8 +6,9 @@ import {TickerService} from "../../../services/ticker.service";
 @Injectable()
 class MockTickerService {
     public callback;
-    public start(ms:number, handler:(value:any) => void) {
+    public start(ms:number, handler:(value:any) => void):number {
         this.callback = handler;
+        return 123;
     }
 
     public tick() {
@@ -35,6 +36,23 @@ describe('TimelineTitleService', () => {
         });
     });
 
+    it('should stop existing timers before starting a new one', () => {
+        service = TestBed.get(TimelineTitleService);
+
+        let mockTicker:MockTickerService = TestBed.get(TickerService);
+
+        service.subscribe("wat", true, (t:string) => {
+            title = t;
+        });
+
+        spyOn(mockTicker, "stop");
+
+        service.setTitle("lol");
+        service.setTitle("kek");
+
+        expect(mockTicker.stop).toHaveBeenCalled();
+    });
+
     it('should have a public setter which broadcasts to subscribers', inject([TickerService], (mockTicker:MockTickerService) => {
         service = TestBed.get(TimelineTitleService);
 
@@ -50,6 +68,16 @@ describe('TimelineTitleService', () => {
 
         expect(title).toEqual("lol");
     }));
+
+    it('should not tick if nobody is subscribed', () => {
+        service = TestBed.get(TimelineTitleService);
+
+        let mockTicker:MockTickerService = TestBed.get(TickerService);
+
+        spyOn(mockTicker, "start");
+        service.setTitle("lol");
+        expect(mockTicker.start).not.toHaveBeenCalled();
+    });
 
     it('should have a reset which broadcasts the original title', inject([TickerService], (mockTicker:MockTickerService) => {
         service = TestBed.get(TimelineTitleService);

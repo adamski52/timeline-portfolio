@@ -84,10 +84,6 @@ export class TimelineTitleService {
     }
 
     private onTick() {
-        if(!this._observer) {
-            return;
-        }
-
         let t = this.scramble(this.title);
 
         if(this.isEven) {
@@ -107,6 +103,10 @@ export class TimelineTitleService {
     }
 
     public setTitle(t:string) {
+        if(!this._observer) {
+            return;
+        }
+
         t = t.toLowerCase();
 
         if(this.interval) {
