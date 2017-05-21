@@ -1,4 +1,4 @@
-import {Component, Input, HostBinding, OnInit} from '@angular/core';
+import {Component, Input, OnInit, HostBinding} from '@angular/core';
 import {TimelineSettingsService} from "../timeline-settings/timeline-settings.service";
 import {ISettings} from "../../../interfaces/settings";
 import {IRepo} from "../../../interfaces/repo";
@@ -27,7 +27,7 @@ export class TimelineBaseItemComponent implements OnInit {
         });
     }
 
-    public ngOnInit() {
+    ngOnInit() {
         this.watchForSettings();
     }
 }
