@@ -15,7 +15,10 @@ describe('TimelineBlogService', () => {
             providers: [
                 ErrorService,
                 TimelineBlogService,
-
+                {
+                    provide: XHRBackend,
+                    useClass: MockBackend
+                }
             ],
             imports: [
                 HttpModule

@@ -5,6 +5,7 @@ import {IBlog} from "../../../interfaces/blog";
 import {TimelineBlogComponent} from "./timeline-blog-item.component";
 import {TimelineDateComponent} from "../timeline-date/timeline-date.component";
 import {TimelineSettingsService} from "../timeline-settings/timeline-settings.service";
+import {TimelineDateService} from "../timeline-date/timeline-date.service";
 
 @Component({
     selector: 'jna-test-component',
@@ -26,7 +27,8 @@ describe('TimelineBlogComponent', () => {
                 TimelineDateComponent
             ],
             providers: [
-                TimelineSettingsService
+                TimelineSettingsService,
+                TimelineDateService
             ]
         }).compileComponents();
         fixture = TestBed.createComponent(TestComponent);

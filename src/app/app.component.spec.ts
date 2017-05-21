@@ -13,10 +13,12 @@ import {TimelineSettingsComponent} from "./components/timeline/timeline-settings
 import {TimelineSettingsService} from "./components/timeline/timeline-settings/timeline-settings.service";
 import {TickerService} from "./services/ticker.service";
 import {TimelineDateComponent} from "./components/timeline/timeline-date/timeline-date.component";
-import {TimelineEventComponent} from "./components/timeline/timeline-event-item/timeline-event-item.component";
 import {TimelineBlogComponent} from "./components/timeline/timeline-blog-item/timeline-blog-item.component";
 import {TimelineBlogService} from "./components/timeline/timeline-blog-item/timeline-blog-item.service";
 import {TimelineService} from "./components/timeline/timeline.service";
+import {TimelineCommitComponent} from "./components/timeline/timeline-event-item/timeline-commit-item.component";
+import {TimelineBranchComponent} from "./components/timeline/timeline-event-item/timeline-branch-item.component";
+import {TimelineDateService} from "./components/timeline/timeline-date/timeline-date.service";
 
 describe('AppComponent', () => {
     beforeEach(async(() => {
@@ -25,7 +27,8 @@ describe('AppComponent', () => {
                 AppComponent,
                 TimelineComponent,
                 TimelineRepoComponent,
-                TimelineEventComponent,
+                TimelineCommitComponent,
+                TimelineBranchComponent,
                 TimelineBlogComponent,
                 TimelineSettingsComponent,
                 TimelineRepoLanguagesComponent,
@@ -38,6 +41,7 @@ describe('AppComponent', () => {
                 TimelineBlogService,
                 TimelineSettingsService,
                 TickerService,
+                TimelineDateService,
                 ErrorService,
                 {
                     provide: XHRBackend,

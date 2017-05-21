@@ -1,59 +1,97 @@
-import {async, ComponentFixture, TestBed, inject} from '@angular/core/testing';
-
-import {TimelineComponent} from './timeline.component';
-import {TimelineRepoService} from "./timeline-repo-item/timeline-repo-item.service";
-import {TimelineEventService} from "./timeline-event-item/timeline-event-item.service";
-import {HttpModule, XHRBackend, Response, ResponseOptions} from '@angular/http';
-import {ErrorService} from "../../services/error.service";
-import {MockBackend} from '@angular/http/testing';
-import {TimelineRepoLanguagesComponent} from "./timeline-repo-languages/timeline-repo-languages.component";
-import {TimelineRepoComponent} from "./timeline-repo-item/timeline-repo-item.component";
-import {TickerService} from "../../services/ticker.service";
+import {async, ComponentFixture, TestBed,} from '@angular/core/testing';
+import {TimelineComponent} from "./timeline.component";
 import {TimelineDateComponent} from "./timeline-date/timeline-date.component";
+import {TimelineRepoLanguagesComponent} from "./timeline-repo-languages/timeline-repo-languages.component";
+import {TimelineBranchComponent} from "./timeline-event-item/timeline-branch-item.component";
+import {TickerService} from "../../services/ticker.service";
 import {TimelineSettingsService} from "./timeline-settings/timeline-settings.service";
+import {TimelineRepoService} from "./timeline-repo-item/timeline-repo-item.service";
+import {ErrorService} from "../../services/error.service";
+import {TimelineEventService} from "./timeline-event-item/timeline-event-item.service";
+import {TimelineDateService} from "./timeline-date/timeline-date.service";
+import {HttpModule} from "@angular/http";
+import {TimelineService} from "./timeline.service";
+import {TimelineCommitComponent} from "./timeline-event-item/timeline-commit-item.component";
+import {TimelineRepoComponent} from "./timeline-repo-item/timeline-repo-item.component";
 import {TimelineBlogComponent} from "./timeline-blog-item/timeline-blog-item.component";
 import {TimelineBlogService} from "./timeline-blog-item/timeline-blog-item.service";
-import {TimelineEventComponent} from "./timeline-event-item/timeline-event-item.component";
+import {Component, Injectable} from "@angular/core";
 import {IBlog} from "../../interfaces/blog";
-import {IRepo} from "../../interfaces/repo";
 import {IEvent} from "../../interfaces/event";
+import {IRepo} from "../../interfaces/repo";
+
+@Component({
+    selector: 'jna-test-component',
+    template: `<jna-timeline></jna-timeline>`
+})
+class TestComponent {
+}
+
+@Injectable()
+class MockTimelineService extends TimelineService {
+    public $$repos:IRepo[] = require("../../../../mocks/repos.json");
+    public $$events:IEvent[] = require("../../../../mocks/events.json");
+    public $$blogs:IBlog[] = require("../../../../mocks/posts.json");
+
+    public fetch() {
+        let response = [].concat(this.$$repos, this.$$events, this.$$blogs);
+        this.subject.next(response);
+    }
+}
 
 describe('TimelineComponent', () => {
-    let fixture:ComponentFixture<TimelineComponent>,
-        component:TimelineComponent,
-        response,
-        blogResponse = require("../../../../mocks/posts.json"),
-        blogMock:IBlog[] = blogResponse.items,
-        repoMock:IRepo[] = require("../../../../mocks/repos.json"),
-        eventMock:IEvent[] = require("../../../../mocks/events.json");
-
+    let component:TimelineComponent,
+        fixture:ComponentFixture<TestComponent>;
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
+                TestComponent,
                 TimelineComponent,
-                TimelineRepoComponent,
-                TimelineRepoLanguagesComponent,
                 TimelineDateComponent,
-                TimelineBlogComponent,
-                TimelineEventComponent
+                TimelineRepoLanguagesComponent,
+                TimelineBranchComponent,
+                TimelineCommitComponent,
+                TimelineRepoComponent,
+                TimelineBlogComponent
             ],
             providers: [
-                TimelineRepoService,
-                TimelineEventService,
-                TimelineSettingsService,
-                TimelineBlogService,
                 TickerService,
-                ErrorService,
                 {
-                    provide: XHRBackend,
-                    useClass: MockBackend
-                }
+                    provide: TimelineService,
+                    useClass: MockTimelineService
+                },
+                TimelineSettingsService,
+                TimelineRepoService,
+                TimelineBlogService,
+                ErrorService,
+                TimelineEventService,
+                TimelineDateService
             ],
             imports: [
                 HttpModule
             ]
         }).compileComponents();
+
+        fixture = TestBed.createComponent(TestComponent);
+        component = fixture.debugElement.children[0].componentInstance;
     }));
 
+    it('should subscribe to the timeline service', () => {
+        let timelineService:TimelineService = fixture.debugElement.children[0].injector.get(TimelineService);
+        spyOn(timelineService, "subscribe");
+        fixture.detectChanges();
+        expect(timelineService.subscribe).toHaveBeenCalled();
+    });
 
+    it('should respond to the timeline service', () => {
+        fixture.detectChanges();
+        expect(component.items.length).toBe(50);
+    });
+
+    it('should fetch the timeline service', () => {
+        let timelineService:TimelineService = fixture.debugElement.children[0].injector.get(TimelineService);
+        spyOn(timelineService, "fetch");
+        fixture.detectChanges();
+        expect(timelineService.fetch).toHaveBeenCalled();
+    });
 });

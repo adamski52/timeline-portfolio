@@ -46,26 +46,24 @@ describe('TimelineSettingsComponent', () => {
     }));
 
     it('should subscribe and react to the timeline-settings service', inject([TimelineSettingsService], (settingsService:TimelineSettingsService) => {
-        expect(component.settings.githubEvents).toEqual(true);
+        expect(component.settings.experiments).toEqual(true);
 
-        settingsService.toggleSetting("githubEvents");
+        settingsService.toggleSetting("experiments");
 
         fixture.detectChanges();
 
-        expect(component.settings.githubEvents).toEqual(false);
+        expect(component.settings.experiments).toEqual(false);
     }));
 
-    it('should subscribe and react to the title service on hover', inject([TickerService], (mockTicker:MockTickerService) => {
-        let result = "hide github events";
+    it('should react to the title service on hover (hide)', inject([TickerService], (mockTicker:MockTickerService) => {
+        let result:string = "hide github events";
 
         expect(component.title).toEqual("");
-        component.onHover("githubEvents");
+        component.onHover("commits");
         fixture.detectChanges();
 
-        mockTicker.tick();
-        fixture.detectChanges();
 
-        for(let i = 0; i < result.length; i++) {
+        for(let i = 0; i <= result.length; i++) {
             mockTicker.tick();
             fixture.detectChanges();
         }
@@ -73,11 +71,30 @@ describe('TimelineSettingsComponent', () => {
         expect(component.title).toEqual(result);
     }));
 
-    it('should subscribe and react to the title service on mouse out', inject([TickerService], (mockTicker:MockTickerService) => {
-        let result = "hide github events";
+    it('should react to the title service on hover (show)', inject([TickerService, TimelineSettingsService], (mockTicker:MockTickerService, settingsService:TimelineSettingsService) => {
+        let result:string = "show github events";
+        fixture.detectChanges();
+
+        settingsService.toggleSetting("commits");
+        fixture.detectChanges();
+
+        component.onHover("commits");
+
+        fixture.detectChanges();
+
+        for(let i = 0; i <= result.length; i++) {
+            mockTicker.tick();
+            fixture.detectChanges();
+        }
+
+        expect(component.title).toEqual(result);
+    }));
+
+    it('should react to the title service on mouse out', inject([TickerService], (mockTicker:MockTickerService) => {
+        let result:string = "hide github events";
 
         expect(component.title).toEqual("");
-        component.onHover("githubEvents");
+        component.onHover("commits");
         fixture.detectChanges();
 
         mockTicker.tick();
@@ -95,5 +112,14 @@ describe('TimelineSettingsComponent', () => {
         fixture.detectChanges();
 
         expect(component.title).toEqual("");
+    }));
+
+    it('should toggle the setting on click', inject([TimelineSettingsService], (settingsService:TimelineSettingsService) => {
+        spyOn(settingsService, "toggleSetting");
+        fixture.detectChanges();
+        component.onClick(new Event("click"), "commits");
+        fixture.detectChanges();
+        expect(settingsService.toggleSetting).toHaveBeenCalledWith("commits");
+
     }));
 });

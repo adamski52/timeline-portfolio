@@ -4,12 +4,11 @@ import {HttpModule, XHRBackend, Response, ResponseOptions} from '@angular/http';
 
 import {TimelineRepoService} from './timeline-repo-item.service';
 import {ErrorService} from "../../../services/error.service";
+import {IRepo} from "../../../interfaces/repo";
 
 describe('TimelineRepoService', () => {
     let response,
-        data = {
-            data: "hello"
-        };
+        repoData:IRepo[] = require("../../../../../mocks/repos.json");
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -26,10 +25,26 @@ describe('TimelineRepoService', () => {
         });
     });
 
+    it('should add $$type to all items', inject([TimelineRepoService, XHRBackend], (service:TimelineRepoService, mockBackend:MockBackend) => {
+        mockBackend.connections.subscribe((connection) => {
+            connection.mockRespond(new Response(new ResponseOptions({
+                body: repoData
+            })));
+        });
+
+        service.subscribe((repos:IRepo[]) => {
+            response = repos;
+        });
+
+        service.fetch();
+
+        expect(response[0].$$type).toEqual("repos");
+    }));
+
     it('should notify subscribers with response', inject([TimelineRepoService, XHRBackend], (service:TimelineRepoService, mockBackend:MockBackend) => {
         mockBackend.connections.subscribe((connection) => {
             connection.mockRespond(new Response(new ResponseOptions({
-                body: data
+                body: repoData
             })));
         });
 
@@ -39,7 +54,7 @@ describe('TimelineRepoService', () => {
 
         service.fetch();
 
-        expect(response).toBe(data);
+        expect(response).toBe(repoData);
     }));
 
     it('should log an error if the end point fails', inject([TimelineRepoService, XHRBackend, ErrorService], (service:TimelineRepoService, mockBackend:MockBackend, errorService:ErrorService) => {

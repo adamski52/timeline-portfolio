@@ -22,19 +22,20 @@ describe('TimelineSettingsService', () => {
     });
 
     it('should have a public setter which broadcasts to subscribers', () => {
-        expect(settings["githubEvents"]).toEqual(true);
-        expect(settings["githubRepos"]).toEqual(true);
+        expect(settings["commits"]).toEqual(true);
+        expect(settings["branches"]).toEqual(true);
+        expect(settings["repos"]).toEqual(true);
         expect(settings["tweets"]).toEqual(true);
         expect(settings["blogs"]).toEqual(true);
         expect(settings["experiments"]).toEqual(true);
     });
 
     it('should toggle a setting by key name', () => {
-        expect(settings["githubEvents"]).toEqual(true);
+        expect(settings["commits"]).toEqual(true);
 
-        service.toggleSetting("githubEvents");
+        service.toggleSetting("commits");
 
-        expect(settings["githubEvents"]).toEqual(false);
+        expect(settings["commits"]).toEqual(false);
     });
 
 });

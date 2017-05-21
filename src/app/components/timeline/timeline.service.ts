@@ -19,7 +19,7 @@ export class TimelineService {
     private commits:IEvent[] = [];
     private events:IEvent[] = [];
     private blogs:IBlog[] = [];
-    private subject:BehaviorSubject<any> = new BehaviorSubject([]);
+    protected subject:BehaviorSubject<any> = new BehaviorSubject([]);
 
     constructor(private reposService:TimelineRepoService,
                 private eventsService:TimelineEventService,
