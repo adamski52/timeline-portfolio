@@ -5,10 +5,11 @@ import {HttpModule, XHRBackend, Response, ResponseOptions} from '@angular/http';
 import {TimelineEventService} from './timeline-event-item.service';
 import {ErrorService} from "../../../services/error.service";
 import {IEvent} from "../../../interfaces/event";
+import {IEventCollection} from "../../../interfaces/event-collection";
 
 describe('TimelineEventService', () => {
     let mockData:IEvent[] = require("../../../../../mocks/events.json"),
-        response:IEvent[];
+        response:IEventCollection;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -26,22 +27,6 @@ describe('TimelineEventService', () => {
         });
     });
 
-    it('should remove refs/heads/ from event message', inject([TimelineEventService, XHRBackend], (service:TimelineEventService, mockBackend:MockBackend) => {
-        mockBackend.connections.subscribe((connection) => {
-            connection.mockRespond(new Response(new ResponseOptions({
-                body: mockData
-            })));
-        });
-
-        service.subscribe((r:IEvent[]) => {
-            response = r;
-        });
-
-        service.fetch();
-
-        expect(service.getEventMessage(response[2])).toBe("pushed to master");
-    }));
-
     it('should remove refs/heads/ from commit message', inject([TimelineEventService, XHRBackend], (service:TimelineEventService, mockBackend:MockBackend) => {
         mockBackend.connections.subscribe((connection) => {
             connection.mockRespond(new Response(new ResponseOptions({
@@ -49,13 +34,13 @@ describe('TimelineEventService', () => {
             })));
         });
 
-        service.subscribe((r:IEvent[]) => {
+        service.subscribe((r:IEventCollection) => {
             response = r;
         });
 
         service.fetch();
 
-        expect(service.getEventMessage(response[2])).toBe("pushed to master");
+        expect(service.getEventMessage(response.commits[2])).toEqual("pushed to master");
     }));
 
     it('should use ref name for create events', inject([TimelineEventService, XHRBackend], (service:TimelineEventService, mockBackend:MockBackend) => {
@@ -65,13 +50,45 @@ describe('TimelineEventService', () => {
             })));
         });
 
-        service.subscribe((r:IEvent[]) => {
+        service.subscribe((r:IEventCollection) => {
             response = r;
         });
 
         service.fetch();
 
-        expect(service.getEventMessage(response[4])).toBe("created refactor/service-streamlining");
+        expect(service.getEventMessage(response.branches[0])).toEqual("created refactor/service-streamlining");
+    }));
+
+    it('should use "created branch" for branch events commit message', inject([TimelineEventService, XHRBackend], (service:TimelineEventService, mockBackend:MockBackend) => {
+        mockBackend.connections.subscribe((connection) => {
+            connection.mockRespond(new Response(new ResponseOptions({
+                body: mockData
+            })));
+        });
+
+        service.subscribe((r:IEventCollection) => {
+            response = r;
+        });
+
+        service.fetch();
+
+        expect(service.getCommitMessage(response.branches[0])).toEqual("created branch");
+    }));
+
+    it('should use the commit message for commit events', inject([TimelineEventService, XHRBackend], (service:TimelineEventService, mockBackend:MockBackend) => {
+        mockBackend.connections.subscribe((connection) => {
+            connection.mockRespond(new Response(new ResponseOptions({
+                body: mockData
+            })));
+        });
+
+        service.subscribe((r:IEventCollection) => {
+            response = r;
+        });
+
+        service.fetch();
+
+        expect(service.getCommitMessage(response.commits[0])).toEqual("fixed thumbnail tests.");
     }));
 
     it('should notify subscribers with response', inject([TimelineEventService, XHRBackend], (service:TimelineEventService, mockBackend:MockBackend) => {
@@ -81,13 +98,14 @@ describe('TimelineEventService', () => {
             })));
         });
 
-        service.subscribe((r:IEvent[]) => {
+        service.subscribe((r:IEventCollection) => {
             response = r;
         });
 
         service.fetch();
 
-        expect(response).toBe(mockData);
+        expect(response.commits.length).toEqual(23);
+        expect(response.branches.length).toEqual(7);
     }));
 
     it('should log an error if the end point fails', inject([TimelineEventService, XHRBackend, ErrorService], (service:TimelineEventService, mockBackend:MockBackend, errorService:ErrorService) => {
@@ -101,7 +119,7 @@ describe('TimelineEventService', () => {
 
         expect(errorService.getAll().length).toEqual(0);
 
-        service.subscribe((r:IEvent[]) => {
+        service.subscribe((r:IEventCollection) => {
             response = r;
         });
 

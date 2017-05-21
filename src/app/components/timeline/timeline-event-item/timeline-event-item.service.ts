@@ -4,13 +4,14 @@ import {Http, Response} from "@angular/http";
 import {ErrorService} from "../../../services/error.service";
 import {IEvent} from "../../../interfaces/event";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {IEventCollection} from "../../../interfaces/event-collection";
 
 @Injectable()
 export class TimelineEventService extends GenericHttpService {
     private _commits:IEvent[];
     private _branches:IEvent[];
 
-    protected subject:BehaviorSubject<any> = new BehaviorSubject({
+    protected subject:BehaviorSubject<IEventCollection> = new BehaviorSubject({
         commits: [],
         branches: []
     });
@@ -42,7 +43,7 @@ export class TimelineEventService extends GenericHttpService {
             return "created branch";
         }
 
-        return event.payload.commits[0].message
+        return event.payload.commits[0].message;
     }
 
     public isCreateEvent(event:IEvent):boolean {
@@ -51,7 +52,7 @@ export class TimelineEventService extends GenericHttpService {
 
     public fetch():void {
         this.load("/api/users/adamski52/events").subscribe((response:Response) => {
-            let data = this.sanitizeEventMessages(response.json());
+            let data:IEvent[] = this.sanitizeEventMessages(response.json());
 
             this._commits = [];
             this._branches = [];

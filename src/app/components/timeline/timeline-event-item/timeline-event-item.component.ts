@@ -33,7 +33,6 @@ export class TimelineEventComponent extends TimelineBaseItemComponent implements
         this.commitMessage = this.eventsService.getCommitMessage(<IEvent>this.item);
 
         this.reposService.subscribe((repos: IRepo[]) => {
-            console.log("subscribed repos", repos);
             let repo: IRepo = repos.find((r: IRepo) => {
                 return r.id === (<IEvent>this.item).repo.id;
             });
@@ -45,37 +44,5 @@ export class TimelineEventComponent extends TimelineBaseItemComponent implements
                 });
             }
         });
-    }
-}
-
-@Component({
-    selector: 'jna-timeline-commit',
-    templateUrl: './timeline-commit-item.component.html',
-    providers: [
-        TimelineTitleService
-    ]
-})
-export class TimelineCommitComponent extends TimelineEventComponent {
-    constructor(settingsService:TimelineSettingsService,
-                reposService:TimelineRepoService,
-                eventsService:TimelineEventService,
-                titleService:TimelineTitleService) {
-        super(settingsService, reposService, eventsService, titleService);
-    }
-}
-
-@Component({
-    selector: 'jna-timeline-branch',
-    templateUrl: './timeline-branch-item.component.html',
-    providers: [
-        TimelineTitleService
-    ]
-})
-export class TimelineBranchComponent extends TimelineEventComponent {
-    constructor(settingsService:TimelineSettingsService,
-                reposService:TimelineRepoService,
-                eventsService:TimelineEventService,
-                titleService:TimelineTitleService) {
-        super(settingsService, reposService, eventsService, titleService);
     }
 }

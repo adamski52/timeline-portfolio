@@ -8,10 +8,8 @@ import {TimelineComponent} from "./components/timeline/timeline.component";
 import {TimelineBlogComponent} from "./components/timeline/timeline-blog-item/timeline-blog-item.component";
 import {TimelineBlogService} from "./components/timeline/timeline-blog-item/timeline-blog-item.service";
 import {TimelineDateComponent} from "./components/timeline/timeline-date/timeline-date.component";
-import {
-    TimelineBranchComponent,
-    TimelineCommitComponent
-} from "./components/timeline/timeline-event-item/timeline-event-item.component";
+import {TimelineCommitComponent} from "./components/timeline/timeline-event-item/timeline-commit-item.component";
+import {TimelineBranchComponent} from "./components/timeline/timeline-event-item/timeline-branch-item.component";
 import {TimelineEventService} from "./components/timeline/timeline-event-item/timeline-event-item.service";
 import {TimelineTitleService} from "./components/timeline/timeline-item-title/timeline-item-title.service";
 import {TimelineRepoComponent} from "./components/timeline/timeline-repo-item/timeline-repo-item.component";
