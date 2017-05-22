@@ -10,7 +10,8 @@
     color: $color;
 
     &:hover {
-        color: lighter($color, $pct);
+        color: darker($color, $pct);
+        text-shadow: 0 0 5px $color;
     }
 }
 
@@ -74,8 +75,6 @@
     }
 }
 
-$screen-xs-min: 320px;
-
 $angular-color: #e7333e;
 $sql-color: #005b86;
 $scss-color: #cd669a;
@@ -137,3 +136,5 @@ $item-icon-size: 30px;
 $date-icon-size: 45px;
 $timeline-hover-scale: 1.5;
 $theme-secondary-scale: 40%;
+
+$screen-xs-min: $content-width;

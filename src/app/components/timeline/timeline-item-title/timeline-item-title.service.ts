@@ -102,7 +102,7 @@ export class TimelineTitleService {
         }
     }
 
-    public setTitle(t:string) {
+    public setTitle(t:string, ms:number = 30) {
         if(!this._observer) {
             return;
         }
@@ -116,7 +116,7 @@ export class TimelineTitleService {
         this.title = t;
         this.numCharsToKeep = 0;
 
-        this.interval = this.ticker.start(60, () => {
+        this.interval = this.ticker.start(ms, () => {
             this.onTick();
         });
     }

@@ -44,10 +44,10 @@
 
 .icon-javascript-alt {
     @include make-icon($js-color);
-    font-size: 20px;
+    font-size: 19px;
     position: relative;
     top: 1px;
-    margin: 0 -5px 0 -3px;
+    margin-right: -5px;
     line-height: 1;
 }
 
