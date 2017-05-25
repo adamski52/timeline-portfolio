@@ -4,7 +4,11 @@
 [class*=" icon-"] {
     display: inline-block;
     font-size: $global-font-size-base;
-    padding: 0 4px;
+    padding: 0 $global-spacing-smaller;
+
+    &::before {
+        font-size: $global-font-size-large;
+    }
 
     &:last-child {
         padding-right: 0;
@@ -46,7 +50,7 @@
     @include make-icon($js-color);
     font-size: 19px;
     position: relative;
-    top: 1px;
+    top: 2px;
     margin-right: -5px;
     line-height: 1;
 }
@@ -114,8 +118,7 @@
     font-style: normal;
 }
 
-[data-icon]:before,
-[data-icon-reverse]:after {
+[data-icon]:before {
     font-family: "jna-icons" !important;
     content: attr(data-icon);
     font-style: normal !important;
