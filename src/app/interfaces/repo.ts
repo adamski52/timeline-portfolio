@@ -73,4 +73,6 @@ export interface IRepo {
     watchers: number;
     watchers_count: number;
     $$type: string;
+    $$isHidden: boolean;
+    $$isEven: boolean;
 };

@@ -17,7 +17,6 @@ export class TimelineService {
     private repos:IRepo[] = [];
     private branches:IEvent[] = [];
     private commits:IEvent[] = [];
-    private events:IEvent[] = [];
     private blogs:IBlog[] = [];
     protected subject:BehaviorSubject<any> = new BehaviorSubject([]);
 
@@ -35,8 +34,6 @@ export class TimelineService {
             this.commits = events.commits;
             this.branches = events.branches;
 
-            this.events = [].concat(this.commits, this.branches);
-
             this.updateItems();
         });
 
@@ -47,6 +44,7 @@ export class TimelineService {
 
         this.settingsService.subscribe((settings: any) => {
             this.settings = settings;
+            this.updateItems();
         });
     }
 
@@ -93,33 +91,43 @@ export class TimelineService {
     }
 
     public updateItems():void {
-        let items = [];
+        let items:(IRepo|IBlog|IEvent)[] = [];
+
         if(!this.settings) {
             this.subject.next(items);
             return;
         }
 
-        if(this.settings.repos) {
-            items = items.concat(this.repos);
-        }
+        this.repos.map((item:IRepo) => {
+           item.$$isHidden = !this.settings.repos;
+        });
 
-        if(this.settings.commits) {
-            items = items.concat(this.commits);
-        }
+        this.commits.map((item:IEvent) => {
+            item.$$isHidden = !this.settings.commits;
+        });
 
-        if(this.settings.branches) {
-            items = items.concat(this.branches);
-        }
+        this.branches.map((item:IEvent) => {
+            item.$$isHidden = !this.settings.branches;
+        });
 
-        if(this.settings.blogs) {
-            items = items.concat(this.blogs);
-        }
+        this.blogs.map((item:IBlog) => {
+            item.$$isHidden = !this.settings.blogs;
+        });
 
+        items = items.concat(this.repos, this.commits, this.branches, this.blogs);
         items = items.sort((lhs:IBlog|IEvent|IRepo, rhs:IBlog|IEvent|IRepo) => {
             let lhsValue:number = this.getItemTime(lhs),
                 rhsValue:number = this.getItemTime(rhs);
 
             return rhsValue - lhsValue;
+        });
+
+        let isEven:boolean = true;
+        items.map((item:IRepo|IBlog|IEvent) => {
+            if(!item.$$isHidden) {
+                item.$$isEven = isEven;
+                isEven = !isEven;
+            }
         });
 
         this.subject.next(items);

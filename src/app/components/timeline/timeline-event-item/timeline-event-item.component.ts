@@ -1,11 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {TimelineTitleService} from "../timeline-item-title/timeline-item-title.service";
-import {TimelineSettingsService} from "../timeline-settings/timeline-settings.service";
 import {IEvent} from "../../../interfaces/event";
 import {IRepo} from "../../../interfaces/repo";
 import {TimelineRepoService} from "../timeline-repo-item/timeline-repo-item.service";
 import {TimelineEventService} from "./timeline-event-item.service";
-import {TimelineBaseItemComponent} from "../timeline-base-item/timeline-base-item.component";
 
 @Component({
     selector: 'jna-timeline-event',
@@ -14,21 +12,20 @@ import {TimelineBaseItemComponent} from "../timeline-base-item/timeline-base-ite
         TimelineTitleService
     ]
 })
-export class TimelineEventComponent extends TimelineBaseItemComponent implements OnInit {
+export class TimelineEventComponent  implements OnInit {
+    @Input("item")
+    public item:IEvent;
+
     public repoName:string;
     public title:string;
     public commitMessage:string;
 
-    constructor(settingsService:TimelineSettingsService,
-                private reposService:TimelineRepoService,
+    constructor(private reposService:TimelineRepoService,
                 private eventsService:TimelineEventService,
                 private titleService:TimelineTitleService) {
-        super(settingsService);
     }
 
     ngOnInit() {
-        this.watchForSettings();
-
         this.title = this.eventsService.getEventMessage(<IEvent>this.item);
         this.commitMessage = this.eventsService.getCommitMessage(<IEvent>this.item);
 
@@ -39,7 +36,7 @@ export class TimelineEventComponent extends TimelineBaseItemComponent implements
 
             if (repo) {
                 this.repoName = repo.name;
-                this.titleService.subscribe(this.repoName, this.isEven, (t: string) => {
+                this.titleService.subscribe(this.repoName, this.item.$$isEven, (t: string) => {
                     this.repoName = t;
                 });
             }

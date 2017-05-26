@@ -10,6 +10,7 @@
  import {ErrorService} from "../../services/error.service";
  import {TimelineService} from "./timeline.service";
  import {TimelineSettingsService} from "./timeline-settings/timeline-settings.service";
+ import {Mock} from "protractor/built/driverProviders";
 
  describe('TimelineService', () => {
      let blogResponse = require("../../../../mocks/posts.json"),
@@ -191,5 +192,67 @@
              time = timelineService.getItemTime(item);
 
          expect(time).toEqual(0);
+     }));
+
+     it('should set the $$isHidden status from settings', inject([TimelineEventService, TimelineBlogService, TimelineRepoService, XHRBackend, TimelineSettingsService, TimelineService], (eventsService:TimelineEventService, blogsService:TimelineBlogService, repoService:TimelineRepoService, mockBackend:MockBackend, settingsService:TimelineSettingsService, timelineService:TimelineService) => {
+         spyOn(eventsService, "fetch");
+         spyOn(blogsService, "fetch");
+         mockBackend.connections.subscribe((connection) => {
+             connection.mockRespond(new Response(new ResponseOptions({
+                 body: repoMock
+             })));
+         });
+
+         let repos: (IBlog | IEvent | IRepo)[];
+         timelineService.subscribe((items: (IBlog | IEvent | IRepo)[]) => {
+             repos = items.filter((item: IRepo | IEvent | IRepo) => {
+                 return timelineService.isItemRepo(item);
+             });
+         });
+
+         timelineService.fetch();
+
+         settingsService.toggleSetting("repos");
+
+         for(let repo of repos) {
+             expect(repo.$$isHidden).toEqual(true);
+         }
+     }));
+
+     it('should set the $$isEven status from settings', inject([TimelineEventService, TimelineBlogService, TimelineRepoService, XHRBackend, TimelineSettingsService, TimelineService], (eventsService:TimelineEventService, blogsService:TimelineBlogService, repoService:TimelineRepoService, mockBackend:MockBackend, settingsService:TimelineSettingsService, timelineService:TimelineService) => {
+         spyOn(repoService, "fetch");
+         spyOn(blogsService, "fetch");
+         mockBackend.connections.subscribe((connection) => {
+             connection.mockRespond(new Response(new ResponseOptions({
+                 body: eventMock
+             })));
+         });
+
+         let events: (IBlog | IEvent | IRepo)[];
+         timelineService.subscribe((items: (IBlog | IEvent | IRepo)[]) => {
+             events = items.filter((item: IRepo | IEvent | IRepo) => {
+                 return timelineService.isItemCommit(item) || timelineService.isItemBranch(item);
+             });
+         });
+
+         timelineService.fetch();
+
+         let isEven:boolean = true;
+         for(let event of events) {
+             if(!event.$$isHidden) {
+                 expect(event.$$isEven).toEqual(isEven);
+                 isEven = !isEven;
+             }
+         }
+
+         settingsService.toggleSetting("branches");
+
+         isEven = true;
+         for(let event of events) {
+             if(!event.$$isHidden) {
+                 expect(event.$$isEven).toEqual(isEven);
+                 isEven = !isEven;
+             }
+         }
      }));
  });

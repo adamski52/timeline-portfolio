@@ -24,4 +24,6 @@ export interface IBlog {
         selfLink: string;
     };
     $$type: string;
+    $$isHidden: boolean;
+    $$isEven: boolean;
 };
