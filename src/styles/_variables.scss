@@ -19,10 +19,11 @@
 @mixin make-button($primary, $secondary, $tertiary) {
     background: $primary;
     color: $global-color-lightest;
+    transition: all $global-transition-fast;
 
     &:hover {
         background: $secondary;
-        color: $tertiary;
+        box-shadow: 0 0 $global-spacing-large $primary;
     }
 }
 
@@ -34,6 +35,7 @@
         .timeline-item-inner {
             &::before {
                 background: $secondary;
+                box-shadow: 0 0 0 $secondary;
             }
         }
 
@@ -46,14 +48,14 @@
         .timeline-date {
             background: $tertiary;
             color: $secondary;
-            border: 1px solid $primary;
+            border: 2px dotted $primary;
         }
 
         &:hover {
             .timeline-item-inner {
                 &::before {
-                    box-shadow: 0 0 $timeline-width*$timeline-hover-scale $secondary;
                     background: $primary;
+                    box-shadow: 0 0 $timeline-width*$timeline-hover-scale $secondary;
                 }
             }
 
@@ -110,6 +112,7 @@ $global-color-light: #ddd;
 $global-color-lighter: #f0f0f0;
 $global-color-lightest: #fff;
 $global-color-background: #f3f3f3;
+$global-color-background-darker: darker($global-color-background, 20%);
 
 $global-font-size-base: 14px;
 
@@ -139,3 +142,9 @@ $timeline-hover-scale: 1.5;
 $theme-secondary-scale: 40%;
 
 $screen-xs-min: $content-width;
+
+$rainbow1: #ff77d2;
+$rainbow2: #ffb800;
+$rainbow3: #e7ff06;
+$rainbow4: #7aff00;
+$rainbow5: #00e3ff;
