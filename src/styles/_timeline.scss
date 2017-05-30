@@ -23,7 +23,7 @@
     &:hover {
         max-height: 350px;
         cursor: pointer;
-        z-index: 999;
+        z-index: $global-hover-z;
 
         .timeline-item-inner {
             width: $content-width/2;
@@ -51,10 +51,12 @@
             border-left: none;
             border-right: none;
             position: absolute;
-            z-index: 2;
+            z-index: $global-timeline-bar-z;
         }
 
         .timeline-item-content {
+            position: relative;
+            z-index: $global-item-z;
             width: $content-width/2 - $timeline-width/2;
         }
     }
@@ -71,7 +73,7 @@
         margin-top: -$item-icon-size/2;
         font-size: $global-font-size-large;
         transition: $global-transition-fast;
-        z-index: 1000;
+        z-index: $global-item-icon-z;
     }
 
     .timeline-date {
@@ -81,6 +83,7 @@
         border-radius: $date-icon-size;
         display: block;
         position: absolute;
+        z-index: $global-date-icon-z;
         text-align: center;
         top: 50%;
         margin-top: -$date-icon-size/2;
@@ -154,6 +157,16 @@
     padding: $global-spacing-smallest $global-spacing-small;
     font-size: $global-font-size-smaller;
     color: $global-color-lightest;
+}
+
+.theme-blog .timeline-summary {
+    line-height: 1em;
+    max-height: 10em;
+    overflow: hidden;
+
+    * {
+        margin: 0;
+    }
 }
 
 .timeline-commit-message {
