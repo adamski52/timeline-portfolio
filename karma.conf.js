@@ -38,6 +38,11 @@ module.exports = function (config) {
             environment: 'dev',
             config: './angular-cli.json'
         },
+        specReporter: {
+            suppressSkipped: true,
+            maxLogLines: 5,
+            lateReport: true
+        },
         reporters: ['spec', 'karma-remap-istanbul'],
         port: 9876,
         colors: true,

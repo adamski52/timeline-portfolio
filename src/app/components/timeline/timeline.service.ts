@@ -10,6 +10,8 @@ import {TimelineBlogService} from "./timeline-blog-item/timeline-blog-item.servi
 import {Subscription} from "rxjs/Subscription";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {IEventCollection} from "../../interfaces/event-collection";
+import {AppConfigService} from "../../services/app-config.service";
+import {IAppConfig} from "../../interfaces/app-config";
 
 @Injectable()
 export class TimelineService {
@@ -18,12 +20,15 @@ export class TimelineService {
     private branches:IEvent[] = [];
     private commits:IEvent[] = [];
     private blogs:IBlog[] = [];
+    private config:IAppConfig;
+
     protected subject:BehaviorSubject<any> = new BehaviorSubject([]);
 
     constructor(private reposService:TimelineRepoService,
                 private eventsService:TimelineEventService,
                 private blogsService:TimelineBlogService,
-                private settingsService:TimelineSettingsService) {
+                private settingsService:TimelineSettingsService,
+                private appConfigService:AppConfigService) {
 
         this.reposService.subscribe((repos: IRepo[]) => {
             this.repos = repos;
@@ -42,8 +47,13 @@ export class TimelineService {
             this.updateItems();
         });
 
-        this.settingsService.subscribe((settings: any) => {
+        this.settingsService.subscribe((settings: ISettings) => {
             this.settings = settings;
+            this.updateItems();
+        });
+
+        this.appConfigService.subscribe((appConfig:IAppConfig) => {
+            this.config = appConfig;
             this.updateItems();
         });
     }
@@ -124,6 +134,11 @@ export class TimelineService {
 
         let isEven:boolean = true;
         items.map((item:IRepo|IBlog|IEvent) => {
+            if(this.config.isMobile) {
+                item.$$isEven = true;
+                return;
+            }
+
             if(!item.$$isHidden) {
                 item.$$isEven = isEven;
                 isEven = !isEven;

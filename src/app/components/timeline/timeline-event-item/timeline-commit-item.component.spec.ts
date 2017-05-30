@@ -12,6 +12,7 @@ import {ErrorService} from "../../../services/error.service";
 import {TimelineEventService} from "./timeline-event-item.service";
 import {TimelineDateService} from "../timeline-date/timeline-date.service";
 import {TimelineCommitComponent} from "./timeline-commit-item.component";
+import {AppConfigService} from "../../../services/app-config.service";
 
 @Component({
     selector: 'jna-test-component',
@@ -39,7 +40,8 @@ describe('TimelineCommitComponent', () => {
                 TimelineRepoService,
                 ErrorService,
                 TimelineEventService,
-                TimelineDateService
+                TimelineDateService,
+                AppConfigService
             ],
             imports: [
                 HttpModule

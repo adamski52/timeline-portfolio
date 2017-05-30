@@ -19,6 +19,7 @@ import {Component, Injectable} from "@angular/core";
 import {IBlog} from "../../interfaces/blog";
 import {IEvent} from "../../interfaces/event";
 import {IRepo} from "../../interfaces/repo";
+import {AppConfigService} from "../../services/app-config.service";
 
 @Component({
     selector: 'jna-test-component',
@@ -65,7 +66,8 @@ describe('TimelineComponent', () => {
                 TimelineBlogService,
                 ErrorService,
                 TimelineEventService,
-                TimelineDateService
+                TimelineDateService,
+                AppConfigService
             ],
             imports: [
                 HttpModule

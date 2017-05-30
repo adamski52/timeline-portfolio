@@ -28,7 +28,7 @@ export class TimelineSettingsComponent {
             this.settings = settings;
         });
 
-        this.titleService.subscribe("", true, (t: string) => {
+        this.titleService.subscribe("", (t: string) => {
             this.title = t;
         });
     }

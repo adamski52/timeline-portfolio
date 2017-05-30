@@ -11,6 +11,18 @@
  import {TimelineService} from "./timeline.service";
  import {TimelineSettingsService} from "./timeline-settings/timeline-settings.service";
  import {Mock} from "protractor/built/driverProviders";
+ import {AppConfigService} from "../../services/app-config.service";
+ import {Injectable} from "@angular/core";
+ import {IAppConfig} from "../../interfaces/app-config";
+ import {BehaviorSubject} from "rxjs/BehaviorSubject";
+
+ @Injectable()
+ class MockAppConfigService extends AppConfigService {
+     public setConfig(config:IAppConfig):void {
+         this.subject.next(config);
+     }
+ }
+
 
  describe('TimelineService', () => {
      let blogResponse = require("../../../../mocks/posts.json"),
@@ -28,6 +40,10 @@
                  TimelineRepoService,
                  TimelineBlogService,
                  TimelineEventService,
+                 {
+                     provide: AppConfigService,
+                     useClass: MockAppConfigService
+                 },
                  {
                      provide: XHRBackend,
                      useClass: MockBackend
@@ -253,6 +269,32 @@
                  expect(event.$$isEven).toEqual(isEven);
                  isEven = !isEven;
              }
+         }
+     }));
+
+     it('should force $$isEven = true when mobile size', inject([AppConfigService, TimelineEventService, TimelineBlogService, TimelineRepoService, XHRBackend, TimelineSettingsService, TimelineService], (appConfigService:MockAppConfigService, eventsService:TimelineEventService, blogsService:TimelineBlogService, repoService:TimelineRepoService, mockBackend:MockBackend, settingsService:TimelineSettingsService, timelineService:TimelineService) => {
+         appConfigService.setConfig({
+             isMobile: true
+         });
+         spyOn(repoService, "fetch");
+         spyOn(blogsService, "fetch");
+         mockBackend.connections.subscribe((connection) => {
+             connection.mockRespond(new Response(new ResponseOptions({
+                 body: eventMock
+             })));
+         });
+
+         let events: (IBlog | IEvent | IRepo)[];
+         timelineService.subscribe((items: (IBlog | IEvent | IRepo)[]) => {
+             events = items.filter((item: IRepo | IEvent | IRepo) => {
+                 return timelineService.isItemCommit(item) || timelineService.isItemBranch(item);
+             });
+         });
+
+         timelineService.fetch();
+
+         for(let event of events) {
+             expect(event.$$isEven).toEqual(true);
          }
      }));
  });

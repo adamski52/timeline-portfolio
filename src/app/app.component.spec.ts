@@ -19,6 +19,7 @@ import {TimelineService} from "./components/timeline/timeline.service";
 import {TimelineCommitComponent} from "./components/timeline/timeline-event-item/timeline-commit-item.component";
 import {TimelineBranchComponent} from "./components/timeline/timeline-event-item/timeline-branch-item.component";
 import {TimelineDateService} from "./components/timeline/timeline-date/timeline-date.service";
+import {AppConfigService} from "./services/app-config.service";
 
 describe('AppComponent', () => {
     beforeEach(async(() => {
@@ -43,6 +44,7 @@ describe('AppComponent', () => {
                 TickerService,
                 TimelineDateService,
                 ErrorService,
+                AppConfigService,
                 {
                     provide: XHRBackend,
                     useClass: MockBackend

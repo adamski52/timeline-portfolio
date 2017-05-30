@@ -41,7 +41,7 @@ describe('TimelineTitleService', () => {
 
         let mockTicker:MockTickerService = TestBed.get(TickerService);
 
-        service.subscribe("wat", true, (t:string) => {
+        service.subscribe("wat", (t:string) => {
             title = t;
         });
 
@@ -56,7 +56,7 @@ describe('TimelineTitleService', () => {
     it('should have a public setter which broadcasts to subscribers', inject([TickerService], (mockTicker:MockTickerService) => {
         service = TestBed.get(TimelineTitleService);
 
-        service.subscribe("wat", true, (t:string) => {
+        service.subscribe("wat", (t:string) => {
             title = t;
         });
 
@@ -82,7 +82,7 @@ describe('TimelineTitleService', () => {
     it('should have a reset which broadcasts the original title', inject([TickerService], (mockTicker:MockTickerService) => {
         service = TestBed.get(TimelineTitleService);
 
-        service.subscribe("wat", true, (t:string) => {
+        service.subscribe("wat", (t:string) => {
             title = t;
         });
 
@@ -103,7 +103,7 @@ describe('TimelineTitleService', () => {
     it("should scramble the entire word", inject([TickerService], (mockTicker:MockTickerService) => {
         service = TestBed.get(TimelineTitleService);
 
-        service.subscribe("wat", true, (t:string) => {
+        service.subscribe("wat", (t:string) => {
             title = t;
         });
 
@@ -121,7 +121,7 @@ describe('TimelineTitleService', () => {
     it("should unscramble letter by letter word, left to right if even", inject([TickerService], (mockTicker:MockTickerService) => {
         service = TestBed.get(TimelineTitleService);
 
-        service.subscribe("lol", true, (t:string) => {
+        service.subscribe("lol", (t:string) => {
             title = t;
         });
 
@@ -155,9 +155,10 @@ describe('TimelineTitleService', () => {
     it("should unscramble letter by letter, right to left if not even", inject([TickerService], (mockTicker:MockTickerService) => {
         service = TestBed.get(TimelineTitleService);
 
-        service.subscribe("lol", false, (t:string) => {
+        service.subscribe("lol", (t:string) => {
             title = t;
         });
+        service.setOrientation(false);
 
         service.setTitle("wat");
 
@@ -187,11 +188,11 @@ describe('TimelineTitleService', () => {
     }));
 
     it("should scramble letters for letters only", inject([TickerService], (mockTicker:MockTickerService) => {
-        let alphabet:string = "abcdefghijklmnopqtstuvwxyz";
+        let alphabet:string = "abcdefghijklmnopqrstuvwxyz";
 
         service = TestBed.get(TimelineTitleService);
 
-        service.subscribe("lol", true, (t:string) => {
+        service.subscribe("lol", (t:string) => {
             title = t;
         });
 
@@ -213,7 +214,7 @@ describe('TimelineTitleService', () => {
 
         service = TestBed.get(TimelineTitleService);
 
-        service.subscribe("lol", true, (t:string) => {
+        service.subscribe("lol", (t:string) => {
             title = t;
         });
 
@@ -234,7 +235,7 @@ describe('TimelineTitleService', () => {
 
         service = TestBed.get(TimelineTitleService);
 
-        service.subscribe("lol", true, (t:string) => {
+        service.subscribe("lol", (t:string) => {
             title = t;
         });
 

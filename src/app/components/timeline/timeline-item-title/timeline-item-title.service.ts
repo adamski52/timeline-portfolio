@@ -9,8 +9,8 @@ export class TimelineTitleService {
     private interval:number;
     private alphabet:string = "abcdefghijklmnopqrstuvwxyz";
     private numbers:string = "01234567890";
-    private isEven:boolean;
     private title:string;
+    private isLeftToRight:boolean = true;
     private numCharsToKeep:number;
 
     constructor(private ticker:TickerService) {}
@@ -19,11 +19,14 @@ export class TimelineTitleService {
         this._observer = observer;
     }).share();
 
-    public subscribe(initial:string, isEven:boolean, handler:(value: string) => void):Subscription {
+    public subscribe(initial:string, handler:(value: string) => void):Subscription {
         this.originalValue = initial;
-        this.isEven = isEven;
 
         return this.data$.subscribe(handler);
+    }
+
+    public setOrientation(isLeftToRight:boolean):void {
+        this.isLeftToRight = isLeftToRight;
     }
 
     private getRandomNumber():string {
@@ -86,7 +89,7 @@ export class TimelineTitleService {
     private onTick() {
         let t = this.scramble(this.title);
 
-        if(this.isEven) {
+        if(this.isLeftToRight) {
             t = this.descrambleFromLeft(t, this.numCharsToKeep);
         }
         else {

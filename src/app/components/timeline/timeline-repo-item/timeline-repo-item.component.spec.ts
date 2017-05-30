@@ -13,6 +13,7 @@ import {TimelineSettingsService} from "../timeline-settings/timeline-settings.se
 import {IRepo} from "../../../interfaces/repo";
 import {TimelineDateService} from "../timeline-date/timeline-date.service";
 import {TimelineRepoService} from "./timeline-repo-item.service";
+import {AppConfigService} from "../../../services/app-config.service";
 
 
 @Injectable()
@@ -58,6 +59,7 @@ describe('TimelineRepoComponent', () => {
                 TimelineDateService,
                 TimelineRepoService,
                 ErrorService,
+                AppConfigService,
                 {
                     provide: TickerService,
                     useClass: MockTickerService

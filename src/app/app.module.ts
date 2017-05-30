@@ -22,6 +22,7 @@ import {ErrorService} from "./services/error.service";
 import {TickerService} from "./services/ticker.service";
 import {TimelineService} from "./components/timeline/timeline.service";
 import {TimelineDateService} from "./components/timeline/timeline-date/timeline-date.service";
+import {AppConfigService} from "./services/app-config.service";
 
 @NgModule({
     declarations: [
@@ -50,7 +51,8 @@ import {TimelineDateService} from "./components/timeline/timeline-date/timeline-
         TimelineSettingsService,
         TimelineDateService,
         ErrorService,
-        TickerService
+        TickerService,
+        AppConfigService
     ],
     bootstrap: [AppComponent]
 })

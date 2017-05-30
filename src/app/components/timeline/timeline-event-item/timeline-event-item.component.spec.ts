@@ -12,6 +12,16 @@ import {HttpModule, XHRBackend, Response, ResponseOptions} from '@angular/http';
 import {ErrorService} from "../../../services/error.service";
 import {IRepo} from "../../../interfaces/repo";
 import {TimelineTitleService} from "../timeline-item-title/timeline-item-title.service";
+import {AppConfigService} from "../../../services/app-config.service";
+import {IAppConfig} from "../../../interfaces/app-config";
+import {Subscription} from "rxjs/Subscription";
+
+@Injectable()
+class MockAppConfigService extends AppConfigService {
+    public setConfig(config:IAppConfig):void {
+        this.subject.next(config);
+    }
+}
 
 @Injectable()
 class MockTimelineEventService {
@@ -70,6 +80,12 @@ describe('TimelineEventComponent', () => {
                     provide: XHRBackend,
                     useClass: MockBackend
                 },
+                {
+                    provide: AppConfigService,
+                    useClass: MockAppConfigService
+                },
+                AppConfigService,
+                TimelineTitleService,
                 TimelineSettingsService,
                 TimelineRepoService,
                 ErrorService
@@ -148,5 +164,43 @@ describe('TimelineEventComponent', () => {
         fixture.detectChanges();
 
         expect(component.repoName).toEqual("a");
+    }));
+
+    it('should subscribe to config changes', inject([XHRBackend, AppConfigService], (mockBackend:MockBackend, mockAppConfigService:MockAppConfigService) => {
+        mockBackend.connections.subscribe((connection) => {
+            connection.mockRespond(new Response(new ResponseOptions({
+                body: repoData
+            })));
+        });
+
+        let repoService:TimelineRepoService = fixture.debugElement.children[0].injector.get(TimelineRepoService);
+        repoService.fetch();
+
+        spyOn(mockAppConfigService, "subscribe");
+
+        fixture.detectChanges();
+
+        expect(mockAppConfigService.subscribe).toHaveBeenCalled();
+    }));
+
+    it('should respond to config changes', inject([XHRBackend], (mockBackend:MockBackend) => {
+        mockBackend.connections.subscribe((connection) => {
+            connection.mockRespond(new Response(new ResponseOptions({
+                body: repoData
+            })));
+        });
+
+        let repoService:TimelineRepoService = fixture.debugElement.children[0].injector.get(TimelineRepoService);
+        repoService.fetch();
+
+        let titleService:TimelineTitleService = fixture.debugElement.children[0].injector.get(TimelineTitleService);
+
+        spyOn(titleService, "setOrientation");
+
+        titleService.setOrientation(true);
+
+        fixture.detectChanges();
+
+        expect(titleService.setOrientation).toHaveBeenCalledWith(true);
     }));
 });
