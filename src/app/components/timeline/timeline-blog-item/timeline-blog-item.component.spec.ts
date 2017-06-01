@@ -3,9 +3,7 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {Component} from "@angular/core";
 import {IBlog} from "../../../interfaces/blog";
 import {TimelineBlogComponent} from "./timeline-blog-item.component";
-import {TimelineDateComponent} from "../timeline-date/timeline-date.component";
 import {TimelineSettingsService} from "../timeline-settings/timeline-settings.service";
-import {TimelineDateService} from "../timeline-date/timeline-date.service";
 
 @Component({
     selector: 'jna-test-component',
@@ -23,12 +21,10 @@ describe('TimelineBlogComponent', () => {
         TestBed.configureTestingModule({
             declarations: [
                 TestComponent,
-                TimelineBlogComponent,
-                TimelineDateComponent
+                TimelineBlogComponent
             ],
             providers: [
-                TimelineSettingsService,
-                TimelineDateService
+                TimelineSettingsService
             ]
         }).compileComponents();
         fixture = TestBed.createComponent(TestComponent);

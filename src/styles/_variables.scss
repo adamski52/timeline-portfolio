@@ -15,68 +15,6 @@
     }
 }
 
-
-@mixin make-button($primary, $secondary, $tertiary) {
-    background: $primary;
-    color: $global-color-lightest;
-    transition: all $global-transition-fast;
-
-    &:hover {
-        background: $secondary;
-        box-shadow: 0 0 $global-spacing-large $primary;
-    }
-}
-
-@mixin make-theme($primary) {
-    $secondary: darker($primary, $theme-secondary-scale);
-    $tertiary: lighter($primary, $theme-secondary-scale);
-
-    &.timeline-item {
-        .timeline-item-inner {
-            &::before {
-                background: $secondary;
-                box-shadow: 0 0 0 $secondary;
-            }
-        }
-
-        .timeline-item-icon {
-            border: $global-spacing-smallest solid $secondary;
-            background: $primary;
-            color: $secondary;
-        }
-
-        .timeline-date {
-            background: $tertiary;
-            color: $secondary;
-            border: 2px solid $primary;
-        }
-
-        &:hover {
-            .timeline-item-inner {
-                &::before {
-                    background: $primary;
-                    box-shadow: 0 0 $timeline-width*$timeline-hover-scale $secondary;
-                }
-            }
-
-            .timeline-item-icon {
-                border-color: $primary;
-                background: $secondary;
-                color: $primary;
-            }
-
-            .timeline-date {
-                background: $secondary;
-                color: $tertiary;
-            }
-        }
-    }
-
-    .btn {
-        @include make-button($primary, $secondary, $tertiary);
-    }
-}
-
 $angular-color: #e7333e;
 $sql-color: #005b86;
 $scss-color: #cd669a;

@@ -8,13 +8,9 @@ import {HttpModule, XHRBackend} from '@angular/http';
 import {MockBackend} from '@angular/http/testing';
 import {ErrorService} from "../../../services/error.service";
 import {TickerService} from "../../../services/ticker.service";
-import {TimelineDateComponent} from "../timeline-date/timeline-date.component";
 import {TimelineSettingsService} from "../timeline-settings/timeline-settings.service";
 import {IRepo} from "../../../interfaces/repo";
-import {TimelineDateService} from "../timeline-date/timeline-date.service";
 import {TimelineRepoService} from "./timeline-repo-item.service";
-import {AppConfigService} from "../../../services/app-config.service";
-
 
 @Injectable()
 class MockTickerService {
@@ -50,16 +46,13 @@ describe('TimelineRepoComponent', () => {
             declarations: [
                 TestComponent,
                 TimelineRepoLanguagesComponent,
-                TimelineRepoComponent,
-                TimelineDateComponent
+                TimelineRepoComponent
             ],
             providers: [
                 TimelineTitleService,
                 TimelineSettingsService,
-                TimelineDateService,
                 TimelineRepoService,
                 ErrorService,
-                AppConfigService,
                 {
                     provide: TickerService,
                     useClass: MockTickerService

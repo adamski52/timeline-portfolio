@@ -5,7 +5,6 @@ import {IRepo} from "../../../interfaces/repo";
 import {TimelineRepoService} from "../timeline-repo-item/timeline-repo-item.service";
 import {TimelineEventService} from "./timeline-event-item.service";
 import {Subscription} from "rxjs/Subscription";
-import {AppConfigService} from "../../../services/app-config.service";
 
 @Component({
     selector: 'jna-timeline-event',
@@ -26,8 +25,7 @@ export class TimelineEventComponent implements OnInit {
 
     constructor(private reposService:TimelineRepoService,
                 private eventsService:TimelineEventService,
-                private titleService:TimelineTitleService,
-                private appConfigService:AppConfigService) {
+                private titleService:TimelineTitleService) {
     }
 
     ngOnInit() {
@@ -36,10 +34,6 @@ export class TimelineEventComponent implements OnInit {
 
         this.titleService.subscribe(this.title, (t: string) => {
             this.repoName = t;
-        });
-
-        this.appConfigService.subscribe(() => {
-            this.titleService.setOrientation(this.item.$$isEven);
         });
 
         this.reposService.subscribe((repos: IRepo[]) => {

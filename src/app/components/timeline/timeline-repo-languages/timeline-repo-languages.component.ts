@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {TimelineRepoLanguagesService} from "./timeline-repo-languages.service";
 import {ILanguage} from "../../../interfaces/language";
 import {TimelineTitleService} from "../timeline-item-title/timeline-item-title.service";
-import {AppConfigService} from "../../../services/app-config.service";
 
 @Component({
     selector: 'jna-repo-languages',

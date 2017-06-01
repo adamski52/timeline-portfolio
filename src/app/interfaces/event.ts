@@ -15,5 +15,4 @@ export interface IEvent {
     type: string;
     $$type: string;
     $$isHidden: boolean;
-    $$isEven: boolean;
 };

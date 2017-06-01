@@ -10,8 +10,10 @@ import {TimelineBlogService} from "./timeline-blog-item/timeline-blog-item.servi
 import {Subscription} from "rxjs/Subscription";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {IEventCollection} from "../../interfaces/event-collection";
-import {AppConfigService} from "../../services/app-config.service";
-import {IAppConfig} from "../../interfaces/app-config";
+import {IYearCollection} from "../../interfaces/sorted-item-collection";
+import {IDate} from "../../interfaces/date";
+import {IMonthCollection} from "../../interfaces/sorted-item-collection";
+import {IDateCollection} from "../../interfaces/sorted-item-collection";
 
 @Injectable()
 export class TimelineService {
@@ -20,15 +22,15 @@ export class TimelineService {
     private branches:IEvent[] = [];
     private commits:IEvent[] = [];
     private blogs:IBlog[] = [];
-    private config:IAppConfig;
+    private months:string[] = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
 
-    protected subject:BehaviorSubject<any> = new BehaviorSubject([]);
+
+    protected subject:BehaviorSubject<IYearCollection[]> = new BehaviorSubject([]);
 
     constructor(private reposService:TimelineRepoService,
                 private eventsService:TimelineEventService,
                 private blogsService:TimelineBlogService,
-                private settingsService:TimelineSettingsService,
-                private appConfigService:AppConfigService) {
+                private settingsService:TimelineSettingsService) {
 
         this.reposService.subscribe((repos: IRepo[]) => {
             this.repos = repos;
@@ -51,11 +53,24 @@ export class TimelineService {
             this.settings = settings;
             this.updateItems();
         });
+    }
 
-        this.appConfigService.subscribe((appConfig:IAppConfig) => {
-            this.config = appConfig;
-            this.updateItems();
-        });
+    public getDate(rawDate:Date|string|number):IDate {
+        let fullDate:any = rawDate,
+            date:Date = new Date(fullDate),
+            m:string = this.months[date.getMonth()],
+            d:string = date.getDate() + "",
+            y:string = date.getFullYear() + "";
+
+        if(d.length < 2) {
+            d = "0" + d;
+        }
+
+        return {
+            month: m,
+            date: d,
+            year: y
+        };
     }
 
     public fetch():void {
@@ -64,7 +79,7 @@ export class TimelineService {
         this.blogsService.fetch();
     }
 
-    public subscribe(handler:(value: any) => void):Subscription {
+    public subscribe(handler:(value: IYearCollection[]) => void):Subscription {
         return this.subject.subscribe(handler);
     }
 
@@ -100,11 +115,10 @@ export class TimelineService {
         return 0;
     }
 
-    public updateItems():void {
+    private updateItems():void {
         let items:(IRepo|IBlog|IEvent)[] = [];
 
         if(!this.settings) {
-            this.subject.next(items);
             return;
         }
 
@@ -132,19 +146,54 @@ export class TimelineService {
             return rhsValue - lhsValue;
         });
 
-        let isEven:boolean = true;
-        items.map((item:IRepo|IBlog|IEvent) => {
-            if(this.config.isMobile) {
-                item.$$isEven = true;
-                return;
+        let years:IYearCollection[] = [];
+        for(let item of items) {
+            let itemDate:IDate = this.getDate(this.getItemTime(item));
+
+            let yearCollection:IYearCollection = years.find((y:IYearCollection) => {
+                return y.year === itemDate.year;
+            });
+
+            if(!yearCollection) {
+                yearCollection = {
+                    months: [],
+                    year: itemDate.year
+                };
+
+                years.push(yearCollection);
             }
 
-            if(!item.$$isHidden) {
-                item.$$isEven = isEven;
-                isEven = !isEven;
-            }
-        });
 
-        this.subject.next(items);
+            let monthCollection:IMonthCollection = yearCollection.months.find((m:IMonthCollection) => {
+                return m.month === itemDate.month;
+            });
+
+            if(!monthCollection) {
+                monthCollection = {
+                    dates: [],
+                    month: itemDate.month
+                };
+
+                yearCollection.months.push(monthCollection);
+            }
+
+
+            let dateCollection:IDateCollection = monthCollection.dates.find((d:IDateCollection) => {
+                return d.date === itemDate.date;
+            });
+
+            if(!dateCollection) {
+                dateCollection = {
+                    items: [],
+                    date: itemDate.date
+                };
+
+                monthCollection.dates.push(dateCollection);
+            }
+
+            dateCollection.items.push(item);
+        }
+
+        this.subject.next(years);
     }
 }

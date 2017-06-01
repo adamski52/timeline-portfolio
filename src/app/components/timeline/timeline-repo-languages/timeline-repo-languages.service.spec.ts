@@ -1,5 +1,3 @@
-/* tslint:disable:no-unused-variable */
-
 import {TestBed, inject} from '@angular/core/testing';
 import {TimelineRepoLanguagesService} from "./timeline-repo-languages.service";
 import {MockBackend} from '@angular/http/testing';

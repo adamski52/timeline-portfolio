@@ -10,7 +10,6 @@ import {TimelineRepoLanguagesService} from "./timeline-repo-languages.service";
 import {TimelineTitleService} from "../timeline-item-title/timeline-item-title.service";
 import {ILanguage} from "../../../interfaces/language";
 import {TickerService} from "../../../services/ticker.service";
-import {AppConfigService} from "../../../services/app-config.service";
 
 @Component({
     selector: 'jna-test-component',
@@ -48,7 +47,6 @@ describe('TimelineRepoLanguagesComponent', () => {
                 TimelineTitleService,
                 TickerService,
                 ErrorService,
-                AppConfigService,
                 {
                     provide: XHRBackend,
                     useClass: MockBackend

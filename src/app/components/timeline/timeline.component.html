@@ -1,30 +1,41 @@
-<div class="timeline-item-wrapper" *ngFor="let item of items;" [ngSwitch]="item.$$type">
-    <jna-timeline-repo
-        class="timeline-item theme-repo"
-        [ngClass]="{'is-hidden': item.$$isHidden, 'even': item.$$isEven, 'odd': !item.$$isEven}"
-        *ngSwitchCase="'repos'"
-        [item]="item"
-        (hover)="onHover($event)">
-    </jna-timeline-repo>
-    <jna-timeline-commit
-        class="timeline-item theme-commit"
-        [ngClass]="{'is-hidden': item.$$isHidden, 'even': item.$$isEven, 'odd': !item.$$isEven}"
-        *ngSwitchCase="'commits'"
-        [item]="item"
-        (hover)="onHover($event)">
-    </jna-timeline-commit>
-    <jna-timeline-branch
-        class="timeline-item theme-branch"
-        [ngClass]="{'is-hidden': item.$$isHidden, 'even': item.$$isEven, 'odd': !item.$$isEven}"
-        *ngSwitchCase="'branches'"
-        [item]="item"
-        (hover)="onHover($event)">
-    </jna-timeline-branch>
-    <jna-timeline-blog
-        class="timeline-item theme-blog"
-        [ngClass]="{'is-hidden': item.$$isHidden, 'even': item.$$isEven, 'odd': !item.$$isEven}"
-        *ngSwitchCase="'blogs'"
-        [item]="item"
-        (hover)="onHover($event)">
-    </jna-timeline-blog>
+<div class="timeline-year-wrapper" *ngFor="let year of years;">
+    <h5>{{year.year}}</h5>
+    <div class="timeline-month-wrapper" *ngFor="let month of year.months;">
+        <h4>{{month.month}}</h4>
+        <div class="timeline-date-wrapper" *ngFor="let date of month.dates;">
+            <h3>{{date.date}}</h3>
+            <ol class="timeline-items-wrapper">
+                <li class="timeline-item-wrapper" *ngFor="let item of date.items;" [ngSwitch]="item.$$type">
+                    <jna-timeline-repo
+                        class="timeline-item theme-repo"
+                        [ngClass]="{'is-hidden': item.$$isHidden}"
+                        *ngSwitchCase="'repos'"
+                        [item]="item"
+                        (hover)="onHover($event)">
+                    </jna-timeline-repo>
+                    <jna-timeline-commit
+                        class="timeline-item theme-commit"
+                        [ngClass]="{'is-hidden': item.$$isHidden}"
+                        *ngSwitchCase="'commits'"
+                        [item]="item"
+                        (hover)="onHover($event)">
+                    </jna-timeline-commit>
+                    <jna-timeline-branch
+                        class="timeline-item theme-branch"
+                        [ngClass]="{'is-hidden': item.$$isHidden}"
+                        *ngSwitchCase="'branches'"
+                        [item]="item"
+                        (hover)="onHover($event)">
+                    </jna-timeline-branch>
+                    <jna-timeline-blog
+                        class="timeline-item theme-blog"
+                        [ngClass]="{'is-hidden': item.$$isHidden}"
+                        *ngSwitchCase="'blogs'"
+                        [item]="item"
+                        (hover)="onHover($event)">
+                    </jna-timeline-blog>
+                </li>
+            </ol>
+        </div>
+    </div>
 </div>

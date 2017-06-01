@@ -7,7 +7,6 @@ import {AppComponent} from './app.component';
 import {TimelineComponent} from "./components/timeline/timeline.component";
 import {TimelineBlogComponent} from "./components/timeline/timeline-blog-item/timeline-blog-item.component";
 import {TimelineBlogService} from "./components/timeline/timeline-blog-item/timeline-blog-item.service";
-import {TimelineDateComponent} from "./components/timeline/timeline-date/timeline-date.component";
 import {TimelineCommitComponent} from "./components/timeline/timeline-event-item/timeline-commit-item.component";
 import {TimelineBranchComponent} from "./components/timeline/timeline-event-item/timeline-branch-item.component";
 import {TimelineEventService} from "./components/timeline/timeline-event-item/timeline-event-item.service";
@@ -21,15 +20,12 @@ import {TimelineSettingsService} from "./components/timeline/timeline-settings/t
 import {ErrorService} from "./services/error.service";
 import {TickerService} from "./services/ticker.service";
 import {TimelineService} from "./components/timeline/timeline.service";
-import {TimelineDateService} from "./components/timeline/timeline-date/timeline-date.service";
-import {AppConfigService} from "./services/app-config.service";
 
 @NgModule({
     declarations: [
         AppComponent,
         TimelineComponent,
         TimelineBlogComponent,
-        TimelineDateComponent,
         TimelineCommitComponent,
         TimelineBranchComponent,
         TimelineRepoComponent,
@@ -49,10 +45,8 @@ import {AppConfigService} from "./services/app-config.service";
         TimelineRepoService,
         TimelineRepoLanguagesService,
         TimelineSettingsService,
-        TimelineDateService,
         ErrorService,
-        TickerService,
-        AppConfigService
+        TickerService
     ],
     bootstrap: [AppComponent]
 })

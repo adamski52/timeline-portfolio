@@ -6,7 +6,6 @@ import {TimelineEventService} from './timeline-event-item.service';
 import {ErrorService} from "../../../services/error.service";
 import {IEvent} from "../../../interfaces/event";
 import {IEventCollection} from "../../../interfaces/event-collection";
-import {AppConfigService} from "../../../services/app-config.service";
 
 describe('TimelineEventService', () => {
     let mockData:IEvent[] = require("../../../../../mocks/events.json"),
@@ -16,7 +15,6 @@ describe('TimelineEventService', () => {
         TestBed.configureTestingModule({
             providers: [
                 ErrorService,
-                AppConfigService,
                 TimelineEventService,
                 {
                     provide: XHRBackend,

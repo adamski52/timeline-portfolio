@@ -4,15 +4,12 @@ import {Component} from "@angular/core";
 import {HttpModule} from "@angular/http";
 import {IEvent} from "../../../interfaces/event";
 import {TimelineBranchComponent} from "./timeline-branch-item.component";
-import {TimelineDateComponent} from "../timeline-date/timeline-date.component";
 import {TimelineRepoLanguagesComponent} from "../timeline-repo-languages/timeline-repo-languages.component";
 import {TickerService} from "../../../services/ticker.service";
 import {TimelineSettingsService} from "../timeline-settings/timeline-settings.service";
 import {TimelineRepoService} from "../timeline-repo-item/timeline-repo-item.service";
 import {ErrorService} from "../../../services/error.service";
 import {TimelineEventService} from "./timeline-event-item.service";
-import {TimelineDateService} from "../timeline-date/timeline-date.service";
-import {AppConfigService} from "../../../services/app-config.service";
 
 @Component({
     selector: 'jna-test-component',
@@ -30,7 +27,6 @@ describe('TimelineBranchComponent', () => {
         TestBed.configureTestingModule({
             declarations: [
                 TestComponent,
-                TimelineDateComponent,
                 TimelineRepoLanguagesComponent,
                 TimelineBranchComponent
             ],
@@ -39,9 +35,7 @@ describe('TimelineBranchComponent', () => {
                 TimelineSettingsService,
                 TimelineRepoService,
                 ErrorService,
-                TimelineEventService,
-                TimelineDateService,
-                AppConfigService
+                TimelineEventService
             ],
             imports: [
                 HttpModule

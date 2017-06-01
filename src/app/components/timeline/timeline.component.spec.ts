@@ -1,6 +1,5 @@
 import {async, ComponentFixture, TestBed,} from '@angular/core/testing';
 import {TimelineComponent} from "./timeline.component";
-import {TimelineDateComponent} from "./timeline-date/timeline-date.component";
 import {TimelineRepoLanguagesComponent} from "./timeline-repo-languages/timeline-repo-languages.component";
 import {TimelineBranchComponent} from "./timeline-event-item/timeline-branch-item.component";
 import {TickerService} from "../../services/ticker.service";
@@ -8,7 +7,6 @@ import {TimelineSettingsService} from "./timeline-settings/timeline-settings.ser
 import {TimelineRepoService} from "./timeline-repo-item/timeline-repo-item.service";
 import {ErrorService} from "../../services/error.service";
 import {TimelineEventService} from "./timeline-event-item/timeline-event-item.service";
-import {TimelineDateService} from "./timeline-date/timeline-date.service";
 import {HttpModule} from "@angular/http";
 import {TimelineService} from "./timeline.service";
 import {TimelineCommitComponent} from "./timeline-event-item/timeline-commit-item.component";
@@ -19,7 +17,6 @@ import {Component, Injectable} from "@angular/core";
 import {IBlog} from "../../interfaces/blog";
 import {IEvent} from "../../interfaces/event";
 import {IRepo} from "../../interfaces/repo";
-import {AppConfigService} from "../../services/app-config.service";
 
 @Component({
     selector: 'jna-test-component',
@@ -48,7 +45,6 @@ describe('TimelineComponent', () => {
             declarations: [
                 TestComponent,
                 TimelineComponent,
-                TimelineDateComponent,
                 TimelineRepoLanguagesComponent,
                 TimelineBranchComponent,
                 TimelineCommitComponent,
@@ -65,9 +61,7 @@ describe('TimelineComponent', () => {
                 TimelineRepoService,
                 TimelineBlogService,
                 ErrorService,
-                TimelineEventService,
-                TimelineDateService,
-                AppConfigService
+                TimelineEventService
             ],
             imports: [
                 HttpModule
@@ -87,7 +81,7 @@ describe('TimelineComponent', () => {
 
     it('should respond to the timeline service', () => {
         fixture.detectChanges();
-        expect(component.items.length).toBe(50);
+        expect(component.years.length).toBe(50);
     });
 
     it('should fetch the timeline service', () => {

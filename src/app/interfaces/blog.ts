@@ -25,5 +25,4 @@ export interface IBlog {
     };
     $$type: string;
     $$isHidden: boolean;
-    $$isEven: boolean;
 };
