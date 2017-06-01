@@ -16,3 +16,40 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: normal;
     margin: 0;
 }
+
+ol, ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.timeline-year-wrapper,
+.timeline-month-wrapper,
+.timeline-date-wrapper,
+.timeline-items-wrapper {
+    padding: $global-spacing-large;
+}
+
+.timeline-month-wrapper {
+    border: 1px solid #000;
+}
+
+.timeline-date-wrapper {
+    border: 1px dashed #000;
+}
+
+.timeline-items-wrapper {
+    border: 1px dotted #000;
+}
+
+.timeline-month-wrapper,
+.timeline-date-wrapper,
+.timeline-items-wrapper {
+    border-right: none;
+    border-bottom: none;
+}
+
+.date-text {
+}
+
+

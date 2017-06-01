@@ -1,9 +1,9 @@
 <div class="timeline-year-wrapper" *ngFor="let year of years;">
-    <h5>{{year.year}}</h5>
+    <h5 class="date-text">{{year.year}}</h5>
     <div class="timeline-month-wrapper" *ngFor="let month of year.months;">
-        <h4>{{month.month}}</h4>
+        <h4 class="date-text">{{month.month}}</h4>
         <div class="timeline-date-wrapper" *ngFor="let date of month.dates;">
-            <h3>{{date.date}}</h3>
+            <h3 class="date-text">{{date.date}}</h3>
             <ol class="timeline-items-wrapper">
                 <li class="timeline-item-wrapper" *ngFor="let item of date.items;" [ngSwitch]="item.$$type">
                     <jna-timeline-repo
