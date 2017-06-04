@@ -8,7 +8,7 @@
             <div class="timeline-summary">
                 <jna-repo-languages class="timeline-languages" [repo]="item.name"></jna-repo-languages>
                 <div class="timeline-actions">
-                    <a href="" class="btn" (click)="onViewRepo()">View Repo</a>
+                    <a href="{{getHtmlUrl(item.url)}}" target="github" class="btn">View Repo</a>
                 </div>
             </div>
         </div>

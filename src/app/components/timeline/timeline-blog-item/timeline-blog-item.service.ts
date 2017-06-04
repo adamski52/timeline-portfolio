@@ -19,6 +19,8 @@ export class TimelineBlogService extends GenericHttpService {
             for(let d of this._data) {
                 d.$$type = "blogs";
             }
+            console.log("blogs", this._data);
+
             this.subject.next(this.data);
         }, (error:Response) => {
             this.errorService.add("Failed to load blogs.", error.status);

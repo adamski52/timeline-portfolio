@@ -17,6 +17,8 @@ export class TimelineRepoComponent implements OnInit {
 
     public title:string;
 
+    public href:string = "";
+
     constructor(private titleService:TimelineTitleService,
                 private appConfigService:AppConfigService) {}
 
@@ -30,5 +32,9 @@ export class TimelineRepoComponent implements OnInit {
         this.titleService.subscribe(this.title, (t: string) => {
             this.title = t;
         });
+    }
+
+    getHtmlUrl(apiUrl:string):string {
+        return this.appConfigService.getHtmlUrl(apiUrl);
     }
 }

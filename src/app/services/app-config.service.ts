@@ -28,6 +28,13 @@ export class AppConfigService {
         return this.subject.subscribe(handler);
     }
 
+    public getHtmlUrl(apiUrl:string):string {
+        apiUrl = apiUrl.replace(/api\./g, "www.");
+        apiUrl = apiUrl.replace(/\/repos/g, "");
+        apiUrl = apiUrl.replace(/\/commits/g, "/commit");
+        return apiUrl;
+    }
+
     private onResize(e:any) {
         this.config.isMobile = e.currentTarget.innerWidth < this.MOBILE_MAX_WIDTH;
 

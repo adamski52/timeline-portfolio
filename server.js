@@ -81,7 +81,7 @@ else {
         }
     }));
 
-    app.use('/blog', proxy('googleapis.com', {
+    app.use('/blog', proxy('www.googleapis.com', {
         https: true,
         decorateRequest: function (proxyReq, originalReq) {
             return proxyReq;

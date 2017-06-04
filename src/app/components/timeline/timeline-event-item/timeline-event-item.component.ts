@@ -52,4 +52,8 @@ export class TimelineEventComponent implements OnInit {
             }
         });
     }
+
+    getHtmlUrl(apiUrl:string):string {
+        return this.appConfigService.getHtmlUrl(apiUrl);
+    }
 }

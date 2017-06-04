@@ -10,12 +10,12 @@
                 <h5 class="timeline-subtitle">{{repoName}}</h5>
                 <jna-repo-languages class="timeline-languages" *ngIf="repoName" [repo]="repoName"></jna-repo-languages>
                 <div class="timeline-actions">
-                    <a href="" class="btn" (click)="onViewRepo()">View Repo</a>
+                    <a href="{{getHtmlUrl(item.repo.url)}}" target="github" class="btn">View Repo</a>
                 </div>
             </div>
         </div>
         <div class="timeline-actions">
-            <a href="" class="btn" (click)="onViewEvent()">View Event</a>
+            <a href="{{getHtmlUrl(item.payload.commits[0].url)}}" target="github" class="btn">View Commit</a>
         </div>
     </div>
 </div>

@@ -47,9 +47,6 @@
             display: block;
             width: $timeline-width;
             height: 100%;
-            border: 1px solid rgba(255, 255, 255, .7);
-            border-left: none;
-            border-right: none;
             position: absolute;
             z-index: $global-timeline-bar-z;
         }
@@ -73,6 +70,7 @@
         margin-top: -$item-icon-size/2;
         font-size: $global-font-size-large;
         transition: $global-transition-fast;
+        transition-timing-function: cubic-bezier(0.8, 0.2, 0.8, 1.7);
         z-index: $global-item-icon-z;
     }
 
@@ -115,6 +113,13 @@
             position: absolute;
             bottom: -$global-spacing-medium;
         }
+    }
+
+    .timeline-subtitle {
+        text-overflow: ellipsis;
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
     }
 
     &.is-hidden {

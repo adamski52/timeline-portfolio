@@ -68,6 +68,9 @@ export class TimelineEventService extends GenericHttpService {
                 }
             }
 
+            console.log("commits", this._commits);
+            console.log("branches", this._branches);
+
             this.subject.next({
                 commits: this._commits,
                 branches: this._branches

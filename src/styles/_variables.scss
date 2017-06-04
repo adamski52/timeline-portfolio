@@ -55,7 +55,7 @@
             .timeline-item-inner {
                 &::before {
                     background: $primary;
-                    box-shadow: 0 0 $timeline-width*$timeline-hover-scale $secondary;
+                    box-shadow: 0 0 $timeline-width*$timeline-hover-glow-scale $primary;
                 }
             }
 
@@ -112,7 +112,6 @@ $global-color-light: #ddd;
 $global-color-lighter: #f0f0f0;
 $global-color-lightest: #fff;
 $global-color-background: #f3f3f3;
-$global-color-background-darker: darker($global-color-background, 20%);
 
 $global-font-size-base: 14px;
 
@@ -139,6 +138,7 @@ $timeline-width: 10px;
 $item-icon-size: 30px;
 $date-icon-size: 45px;
 $timeline-hover-scale: 1.5;
+$timeline-hover-glow-scale: 2.5;
 $theme-secondary-scale: 40%;
 
 $screen-xs-min: $content-width;
