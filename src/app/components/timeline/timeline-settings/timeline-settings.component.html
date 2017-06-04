@@ -1,9 +1,22 @@
 <div class="timeline-settings">
-    <span>{{title}}</span>
-    <a [ngClass]="getIconClass('commits')" (mouseenter)="onHover('commits')" (mouseleave)="onOut()" (click)="onClick($event, 'commits')" class="jna-icon-code-fork" href=""></a>
-    <a [ngClass]="getIconClass('branches')" (mouseenter)="onHover('branches')" (mouseleave)="onOut()" (click)="onClick($event, 'branches')" class="jna-icon-github-square" href=""></a>
-    <a [ngClass]="getIconClass('repos')" (mouseenter)="onHover('repos')" (mouseleave)="onOut()" (click)="onClick($event, 'repos')" class="jna-icon-birthday-cake" href=""></a>
-    <a [ngClass]="getIconClass('experiments')" (mouseenter)="onHover('experiments')" (mouseleave)="onOut()" (click)="onClick($event, 'experiments')" class="jna-icon-flask" href=""></a>
-    <a [ngClass]="getIconClass('tweets')" (mouseenter)="onHover('tweets')" (mouseleave)="onOut()" (click)="onClick($event, 'tweets')" class="jna-icon-twitter" href=""></a>
-    <a [ngClass]="getIconClass('blogs')" (mouseenter)="onHover('blogs')" (mouseleave)="onOut()" (click)="onClick($event, 'blogs')" class="jna-icon-font" href=""></a>
+    <h1>jonathan adamski</h1>
+
+    <div class="timeline-settings-menu">
+        <span class="timeline-settings-title">{{title}}</span>
+        <a href="#" [ngClass]="getIconClass('commits')" (mouseenter)="onHover('commits')" (mouseleave)="onOut()" (click)="onClick($event, 'commits')" class="jna-icon-code-fork timeline-settings-icon"></a>
+        <a href="#" [ngClass]="getIconClass('branches')" (mouseenter)="onHover('branches')" (mouseleave)="onOut()" (click)="onClick($event, 'branches')" class="jna-icon-github-square timeline-settings-icon" timeline-settings-icon></a>
+        <a href="#" [ngClass]="getIconClass('repos')" (mouseenter)="onHover('repos')" (mouseleave)="onOut()" (click)="onClick($event, 'repos')" class="jna-icon-birthday-cake timeline-settings-icon"></a>
+        <a href="#" [ngClass]="getIconClass('experiments')" (mouseenter)="onHover('experiments')" (mouseleave)="onOut()" (click)="onClick($event, 'experiments')" class="jna-icon-flask timeline-settings-icon"></a>
+        <a href="#" [ngClass]="getIconClass('blogs')" (mouseenter)="onHover('blogs')" (mouseleave)="onOut()" (click)="onClick($event, 'blogs')" class="jna-icon-font timeline-settings-icon"></a>
+    </div>
+    <div class="timeline-settings-menu-mobile">
+        <a href="#" class="timeline-settings-text" (click)="toggleSubmenu()">filter <span class="jna-icon-bars timeline-settings-icon"></span></a>
+        <div class="timeline-settings-submenu" [ngClass]="getSubmenuClass()">
+            <a href="#" class="timeline-settings-text" [ngClass]="getIconClass('commits')" (click)="onClick($event, 'commits')">github commits <span class="jna-icon-code-fork timeline-settings-icon"></span></a>
+            <a href="#" class="timeline-settings-text" [ngClass]="getIconClass('branches')" (click)="onClick($event, 'branches')">github branches <span class="jna-icon-github-square timeline-settings-icon"></span></a>
+            <a href="#" class="timeline-settings-text" [ngClass]="getIconClass('repos')" (click)="onClick($event, 'repos')">github repos <span class="jna-icon-birthday-cake timeline-settings-icon"></span></a>
+            <a href="#" class="timeline-settings-text" [ngClass]="getIconClass('experiments')" (click)="onClick($event, 'experiments')">experiments <span class="jna-icon-flask timeline-settings-icon"></span></a>
+            <a href="#" class="timeline-settings-text" [ngClass]="getIconClass('blogs')" (click)="onClick($event, 'blogs')">blogs <span class="jna-icon-font timeline-settings-icon"></span></a>
+        </div>
+    </div>
 </div>

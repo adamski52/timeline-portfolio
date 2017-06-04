@@ -16,9 +16,10 @@ export class TimelineSettingsComponent {
         branches: "Github Branches",
         repos: "Github Repos",
         experiments: "Experiments",
-        tweets: "Tweets",
         blogs: "Blogs"
     };
+
+    private _isSubmenuOpen:boolean = false;
 
     public settings:ISettings;
     public title:string = "";
@@ -55,7 +56,17 @@ export class TimelineSettingsComponent {
 
     getIconClass(key:string) {
         return {
-            "jna-icon-disabled": !this.settings[key]
+            "disabled": !this.settings[key]
         };
+    }
+
+    getSubmenuClass() {
+        return {
+            "open": this._isSubmenuOpen
+        };
+    }
+
+    toggleSubmenu() {
+        this._isSubmenuOpen = !this._isSubmenuOpen;
     }
 }

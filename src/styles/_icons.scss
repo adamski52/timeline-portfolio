@@ -107,6 +107,7 @@
     @include make-icon($unknown-color);
 }
 
+
 @font-face {
     font-family: "jna-icons";
     src:url("assets/fonts/jna-icons.eot");
@@ -116,6 +117,7 @@
     url("assets/fonts/jna-icons.svg#jna-icons") format("svg");
     font-weight: normal;
     font-style: normal;
+
 }
 
 [data-icon]:before {
@@ -171,6 +173,12 @@
 .jna-icon-birthday-cake:before {
     content: "\41";
 }
-.jna-icon-disabled {
-    color: $global-color-medium;
+.jna-icon-picture-o:before {
+    content: "\63";
+}
+.jna-icon-instagram:before {
+    content: "\64";
+}
+.jna-icon-bars:before {
+    content: "\65";
 }
