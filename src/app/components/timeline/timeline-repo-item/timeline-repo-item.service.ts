@@ -20,7 +20,6 @@ export class TimelineRepoService extends GenericHttpService {
                 d.$$type = "repos";
             }
 
-            console.log("repos", this._data);
             this.subject.next(this._data);
         }, (error:Response) => {
             this.errorService.add("Failed to load repos.", error.status);

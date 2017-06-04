@@ -38,32 +38,24 @@ describe('AppConfigService', () => {
 
     }));
 
-    // it('should switch to mobile mode < 600', inject([AppConfigService], (service:AppConfigService) => {
-    //     let response:IAppConfig;
-    //     service.subscribe((config:IAppConfig) => {
-    //         response = config;
-    //     });
-    //
-    //     let event:any = new Event("resize");
-    //     event.currentTarget.innerWidth = 599;
-    //
-    //     dispatchEvent(event);
-    //
-    //     expect(response.isMobile).toEqual(true);
-    // }));
-    //
-    // it('should switch to desktop mode >= 600', inject([AppConfigService], (service:AppConfigService) => {
-    //     let response:IAppConfig;
-    //     service.subscribe((config:IAppConfig) => {
-    //         response = config;
-    //     });
-    //
-    //     let event:any = new Event("resize");
-    //     event.currentTarget.innerWidth = 600;
-    //
-    //     dispatchEvent(event);
-    //
-    //     expect(response.isMobile).toEqual(false);
-    // }));
+    it('should switch from API url to HTML url', inject([AppConfigService], (service:AppConfigService) => {
+        let url = service.getHtmlUrl("https://api.github.com/lolwat");
+        expect(url).toEqual("https://www.github.com/lolwat");
+    }));
 
+    it('should switch from API repo url to HTML url', inject([AppConfigService], (service:AppConfigService) => {
+        let url = service.getHtmlUrl("https://api.github.com/repos/lolwat/wutitdo");
+        expect(url).toEqual("https://www.github.com/lolwat/wutitdo");
+    }));
+
+    it('should switch from API commit url to HTML url', inject([AppConfigService], (service:AppConfigService) => {
+        let url = service.getHtmlUrl("https://api.github.com/lolwat/wutitdo/commits/12345");
+        expect(url).toEqual("https://www.github.com/lolwat/wutitdo/commit/12345");
+    }));
+
+
+    it('should leave other URLs alone', inject([AppConfigService], (service:AppConfigService) => {
+        let url = service.getHtmlUrl("http://www.github.com/dont-change-me");
+        expect(url).toEqual("http://www.github.com/dont-change-me");
+    }));
 });

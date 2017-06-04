@@ -34,10 +34,6 @@ export class TimelineEventComponent implements OnInit {
         this.title = this.eventsService.getEventMessage(<IEvent>this.item);
         this.commitMessage = this.eventsService.getCommitMessage(<IEvent>this.item);
 
-        this.titleService.subscribe(this.title, (t: string) => {
-            this.repoName = t;
-        });
-
         this.appConfigService.subscribe(() => {
             this.titleService.setOrientation(this.item.$$isEven);
         });
@@ -49,6 +45,9 @@ export class TimelineEventComponent implements OnInit {
 
             if (repo) {
                 this.repoName = repo.name;
+                this.titleService.subscribe(this.repoName, (t: string) => {
+                    this.repoName = t;
+                });
             }
         });
     }

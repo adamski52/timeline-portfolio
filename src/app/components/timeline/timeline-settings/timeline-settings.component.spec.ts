@@ -120,6 +120,21 @@ describe('TimelineSettingsComponent', () => {
         component.onClick(new Event("click"), "commits");
         fixture.detectChanges();
         expect(settingsService.toggleSetting).toHaveBeenCalledWith("commits");
-
     }));
+
+    it('should toggle the submenu', () => {
+        fixture.detectChanges();
+
+        let submenuStyle = component.getSubmenuClass();
+        fixture.detectChanges();
+        expect(submenuStyle.open).toEqual(false);
+
+        component.toggleSubmenu();
+        submenuStyle = component.getSubmenuClass();
+        expect(submenuStyle.open).toEqual(true);
+
+        component.toggleSubmenu();
+        submenuStyle = component.getSubmenuClass();
+        expect(submenuStyle.open).toEqual(false);
+    });
 });
