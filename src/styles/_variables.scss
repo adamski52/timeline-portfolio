@@ -100,11 +100,11 @@ $csharp-color: #4da3de;
 $unknown-color: #40de93;
 $icon-hover-color: #fff;
 
-$theme-commit-color: #1FADBA;
-$theme-repo-color: #F3572D;
-$theme-branch-color: #9ABE1F;
-$theme-blog-color: #9640d2;
-$theme-history-color: #F68F03;
+$theme-commit-color: #F68F03;
+$theme-repo-color: #1FADBA;
+$theme-branch-color: #F3572D;
+$theme-blog-color: #9ABE1F;
+$theme-history-color: #9640d2;
 
 $global-color-darkest: #000;
 $global-color-medium: #555;
@@ -142,12 +142,6 @@ $timeline-hover-glow-scale: 2.5;
 $theme-secondary-scale: 40%;
 
 $screen-xs-min: $content-width;
-
-$rainbow1: #ff77d2;
-$rainbow2: #ffb800;
-$rainbow3: #e7ff06;
-$rainbow4: #7aff00;
-$rainbow5: #00e3ff;
 
 $global-date-icon-z: 1;
 $global-hover-z: 2;
