@@ -19,13 +19,19 @@
     clear: both;
     position: relative;
     transition: all $global-transition-fast;
+    transition-delay: $global-transition-fast;
 
     &:hover {
+        transition: all $global-transition-fast;
+        transition-delay: unset;
+
         max-height: 350px;
         cursor: pointer;
         z-index: $global-hover-z;
 
         .timeline-item-inner {
+            transition: all $global-transition-fast;
+            transition-delay: $global-transition-fast;
             width: $content-width/2;
         }
 
@@ -39,7 +45,7 @@
         width: 0;
         overflow: hidden;
         transition: all $global-transition-fast;
-        transition-delay: $global-transition-fast;
+        transition-delay: unset;
 
         &::before {
             transition: all $global-transition-fast;
@@ -126,13 +132,13 @@
         .timeline-item-icon {
             opacity: 0;
             transition-delay: unset;
-            transition: $global-transition-fast;
+            transition: all $global-transition-fast;
         }
 
         .timeline-date {
             opacity: 0;
             transition-delay: unset;
-            transition: $global-transition-fast;
+            transition: all $global-transition-fast;
         }
 
         .timeline-item-inner {
@@ -142,7 +148,7 @@
             }
         }
 
-        transition: $global-transition-fast;
+        transition: all $global-transition-fast;
         max-height: 0;
     }
 }
@@ -304,6 +310,8 @@
         }
 
         &:hover {
+            z-index: 9999;
+
             .timeline-item-inner {
                 width: 100%;
 

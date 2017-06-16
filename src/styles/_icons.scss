@@ -145,10 +145,6 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-
-.jna-icon-twitter:before {
-    content: "\61";
-}
 .jna-icon-github:before {
     content: "\66";
 }
@@ -173,12 +169,33 @@
 .jna-icon-birthday-cake:before {
     content: "\41";
 }
-.jna-icon-picture-o:before {
-    content: "\63";
-}
 .jna-icon-instagram:before {
     content: "\64";
 }
 .jna-icon-bars:before {
     content: "\65";
+}
+.jna-icon-graduation-cap:before {
+    content: "\68";
+}
+.jna-icon-coffee:before {
+    content: "\69";
+}
+.jna-icon-home:before {
+    content: "\6a";
+}
+.jna-icon-suitcase:before {
+    content: "\62";
+}
+.jna-icon-picture:before {
+    content: "\61";
+}
+.jna-icon-calendar:before {
+    content: "\63";
+}
+.jna-icon-cog:before {
+    content: "\67";
+}
+.jna-icon-sliders:before {
+    content: "\6b";
 }
